@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://css.fbk.eu/CSS/Schemas/PresaInCaricoEvento" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="qualified" elementFormDefault="qualified"
+	targetNamespace="http://css.fbk.eu/CSS/Schemas/PresaInCaricoEvento">
+
+	<xsd:complexType name="PresaInCaricoType">
+		<xsd:sequence>
+
+			<xsd:element name="PresaCaricoNum" minOccurs="1">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:totalDigits value="7" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="DettaglioEvento" type="tns:PresaInCaricoType"></xsd:element>
+</xsd:schema>

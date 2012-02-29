@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="qualified"
+	elementFormDefault="qualified" targetNamespace="http://egov.eu/events/eGovEvent"
+	xmlns:css-ne="http://css.fbk.eu/CSS/Schemas/NotificaEvento" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://egov.eu/events/eGovEvent" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+	<xsd:import namespace="http://css.fbk.eu/CSS/Schemas/NotificaEvento"
+		schemaLocation="NotificaEvento.xsd" />
+
+	<xsd:complexType name="eGovMessageType">
+		<xsd:sequence>
+
+			<xsd:element ref="css-ne:NotificaXML" />
+			<xsd:element name="EventXML">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:any namespace="##any" processContents="lax" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="eGovMessage" type="tns:eGovMessageType" />
+
+</xsd:schema>
