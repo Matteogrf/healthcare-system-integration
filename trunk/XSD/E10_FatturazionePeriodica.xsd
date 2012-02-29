@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://css.fbk.eu/CSS/Schemas/FatturazionePeriodicaEvento"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+	elementFormDefault="unqualified"
+	targetNamespace="http://css.fbk.eu/CSS/Schemas/FatturazionePeriodicaEvento">
+
+
+	<xsd:complexType name="FatturazionePeriodicaType">
+		<xsd:sequence>
+
+			<xsd:element name="CodiceCentro" minOccurs="1">
+				<xs:simpleType>
+					<xs:restriction base="xsd:int">
+						<xs:totalDigits value="7" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xsd:element>
+
+			<xsd:element name="DenominazioneCentro" minOccurs="1">
+				<xs:simpleType>
+					<xs:restriction base="xsd:string">
+						<xs:maxLength value="240" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xsd:element>
+
+			<xsd:element name="DataInizio" type="xs:date" minOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Formato: YYYY-MM-DD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element name="DataFine" type="xs:date" minOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Formato: YYYY-MM-DD</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element name="ImportoFattura" minOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+						parte decimale </xsd:documentation>
+				</xsd:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xsd:int">
+						<xs:totalDigits value="7" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xsd:element>
+
+			<xsd:element name="Giornate" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+						parte decimale </xsd:documentation>
+				</xsd:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xsd:int">
+						<xs:totalDigits value="7" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xsd:element>
+
+			<xsd:element name="AccessiServizio" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+						parte decimale </xsd:documentation>
+				</xsd:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xsd:int">
+						<xs:totalDigits value="7" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xsd:element>
+
+			<xsd:element name="NumeroPasti" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+						parte decimale </xsd:documentation>
+				</xsd:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xsd:int">
+						<xs:totalDigits value="7" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xsd:element>
+
+			<xsd:element name="NumeroTrasporti" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+						parte decimale </xsd:documentation>
+				</xsd:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xsd:int">
+						<xs:totalDigits value="7" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xsd:element>
+
+			<xsd:element name="GiorniAssenzaGiustificati" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+						parte decimale </xsd:documentation>
+				</xsd:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xsd:int">
+						<xs:totalDigits value="7" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xsd:element>
+
+			<xsd:element name="GiorniAssenzaNonGiustificati"
+				minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+						parte decimale </xsd:documentation>
+				</xsd:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xsd:int">
+						<xs:totalDigits value="7" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xsd:element>
+
+			<xsd:element name="OreErogate" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+						parte decimale </xsd:documentation>
+				</xsd:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xsd:int">
+						<xs:totalDigits value="7" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:element name="DettaglioEvento" type="tns:FatturazionePeriodicaType">
+	</xsd:element>
+</xsd:schema>

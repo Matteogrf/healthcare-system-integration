@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://css.fbk.eu/CSS/Schemas/RevocaAreaUtenzaEvento"
+	attributeFormDefault="qualified" elementFormDefault="qualified"
+	targetNamespace="http://css.fbk.eu/CSS/Schemas/RevocaAreaUtenzaEvento">
+
+	<xsd:complexType name="RevocaAreaUtenzaType">
+		<xsd:sequence>
+
+			<xsd:element name="PresaCaricoNum" minOccurs="1">
+				<xs:simpleType>
+					<xs:restriction base="xsd:int">
+						<xs:totalDigits value="7" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xsd:element>
+
+			<xsd:element name="AreaUtenzaCod" minOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="3" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<xsd:element name="AreaUtenzaDescr" minOccurs="1">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="255" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="DettaglioEvento" type="tns:RevocaAreaUtenzaType"></xsd:element>
+</xsd:schema>

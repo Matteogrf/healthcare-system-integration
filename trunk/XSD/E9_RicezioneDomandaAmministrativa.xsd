@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://css.fbk.eu/CSS/Schemas/RicezioneDomandaAmministrativaEvento"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://css.fbk.eu/CSS/Schemas/RicezioneDomandaAmministrativaEvento">
+
+	<xsd:complexType name="RicezioneDomandaAmministrativaType">
+		<xsd:sequence>
+
+			<xsd:element name="GiornateSettimanali" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+						parte decimale </xsd:documentation>
+				</xsd:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xsd:int">
+						<xs:totalDigits value="7" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xsd:element>
+
+			<xsd:element name="NumeroPastiSettimanali" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+						parte decimale </xsd:documentation>
+				</xsd:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xsd:int">
+						<xs:totalDigits value="7" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xsd:element>
+
+			<xsd:element name="NumeroTrasportiSettimanali" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+						parte decimale </xsd:documentation>
+				</xsd:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xsd:int">
+						<xs:totalDigits value="7" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xsd:element>
+
+			<xsd:element name="OreSettimanali" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+						parte decimale </xsd:documentation>
+				</xsd:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xsd:int">
+						<xs:totalDigits value="7" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:element name="DettaglioEvento" type="tns:RicezioneDomandaAmministrativaType"></xsd:element>
+</xsd:schema>
