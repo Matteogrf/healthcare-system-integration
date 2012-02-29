@@ -5,7 +5,6 @@
 	targetNamespace="http://css.fbk.eu/CSS/Schemas/InserimentoVariazioneAnagraficaEvento">
 	<xsd:complexType name="InserimentoVariazioneAnagraficaType">
 		<xsd:sequence>
-
 			<xsd:element name="ComuneNascitaDescr" minOccurs="1">
 				<xsd:simpleType>
 					<xsd:restriction base="xsd:string">
