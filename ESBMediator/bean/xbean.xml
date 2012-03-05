@@ -5,43 +5,11 @@
      xmlns:tns="http://aibmp.weather/">
 
      <bean:endpoint
-          service="tns:prepareWSRequest"
-          endpoint="getCities"
-          bean="#getCitiesRequestPreparatorBean" />
-          
-     <bean:endpoint
-          service="tns:Logging"
-          endpoint="LoggingEndpoint"
-          bean="#loggingBean" />
-          
-      <bean:endpoint
-          service="tns:tranformationPreparator"
-          endpoint="transformPreparator"
-          bean="#transformCityListBean" />  
-          
-      <bean:endpoint
-          service="tns:tranformationPreparator"
-          endpoint="transformForLogging"
-          bean="#loggingPreparatorBean" />    
+          service="tns:beanLogEvent"
+          endpoint="LogEvent"
+          bean="#logEventXMLMessage"/>
 
-	 <bean
-          id="getCitiesRequestPreparatorBean"
-          class="aibpm.weather.wsconsumer.GetCitiesRequestPreparator">          
-          <property name="country" value="Italy" />
-     </bean>
-     
      <bean
-          id="loggingBean"
-          class="debug.LoggingBean">    
-     </bean>
-     
-     <bean
-          id="loggingPreparatorBean"
-          class="aibpm.weather.preparator.LoggerPreparatorBean">    
-     </bean>
-     
-     <bean
-          id="transformCityListBean"
-          class="aibpm.weather.preparator.TransformCityListRequestPreparator">    
-     </bean>
+          id="logEventXMLMessage"
+          class="org.aibpm.beans.EventManager" />
 </beans>
