@@ -33,7 +33,7 @@ public class CSIDataProducer
 		ResultSet iva = dataM.getInserimentoVariazioneAnagrafica();
 		while ( iva.next() )
 		{
-			CreateInserimentoVariazioneAnagraficaEvent(iva);
+			//CreateInserimentoVariazioneAnagraficaEvent(iva);
 		}
 			
 	}
