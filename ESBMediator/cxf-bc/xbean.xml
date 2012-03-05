@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+     xmlns:cxfbc="http://servicemix.apache.org/cxfbc/1.0"
+     xmlns="http://xbean.org/schemas/spring/1.0"
+     xmlns:wsb="http://schemas.microsoft.com/LiveSearch/2008/03/Search"
+     xmlns:myws="http://aibmp/ImageSearch/"
+     xmlns:tns="http://it.unitn/">
+
+     <classpath>
+          <location>.</location>
+     </classpath>
+
+          
+     <cxfbc:consumer
+     	wsdl="classpath:Events.wsdl"
+        targetEndpoint="staticRouting"
+        targetService="tns:processEventRequest"
+        useJBIWrapper="false"
+        >     
+     </cxfbc:consumer>
+          
+          
+    
+          
+     
+
+</beans>
+

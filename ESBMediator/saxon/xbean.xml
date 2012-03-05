@@ -4,16 +4,8 @@
 	<classpath>
 		<location>.</location>
 	</classpath>
-	<saxon:xslt service="tns:TransformationService"
-				endpoint="transformCityList" 
-				resource="classpath:selectCountry.xsl"
-				result="String" />	
-	<saxon:xslt service="tns:TransformationService"
-				endpoint="transformGetWeatherRequest" 
-				resource="classpath:GetWeatherRequest.xsl"
-				result="String" />	
-	<saxon:xslt service="tns:TransformationService"
-				endpoint="transformGetWeatherResponse" 
-				resource="classpath:getWeatherResponse.xsl"
+	<saxon:xslt service="tns:mapInserimentoVariazioneAnagrafica"
+				endpoint="mapIVA" 
+				resource="classpath:mapInserimentoVariazioneAnagrafica.xsl"
 				result="String" />
 </beans>
