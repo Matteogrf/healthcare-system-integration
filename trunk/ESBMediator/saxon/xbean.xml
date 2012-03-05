@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:saxon="http://servicemix.apache.org/saxon/1.0"
-	xmlns:tns="http://aibmp.weather/">
+	xmlns:tns="http://it.unitn/">
 	<classpath>
 		<location>.</location>
 	</classpath>
-	<saxon:xslt service="tns:mapInserimentoVariazioneAnagrafica"
-				endpoint="mapIVA" 
+	<saxon:xslt service="tns:mappingIVA"
+				endpoint="mappingIVA" 
 				resource="classpath:mapInserimentoVariazioneAnagrafica.xsl"
-				result="String" />
+				result="String"/>
 </beans>

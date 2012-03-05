@@ -2,14 +2,26 @@
 <beans
      xmlns="http://xbean.org/schemas/spring/1.0"
      xmlns:bean="http://servicemix.apache.org/bean/1.0"
-     xmlns:tns="http://aibmp.weather/">
+     xmlns:tns="http://it.unitn/">
 
      <bean:endpoint
           service="tns:beanLogEvent"
           endpoint="LogEvent"
           bean="#logEventXMLMessage"/>
-
+     
      <bean
           id="logEventXMLMessage"
           class="org.aibpm.beans.EventManager" />
+          
+     <bean:endpoint
+          service="tns:mappedEventProcessor"
+          endpoint="mappedEvent"
+          bean="#processFinalData"/>
+     <bean
+          id="processFinalData"
+          class="org.aibpm.beans.ManageMappedData" />
+
+     
+          
+
 </beans>
