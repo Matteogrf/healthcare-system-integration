@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+     xmlns="http://xbean.org/schemas/spring/1.0"
+     xmlns:bean="http://servicemix.apache.org/bean/1.0"
+     xmlns:tns="http://aibmp.weather/">
+
+     <bean:endpoint
+          service="tns:prepareWSRequest"
+          endpoint="getCities"
+          bean="#getCitiesRequestPreparatorBean" />
+          
+     <bean:endpoint
+          service="tns:Logging"
+          endpoint="LoggingEndpoint"
+          bean="#loggingBean" />
+          
+      <bean:endpoint
+          service="tns:tranformationPreparator"
+          endpoint="transformPreparator"
+          bean="#transformCityListBean" />  
+          
+      <bean:endpoint
+          service="tns:tranformationPreparator"
+          endpoint="transformForLogging"
+          bean="#loggingPreparatorBean" />    
+
+	 <bean
+          id="getCitiesRequestPreparatorBean"
+          class="aibpm.weather.wsconsumer.GetCitiesRequestPreparator">          
+          <property name="country" value="Italy" />
+     </bean>
+     
+     <bean
+          id="loggingBean"
+          class="debug.LoggingBean">    
+     </bean>
+     
+     <bean
+          id="loggingPreparatorBean"
+          class="aibpm.weather.preparator.LoggerPreparatorBean">    
+     </bean>
+     
+     <bean
+          id="transformCityListBean"
+          class="aibpm.weather.preparator.TransformCityListRequestPreparator">    
+     </bean>
+</beans>
