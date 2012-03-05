@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jbi xmlns="http://java.sun.com/xml/ns/jbi" version="1.0">
+	<service-assembly>
+		<identification>
+			<name>Weather Project</name>
+			<description>Weather Project for AIBPM Exam</description>
+		</identification>		
+		<service-unit>
+			<identification>
+				<name>Weather-routing-su</name>
+				<description>The component performing routing</description>
+			</identification>
+			<target>
+				<artifacts-zip>Weather-routing-su.zip</artifacts-zip>
+				<component-name>servicemix-eip</component-name>
+			</target>
+		</service-unit>
+		<service-unit>
+			<identification>
+				<name>Weather-saxon-su</name>
+				<description>The component performing trasformation</description>
+			</identification>
+			<target>
+				<artifacts-zip>Weather-saxon-su.zip</artifacts-zip>
+				<component-name>servicemix-saxon</component-name>
+			</target>
+		</service-unit>
+		<service-unit>
+			<identification>
+				<name>Weather-file-su</name>
+				<description>The file component</description>
+			</identification>
+			<target>
+				<artifacts-zip>Weather-file-su.zip</artifacts-zip>
+				<component-name>servicemix-file</component-name>
+			</target>
+		</service-unit>	
+		<service-unit>
+			<identification>
+				<name>Weather-http-su</name>
+				<description>The http component</description>
+			</identification>
+			<target>
+				<artifacts-zip>Weather-http-su.zip</artifacts-zip>
+				<component-name>servicemix-http</component-name>
+			</target>
+		</service-unit>			
+		<service-unit>
+			<identification>
+				<name>Weather-cxf-bc-SU</name>
+				<description>Ebay web service Consumer</description>
+			</identification>
+			<target>
+				<artifacts-zip>Weather-cxf-bc-su.zip</artifacts-zip>
+				<component-name>servicemix-cxf-bc</component-name>
+			</target>
+		</service-unit>		
+		<service-unit>
+			<identification>
+				<name>Weather-bean-SU</name>
+				<description>Beans</description>
+			</identification>
+			<target>
+				<artifacts-zip>Weather-bean-su.zip</artifacts-zip>
+				<component-name>servicemix-bean</component-name>
+			</target>
+		</service-unit>
+	
+		
+	</service-assembly>
+</jbi>

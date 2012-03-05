@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+
+<project name="ESBMediator" basedir="." default="all">
+
+	<property name="servicemix.installation.dir" location="C:\apache-servicemix-4.3.1" />
+	<property name="servicemix.hotdeploy.dir" location="${servicemix.installation.dir}/deploy" />
+
+	<property name="prj.dir" location="." />
+	<property name="src.dir" location="${prj.dir}/src" />
+	<property name="classes.dir" location="${prj.dir}/bin" />
+	<property name="build.dir" location="${prj.dir}/build" />
+	<property name="tmp.dir" location="${build.dir}/tmp" />
+	<property name="test.dir" location="${prj.dir}/test" />
+
+	<property name="sa-archive" value="Weather-SA.zip" />
+
+
+
+	<!-- package and deploy SA -->
+	<target name="all" depends="init">
+		<antcall target="package-su">
+			<param name="destination-su-file" value="Weather-routing-su.zip" />
+			<param name="descriptor-dir" value="./routing" />
+		</antcall>
+		<antcall target="package-su-withresources">
+			<param name="destination-su-file" value="Weather-bean-su.zip" />
+			<param name="descriptor-dir" value="./bean" />
+		</antcall>
+		<antcall target="package-su">
+			<param name="destination-su-file" value="Weather-file-su.zip" />
+			<param name="descriptor-dir" value="./file" />
+		</antcall>
+		<antcall target="package-su">
+					<param name="destination-su-file" value="Weather-http-su.zip" />
+					<param name="descriptor-dir" value="./http" />
+		</antcall>
+		<antcall target="package-saxon-su">
+			<param name="destination-su-file" value="Weather-saxon-su.zip" />
+			<param name="descriptor-dir" value="./saxon" />
+		</antcall>
+		<antcall target="package-cxf-bc-su">
+			<param name="destination-su-file" value="Weather-cxf-bc-su.zip" />
+			<param name="descriptor-dir" value="./cxf-bc" />
+		</antcall>
+		<antcall target="package-sa">
+					<param name="sa-archive" value="${sa-archive}" />
+					<param name="descriptor-dir" value="." />
+					<param name="su-archives" value="Weather-*-su.zip" />
+		</antcall>
+		<antcall target="deploy-sa" />		
+	</target>
+
+	<!-- package a SU containing only xbean.xml
+	required parametes:
+	descriptor-dir: directory containing xbean.xml file
+	destination-su-file: name of archive to be created
+	 -->
+	<target name="package-su">
+		<jar destfile="${build.dir}/${destination-su-file}">
+			<fileset dir="${descriptor-dir}">
+				<include name="xbean.xml" />
+			</fileset>
+		</jar>
+	</target>
+	
+	<target name="package-saxon-su">
+		<jar destfile="${build.dir}/${destination-su-file}">
+			<fileset dir="${descriptor-dir}">
+				<include name="xbean.xml" />
+				<include name="*.xsl"/>
+			</fileset>
+		</jar>
+	</target>
+	
+	<target name="package-cxf-bc-su">
+		<jar destfile="${build.dir}/${destination-su-file}">
+			<fileset dir="${descriptor-dir}">
+				<include name="xbean.xml" />
+				<include name="cxf.xml"/>
+				<include name="*.wsdl"/>
+			</fileset>
+		</jar>
+	</target>
+
+	<!-- package a SU containing xbean.xml and other resources (classes and other files)
+	required parametes:
+	descriptor-dir: directory containing xbean.xml file
+	resource-dir: directory containig files to be packaged in the SU archive
+	classes.dir: directory cointaining compiled classes to be packaged in the SU archive (may override global classes.dir)
+	destination-su-file: name of archive to be created
+	 -->
+	<target name="package-su-withresources">
+		<jar destfile="${build.dir}/${destination-su-file}">
+			<fileset dir="${descriptor-dir}">
+				<include name="xbean.xml" />
+			</fileset>
+			<fileset dir="${classes.dir}">
+				<include name="**/*" />
+			</fileset>
+		</jar>
+	</target>
+
+
+	<!-- package SA archive 
+	required parameters:
+	sa-archive: name of the archive to be created
+	descriptor-dir: directory containing jbi.xml file
+	su-archives: SU to be packaged in the SA
+	-->
+	<target name="package-sa">
+		<delete dir="${tmp.dir}" />
+		<mkdir dir="${tmp.dir}" />
+		<mkdir dir="${tmp.dir}/META-INF" />
+		<copy file="${descriptor-dir}/jbi.xml" tofile="${tmp.dir}/META-INF/jbi.xml" />
+		<jar destfile="${build.dir}/${sa-archive}">
+			<fileset dir="${tmp.dir}">
+				<include name="META-INF/**" />
+			</fileset>
+			<fileset dir="${build.dir}">
+				<include name="${su-archives}" />
+			</fileset>
+		</jar>
+	</target>
+
+	<!-- deploy SA: copy SA archive in servicemix hotdeploy directory -->
+	<target name="deploy-sa">
+		<copy file="${build.dir}/${sa-archive}" tofile="${servicemix.hotdeploy.dir}/${sa-archive}" overwrite="true" />
+	</target>
+
+
+	<target name="init">
+		<delete dir="${build.dir}" />
+		<mkdir dir="${build.dir}" />		
+	</target>
+	
+	<!-- undeploy -->
+	<target name="undeploy-sa">
+		<delete file="${servicemix.hotdeploy.dir}/${sa-archive}" />
+	</target>
+</project>
