@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-	xmlns:tns="http://it.unitn.laboratory.events/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://events.laboratory.unitn.it/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
     name="Events"
-	targetNamespace="http://it.unitn.laboratory.events/">
+	targetNamespace="http://events.laboratory.unitn.it/">
 	<wsdl:types>
-		<xsd:schema targetNamespace="http://it.unitn.laboratory.events/">  
+		<xsd:schema targetNamespace="http://events.laboratory.unitn.it/">  
             <xsd:complexType name="BodyType">
             	<xsd:sequence>
             		<xsd:element name="InserimentoVariazioneAnagrafica"
@@ -860,7 +860,7 @@
   <wsdl:binding name="EventsSOAP" type="tns:Events">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     <wsdl:operation name="NewOperation">
-      <soap:operation soapAction="http://it.unitn.laboratory.events/NewOperation"/>
+      <soap:operation soapAction="http://events.laboratory.unitn.it/NewOperation"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>
