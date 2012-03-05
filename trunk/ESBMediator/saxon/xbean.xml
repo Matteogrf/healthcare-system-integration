@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:saxon="http://servicemix.apache.org/saxon/1.0"
+	xmlns:tns="http://aibmp.weather/">
+	<classpath>
+		<location>.</location>
+	</classpath>
+	<saxon:xslt service="tns:TransformationService"
+				endpoint="transformCityList" 
+				resource="classpath:selectCountry.xsl"
+				result="String" />	
+	<saxon:xslt service="tns:TransformationService"
+				endpoint="transformGetWeatherRequest" 
+				resource="classpath:GetWeatherRequest.xsl"
+				result="String" />	
+	<saxon:xslt service="tns:TransformationService"
+				endpoint="transformGetWeatherResponse" 
+				resource="classpath:getWeatherResponse.xsl"
+				result="String" />
+</beans>

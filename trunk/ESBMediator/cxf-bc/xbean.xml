@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+     xmlns:cxfbc="http://servicemix.apache.org/cxfbc/1.0"
+     xmlns:tns="http://aibmp.weather/"
+     xmlns="http://xbean.org/schemas/spring/1.0"
+     xmlns:webservice="http://www.webserviceX.NET">
+
+     <classpath>
+          <location>.</location>
+     </classpath>
+
+     <cxfbc:provider
+          wsdl="classpath:WeatherService.wsdl"
+          endpoint="GlobalWeatherSoap12"
+          service="webservice:GlobalWeather"
+          interfaceName="GlobalWeatherSoap12"         
+          useJBIWrapper="false"
+          useSOAPEnvelope="false" />
+               
+     <cxfbc:consumer
+     	  wsdl="classpath:MyWeatherWsdl.wsdl"
+          targetService="tns:baseRounting"
+          targetEndpoint="routing"
+          useJBIWrapper="false" />
+
+</beans>

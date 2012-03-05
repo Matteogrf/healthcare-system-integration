@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://xbean.org/schemas/spring/1.0" xmlns:eip="http://servicemix.apache.org/eip/1.0"
+	xmlns:webservice="http://www.webserviceX.NET" xmlns:tns="http://aibmp.weather/">
+
+
+<eip:wire-tap service="tns:baseRounting" endpoint="routing">
+    <eip:target>
+      <eip:exchange-target service="tns:routingWebServiceRequest" endpoint="wsRequestEndpoint" />
+    </eip:target>
+
+    <eip:inListener>
+      <eip:exchange-target service="tns:loggingService" endpoint="logger" />
+    </eip:inListener>
+  </eip:wire-tap>
+
+
+<eip:content-based-router service="tns:routingWebServiceRequest" endpoint="wsRequestEndpoint">
+		<eip:rules>
+			<eip:routing-rule>
+				<eip:predicate>
+					<eip:xpath-predicate xpath="//node()[@operation = 'CityList']"   />
+				</eip:predicate>
+				<eip:target>
+					<eip:exchange-target service="tns:routingWebServiceRequest"	endpoint="getCityListEndpoint" />
+				</eip:target>
+			</eip:routing-rule>
+			<eip:routing-rule>
+				<eip:predicate>
+					<eip:xpath-predicate xpath="//node()[@operation = 'WeatherInfo']"  />
+				</eip:predicate>
+				<eip:target>
+					<eip:exchange-target service="tns:routingWebServiceRequest"	endpoint="getWeatherEndpoint" />
+				</eip:target>
+			</eip:routing-rule>	
+			<eip:routing-rule>			
+			<eip:target>
+					<eip:exchange-target endpoint="LoggingEndpoint" service="tns:Logging" operation="log" />
+			</eip:target>
+			</eip:routing-rule>			
+		</eip:rules>
+</eip:content-based-router>
+
+
+	<eip:static-routing-slip service="tns:routingWebServiceRequest"	endpoint="getCityListEndpoint">
+		<eip:targets>
+			<eip:exchange-target endpoint="messageReader" service="tns:prepareWSRequest" operation="prepare" />
+			<eip:exchange-target endpoint="GlobalWeatherSoap12"	service="webservice:GlobalWeather" operation="webservice:GetCitiesByCountry" />
+			<eip:exchange-target endpoint="transformPreparator"	service="tns:tranformationPreparator" operation="prepare" />
+			<eip:exchange-target endpoint="transformCityList" service="tns:TransformationService" />
+		</eip:targets>
+	</eip:static-routing-slip>
+	
+		<eip:static-routing-slip service="tns:routingWebServiceRequest"	endpoint="getWeatherEndpoint">
+		<eip:targets>			
+			<eip:exchange-target endpoint="transformGetWeatherRequest" service="tns:TransformationService" />
+			<eip:exchange-target endpoint="GlobalWeatherSoap12"	service="webservice:GlobalWeather" operation="webservice:GetCitiesByCountry" />
+			<eip:exchange-target endpoint="transformPreparator"	service="tns:tranformationPreparator" operation="prepare" />			
+			<eip:exchange-target endpoint="transformGetWeatherResponse" service="tns:TransformationService" />
+		</eip:targets>
+	</eip:static-routing-slip>
+	
+<eip:pipeline service="tns:loggingService" endpoint="logger">
+  	 <eip:transformer>
+  	  	<eip:exchange-target endpoint="transformForLogging" service="tns:tranformationPreparator" operation="prepare" />
+ 	 </eip:transformer>
+  	<eip:target>
+   	    <eip:exchange-target service="tns:logFileSender" endpoint="loggerEndpoint" />
+ 	 </eip:target>
+</eip:pipeline>
+
+<eip:static-routing-slip service="tns:viewLogRouting"	endpoint="viewLog">
+		<eip:targets>			
+		 	<eip:exchange-target endpoint="transformForLogging" service="tns:tranformationPreparator" operation="prepareViewLog" />			
+		</eip:targets>
+	</eip:static-routing-slip>
+
+</beans>
