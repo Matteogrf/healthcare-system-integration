@@ -55,27 +55,36 @@ public class CSIDataProducer
 		event.setIntestazione(extractHeader(iva, of));
 		event.setDescrizione(extractDescrizione(iva,of));
 		event.setEvento(extractEventInserimentoVariazioneAnagrafica(iva,of));
+		event.setOperazione(extractOperation(of));
 		
 		new Events_Service().getEventsSOAP().sendEvent(event);
 	}
 
-	private static BodyType extractEventInserimentoVariazioneAnagrafica(ResultSet iva, ObjectFactory of) {
+	private static OperationType extractOperation(ObjectFactory of) 
+	{
+		OperationType operation = of.createOperationType();
+		operation.setOperazioneCod("1");
+		operation.setOperazioneDescr("Inserimento");
+		return operation;
+	}
+
+	private static BodyType extractEventInserimentoVariazioneAnagrafica(ResultSet iva, ObjectFactory of) throws SQLException {
 		BodyType body = of.createBodyType();
 		InserimentoVariazioneAnagraficaType ivat = of.createInserimentoVariazioneAnagraficaType();
 		ivat.setAssSocialeCod( iva.getInt("I.AssSocialeCod") );
-		ivat.setAssSocialeCognome(value);
-		ivat.setAssSocialeNome(value);
-		ivat.setCAP(value);
-		ivat.setCittadinanzaCod(value);
-		ivat.setCittadinanzaDescr(value);
-		ivat.setComuneNascitaDescr(value);
-		ivat.setComuneResidenzaDescr(value);
-		ivat.setNazionalitacDescr(value);
-		ivat.setNazionalitaCod(value);
-		ivat.setSesso(value);
-		ivat.setStatoCivileCod(value);
-		ivat.setStatoCivileDescr(value);
-		ivat.setVia(value);
+		ivat.setAssSocialeCognome( iva.getString("I.AssSocialeCognome") );
+		ivat.setAssSocialeNome(iva.getString("I.AssSocialeNome"));
+		ivat.setCAP( iva.getInt("I.CAP") );
+		ivat.setCittadinanzaCod( iva.getInt("I.CittadinanzaCod") );
+		ivat.setCittadinanzaDescr( iva.getString("I.CittadinanzaDescr") );
+		ivat.setComuneNascitaDescr( iva.getString("I.ComuneNascitaDescr") );
+		ivat.setComuneResidenzaDescr( iva.getString("I.ComuneDiResidenzaDescr") );
+		ivat.setNazionalitacDescr( iva.getString("I.NazionalitaDescr") );
+		ivat.setNazionalitaCod( iva.getInt("I.NazionalitaCod") );
+		ivat.setSesso( iva.getString("I.Sesso") );
+		ivat.setStatoCivileCod( iva.getInt("I.StatoCivileCod") );
+		ivat.setStatoCivileDescr(iva.getString("I.StatoCivileDescr"));
+		ivat.setVia(iva.getString("I.Via"));
 		body.setInserimentoVariazioneAnagrafica(ivat);
 		return body;
 	}
