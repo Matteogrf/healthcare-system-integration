@@ -120,7 +120,7 @@ public class CSIDataProducer
 		sat.setIdAnagrafe(iva.getString("H.IdAnagrafe"));
 		sat.setUrlEnte(iva.getString("H.UrlEnteAnagrafe"));
 		header.setSorgenteAnagrafe(sat);
-		return null;
+		return header;
 	}
 
 	private static PatientType extractPatient(ResultSet iva, ObjectFactory of) throws SQLException, DatatypeConfigurationException 
