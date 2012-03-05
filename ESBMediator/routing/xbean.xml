@@ -5,8 +5,7 @@
 
 
 	<!-- Ricevo la richiesta inviata al Web Service Endpoint  e la invio al
-	     componente di routing wiretrap   -->
-		
+	     componente di routing wiretrap   -->		
 	<eip:static-routing-slip service="tns:processEventRequest"
 		endpoint="staticRouting">
 		<eip:targets>
@@ -19,7 +18,7 @@
 	<!-- Devo utilizzare questo componente per poter processare l'evento 
 	     in modo da poterlo salvare nella staging area. In questo modo riesco ad avvisare il client 
 	     dell' avvenuta consegna dell'evento all'ESB -->
-	<eip:wire-tap service="tns:wireTap" endpoint="endpoint">
+	<eip:wire-tap service="tns:wireTrap" endpoint="endpoint">
 		<eip:target>
 			<eip:exchange-target service="tns:beanLogEvent"
 				endpoint="LogEvent" operation="logContent" />
@@ -44,6 +43,16 @@
 			</eip:routing-rule>
 		</eip:rules>
 	</eip:content-based-router>
+	
+	<!-- Eseguo il mapping relativo all'evento Inserimento Variazione Anagrafica e salvo il risultato nella staging area -->
+    <eip:pipeline service="tns:mapInserimentoVariazioneAnagrafica" endpoint="IVA">
+    	<eip:transformer>
+    	  <eip:exchange-target service="tns:mappingIVA" endpoint="mappingIVA"></eip:exchange-target>
+    	</eip:transformer>
+    	<eip:target>
+    	  <eip:exchange-target service="tns:mappedEventProcessor" endpoint="mappedEvent" operation="manageInserimentoVariazioneAnagrafica"></eip:exchange-target>
+    	</eip:target>
+    </eip:pipeline>
 	
 	
 
