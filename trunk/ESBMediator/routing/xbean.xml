@@ -4,20 +4,33 @@
 	xmlns:tns="http://it.unitn/">
 
 
-	<!-- Processo la richiesta inviata al Web Service Endpoint, la trasformo, 
-		la invio al BingImage Search Web service, trasformo la risposta , salvo la 
-		risposta trasformata in un file e rispondo al client -->
+	<!-- Ricevo la richiesta inviata al Web Service Endpoint  e la invio al
+	     componente di routing wiretrap   -->
 		
 	<eip:static-routing-slip service="tns:processEventRequest"
 		endpoint="staticRouting">
 		<eip:targets>
-			<eip:exchange-target service="tns:beanLogEvent"
-				endpoint="LogEvent" operation="logContent" />			
+			<eip:exchange-target service="tns:wireTrap"
+				endpoint="endpoint" />			
 		</eip:targets>
 	   
 	</eip:static-routing-slip>
 	
-	<eip:content-based-router service="tns:contentBaseRouter"
+	<!-- Devo utilizzare questo componente per poter processare l'evento 
+	     in modo da poterlo salvare nella staging area. In questo modo riesco ad avvisare il client 
+	     dell' avvenuta consegna dell'evento all'ESB -->
+	<eip:wire-tap service="tns:wireTap" endpoint="endpoint">
+		<eip:target>
+			<eip:exchange-target service="tns:beanLogEvent"
+				endpoint="LogEvent" operation="logContent" />
+		</eip:target>
+		<eip:inListener>
+			<eip:exchange-target service="tns:splitDifferentEvents" />
+		</eip:inListener>
+	</eip:wire-tap>
+	
+	<!-- Instrado l'evento al mapping associato -->
+	<eip:content-based-router service="tns:splitDifferentEvents"
 		endpoint="endpoint">
 		<eip:rules>
 			<eip:routing-rule>
