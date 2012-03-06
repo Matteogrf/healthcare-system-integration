@@ -101,8 +101,8 @@ public class CSIDataProducer
 		description.setServizioDescr( iva.getString("ED.ServizioDescr") );
 		description.setTipoEventoCod( iva.getInt("ED.TipoEventoCod") );
 		description.setTipoEventoDescr( iva.getString("ED.TipoEventoDescr") );
-		description.setUnitaOrganizzativaCod( iva.getInt("ED.Unit‡OrganizzativaCod") );
-		description.setUnitaOrganizzativaDescr( iva.getString("ED.Unit‡OrganizzativaDescr") );
+		description.setUnitaOrganizzativaCod( iva.getInt("ED.UnitaOrganizzativaCod") );
+		description.setUnitaOrganizzativaDescr( iva.getString("ED.UnitaOrganizzativaDescr") );
 		
 		description.setDataOraEvento( DateToXMLGregorianCalendar( iva.getDate("ED.DataOraEvento") ) );
 		description.setDataOraRegEvento( DateToXMLGregorianCalendar( iva.getDate("ED.DataOraRegEvento") ) );
