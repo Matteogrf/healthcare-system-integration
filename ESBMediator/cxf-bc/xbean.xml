@@ -16,6 +16,7 @@
         targetEndpoint="staticRouting"
         targetService="tns:processEventRequest"
         useJBIWrapper="false"
+        useSOAPEnvelope="false"
         >     
      </cxfbc:consumer>
           
