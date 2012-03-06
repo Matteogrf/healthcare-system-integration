@@ -144,4 +144,13 @@
 	<target name="undeploy-sa">
 		<delete file="${servicemix.hotdeploy.dir}/${sa-archive}" />
 	</target>
+	
+	<!-- JAXB generate classes from XML schema-->
+	<target name="jaxb-gen">
+		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+		  <classpath>
+		    <fileset dir="path/to/jaxb/lib" includes="*.jar" />
+		  </classpath>
+		</taskdef>
+	</target>
 </project>
