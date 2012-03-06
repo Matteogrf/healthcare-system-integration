@@ -29,6 +29,11 @@
 			<param name="descriptor-dir" value="./cxf-bc" />
 		</antcall>
 		
+		<antcall target="package-saxon-su">
+			<param name="destination-su-file" value="IntegrationLayer-saxon-su.zip" />
+			<param name="descriptor-dir" value="./saxon" />
+		</antcall>
+		
 		<antcall target="package-su">
 			<param name="destination-su-file" value="IntegrationLayer-eip-su.zip" />
 			<param name="descriptor-dir" value="./routing" />
@@ -68,9 +73,7 @@
 		<jar destfile="${build.dir}/${destination-su-file}">
 			<fileset dir="${descriptor-dir}">
 				<include name="xbean.xml" />
-			    <include name="BingTrans.xslt" />
-				<include name="MyServiceTrans.xslt" />
-				<include name="ImageSearchedHTML.xslt" />
+			    <include name="mapInserimentoVariazioneAnagrafica.xsl" />
 			</fileset>
 		</jar>
 	</target>
