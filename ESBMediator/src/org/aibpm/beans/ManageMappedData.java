@@ -1,5 +1,10 @@
 package org.aibpm.beans;
 
+import it.unitn.laboratory.mappedData.DwhSchemaType;
+import it.unitn.laboratory.utils.JAXBUtils;
+
+import java.io.InputStream;
+
 import javax.annotation.Resource;
 import javax.jbi.messaging.DeliveryChannel;
 import javax.jbi.messaging.ExchangeStatus;
@@ -26,9 +31,13 @@ public class ManageMappedData {
 			Source messageContent = inMessage.getContent();
 
 			try {
-				String body = (new SourceTransformer()).toString(messageContent);
-				System.out.println("Hey, your message passed from here!1\n"+body);
-
+				
+				
+				InputStream globalSchemaEventXML = (new SourceTransformer().toStreamSource(messageContent).getInputStream());
+				DwhSchemaType dwh = JAXBUtils.getDWHClassesFromXML(globalSchemaEventXML);
+				
+				System.out.println(dwh.getDASSISTITO().getCAP());
+				
 
 			} catch (Exception e1) {
 				System.out.println("Errore Parsing Request:" + e1.getMessage());
