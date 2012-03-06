@@ -30,7 +30,7 @@ public class DBManager
 	
 	public void createSchema() throws SQLException
 	{
-		File f = new File("../Data/CreateStagingAreaCode.sql");
+		File f = new File("Data/CreateStagingAreaCode.sql");
 		
 		BufferedReader br;		
 		try 
@@ -43,7 +43,6 @@ public class DBManager
 				s = s.concat(l+"\n");
 			}
 			br.close();	
-			System.out.println(s);
 			Statement stat = con.createStatement();
 			stat.executeUpdate(s);
 			stat.close();
@@ -74,12 +73,11 @@ public class DBManager
 	
 	public static void main(String[] args) 
 	{
-		try {
+		try 
+		{
 			DBManager.getIstance().createSchema();
 		} catch (Exception e) 
 		{
-			System.out.println(e.getMessage());
-			e.printStackTrace();
 		}
 	
 	}
