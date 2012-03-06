@@ -24,7 +24,7 @@
 				endpoint="LogEvent" operation="logContent" />
 		</eip:target>
 		<eip:inListener>
-			<eip:exchange-target service="tns:splitDifferentEvents" />
+			<eip:exchange-target service="tns:splitDifferentEvents" endpoint="endpoint"/>
 		</eip:inListener>
 	</eip:wire-tap>
 	
@@ -35,10 +35,10 @@
 			<eip:routing-rule>
 				<eip:predicate>
 					<!-- Evento Inserimento Variazione Anagrafica  -->
-					<eip:xpath-predicate xpath="//EventNotificationRequest[Description/TipoEventoCod=1]"/>
+					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=1]"/>
 				</eip:predicate>
 				<eip:target>
-					<eip:exchange-target service="tns:mapInserimentoVariazioneAnagrafica" />
+					<eip:exchange-target service="tns:mapInserimentoVariazioneAnagrafica" endpoint="IVA" />
 				</eip:target>
 			</eip:routing-rule>
 		</eip:rules>

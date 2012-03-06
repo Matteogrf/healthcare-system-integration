@@ -2,8 +2,9 @@
 <xsl:stylesheet version="1.0"
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 xmlns:ns2="http://events.laboratory.unitn.it/">
+
 <xsl:template match="/ns2:EventNotificationRequest">
-    <DWH_SCHEMA>
+    <DWH_SCHEMA xmlns:ns2="http://events.laboratory.unitn.it/">
         <D_ASSISTITO>
             <ID_ASSISTITO></ID_ASSISTITO>
             <ID_ANAGRAFE_LOCALE>
