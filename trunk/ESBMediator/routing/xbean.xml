@@ -1,60 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:eip="http://servicemix.apache.org/eip/1.0" xmlns="http://xbean.org/schemas/spring/1.0"
-	xmlns:wsb="http://schemas.microsoft.com/LiveSearch/2008/03/Search"
-	xmlns:tns="http://it.unitn/">
+	xmlns:wsb="http://events.laboratory.unitn.it" xmlns:tns="http://it.unitn/">
 
 
-	<!-- Ricevo la richiesta inviata al Web Service Endpoint  e la invio al
-	     componente di routing wiretrap   -->		
+	<!-- Ricevo la richiesta inviata al Web Service Endpoint e la invio al componente 
+		di routing wiretrap -->
 	<eip:static-routing-slip service="tns:processEventRequest"
 		endpoint="staticRouting">
 		<eip:targets>
 			<eip:exchange-target service="tns:wireTrap"
-				endpoint="endpoint" />			
+				endpoint="endpoint" />
 		</eip:targets>
-	   
+
 	</eip:static-routing-slip>
-	
-	<!-- Devo utilizzare questo componente per poter processare l'evento 
-	     in modo da poterlo salvare nella staging area. In questo modo riesco ad avvisare il client 
-	     dell' avvenuta consegna dell'evento all'ESB -->
+
+	<!-- Devo utilizzare questo componente per poter processare l'evento in 
+		modo da poterlo salvare nella staging area. In questo modo riesco ad avvisare 
+		il client dell' avvenuta consegna dell'evento all'ESB -->
 	<eip:wire-tap service="tns:wireTrap" endpoint="endpoint">
 		<eip:target>
 			<eip:exchange-target service="tns:beanLogEvent"
 				endpoint="LogEvent" operation="logContent" />
 		</eip:target>
 		<eip:inListener>
-			<eip:exchange-target service="tns:splitDifferentEvents" endpoint="endpoint"/>
+			<eip:exchange-target service="tns:splitDifferentEvents"
+				endpoint="endpoint" />
 		</eip:inListener>
 	</eip:wire-tap>
-	
+
 	<!-- Instrado l'evento al mapping associato -->
 	<eip:content-based-router service="tns:splitDifferentEvents"
 		endpoint="endpoint">
 		<eip:rules>
 			<eip:routing-rule>
 				<eip:predicate>
-					<!-- Evento Inserimento Variazione Anagrafica  -->
-					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=1]"/>
+					<!-- Evento Inserimento Variazione Anagrafica -->
+					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=1]" />
 				</eip:predicate>
 				<eip:target>
-					<eip:exchange-target service="tns:mapInserimentoVariazioneAnagrafica" endpoint="IVA" />
+					<eip:exchange-target service="tns:mapInserimentoVariazioneAnagrafica"
+						endpoint="IVA" />
 				</eip:target>
 			</eip:routing-rule>
 		</eip:rules>
 	</eip:content-based-router>
-	
-	<!-- Eseguo il mapping relativo all'evento Inserimento Variazione Anagrafica e salvo il risultato nella staging area -->
-    <eip:pipeline service="tns:mapInserimentoVariazioneAnagrafica" endpoint="IVA">
-    	<eip:transformer>
-    	  <eip:exchange-target service="tns:mappingIVA" endpoint="mappingIVA"></eip:exchange-target>
-    	</eip:transformer>
-    	<eip:target>
-    	  <eip:exchange-target service="tns:mappedEventProcessor" endpoint="mappedEvent" operation="manageInserimentoVariazioneAnagrafica"></eip:exchange-target>
-    	</eip:target>
-    </eip:pipeline>
-	
-	
+
+	<!-- Eseguo il mapping relativo all'evento Inserimento Variazione Anagrafica 
+		e inoltro il risultato al Datawarehouse WS -->
+	<eip:pipeline service="tns:mapInserimentoVariazioneAnagrafica"
+		endpoint="IVA">
+		<eip:transformer>
+			<eip:exchange-target service="tns:mappingIVA"
+				endpoint="mappingIVA"></eip:exchange-target>
+		</eip:transformer>
+		<eip:target>
+			<eip:exchange-target service="tns:logAndSend" endpoint="mappedEvents"></eip:exchange-target>
+		</eip:target>
+	</eip:pipeline>
+
+	<eip:static-recipient-list service="tns:logAndSend" endpoint="mappedEvents">
+		<eip:recipients>
+			<eip:exchange-target service="tns:beanLogEvent"
+				endpoint="LogEvent" operation="logContentNoForward" />
+			<eip:exchange-target service="wsb:DwhWS" />
+		</eip:recipients>
+	</eip:static-recipient-list>
+
+
 
 </beans>
 

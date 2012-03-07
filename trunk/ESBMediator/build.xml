@@ -65,6 +65,7 @@
 			<fileset dir="${descriptor-dir}">
 				<include name="xbean.xml" />
 			    <include name="Events.wsdl" />
+				<include name="DwhWS.wsdl" />
 			</fileset>
 		</jar>
 	</target>
