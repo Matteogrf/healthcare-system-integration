@@ -12,10 +12,16 @@ import javax.jbi.messaging.ExchangeStatus;
 import javax.jbi.messaging.MessageExchange;
 import javax.jbi.messaging.NormalizedMessage;
 import javax.swing.text.GlyphView;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
 
 import org.apache.servicemix.bean.Operation;
 import org.apache.servicemix.jbi.jaxp.SourceTransformer;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class ManageMappedData {
 	
@@ -37,9 +43,11 @@ public class ManageMappedData {
 
 				try {
 					String body = (new SourceTransformer()).toString(messageContent);
-					System.out.println("Hey, your message passed from here!1\n"
-							+ body);
-
+					System.out.println("DWH Response:"+body);
+					
+					String response = createWSResponse(new SourceTransformer().toDOMDocument(messageContent));
+					
+					
 
 					exchange.setMessage(inMessage, "out");
 					// send the out message through the delivery channel
@@ -51,9 +59,22 @@ public class ManageMappedData {
 			}
 
         }
-			
-		
     }
+	
+	
+	private String createWSResponse(Document doc){
+		
+		Element el = doc.getElementById("SendMappedChangesResponse");
+
+		NodeList nodes = el.getChildNodes();
+		Node n;
+		for(int i= 0; i<nodes.getLength(); i++){
+			n = nodes.item(i);
+			System.out.println("Element:"+n.getNodeValue());
+		}
+	    
+		return "";
+	}
 			
  }
 

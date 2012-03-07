@@ -37,6 +37,7 @@
 		<eip:targets>
 		    <eip:exchange-target service="tns:mappingIVA"
 				endpoint="mappingIVA"></eip:exchange-target>
+				
 		    <eip:exchange-target service="wsb:DwhWS" />
 		    
 			<eip:exchange-target service="tns:mappedEventProcessor"
