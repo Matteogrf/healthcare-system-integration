@@ -21,7 +21,7 @@ public class EventManager
 		} 
 		catch (StagingAreaException e) 
 		{
-			return e.getMessage();
+			return "ERRORE: "+e.getMessage();
 		}
 		return "OK";		
 	}
