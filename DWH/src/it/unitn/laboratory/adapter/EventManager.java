@@ -29,10 +29,8 @@ public class EventManager
 	private static void checkOperatore(OperatoreType operatore) throws StagingAreaException
 	{
 		try 
-		{
-			System.out.println("Inizio controllo operatore. mi connetto al db");
-			QueryManager qm = new QueryManager(ConnectionManagerDWH.getInstance());
-			System.out.println("Connessione in atto, stay tuned");
+		{			
+			QueryManager qm = new QueryManager(ConnectionManagerDWH.getInstance());			
 			ResultSet rs = qm.findOperatore(operatore.getOPERATORECOD(), operatore.getPOLOCOD(), operatore.getENTEGESTORECOD());
 			if(rs.next()) return; // Operatore gia presente nel database
 			
@@ -41,7 +39,7 @@ public class EventManager
 		    if(rs.next()) return; // Operatore gia presente nella staging area
 		    
 		    // inserire l'operatore nella staging area
-		    qm.insertOperatore(operatore);
+		    qm2.insertOperatore(operatore);
 		} 
 		catch (Exception e ) 
 		{
