@@ -36,94 +36,93 @@
 
 			<xsd:complexType name="EventType">
 				<xsd:sequence>
-					<xsd:element name="EVENT_COD" type="int" minOccurs="1"
+					<xsd:element name="EVENT_COD" type="xsd:int" minOccurs="1"
 						maxOccurs="1"></xsd:element>
-					<xsd:element name="EVENT_DESCR" type="string"
+					<xsd:element name="EVENT_DESCR" type="xsd:string"
 						minOccurs="1" maxOccurs="1"></xsd:element>
 				</xsd:sequence>
 			</xsd:complexType>
 
 			<xsd:complexType name="OperatoreType">
 				<xsd:sequence>
-					<xsd:element name="OPERATORE_COD" type="int" minOccurs="0"
+					<xsd:element name="OPERATORE_COD" type="xsd:int" minOccurs="0"
 						maxOccurs="1"></xsd:element>
-					<xsd:element name="NOME" type="string" minOccurs="0"
+					<xsd:element name="NOME" type="xsd:string" minOccurs="0"
 						maxOccurs="1"></xsd:element>
-					<xsd:element name="COGNOME" type="string" minOccurs="0"
+					<xsd:element name="COGNOME" type="xsd:string" minOccurs="0"
 						maxOccurs="1"></xsd:element>
-					<xsd:element name="POLO_COD" type="int" minOccurs="0"
+					<xsd:element name="POLO_COD" type="xsd:int" minOccurs="0"
 						maxOccurs="1"></xsd:element>
-					<xsd:element name="POLO_DESCR" type="string" minOccurs="0"
+					<xsd:element name="POLO_DESCR" type="xsd:string" minOccurs="0"
 						maxOccurs="1"></xsd:element>
-					<xsd:element name="ENTE_GESTORE_COD" type="int"
+					<xsd:element name="ENTE_GESTORE_COD" type="xsd:int"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="ENTE_GESTORE_DESCR" type="string"
+					<xsd:element name="ENTE_GESTORE_DESCR" type="xsd:string"
 						minOccurs="0" maxOccurs="1"></xsd:element>
 				</xsd:sequence>
 			</xsd:complexType>
 
 			<xsd:complexType name="AssistitoType">
 				<xsd:sequence>
-					<xsd:element name="ID_ASSISTITO" type="int" minOccurs="0"
+					<xsd:element name="ID_ASSISTITO" type="xsd:int" minOccurs="0"
 						maxOccurs="1"></xsd:element>
-					<xsd:element name="ID_ANAGRAFE_LOCALE" type="int"
+					<xsd:element name="ID_ANAGRAFE_LOCALE" type="xsd:int"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="MITTENTE_NOME_ENTE" type="string"
+					<xsd:element name="MITTENTE_NOME_ENTE" type="xsd:string"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="MITTENTE_URL_ENTE" type="string"
+					<xsd:element name="MITTENTE_URL_ENTE" type="xsd:string"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="ANAG_URL_ENTE" type="string"
+					<xsd:element name="ANAG_URL_ENTE" type="xsd:string"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="ANAG_ID_ANAGRAFE" type="int"
+					<xsd:element name="ANAG_ID_ANAGRAFE" type="xsd:int"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="ID_ASS_SOC" type="int" minOccurs="0"
+					<xsd:element name="ID_ASS_SOC" type="xsd:int" minOccurs="0"
 						maxOccurs="1"></xsd:element>
-					<xsd:element name="HASH_COD" type="string" minOccurs="0"
+					<xsd:element name="HASH_COD" type="xsd:string" minOccurs="0"
 						maxOccurs="1"></xsd:element>
-					<xsd:element name="DATA_NASCITA" type="date" minOccurs="0"
+					<xsd:element name="DATA_NASCITA" type="xsd:date" minOccurs="0"
 						maxOccurs="1"></xsd:element>
-					<xsd:element name="COMUNE_NASCITA_COD" type="int"
+					<xsd:element name="COMUNE_NASCITA_COD" type="xsd:int"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="COMUNE_NASCITA_DESCR" type="string"
+					<xsd:element name="COMUNE_NASCITA_DESCR" type="xsd:string"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="COMUNE_RESIDENZA" type="string"
+					<xsd:element name="COMUNE_RESIDENZA" type="xsd:string"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="COMUNE_RESIDENZA_COD" type="int"
+					<xsd:element name="COMUNE_RESIDENZA_COD" type="xsd:int"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="COMUNE_RESIDENZA_DESCR" type="string"
+					<xsd:element name="COMUNE_RESIDENZA_DESCR" type="xsd:string"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="SESSO" type="string" minOccurs="0"
+					<xsd:element name="SESSO" type="xsd:string" minOccurs="0"
 						maxOccurs="1"></xsd:element>
-					<xsd:element name="CAP" type="string" minOccurs="0"
+					<xsd:element name="CAP" type="xsd:string" minOccurs="0"
 						maxOccurs="1"></xsd:element>
-					<xsd:element name="STATO_CIVILE_COD" type="int"
+					<xsd:element name="STATO_CIVILE_COD" type="xsd:int"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="STATO_CIVILE_DESCR" type="string"
+					<xsd:element name="STATO_CIVILE_DESCR" type="xsd:string"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="NAZIONALITA_COD" type="int"
+					<xsd:element name="NAZIONALITA_COD" type="xsd:int"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="NAZIONALITA_DESCR" type="string"
+					<xsd:element name="NAZIONALITA_DESCR" type="xsd:string"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="CITTADINANZA_COD" type="int"
+					<xsd:element name="CITTADINANZA_COD" type="xsd:int"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="CITTADINANZA_DESCR" type="string"
+					<xsd:element name="CITTADINANZA_DESCR" type="xsd:string"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="POLO_COD" type="int" minOccurs="0"
+					<xsd:element name="POLO_COD" type="xsd:int" minOccurs="0"
 						maxOccurs="1"></xsd:element>
-					<xsd:element name="POLO_DESCR" type="string" minOccurs="0"
+					<xsd:element name="POLO_DESCR" type="xsd:string" minOccurs="0"
 						maxOccurs="1"></xsd:element>
-					<xsd:element name="GESTORE_COD" type="int" minOccurs="0"
+					<xsd:element name="GESTORE_COD" type="xsd:int" minOccurs="0"
 						maxOccurs="1"></xsd:element>
-					<xsd:element name="GESTORE_DESCR" type="string"
+					<xsd:element name="GESTORE_DESCR" type="xsd:string"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="INIZIO_PRESA_CARICO" type="date"
+					<xsd:element name="INIZIO_PRESA_CARICO" type="xsd:date"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="DATA_DOMANDA" type="date" minOccurs="0"
+					<xsd:element name="DATA_DOMANDA" type="xsd:date" minOccurs="0"
 						maxOccurs="1"></xsd:element>
 				</xsd:sequence>
 			</xsd:complexType>
 
-			<xsd:complexType name="tns:DwhSchemaType"></xsd:complexType>
 		</xsd:schema>
 	</wsdl:types>
 	<wsdl:message name="SendMappedChangesRequest">
@@ -153,7 +152,7 @@
 	</wsdl:binding>
 	<wsdl:service name="DwhWS">
 		<wsdl:port binding="tns:DwhWSSOAP" name="DwhWSSOAP">
-			<soap:address location="http://192.168.1.41/DwhWS" />
+			<soap:address location="http://192.168.1.41:9090/DwhWS" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>
