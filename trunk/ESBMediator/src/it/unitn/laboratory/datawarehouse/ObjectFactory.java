@@ -47,19 +47,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link QueryResponse }
-     * 
-     */
-    public QueryResponse createQueryResponse() {
-        return new QueryResponse();
-    }
-
-    /**
      * Create an instance of {@link UpdateResponse }
      * 
      */
     public UpdateResponse createUpdateResponse() {
         return new UpdateResponse();
+    }
+
+    /**
+     * Create an instance of {@link InsertResponse }
+     * 
+     */
+    public InsertResponse createInsertResponse() {
+        return new InsertResponse();
     }
 
     /**
@@ -71,19 +71,19 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link QueryResponse }
+     * 
+     */
+    public QueryResponse createQueryResponse() {
+        return new QueryResponse();
+    }
+
+    /**
      * Create an instance of {@link Query }
      * 
      */
     public Query createQuery() {
         return new Query();
-    }
-
-    /**
-     * Create an instance of {@link InsertResponse }
-     * 
-     */
-    public InsertResponse createInsertResponse() {
-        return new InsertResponse();
     }
 
     /**
