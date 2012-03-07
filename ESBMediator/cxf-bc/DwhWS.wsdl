@@ -74,7 +74,7 @@
 						minOccurs="0" maxOccurs="1"></xsd:element>
 					<xsd:element name="ANAG_URL_ENTE" type="xsd:string"
 						minOccurs="0" maxOccurs="1"></xsd:element>
-					<xsd:element name="ANAG_ID_ANAGRAFE" type="xsd:int"
+					<xsd:element name="ANAG_ID_ANAGRAFE" type="xsd:string"
 						minOccurs="0" maxOccurs="1"></xsd:element>
 					<xsd:element name="ID_ASS_SOC" type="xsd:int" minOccurs="0"
 						maxOccurs="1"></xsd:element>

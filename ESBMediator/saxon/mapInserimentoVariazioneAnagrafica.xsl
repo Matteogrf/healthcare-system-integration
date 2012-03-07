@@ -4,44 +4,46 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 xmlns:ns2="http://events.laboratory.unitn.it/">
 
 <xsl:template match="/ns2:EventNotificationRequest">
-<tns:DWH_SCHEMA xmlns:tns="http://events.laboratory.unitn.it/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://events.laboratory.unitn.it/MappedEvents.xsd ">
-  <tns:EVENT_TYPE>
-    <tns:EVENT_COD><xsl:value-of select="Descrizione/TipoEventoCod"/></tns:EVENT_COD>
-    <tns:EVENT_DESCR><xsl:value-of select="Descrizione/TipoEventoDescr"/></tns:EVENT_DESCR>
-  </tns:EVENT_TYPE>
-  <tns:D_ASSISTITO>
-    <tns:ID_ANAGRAFE_LOCALE><xsl:value-of select="Assistito/IdAnagrafeLocale"/></tns:ID_ANAGRAFE_LOCALE>
-    <tns:MITTENTE_NOME_ENTE><xsl:value-of select="Intestazione/Mittente/NomeEnte"/></tns:MITTENTE_NOME_ENTE>
-    <tns:MITTENTE_URL_ENTE><xsl:value-of select="Intestazione/Mittente/UrlEnte"/></tns:MITTENTE_URL_ENTE>
-    <tns:ANAG_URL_ENTE><xsl:value-of select="Intestazione/SorgenteAnagrafe/UrlEnte"/></tns:ANAG_URL_ENTE>
-    <tns:ANAG_ID_ANAGRAFE><xsl:value-of select="Intestazione/SorgenteAnagrafe/IdAnagrafe"/></tns:ANAG_ID_ANAGRAFE>
-    <tns:ID_ASS_SOC><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/AssSocialeCod"/></tns:ID_ASS_SOC>
-    <tns:HASH_COD> <xsl:value-of select="Assistito/Nome"/>,<xsl:value-of select="Assistito/Cognome"/>,<xsl:value-of select="Assistito/CodiceFiscale"/></tns:HASH_COD>
-    <tns:DATA_NASCITA><xsl:value-of select="Assistito/DataNascita"/></tns:DATA_NASCITA>
-    <tns:COMUNE_NASCITA_COD><xsl:value-of select="Assistito/ComuneNascitaCod"/></tns:COMUNE_NASCITA_COD>
-    <tns:COMUNE_RESIDENZA_COD><xsl:value-of select="Assistito/ComuneResidenzaCod"/></tns:COMUNE_RESIDENZA_COD>
-    <tns:SESSO><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/Sesso"/></tns:SESSO>
-    <tns:CAP><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/CAP"/></tns:CAP>
-    <tns:STATO_CIVILE_COD><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/StatoCivileCod"/></tns:STATO_CIVILE_COD>
-    <tns:STATO_CIVILE_DESCR><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/StatoCivileDescr"/></tns:STATO_CIVILE_DESCR>
-    <tns:NAZIONALITA_COD><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/NazionalitaCod"/></tns:NAZIONALITA_COD>
-    <tns:NAZIONALITA_DESCR><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/NazionalitaDescr"/></tns:NAZIONALITA_DESCR>
-    <tns:CITTADINANZA_COD><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/CittadinanzaCod"/></tns:CITTADINANZA_COD>
-    <tns:CITTADINANZA_DESCR><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/CittadinanzaDescr"/></tns:CITTADINANZA_DESCR>
-    <tns:POLO_COD><xsl:value-of select="Descrizione/UnitaOrganizzativaCod"/></tns:POLO_COD>
-    <tns:POLO_DESCR><xsl:value-of select="Descrizione/UnitaOrganizzativaDescr"/></tns:POLO_DESCR>
-    <tns:GESTORE_COD><xsl:value-of select="Descrizione/ProduttoreCod"/></tns:GESTORE_COD>
-    <tns:GESTORE_DESCR><xsl:value-of select="Descrizione/ProduttoreDescr"/></tns:GESTORE_DESCR>
-  </tns:D_ASSISTITO>
-  <tns:D_OPERATORE>
-    <tns:OPERATORE_COD><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/AssSocialeCod"/></tns:OPERATORE_COD>
-    <tns:NOME><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/AssSocialeNome"/></tns:NOME>
-    <tns:COGNOME><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/AssSocialeCognome"/></tns:COGNOME>
-    <tns:POLO_COD><xsl:value-of select="Descrizione/UnitaOrganizzativaCod"/></tns:POLO_COD>
-    <tns:POLO_DESCR><xsl:value-of select="Descrizione/UnitaOrganizzativaDescr"/></tns:POLO_DESCR>
-    <tns:ENTE_GESTORE_COD><xsl:value-of select="Descrizione/ProduttoreCod"/></tns:ENTE_GESTORE_COD>
-    <tns:ENTE_GESTORE_DESCR><xsl:value-of select="Descrizione/ProduttoreDescr"/></tns:ENTE_GESTORE_DESCR>
-  </tns:D_OPERATORE>
-</tns:DWH_SCHEMA>
+<tns:SendMappedChanges xmlns:tns="http://events.laboratory.unitn.it" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://events.laboratory.unitn.it/MappedEvents.xsd ">
+<DWH_SCHEMA >
+  <EVENT_TYPE>
+    <EVENT_COD><xsl:value-of select="Descrizione/TipoEventoCod"/></EVENT_COD>
+    <EVENT_DESCR><xsl:value-of select="Descrizione/TipoEventoDescr"/></EVENT_DESCR>
+  </EVENT_TYPE>
+  <D_ASSISTITO>
+    <ID_ANAGRAFE_LOCALE><xsl:value-of select="Assistito/IdAnagrafeLocale"/></ID_ANAGRAFE_LOCALE>
+    <MITTENTE_NOME_ENTE><xsl:value-of select="Intestazione/Mittente/NomeEnte"/></MITTENTE_NOME_ENTE>
+    <MITTENTE_URL_ENTE><xsl:value-of select="Intestazione/Mittente/UrlEnte"/></MITTENTE_URL_ENTE>
+    <ANAG_URL_ENTE><xsl:value-of select="Intestazione/SorgenteAnagrafe/UrlEnte"/></ANAG_URL_ENTE>
+    <ANAG_ID_ANAGRAFE><xsl:value-of select="Intestazione/SorgenteAnagrafe/IdAnagrafe"/></ANAG_ID_ANAGRAFE>
+    <ID_ASS_SOC><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/AssSocialeCod"/></ID_ASS_SOC>
+    <HASH_COD> <xsl:value-of select="Assistito/Nome"/>,<xsl:value-of select="Assistito/Cognome"/>,<xsl:value-of select="Assistito/CodiceFiscale"/></HASH_COD>
+    <DATA_NASCITA><xsl:value-of select="Assistito/DataNascita"/></DATA_NASCITA>
+    <COMUNE_NASCITA_COD><xsl:value-of select="Assistito/ComuneNascitaCod"/></COMUNE_NASCITA_COD>
+    <COMUNE_RESIDENZA_COD><xsl:value-of select="Assistito/ComuneResidenzaCod"/></COMUNE_RESIDENZA_COD>
+    <SESSO><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/Sesso"/></SESSO>
+    <CAP><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/CAP"/></CAP>
+    <STATO_CIVILE_COD><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/StatoCivileCod"/></STATO_CIVILE_COD>
+    <STATO_CIVILE_DESCR><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/StatoCivileDescr"/></STATO_CIVILE_DESCR>
+    <NAZIONALITA_COD><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/NazionalitaCod"/></NAZIONALITA_COD>
+    <NAZIONALITA_DESCR><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/NazionalitaDescr"/></NAZIONALITA_DESCR>
+    <CITTADINANZA_COD><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/CittadinanzaCod"/></CITTADINANZA_COD>
+    <CITTADINANZA_DESCR><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/CittadinanzaDescr"/></CITTADINANZA_DESCR>
+    <POLO_COD><xsl:value-of select="Descrizione/UnitaOrganizzativaCod"/></POLO_COD>
+    <POLO_DESCR><xsl:value-of select="Descrizione/UnitaOrganizzativaDescr"/></POLO_DESCR>
+    <GESTORE_COD><xsl:value-of select="Descrizione/ProduttoreCod"/></GESTORE_COD>
+    <GESTORE_DESCR><xsl:value-of select="Descrizione/ProduttoreDescr"/></GESTORE_DESCR>
+  </D_ASSISTITO>
+  <D_OPERATORE>
+    <OPERATORE_COD><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/AssSocialeCod"/></OPERATORE_COD>
+    <NOME><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/AssSocialeNome"/></NOME>
+    <COGNOME><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/AssSocialeCognome"/></COGNOME>
+    <POLO_COD><xsl:value-of select="Descrizione/UnitaOrganizzativaCod"/></POLO_COD>
+    <POLO_DESCR><xsl:value-of select="Descrizione/UnitaOrganizzativaDescr"/></POLO_DESCR>
+    <ENTE_GESTORE_COD><xsl:value-of select="Descrizione/ProduttoreCod"/></ENTE_GESTORE_COD>
+    <ENTE_GESTORE_DESCR><xsl:value-of select="Descrizione/ProduttoreDescr"/></ENTE_GESTORE_DESCR>
+  </D_OPERATORE>
+</DWH_SCHEMA>
+</tns:SendMappedChanges>
 </xsl:template>
 </xsl:stylesheet>
