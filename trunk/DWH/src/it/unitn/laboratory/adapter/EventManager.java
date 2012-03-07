@@ -30,7 +30,9 @@ public class EventManager
 	{
 		try 
 		{
+			System.out.println("Inizio controllo operatore. mi connetto al db");
 			QueryManager qm = new QueryManager(ConnectionManagerDWH.getInstance());
+			System.out.println("Connessione in atto, stay tuned");
 			ResultSet rs = qm.findOperatore(operatore.getOPERATORECOD(), operatore.getPOLOCOD(), operatore.getENTEGESTORECOD());
 			if(rs.next()) return; // Operatore gia presente nel database
 			
