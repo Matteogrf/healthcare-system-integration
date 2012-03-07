@@ -22,7 +22,7 @@ import javax.xml.ws.Endpoint;
                       serviceName = "DwhWS",
                       portName = "DwhWSSOAP",
                       targetNamespace = "http://events.laboratory.unitn.it",
-                      wsdlLocation = "http://192.168.1.41:9090/DwhWS?wsdl",
+                      wsdlLocation = "WebContent/wsdl/DwhWS.wsdl",
                       endpointInterface = "it.unitn.laboratory.wrapper.DwhWS")
                       
 public class DwhWSImpl implements DwhWS {
