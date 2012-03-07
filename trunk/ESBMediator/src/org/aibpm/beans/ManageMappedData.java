@@ -10,6 +10,7 @@ import javax.jbi.messaging.DeliveryChannel;
 import javax.jbi.messaging.ExchangeStatus;
 import javax.jbi.messaging.MessageExchange;
 import javax.jbi.messaging.NormalizedMessage;
+import javax.swing.text.GlyphView;
 import javax.xml.transform.Source;
 
 import org.apache.servicemix.bean.Operation;
@@ -32,9 +33,9 @@ public class ManageMappedData {
 
 			try {
 				
-				
-				InputStream globalSchemaEventXML = (new SourceTransformer().toStreamSource(messageContent).getInputStream());
-				DwhSchemaType dwh = JAXBUtils.getDWHClassesFromXML(globalSchemaEventXML);
+				String body = (new SourceTransformer()).toString(messageContent);
+				System.out.println("Hey, your message passed from here!1\n"+body);
+				DwhSchemaType dwh = JAXBUtils.getDWHClassesFromXML(messageContent);
 				
 				System.out.println(dwh.getDASSISTITO().getCAP());
 				

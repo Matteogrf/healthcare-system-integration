@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:DWH_SCHEMA xmlns:tns="http://events.laboratory.unitn.it/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://events.laboratory.unitn.it/ MappedEvents.xsd ">
+  <tns:D_ASSISTITO>
+    <tns:ID_ANAGRAFE_LOCALE>0</tns:ID_ANAGRAFE_LOCALE>
+    <tns:MITTENTE_NOME_ENTE>tns:MITTENTE_NOME_ENTE</tns:MITTENTE_NOME_ENTE>
+    <tns:MITTENTE_URL_ENTE>tns:MITTENTE_URL_ENTE</tns:MITTENTE_URL_ENTE>
+    <tns:ANAG_URL_ENTE>tns:ANAG_URL_ENTE</tns:ANAG_URL_ENTE>
+    <tns:ANAG_ID_ANAGRAFE>0</tns:ANAG_ID_ANAGRAFE>
+    <tns:HASH_COD>tns:HASH_COD</tns:HASH_COD>
+    <tns:DATA_NASCITA>2001-01-01</tns:DATA_NASCITA>
+    <tns:COMUNE_NASCITA_COD>0</tns:COMUNE_NASCITA_COD>
+    <tns:COMUNE_RESIDENZA_COD>0</tns:COMUNE_RESIDENZA_COD>
+    <tns:SESSO>tns:SESSO</tns:SESSO>
+    <tns:CAP>tns:CAP</tns:CAP>
+    <tns:STATO_CIVILE_COD>0</tns:STATO_CIVILE_COD>
+    <tns:STATO_CIVILE_DESCR>tns:STATO_CIVILE_DESCR</tns:STATO_CIVILE_DESCR>
+    <tns:NAZIONALITA_COD>0</tns:NAZIONALITA_COD>
+    <tns:NAZIONALITA_DESCR>tns:NAZIONALITA_DESCR</tns:NAZIONALITA_DESCR>
+    <tns:CITTADINANZA_COD>0</tns:CITTADINANZA_COD>
+    <tns:CITTADINANZA_DESCR>tns:CITTADINANZA_DESCR</tns:CITTADINANZA_DESCR>
+    <tns:POLO_COD>0</tns:POLO_COD>
+    <tns:POLO_DESCR>tns:POLO_DESCR</tns:POLO_DESCR>
+    <tns:GESTORE_COD>0</tns:GESTORE_COD>
+    <tns:GESTORE_DESCR>tns:GESTORE_DESCR</tns:GESTORE_DESCR>
+  </tns:D_ASSISTITO>
+  <tns:D_OPERATORE>
+    <tns:POLO_COD>0</tns:POLO_COD>
+    <tns:POLO_DESCR>tns:POLO_DESCR</tns:POLO_DESCR>
+    <tns:ENTE_GESTORE_COD>0</tns:ENTE_GESTORE_COD>
+    <tns:ENTE_GESTORE_DESCR>tns:ENTE_GESTORE_DESCR</tns:ENTE_GESTORE_DESCR>
+  </tns:D_OPERATORE>
+</tns:DWH_SCHEMA>

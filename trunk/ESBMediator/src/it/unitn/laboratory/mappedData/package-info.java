@@ -5,5 +5,5 @@
 // Generated on: 2012.03.07 at 08:36:04 AM CET 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http:/it.unitn.laboratory.MappedEventsSchema", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://events.laboratory.unitn.it/", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package it.unitn.laboratory.mappedData;

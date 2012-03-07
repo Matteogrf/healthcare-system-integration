@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" 
 		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        targetNamespace="http:/it.unitn.laboratory.MappedEventsSchema"
-	    xmlns:tns="http:/it.unitn.laboratory.MappedEventsSchema"
+        targetNamespace="http://events.laboratory.unitn.it/"
+	    xmlns:tns="http://events.laboratory.unitn.it/"
 	    attributeFormDefault="qualified" elementFormDefault="qualified">
 
 	<xsd:element name="DWH_SCHEMA" type="tns:DwhSchemaType"/>
