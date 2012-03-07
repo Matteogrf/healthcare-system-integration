@@ -41,13 +41,11 @@ public class EventManager
 		    // inserire l'operatore nella staging area
 		    qm.insertOperatore(operatore);
 		} 
-		catch (ClassNotFoundException e) 
+		catch (Exception e ) 
 		{
-			throw new StagingAreaException(e.getMessage());
+			e.printStackTrace();
+			throw new StagingAreaException(e.getMessage());			
 		} 
-		catch (SQLException e) 
-		{
-			throw new StagingAreaException(e.getMessage());
-		}				
+				
 	}
 }
