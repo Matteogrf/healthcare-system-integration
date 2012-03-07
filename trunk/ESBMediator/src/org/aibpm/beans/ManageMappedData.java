@@ -2,6 +2,7 @@ package org.aibpm.beans;
 
 import it.unitn.laboratory.mappedData.DwhSchemaType;
 import it.unitn.laboratory.utils.JAXBUtils;
+import it.unitn.laboratory.utils.ManageMappedEvents;
 
 import java.io.InputStream;
 
@@ -17,6 +18,9 @@ import org.apache.servicemix.bean.Operation;
 import org.apache.servicemix.jbi.jaxp.SourceTransformer;
 
 public class ManageMappedData {
+	
+	private static final int OP_BEFORE_UPDATE_DWH = 10;
+	private static int op = 0;
 
 	@Resource
 	private DeliveryChannel channel;
@@ -27,23 +31,25 @@ public class ManageMappedData {
 
 			// get incoming message in normalized form
 			NormalizedMessage inMessage = exchange.getMessage("in");
-
 			// get message content
 			Source messageContent = inMessage.getContent();
 
-			try {
-				
-				String body = (new SourceTransformer()).toString(messageContent);
-				System.out.println("Hey, your message passed from here!1\n"+body);
-				DwhSchemaType dwh = JAXBUtils.getDWHClassesFromXML(messageContent);
-				
-				System.out.println(dwh.getDASSISTITO().getCAP());
-				
-
-			} catch (Exception e1) {
-				System.out.println("Errore Parsing Request:" + e1.getMessage());
-				e1.printStackTrace();
-			}
-		}
-	}
+			/* Conversione dell'evento mappato per la staging area da XML a Oggetti mediante JAXB */
+			DwhSchemaType dwh = JAXBUtils.getDWHClassesFromXML(messageContent);
+			
+			int eventType = dwh.getEVENTTYPE().getEVENTCOD();
+			
+			/* Esegue il routing dell'evento in base al tipo */
+			switch (eventType) {
+            case 1:  ManageMappedEvents.InserimentoVariazioneAnagraficaEvent(dwh);
+                     break;
+            default: break;
+        }
+			
+		
+    }
+			
+ }
 }
+
+

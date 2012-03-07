@@ -5,12 +5,17 @@ xmlns:ns2="http://events.laboratory.unitn.it/">
 
 <xsl:template match="/ns2:EventNotificationRequest">
 <tns:DWH_SCHEMA xmlns:tns="http://events.laboratory.unitn.it/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://events.laboratory.unitn.it/MappedEvents.xsd ">
+  <tns:EVENT_TYPE>
+    <tns:EVENT_COD><xsl:value-of select="Descrizione/TipoEventoCod"/></tns:EVENT_COD>
+    <tns:EVENT_DESCR><xsl:value-of select="Descrizione/TipoEventoDescr"/></tns:EVENT_DESCR>
+  </tns:EVENT_TYPE>
   <tns:D_ASSISTITO>
     <tns:ID_ANAGRAFE_LOCALE><xsl:value-of select="Assistito/IdAnagrafeLocale"/></tns:ID_ANAGRAFE_LOCALE>
     <tns:MITTENTE_NOME_ENTE><xsl:value-of select="Intestazione/Mittente/NomeEnte"/></tns:MITTENTE_NOME_ENTE>
     <tns:MITTENTE_URL_ENTE><xsl:value-of select="Intestazione/Mittente/UrlEnte"/></tns:MITTENTE_URL_ENTE>
     <tns:ANAG_URL_ENTE><xsl:value-of select="Intestazione/SorgenteAnagrafe/UrlEnte"/></tns:ANAG_URL_ENTE>
     <tns:ANAG_ID_ANAGRAFE><xsl:value-of select="Intestazione/SorgenteAnagrafe/IdAnagrafe"/></tns:ANAG_ID_ANAGRAFE>
+    <tns:ID_ASS_SOC><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/AssSocialeCod"/></tns:ID_ASS_SOC>
     <tns:HASH_COD> <xsl:value-of select="Assistito/Nome"/>,<xsl:value-of select="Assistito/Cognome"/>,<xsl:value-of select="Assistito/CodiceFiscale"/></tns:HASH_COD>
     <tns:DATA_NASCITA><xsl:value-of select="Assistito/DataNascita"/></tns:DATA_NASCITA>
     <tns:COMUNE_NASCITA_COD><xsl:value-of select="Assistito/ComuneNascitaCod"/></tns:COMUNE_NASCITA_COD>
@@ -29,6 +34,9 @@ xmlns:ns2="http://events.laboratory.unitn.it/">
     <tns:GESTORE_DESCR><xsl:value-of select="Descrizione/ProduttoreDescr"/></tns:GESTORE_DESCR>
   </tns:D_ASSISTITO>
   <tns:D_OPERATORE>
+    <tns:OPERATORE_COD><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/AssSocialeCod"/></tns:OPERATORE_COD>
+    <tns:NOME><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/AssSocialeNome"/></tns:NOME>
+    <tns:COGNOME><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/AssSocialeCognome"/></tns:COGNOME>
     <tns:POLO_COD><xsl:value-of select="Descrizione/UnitaOrganizzativaCod"/></tns:POLO_COD>
     <tns:POLO_DESCR><xsl:value-of select="Descrizione/UnitaOrganizzativaDescr"/></tns:POLO_DESCR>
     <tns:ENTE_GESTORE_COD><xsl:value-of select="Descrizione/ProduttoreCod"/></tns:ENTE_GESTORE_COD>
