@@ -23,7 +23,7 @@ public class QueryManager
 		ps.setInt(2, poloCod);
 		ps.setInt(3, enteGestoreCod);
 		ResultSet rs = ps.executeQuery();
-		ps.close();
+		
 		return rs;
 	}
 
@@ -41,7 +41,7 @@ public class QueryManager
 		ps.setInt(6, operatore.getENTEGESTORECOD());
 		ps.setString(7, operatore.getENTEGESTOREDESCR());
 		int res = ps.executeUpdate();
-		ps.close();
+		
 		if (res==0) throw new SQLWarning("Inserimanto operatore fallito? check It");
 	}
 }
