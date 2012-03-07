@@ -6,10 +6,5 @@
 	<classpathentry kind="lib" path="lib/servicemix-bean-2009.01.jar"/>
 	<classpathentry kind="lib" path="lib/servicemix-utils-1.1.0.jar"/>
 	<classpathentry kind="lib" path="lib/sqlitejdbc-v056.jar"/>
-	<classpathentry kind="lib" path="lib/jaxb-xjc.jar"/>
-	<classpathentry kind="lib" path="lib/jaxb-api.jar"/>
-	<classpathentry kind="lib" path="lib/jaxb-impl-javadoc.jar"/>
-	<classpathentry kind="lib" path="lib/jaxb-impl.jar"/>
-	<classpathentry kind="lib" path="lib/jaxb-xjc-javadoc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
