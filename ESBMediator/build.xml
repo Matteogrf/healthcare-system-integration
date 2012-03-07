@@ -2,8 +2,8 @@
 
 <project name="Event-Driven Integration and DWH" basedir="." default="all">
 
-	<!--<property name="servicemix.installation.dir" location="C:\servers\apache-servicemix-4.4.0" />-->
-	<property name="servicemix.installation.dir" location="/home/michele/servers/apache-servicemix-4.3.1" />
+	<property name="servicemix.installation.dir" location="C:\servers\apache-servicemix-4.4.0" />
+	<!--<property name="servicemix.installation.dir" location="/home/michele/servers/apache-servicemix-4.3.1" />-->
 	<property name="servicemix.hotdeploy.dir" location="${servicemix.installation.dir}/deploy" />
 
 	<property name="prj.dir" location="." />

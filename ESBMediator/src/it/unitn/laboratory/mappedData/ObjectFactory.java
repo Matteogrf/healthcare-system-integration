@@ -68,7 +68,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link DwhSchemaType }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http:/it.unitn.laboratory.MappedEventsSchema", name = "DWH_SCHEMA")
+    @XmlElementDecl(namespace = "http://events.laboratory.unitn.it/", name = "DWH_SCHEMA")
     public JAXBElement<DwhSchemaType> createDWHSCHEMA(DwhSchemaType value) {
         return new JAXBElement<DwhSchemaType>(_DWHSCHEMA_QNAME, DwhSchemaType.class, null, value);
     }
