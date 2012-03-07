@@ -32,16 +32,17 @@ public class DwhWSImpl implements DwhWS {
     /* (non-Javadoc)
      * @see it.unitn.laboratory.wrapper.DwhWS#sendMappedChanges(it.unitn.laboratory.wrapper.DwhSchemaType  dwhSCHEMA )*
      */
-    public java.lang.String sendMappedChanges(it.unitn.laboratory.wrapper.DwhSchemaType dwhSCHEMA) { 
+    public java.lang.String sendMappedChanges(it.unitn.laboratory.wrapper.DwhSchemaType dwhSCHEMA) 
+    { 
         LOG.info("Executing operation sendMappedChanges");
-        System.out.println(dwhSCHEMA);
-        try {
-            java.lang.String _return = "_return-943519274";
-            return _return;
-        } catch (java.lang.Exception ex) {
-            ex.printStackTrace();
-            throw new RuntimeException(ex);
-        }
+        int type = dwhSCHEMA.getEVENTTYPE().getEVENTCOD();
+        switch ( type ) 
+        {
+		case 1:	  ;break;
+
+		default: return "ERROR: unokown type "+type;
+		}
+        return OK;
     }
     
     public static void main(String[] args){
