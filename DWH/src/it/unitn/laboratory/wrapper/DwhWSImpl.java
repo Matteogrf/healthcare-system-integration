@@ -8,6 +8,8 @@ package it.unitn.laboratory.wrapper;
 
 
 
+import it.unitn.laboratory.adapter.EventManager;
+
 import java.util.logging.Logger;
 import javax.xml.ws.Endpoint;
 
@@ -38,11 +40,9 @@ public class DwhWSImpl implements DwhWS {
         int type = dwhSCHEMA.getEVENTTYPE().getEVENTCOD();
         switch ( type ) 
         {
-		case 1:	  ;break;
-
-		default: return "ERROR: unokown type "+type;
-		}
-        return OK;
+			case 1:	 return EventManager.inserimentoVariazioneAnagrafica(dwhSCHEMA);
+			default: return "ERROR: unokown type "+type;
+		}        
     }
     
     public static void main(String[] args){
