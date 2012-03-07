@@ -9,10 +9,19 @@
 
 	<xsd:complexType name="DwhSchemaType">
 		<xsd:sequence>
-			<xsd:element name="D_ASSISTITO" type="tns:AssistitoType">
+		    <xsd:element name="EVENT_TYPE" type="tns:EventType" minOccurs="1" maxOccurs="1">
 			</xsd:element>
-			<xsd:element name="D_OPERATORE" type="tns:OperatoreType">
+			<xsd:element name="D_ASSISTITO" type="tns:AssistitoType" minOccurs="0" maxOccurs="1">
 			</xsd:element>
+			<xsd:element name="D_OPERATORE" type="tns:OperatoreType" minOccurs="0" maxOccurs="1">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>	
+    
+    <xsd:complexType name="EventType">
+		<xsd:sequence>
+			<xsd:element name="EVENT_COD" type="int" minOccurs="1" maxOccurs="1"></xsd:element>
+			<xsd:element name="EVENT_DESCR" type="string" minOccurs="1" maxOccurs="1"></xsd:element>
 		</xsd:sequence>
 	</xsd:complexType>
 	
