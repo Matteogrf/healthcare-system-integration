@@ -29,6 +29,7 @@ public class ConnectionManagerDWH implements ConnectionManager
 		Properties connectionProps = new Properties();
 		connectionProps.put("user", this.userName);
 		connectionProps.put("password", this.pwd);
+		System.out.println("Dovrei incazzarmi e sputare exxezzioni a cioooodoooo");
 		Class.forName("com.mysql.jdbc.Driver");
 		db = DriverManager.getConnection("jdbc:mysql://" + this.address + "/"+DBName,
 				connectionProps);

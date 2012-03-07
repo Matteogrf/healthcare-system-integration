@@ -36,9 +36,9 @@ public class DwhWSImpl implements DwhWS {
      */
     public java.lang.String sendMappedChanges(it.unitn.laboratory.wrapper.DwhSchemaType dwhSCHEMA) 
     { 
-        LOG.info("Executing operation sendMappedChanges");
+        
         int type = dwhSCHEMA.getEVENTTYPE().getEVENTCOD();
-        System.out.println("Arrivata Richiesta con cod: "+type);
+        LOG.info("Executing operation "+dwhSCHEMA.getEVENTTYPE().getEVENTDESCR());
         switch ( type ) 
         {
 			case 1:	 return EventManager.inserimentoVariazioneAnagrafica(dwhSCHEMA);
