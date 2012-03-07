@@ -99,7 +99,7 @@ public class AssistitoType {
     @XmlElement(name = "ANAG_URL_ENTE")
     protected String anagurlente;
     @XmlElement(name = "ANAG_ID_ANAGRAFE")
-    protected Integer anagidanagrafe;
+    protected String anagidanagrafe;
     @XmlElement(name = "ID_ASS_SOC")
     protected Integer idasssoc;
     @XmlElement(name = "HASH_COD")
@@ -276,7 +276,7 @@ public class AssistitoType {
      *     {@link Integer }
      *     
      */
-    public Integer getANAGIDANAGRAFE() {
+    public String getANAGIDANAGRAFE() {
         return anagidanagrafe;
     }
 
@@ -288,7 +288,7 @@ public class AssistitoType {
      *     {@link Integer }
      *     
      */
-    public void setANAGIDANAGRAFE(Integer value) {
+    public void setANAGIDANAGRAFE(String value) {
         this.anagidanagrafe = value;
     }
 
