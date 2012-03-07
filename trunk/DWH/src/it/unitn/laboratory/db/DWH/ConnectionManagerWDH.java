@@ -1,27 +1,28 @@
-package it.unitn.laboratory.db.StagingArea;
+package it.unitn.laboratory.db.DWH;
 
 import it.unitn.laboratory.db.ConnectionManager;
 
 import java.sql.*;
 import java.util.Properties;
 
-public class ConnectionManagerSA implements ConnectionManager{
-	private static final String DBName = "stagingarea"; // Name of the database
+public class ConnectionManagerWDH implements ConnectionManager
+{
+	private static final String DBName = "dhw"; // Name of the database
 	private static final String userName = "root";
 	private static final String pwd = "root";
 	private static final String address = "192.168.1.41:3306";//"192.168.178.25:3306";;	
 	private static Connection db;
 
-	private static ConnectionManagerSA istance;
+	private static ConnectionManagerWDH istance;
 
-	public static ConnectionManager getInstance() throws ClassNotFoundException, SQLException 
+	public static ConnectionManagerWDH getInstance() throws ClassNotFoundException, SQLException 
 	{
 		if (istance == null)
-			istance = new ConnectionManagerSA();
+			istance = new ConnectionManagerWDH();
 		return istance;
 	}
 
-	private ConnectionManagerSA() throws ClassNotFoundException, SQLException 
+	private ConnectionManagerWDH() throws ClassNotFoundException, SQLException 
 	{
 		Properties connectionProps = new Properties();
 		connectionProps.put("user", this.userName);
