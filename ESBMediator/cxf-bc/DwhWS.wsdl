@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://events.laboratory.unitn.it" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DwhWS"
+	targetNamespace="http://events.laboratory.unitn.it">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://events.laboratory.unitn.it">
+			<xsd:element name="SendMappedChanges">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="DWH_SCHEMA" type="tns:DwhSchemaType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SendMappedChangesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="out" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:complexType name="DwhSchemaType">
+				<xsd:sequence>
+					<xsd:element name="EVENT_TYPE" type="tns:EventType"
+						minOccurs="1" maxOccurs="1">
+					</xsd:element>
+					<xsd:element name="D_ASSISTITO" type="tns:AssistitoType"
+						minOccurs="0" maxOccurs="1">
+					</xsd:element>
+					<xsd:element name="D_OPERATORE" type="tns:OperatoreType"
+						minOccurs="0" maxOccurs="1">
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="EventType">
+				<xsd:sequence>
+					<xsd:element name="EVENT_COD" type="int" minOccurs="1"
+						maxOccurs="1"></xsd:element>
+					<xsd:element name="EVENT_DESCR" type="string"
+						minOccurs="1" maxOccurs="1"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="OperatoreType">
+				<xsd:sequence>
+					<xsd:element name="OPERATORE_COD" type="int" minOccurs="0"
+						maxOccurs="1"></xsd:element>
+					<xsd:element name="NOME" type="string" minOccurs="0"
+						maxOccurs="1"></xsd:element>
+					<xsd:element name="COGNOME" type="string" minOccurs="0"
+						maxOccurs="1"></xsd:element>
+					<xsd:element name="POLO_COD" type="int" minOccurs="0"
+						maxOccurs="1"></xsd:element>
+					<xsd:element name="POLO_DESCR" type="string" minOccurs="0"
+						maxOccurs="1"></xsd:element>
+					<xsd:element name="ENTE_GESTORE_COD" type="int"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="ENTE_GESTORE_DESCR" type="string"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="AssistitoType">
+				<xsd:sequence>
+					<xsd:element name="ID_ASSISTITO" type="int" minOccurs="0"
+						maxOccurs="1"></xsd:element>
+					<xsd:element name="ID_ANAGRAFE_LOCALE" type="int"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="MITTENTE_NOME_ENTE" type="string"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="MITTENTE_URL_ENTE" type="string"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="ANAG_URL_ENTE" type="string"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="ANAG_ID_ANAGRAFE" type="int"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="ID_ASS_SOC" type="int" minOccurs="0"
+						maxOccurs="1"></xsd:element>
+					<xsd:element name="HASH_COD" type="string" minOccurs="0"
+						maxOccurs="1"></xsd:element>
+					<xsd:element name="DATA_NASCITA" type="date" minOccurs="0"
+						maxOccurs="1"></xsd:element>
+					<xsd:element name="COMUNE_NASCITA_COD" type="int"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="COMUNE_NASCITA_DESCR" type="string"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="COMUNE_RESIDENZA" type="string"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="COMUNE_RESIDENZA_COD" type="int"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="COMUNE_RESIDENZA_DESCR" type="string"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="SESSO" type="string" minOccurs="0"
+						maxOccurs="1"></xsd:element>
+					<xsd:element name="CAP" type="string" minOccurs="0"
+						maxOccurs="1"></xsd:element>
+					<xsd:element name="STATO_CIVILE_COD" type="int"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="STATO_CIVILE_DESCR" type="string"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="NAZIONALITA_COD" type="int"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="NAZIONALITA_DESCR" type="string"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="CITTADINANZA_COD" type="int"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="CITTADINANZA_DESCR" type="string"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="POLO_COD" type="int" minOccurs="0"
+						maxOccurs="1"></xsd:element>
+					<xsd:element name="POLO_DESCR" type="string" minOccurs="0"
+						maxOccurs="1"></xsd:element>
+					<xsd:element name="GESTORE_COD" type="int" minOccurs="0"
+						maxOccurs="1"></xsd:element>
+					<xsd:element name="GESTORE_DESCR" type="string"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="INIZIO_PRESA_CARICO" type="date"
+						minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="DATA_DOMANDA" type="date" minOccurs="0"
+						maxOccurs="1"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="tns:DwhSchemaType"></xsd:complexType>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="SendMappedChangesRequest">
+		<wsdl:part element="tns:SendMappedChanges" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="SendMappedChangesResponse">
+		<wsdl:part element="tns:SendMappedChangesResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:portType name="DwhWS">
+		<wsdl:operation name="SendMappedChanges">
+			<wsdl:input message="tns:SendMappedChangesRequest" />
+			<wsdl:output message="tns:SendMappedChangesResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="DwhWSSOAP" type="tns:DwhWS">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="SendMappedChanges">
+			<soap:operation soapAction="http://events.laboratory.unitn.it/NewOperation" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="DwhWS">
+		<wsdl:port binding="tns:DwhWSSOAP" name="DwhWSSOAP">
+			<soap:address location="http://192.168.1.41/DwhWS" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
