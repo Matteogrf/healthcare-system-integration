@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import it.unitn.laboratory.db.ConnectionManager;
 import it.unitn.laboratory.db.QueryManager;
-import it.unitn.laboratory.db.DWH.ConnectionManagerWDH;
+import it.unitn.laboratory.db.DWH.ConnectionManagerDWH;
 import it.unitn.laboratory.db.StagingArea.ConnectionManagerSA;
 import it.unitn.laboratory.db.StagingArea.StagingAreaException;
 import it.unitn.laboratory.wrapper.DwhSchemaType;
@@ -30,7 +30,7 @@ public class EventManager
 	{
 		try 
 		{
-			QueryManager qm = new QueryManager(ConnectionManagerWDH.getInstance());
+			QueryManager qm = new QueryManager(ConnectionManagerDWH.getInstance());
 			ResultSet rs = qm.findOperatore(operatore.getOPERATORECOD(), operatore.getPOLOCOD(), operatore.getENTEGESTORECOD());
 			if(rs.next()) return; // Operatore gia presente nel database
 			

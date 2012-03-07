@@ -2,10 +2,12 @@ package it.unitn.laboratory.db.DWH;
 
 import it.unitn.laboratory.db.ConnectionManager;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 
-public class ConnectionManagerWDH implements ConnectionManager
+public class ConnectionManagerDWH implements ConnectionManager
 {
 	private static final String DBName = "dwh"; // Name of the database
 	private static final String userName = "root";
@@ -13,16 +15,16 @@ public class ConnectionManagerWDH implements ConnectionManager
 	private static final String address = "192.168.1.41:3306";//"192.168.178.25:3306";;	
 	private static Connection db;
 
-	private static ConnectionManagerWDH istance;
+	private static ConnectionManagerDWH istance;
 
-	public static ConnectionManagerWDH getInstance() throws ClassNotFoundException, SQLException 
+	public static ConnectionManagerDWH getInstance() throws ClassNotFoundException, SQLException 
 	{
 		if (istance == null)
-			istance = new ConnectionManagerWDH();
+			istance = new ConnectionManagerDWH();
 		return istance;
 	}
 
-	private ConnectionManagerWDH() throws ClassNotFoundException, SQLException 
+	private ConnectionManagerDWH() throws ClassNotFoundException, SQLException 
 	{
 		Properties connectionProps = new Properties();
 		connectionProps.put("user", this.userName);
