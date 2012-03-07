@@ -19,38 +19,42 @@ import org.apache.servicemix.jbi.jaxp.SourceTransformer;
 
 public class ManageMappedData {
 	
-	private static final int OP_BEFORE_UPDATE_DWH = 10;
-	private static int op = 0;
 
 	@Resource
 	private DeliveryChannel channel;
 
 	@Operation
-	public void manageInserimentoVariazioneAnagrafica(MessageExchange exchange){
+	public void manageDWHResponse(MessageExchange exchange){
 		if (exchange.getStatus() == ExchangeStatus.ACTIVE) {
 
-			// get incoming message in normalized form
-			NormalizedMessage inMessage = exchange.getMessage("in");
-			// get message content
-			Source messageContent = inMessage.getContent();
+			if (exchange.getStatus() == ExchangeStatus.ACTIVE) {
 
-			/* Conversione dell'evento mappato per la staging area da XML a Oggetti mediante JAXB */
-			DwhSchemaType dwh = JAXBUtils.getDWHClassesFromXML(messageContent);
-			
-			System.out.println(dwh.getEVENTTYPE().getEVENTCOD());
-			int eventType = dwh.getEVENTTYPE().getEVENTCOD();
-			
-			/* Esegue il routing dell'evento in base al tipo */
-			switch (eventType) {
-            case 1:  ManageMappedEvents.InserimentoVariazioneAnagraficaEvent(dwh);
-                     break;
-            default: break;
+				// get incoming message in normalized form
+				NormalizedMessage inMessage = exchange.getMessage("in");
+
+				// get message content
+				Source messageContent = inMessage.getContent();
+
+				try {
+					String body = (new SourceTransformer()).toString(messageContent);
+					System.out.println("Hey, your message passed from here!1\n"
+							+ body);
+
+
+					exchange.setMessage(inMessage, "out");
+					// send the out message through the delivery channel
+					channel.send(exchange);
+				} catch (Exception e1) {
+					System.out.println("Errore Parsing Request:" + e1.getMessage());
+					e1.printStackTrace();
+				}
+			}
+
         }
 			
 		
     }
 			
  }
-}
 
 
