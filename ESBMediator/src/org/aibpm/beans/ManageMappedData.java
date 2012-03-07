@@ -37,6 +37,7 @@ public class ManageMappedData {
 			/* Conversione dell'evento mappato per la staging area da XML a Oggetti mediante JAXB */
 			DwhSchemaType dwh = JAXBUtils.getDWHClassesFromXML(messageContent);
 			
+			System.out.println(dwh.getEVENTTYPE().getEVENTCOD());
 			int eventType = dwh.getEVENTTYPE().getEVENTCOD();
 			
 			/* Esegue il routing dell'evento in base al tipo */
