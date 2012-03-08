@@ -872,7 +872,7 @@
   <wsdl:service name="Events">
     <wsdl:port binding="tns:EventsSOAP" name="EventsSOAP">
       <!--<soap:address location="http://192.168.1.42:8090/SourceEventReceiver"/>  -->
-      <soap:address location="http://localhost:8090/SourceEventReceiver"/>
+      <soap:address location="http://192.168.178.30:8090/SourceEventReceiver"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
