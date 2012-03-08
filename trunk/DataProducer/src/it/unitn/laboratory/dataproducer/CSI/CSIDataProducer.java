@@ -57,7 +57,8 @@ public class CSIDataProducer
 		event.setEvento(extractEventInserimentoVariazioneAnagrafica(iva,of));
 		event.setOperazione(extractOperation(of));
 		
-		new Events_Service().getEventsSOAP().sendEvent(event);
+		String res=new Events_Service().getEventsSOAP().sendEvent(event);
+		System.out.println("Res sendEvent:"+res);
 	}
 
 	private static OperationType extractOperation(ObjectFactory of) 
@@ -101,8 +102,8 @@ public class CSIDataProducer
 		description.setServizioDescr( iva.getString("ED.ServizioDescr") );
 		description.setTipoEventoCod( iva.getInt("ED.TipoEventoCod") );
 		description.setTipoEventoDescr( iva.getString("ED.TipoEventoDescr") );
-		description.setUnitaOrganizzativaCod( iva.getInt("ED.UnitaOrganizzativaCod") );
-		description.setUnitaOrganizzativaDescr( iva.getString("ED.UnitaOrganizzativaDescr") );
+		description.setUnitaOrganizzativaCod( iva.getInt("ED.Unit‡OrganizzativaCod") );
+		description.setUnitaOrganizzativaDescr( iva.getString("ED.Unit‡OrganizzativaDescr") );
 		
 		description.setDataOraEvento( DateToXMLGregorianCalendar( iva.getDate("ED.DataOraEvento") ) );
 		description.setDataOraRegEvento( DateToXMLGregorianCalendar( iva.getDate("ED.DataOraRegEvento") ) );
