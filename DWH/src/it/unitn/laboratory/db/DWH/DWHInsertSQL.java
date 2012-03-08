@@ -12,7 +12,7 @@ public class DWHInsertSQL {
 
 	public static void insertOperatore(OperatoreType operatore) throws SQLException, ClassNotFoundException 
 	{
-		Connection con = ConnectionManagerSA.getInstance().getConnection();
+		Connection con = ConnectionManagerDWH.getInstance().getConnection();
 		PreparedStatement ps = con.prepareStatement("INSERT INTO D_OPERATORE " +
 						"(OPERATORE_COD, NOME, COGNOME, POLO_COD, POLO_DESCR, ENTE_GESTORE_COD, ENTE_GESTORE_DESCR ) " +
 						"VALUES (?,?,?,?,?,?,?)");

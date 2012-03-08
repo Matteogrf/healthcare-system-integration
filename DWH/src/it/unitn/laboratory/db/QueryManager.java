@@ -42,8 +42,7 @@ public class QueryManager
 	public ResultSet findAll(String tableName) throws SQLException 
 	{
 		Connection con = cm.getConnection();
-		PreparedStatement ps = con.prepareStatement("SELECT * FROM ?");
-		ps.setString(1, tableName);
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM "+tableName+" ;");
 		
 		return ps.executeQuery();
 	}
