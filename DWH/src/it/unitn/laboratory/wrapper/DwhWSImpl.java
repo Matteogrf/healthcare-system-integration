@@ -47,7 +47,7 @@ public class DwhWSImpl implements DwhWS {
     }
     
     public static void main(String[] args){
-    	Endpoint.publish("http://192.168.1.41:9090/DwhWS",new DwhWSImpl());
+    	Endpoint.publish("http://192.168.178.25:9090/DwhWS",new DwhWSImpl());
     }
 
 }

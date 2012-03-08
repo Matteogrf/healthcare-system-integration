@@ -8,6 +8,8 @@ import it.unitn.laboratory.db.QueryManager;
 import it.unitn.laboratory.db.DWH.ConnectionManagerDWH;
 import it.unitn.laboratory.db.StagingArea.ConnectionManagerSA;
 import it.unitn.laboratory.db.StagingArea.StagingAreaException;
+import it.unitn.laboratory.db.StagingArea.StagingAreaInsert;
+import it.unitn.laboratory.wrapper.AssistitoType;
 import it.unitn.laboratory.wrapper.DwhSchemaType;
 import it.unitn.laboratory.wrapper.OperatoreType;
 
@@ -18,8 +20,14 @@ public class EventManager
 		try 
 		{
 			checkOperatore(dwhSCHEMA.getDOPERATORE());
+			AssistitoType assistito = dwhSCHEMA.getDASSISTITO();
+			QueryManager qmDHW = new QueryManager(ConnectionManagerDWH.getInstance());
+			ResultSet rs = qmDHW.findAssistito( assistito );
+			int id;
+			if(rs.next()) id = rs.getInt("ID_ASSISTITO"); // Gia presente nel database. modifica
+			else id = 0;
 		} 
-		catch (StagingAreaException e) 
+		catch (Exception e) 
 		{
 			return "ERRORE: "+e.getMessage();
 		}
@@ -39,7 +47,7 @@ public class EventManager
 		    if(rs.next()) return; // Operatore gia presente nella staging area
 		    
 		    // inserire l'operatore nella staging area
-		    qm2.insertOperatore(operatore);
+		    StagingAreaInsert.insertOperatore(operatore, 0);
 		} 
 		catch (Exception e ) 
 		{

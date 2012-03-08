@@ -1,5 +1,6 @@
 package it.unitn.laboratory.db;
 
+import it.unitn.laboratory.wrapper.AssistitoType;
 import it.unitn.laboratory.wrapper.OperatoreType;
 
 import java.sql.*;
@@ -27,21 +28,14 @@ public class QueryManager
 		return rs;
 	}
 
-	public void insertOperatore(OperatoreType operatore) throws SQLException 
+	
+	public ResultSet findAssistito(AssistitoType assistito) throws SQLException 
 	{
 		Connection con = cm.getConnection();
-		PreparedStatement ps = con.prepareStatement("INSERT INTO D_OPERATORE " +
-						"( OPERATORE_COD, NOME, COGNOME, POLO_COD, POLO_DESCR, ENTE_GESTORE_COD, ENTE_GESTORE_DESCR ) " +
-						"VALUES (?,?,?,?,?,?,?)");
-		ps.setInt(1, operatore.getOPERATORECOD());
-		ps.setString(2, operatore.getNOME());
-		ps.setString(3, operatore.getCOGNOME());
-		ps.setInt(4, operatore.getPOLOCOD());
-		ps.setString(5, operatore.getPOLODESCR());
-		ps.setInt(6, operatore.getENTEGESTORECOD());
-		ps.setString(7, operatore.getENTEGESTOREDESCR());
-		int res = ps.executeUpdate();
-		
-		if (res==0) throw new SQLWarning("Inserimanto operatore fallito? check It");
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM D_ASSISTITO " +
+								" WHERE HASH_COD = MD5('"+assistito.getHASHCOD()+"')" +
+								" AND ID_ANAGRAFE_LOCALE = ?;");
+		ps.setInt(1, assistito.getIDANAGRAFELOCALE());
+		return ps.executeQuery();
 	}
 }
