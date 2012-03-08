@@ -38,4 +38,13 @@ public class QueryManager
 		ps.setInt(1, assistito.getIDANAGRAFELOCALE());
 		return ps.executeQuery();
 	}
+	
+	public ResultSet findAll(String tableName) throws SQLException 
+	{
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM ?");
+		ps.setString(1, tableName);
+		
+		return ps.executeQuery();
+	}
 }
