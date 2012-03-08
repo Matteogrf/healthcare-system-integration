@@ -26,6 +26,13 @@ public class EventManager
 			int id;
 			if(rs.next()) id = rs.getInt("ID_ASSISTITO"); // Gia presente nel database. modifica
 			else id = 0;
+			
+			// Controllo se è gia presente nella staging area
+			QueryManager qmSTA = new QueryManager(ConnectionManagerSA.getInstance());
+			rs = qmDHW.findAssistito( assistito );
+			if(rs.next()) return "OK"; // Gia nella staging area. per ora non faccio nulla, poi bho
+			
+			StagingAreaInsert.insertAssistito(id, assistito);
 		} 
 		catch (Exception e) 
 		{
