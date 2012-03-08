@@ -30,7 +30,8 @@ public class Events_Service
         try {
             URL baseUrl;
             baseUrl = it.unitn.laboratory.events.Events_Service.class.getResource(".");
-            url = new URL(baseUrl, "file:/C:/Users/Matteo/workspace/ESBMediator/cxf-bc/Events.wsdl");
+            //url = new URL(baseUrl, "file:/C:/Users/Matteo/workspace/ESBMediator/cxf-bc/Events.wsdl");
+            url = new URL(baseUrl, "file:/C:/Users/Michele/workspace/ESBMediator/cxf-bc/Events.wsdl");
         } catch (MalformedURLException e) {
             logger.warning("Failed to create URL for the wsdl Location: 'file:/C:/Users/Matteo/workspace/ESBMediator/cxf-bc/Events.wsdl', retrying as a local file");
             logger.warning(e.getMessage());
