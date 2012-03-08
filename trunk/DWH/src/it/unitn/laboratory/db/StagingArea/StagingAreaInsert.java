@@ -35,11 +35,11 @@ public class StagingAreaInsert
 	}
 
 	public static void insertAssistito(int id, AssistitoType assistito, OperatoreType operatore) throws ClassNotFoundException, SQLException 
-	{
+	{		
 		Connection con = ConnectionManagerSA.getInstance().getConnection();
 		PreparedStatement ps = con.prepareStatement("INSERT INTO D_ASSISTITO " +
 				"VALUES (?,?,?,?,?,?,?,MD5('"+assistito.getHASHCOD()+"'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
-		
+
 		ps.setInt(1, id);
 		ps.setInt(2, assistito.getIDANAGRAFELOCALE());
 		ps.setString(3, assistito.getMITTENTENOMEENTE());
@@ -53,18 +53,20 @@ public class StagingAreaInsert
 		ps.setInt(11, assistito.getCOMUNERESIDENZACOD());
 		ps.setString(12, assistito.getCOMUNERESIDENZADESCR());
 		ps.setString(13, assistito.getSESSO());
-		ps.setString(14, assistito.getCAP());
-		ps.setInt(15, assistito.getSTATOCIVILECOD());
-		ps.setString(16, assistito.getSTATOCIVILEDESCR());
-		ps.setInt(17, assistito.getNAZIONALITACOD());
-		ps.setString(18, assistito.getNAZIONALITADESCR());
-		ps.setInt(19, assistito.getCITTADINANZACOD());
-		ps.setString(20, assistito.getCITTADINANZADESCR());
-		ps.setInt(21, assistito.getPOLOCOD());
-		ps.setString(22, assistito.getPOLODESCR());
-		ps.setInt(23, operatore.getENTEGESTORECOD());
-		ps.setString(24, operatore.getENTEGESTOREDESCR());
-		int res = ps.executeUpdate();		
+		ps.setString(13, assistito.getCAP());
+		ps.setInt(14, assistito.getSTATOCIVILECOD());
+		ps.setString(15, assistito.getSTATOCIVILEDESCR());
+		ps.setInt(16, assistito.getNAZIONALITACOD());
+		ps.setString(17, assistito.getNAZIONALITADESCR());
+		ps.setInt(18, assistito.getCITTADINANZACOD());
+		ps.setString(19, assistito.getCITTADINANZADESCR());
+		ps.setInt(20, assistito.getPOLOCOD());
+		ps.setString(21, assistito.getPOLODESCR());
+		ps.setInt(22, operatore.getENTEGESTORECOD());
+		ps.setString(23, operatore.getENTEGESTOREDESCR());
+
+		int res = ps.executeUpdate();	
+
 		if (res==0) throw new SQLWarning("Inserimanto operatore fallito? check It");
 		
 	}
