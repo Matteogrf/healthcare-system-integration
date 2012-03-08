@@ -1,6 +1,7 @@
 package it.unitn.laboratory.db.DWH;
 
 import it.unitn.laboratory.db.StagingArea.ConnectionManagerSA;
+import it.unitn.laboratory.wrapper.AssistitoType;
 import it.unitn.laboratory.wrapper.OperatoreType;
 
 import java.sql.Connection;
@@ -33,6 +34,11 @@ public class DWHUpdateSQL {
 		int res = ps.executeUpdate();
 		
 		if (res==0) throw new SQLWarning("Inserimanto operatore fallito? check It");
+	}
+
+	public static void updateAssistito(AssistitoType i, int id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

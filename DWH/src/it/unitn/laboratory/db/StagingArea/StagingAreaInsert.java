@@ -62,8 +62,8 @@ public class StagingAreaInsert
 		ps.setString(19, assistito.getCITTADINANZADESCR());
 		ps.setInt(20, assistito.getPOLOCOD());
 		ps.setString(21, assistito.getPOLODESCR());
-		ps.setInt(22, operatore.getENTEGESTORECOD());
-		ps.setString(23, operatore.getENTEGESTOREDESCR());
+		ps.setInt(22, assistito.getGESTORECOD());
+		ps.setString(23, assistito.getGESTOREDESCR());
 
 		int res = ps.executeUpdate();	
 
