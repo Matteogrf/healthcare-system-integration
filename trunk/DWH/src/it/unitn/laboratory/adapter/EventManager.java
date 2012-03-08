@@ -32,7 +32,7 @@ public class EventManager
 			rs = qmDHW.findAssistito( assistito );
 			if(rs.next()) return "OK"; // Gia nella staging area. per ora non faccio nulla, poi bho
 			
-			StagingAreaInsert.insertAssistito(id, assistito);
+			StagingAreaInsert.insertAssistito(id, assistito, dwhSCHEMA.getDOPERATORE());
 		} 
 		catch (Exception e) 
 		{

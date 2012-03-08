@@ -34,7 +34,7 @@ public class StagingAreaInsert
 		if (res==0) throw new SQLWarning("Inserimanto operatore fallito? check It");
 	}
 
-	public static void insertAssistito(int id, AssistitoType assistito) throws ClassNotFoundException, SQLException 
+	public static void insertAssistito(int id, AssistitoType assistito, OperatoreType operatore) throws ClassNotFoundException, SQLException 
 	{
 		Connection con = ConnectionManagerSA.getInstance().getConnection();
 		PreparedStatement ps = con.prepareStatement("INSERT INTO D_ASSISTITO " +
@@ -62,8 +62,8 @@ public class StagingAreaInsert
 		ps.setString(20, assistito.getCITTADINANZADESCR());
 		ps.setInt(21, assistito.getPOLOCOD());
 		ps.setString(22, assistito.getPOLODESCR());
-		ps.setInt(23, assistito.get);
-		ps.setString(24, assistito.getPOLODESCR());
+		ps.setInt(23, operatore.getENTEGESTORECOD());
+		ps.setString(24, operatore.getENTEGESTOREDESCR());
 		int res = ps.executeUpdate();		
 		if (res==0) throw new SQLWarning("Inserimanto operatore fallito? check It");
 		
