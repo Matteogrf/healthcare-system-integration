@@ -75,6 +75,7 @@
 			<fileset dir="${descriptor-dir}">
 				<include name="xbean.xml" />
 			    <include name="mapInserimentoVariazioneAnagrafica.xsl" />
+				<include name="convertResponseFromDWH.xsl" />
 			</fileset>
 		</jar>
 	</target>
