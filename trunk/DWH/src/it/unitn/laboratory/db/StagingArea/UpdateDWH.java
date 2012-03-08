@@ -39,7 +39,7 @@ public class UpdateDWH {
 
 	private void updateD_Operatore(ConnectionManager cm) throws SQLException, ClassNotFoundException {
 		
-		String table = "D_Operatore";
+		String table = "D_OPERATORE";
 		QueryManager qm = new QueryManager(cm);
 		ResultSet rs = qm.findAll(table);
 		
@@ -59,9 +59,9 @@ public class UpdateDWH {
 			id = rs.getInt("ID_OPERATORE");
 			
 			if(id >0)
-				DWHInsertSQL.insertOperatore(o);
+				DWHUpdateSQL.updateOperatore(o, id);				
 			else
-			    DWHUpdateSQL.updateOperatore(o, id);
+				DWHInsertSQL.insertOperatore(o);
 		}
 			
 		}

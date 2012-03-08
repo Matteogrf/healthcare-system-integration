@@ -12,7 +12,7 @@ public class DWHUpdateSQL {
 	
 	public static void updateOperatore(OperatoreType operatore, int id) throws SQLException, ClassNotFoundException 
 	{
-		Connection con = ConnectionManagerSA.getInstance().getConnection();
+		Connection con = ConnectionManagerDWH.getInstance().getConnection();
 		PreparedStatement ps = con.prepareStatement("UPDATE D_OPERATORE SET" +
 													" OPERATORE_COD = ?," +
 													" NOME = ?," +
@@ -21,7 +21,7 @@ public class DWHUpdateSQL {
 													" POLO_DESCR = ?," +
 													" ENTE_GESTORE_COD = ?," +
 													" ENTE_GESTORE_DESCR = ? " +
-													" WHERE ID_OPERATORE = ?)");
+													" WHERE ID_OPERATORE = ?;");
 		ps.setInt(8, id);
 		ps.setInt(1, operatore.getOPERATORECOD());
 		ps.setString(2, operatore.getNOME());
