@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
 
-public class DWHInsert {
+public class DWHInsertSQL {
 
 	public static void insertOperatore(OperatoreType operatore) throws SQLException, ClassNotFoundException 
 	{

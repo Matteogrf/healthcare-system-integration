@@ -2,12 +2,11 @@ package it.unitn.laboratory.db.StagingArea;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Iterator;
 
 import it.unitn.laboratory.db.ConnectionManager;
 import it.unitn.laboratory.db.QueryManager;
-import it.unitn.laboratory.db.DWH.DWHInsert;
-import it.unitn.laboratory.db.DWH.DWHUpdate;
+import it.unitn.laboratory.db.DWH.DWHInsertSQL;
+import it.unitn.laboratory.db.DWH.DWHUpdateSQL;
 import it.unitn.laboratory.wrapper.OperatoreType;
 
 public class UpdateDWH {
@@ -38,7 +37,7 @@ public class UpdateDWH {
 
 	}
 
-	private void updateD_Operatore(ConnectionManager cm) throws SQLException {
+	private void updateD_Operatore(ConnectionManager cm) throws SQLException, ClassNotFoundException {
 		
 		String table = "D_Operatore";
 		QueryManager qm = new QueryManager(cm);
@@ -50,7 +49,7 @@ public class UpdateDWH {
 			
 			o = new OperatoreType();
 			o.setCOGNOME(rs.getString("COGNOME"));
-			o.setNOME(rs.getString("NOME");
+			o.setNOME(rs.getString("NOME"));
 			o.setENTEGESTORECOD(rs.getInt("ENTE_GESTORE_COD"));
 			o.setENTEGESTOREDESCR(rs.getString("ENTE_GESTORE_DESCR"));
 			o.setOPERATORECOD(rs.getInt("OPERATORE_COD"));
@@ -60,13 +59,12 @@ public class UpdateDWH {
 			id = rs.getInt("ID_OPERATORE");
 			
 			if(id >0)
-				DWHInsert.insertOperatore(o);
+				DWHInsertSQL.insertOperatore(o);
 			else
-			    DWHUpdate.updateOperatore(o, id);
+			    DWHUpdateSQL.updateOperatore(o, id);
 		}
 			
 		}
 
 	}
 
-}
