@@ -40,8 +40,10 @@
 				
 		    <eip:exchange-target service="wsb:DwhWS" />
 		    
-			<eip:exchange-target service="tns:mappedEventProcessor"
-				endpoint="mappedEvent" operation="manageDWHResponse" />
+		    <eip:exchange-target  service="tns:mappedEventProcessor" endpoint="mappedEvent" operation="manageDWHResponse"/> />
+		    
+			<eip:exchange-target service="tns:convertDwhResponse"
+				endpoint="convertDwhResponse" />
 		</eip:targets>
 	</eip:static-routing-slip>
 

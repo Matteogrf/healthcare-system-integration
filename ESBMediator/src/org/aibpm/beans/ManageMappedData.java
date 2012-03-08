@@ -22,6 +22,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 public class ManageMappedData {
 	
@@ -45,8 +46,6 @@ public class ManageMappedData {
 					String body = (new SourceTransformer()).toString(messageContent);
 					System.out.println("DWH Response:"+body);
 					
-					String response = createWSResponse(new SourceTransformer().toDOMDocument(messageContent));
-					
 					
 
 					exchange.setMessage(inMessage, "out");
@@ -59,23 +58,7 @@ public class ManageMappedData {
 			}
 
         }
-    }
-	
-	
-	private String createWSResponse(Document doc){
-		
-		Element el = doc.getElementById("SendMappedChangesResponse");
-
-		NodeList nodes = el.getChildNodes();
-		Node n;
-		for(int i= 0; i<nodes.getLength(); i++){
-			n = nodes.item(i);
-			System.out.println("Element:"+n.getNodeValue());
-		}
-	    
-		return "";
-	}
-			
+    }			
  }
 
 

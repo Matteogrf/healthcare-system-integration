@@ -8,4 +8,8 @@
 				endpoint="mappingIVA" 
 				resource="classpath:mapInserimentoVariazioneAnagrafica.xsl"
 				result="String"/>
+	<saxon:xslt service="tns:convertDwhResponse"
+				endpoint="convertDwhResponse" 
+				resource="classpath:convertResponseFromDWH.xsl"
+				result="String"/>
 </beans>
