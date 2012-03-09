@@ -91,7 +91,6 @@ public class UpdateDWH {
 			i.setCITTADINANZADESCR(rs.getString("CITTADINANZA_DESCR"));
 			i.setCOMUNENASCITACOD(rs.getInt("COMUNE_NASCITA_COD"));
 			i.setCOMUNENASCITADESCR(rs.getString("COMUNE_NASCITA_DESCR"));
-			//i.setCOMUNERESIDENZA(rs.getString("COMUNE_RESIDENZA"));
 			i.setCOMUNERESIDENZACOD(rs.getInt("COMUNE_RESIDENZA_COD"));
 			i.setCOMUNERESIDENZADESCR(rs.getString("COMUNE_RESIDENZA_DESCR"));
 			i.setDATANASCITA(DateToXMLGregorianCalendar(rs.getDate("DATA_NASCITA")));
