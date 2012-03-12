@@ -1,878 +1,882 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
 	xmlns:tns="http://events.laboratory.unitn.it/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    name="Events"
-	targetNamespace="http://events.laboratory.unitn.it/">
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	name="Events" targetNamespace="http://events.laboratory.unitn.it/">
 	<wsdl:types>
-		<xsd:schema targetNamespace="http://events.laboratory.unitn.it/">  
-            <xsd:complexType name="BodyType">
-            	<xsd:sequence>
-            		<xsd:element name="InserimentoVariazioneAnagrafica"
-            			type="tns:InserimentoVariazioneAnagraficaType"
-            			minOccurs="0">
-            		</xsd:element>
-            		<xsd:element name="InserimentoVariazioneNucleoFatto"
-            			type="tns:InserimentoVariazioneNucleoFattoType"
-            			maxOccurs="1" minOccurs="0">
-            		</xsd:element>
-            		<xsd:element name="SchedaAccesso"
-            			type="tns:SchedaAccessoType" maxOccurs="1"
-            			minOccurs="0">
-            		</xsd:element>
-            		<xsd:element name="PresaInCarico"
-            			type="tns:PresaInCaricoType" maxOccurs="1"
-            			minOccurs="0">
-            		</xsd:element>
-            		<xsd:element name="ChiusuraPresaInCarico"
-            			type="tns:ChiusuraPresaInCaricoType" maxOccurs="1"
-            			minOccurs="0">
-            		</xsd:element>
-            		<xsd:element name="AssegnazioneAreaUtenza"
-            			type="tns:AssegnazioneAreaUtenzaType" maxOccurs="1"
-            			minOccurs="0">
-            		</xsd:element>
+		<xsd:schema targetNamespace="http://events.laboratory.unitn.it/">
+			<xsd:complexType name="BodyType">
+				<xsd:sequence>
+					<xsd:element name="InserimentoVariazioneAnagrafica"
+						type="tns:InserimentoVariazioneAnagraficaType" minOccurs="0">
+					</xsd:element>
+					<xsd:element name="InserimentoVariazioneNucleoFatto"
+						type="tns:InserimentoVariazioneNucleoFattoType" maxOccurs="1"
+						minOccurs="0">
+					</xsd:element>
+					<xsd:element name="SchedaAccesso" type="tns:SchedaAccessoType"
+						maxOccurs="1" minOccurs="0">
+					</xsd:element>
+					<xsd:element name="PresaInCarico" type="tns:PresaInCaricoType"
+						maxOccurs="1" minOccurs="0">
+					</xsd:element>
+					<xsd:element name="ChiusuraPresaInCarico" type="tns:ChiusuraPresaInCaricoType"
+						maxOccurs="1" minOccurs="0">
+					</xsd:element>
+					<xsd:element name="AssegnazioneAreaUtenza" type="tns:AssegnazioneAreaUtenzaType"
+						maxOccurs="1" minOccurs="0">
+					</xsd:element>
 
-            		<xsd:element name="RevocaAreaUtenza"
-            			type="tns:RevocaAreaUtenzaType" maxOccurs="1"
-            			minOccurs="0">
-            		</xsd:element>
-            		<xsd:element name="RicezioneDomandaAmministrativa"
-            			type="tns:RicezioneDomandaAmministrativaType"
-            			maxOccurs="1" minOccurs="0">
-            		</xsd:element>
-            		<xsd:element name="FatturazionePeriodica" type="tns:FatturazionePeriodicaType" maxOccurs="1" minOccurs="0"></xsd:element>
-            	</xsd:sequence>
-            </xsd:complexType>
-            
-            <xsd:complexType name="DescriptionType">
-            <xsd:sequence>
-			<xsd:element name="DataOraRegEvento" type="xsd:dateTime">
+					<xsd:element name="RevocaAreaUtenza" type="tns:RevocaAreaUtenzaType"
+						maxOccurs="1" minOccurs="0">
+					</xsd:element>
+					<xsd:element name="RicezioneDomandaAmministrativa"
+						type="tns:RicezioneDomandaAmministrativaType" maxOccurs="1"
+						minOccurs="0">
+					</xsd:element>
+					<xsd:element name="FatturazionePeriodica" type="tns:FatturazionePeriodicaType"
+						maxOccurs="1" minOccurs="0"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="DescriptionType">
+				<xsd:sequence>
+					<xsd:element name="DataOraRegEvento" type="xsd:dateTime">
+						<xsd:annotation>
+							<xsd:documentation>Data ed ora di quando l'evento è stato
+								registrato nel sistema informativo legacy del producer
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="TipoEventoCod">
+						<xsd:annotation>
+							<xsd:documentation>ID della classe/tipo di evento
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:totalDigits value="7" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="TipoEventoDescr">
+						<xsd:annotation>
+							<xsd:documentation>
+								Descrizione della classe/tipo di evento
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="250"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element minOccurs="0" name="IdInterventoPratica">
+						<xsd:annotation>
+							<xsd:documentation>ID dell'intervento o pratica nell'ambito del
+								quale è avvenuto l'evento
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:totalDigits value="7" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="ServizioCod">
+						<xsd:annotation>
+							<xsd:documentation>Codice tipo intervento o tipo pratica
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:totalDigits value="12" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="ServizioDescr">
+						<xsd:annotation>
+							<xsd:documentation>
+								Descrizione tipo intervento o tipo pratica
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="250"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="DataOraEvento" type="xsd:dateTime">
+						<xsd:annotation>
+							<xsd:documentation>Data ed ora di quando l'evento è avvenuto
+								nella
+								realtà
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="ProduttoreCod">
+						<xsd:annotation>
+							<xsd:documentation>Codice ente gestore (ente gestore
+								dell'operatore)
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:totalDigits value="3" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="ProduttoreDescr">
+						<xsd:annotation>
+							<xsd:documentation>
+								Descrizione ente gestore (ente gestore
+								dell'operatore)
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="250"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="UnitaOrganizzativaCod">
+						<xsd:annotation>
+							<xsd:documentation>Codice polo o ambito (polo dell'operatore)
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:totalDigits value="3" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="UnitaOrganizzativaDescr">
+						<xsd:annotation>
+							<xsd:documentation>
+								Descrizione polo o ambito (polo dell'operatore)
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="100"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="HeaderType">
+				<xsd:sequence>
+					<xsd:element name="IdEvento" type="xsd:string"></xsd:element>
+					<xsd:element name="Mittente" type="tns:MittenteType">
+					</xsd:element>
+					<xsd:element name="SorgenteAnagrafe" type="tns:SorgenteAnagrafeType"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="PatientType">
+				<xsd:sequence>
+					<xsd:element name="Nome">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="100"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="Cognome">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="100"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="DataNascita" type="xs:date" />
+					<xsd:element name="CodiceFiscale" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:length value="16"></xsd:length>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="ComuneNascitaCod">
+						<xsd:annotation>
+							<xsd:documentation>Codice ISTAT dei comuni</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:totalDigits value="7" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="ComuneResidenzaCod">
+						<xsd:annotation>
+							<xsd:documentation>Codice ISTAT dei comuni</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:totalDigits value="7" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="IdAnagrafeLocale">
+						<xsd:annotation>
+							<xsd:documentation>
+								ID DELL' ANAGRAFICA LOCALE (eg.
+								MATRICOLA_ASSISTITO PER CSI)
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:totalDigits value="7" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="EventType">
+				<xsd:sequence>
+					<xsd:element name="Intestazione" type="tns:HeaderType">
+					</xsd:element>
+					<xsd:element name="Assistito" type="tns:PatientType">
+					</xsd:element>
+					<xsd:element name="Descrizione" type="tns:DescriptionType">
+					</xsd:element>
+					<xsd:element name="Operazione" type="tns:OperationType">
+					</xsd:element>
+					<xsd:element name="Evento" type="tns:BodyType"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="InserimentoVariazioneAnagraficaType">
+				<xsd:sequence>
+
+					<xsd:element name="ComuneNascitaDescr" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="255"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="Sesso" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="1"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="StatoCivileCod" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:totalDigits value="3" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="StatoCivileDescr" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="255" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="NazionalitaCod" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:totalDigits value="3" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="NazionalitacDescr" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="255" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="ComuneResidenzaDescr" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="255" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="Via" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="255" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="CAP" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:totalDigits value="5" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="CittadinanzaCod" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:totalDigits value="3" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="CittadinanzaDescr" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="25" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="AssSocialeCod" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:totalDigits value="3" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="AssSocialeCognome" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="100" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="AssSocialeNome" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="100" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="InserimentoVariazioneNucleoFattoType">
+				<xsd:sequence>
+					<xsd:element name="Componente" minOccurs="1" maxOccurs="unbounded"
+						type="tns:ComponenteNucleoType">
+					</xsd:element>
+					<xsd:element name="CodiceNucleo" minOccurs="1"
+						type="xsd:integer" />
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="ComponenteNucleoType">
+				<xsd:sequence>
+					<xsd:element name="Nome" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="100"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="Cognome" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="100"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="CodiceFiscale" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:length value="16" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="GradoParentelaCod" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:totalDigits value="3" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="GradoParentelaDescr" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="50" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="DataNascita" type="xsd:date"
+						minOccurs="1">
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="SchedaAccessoType">
+				<xsd:sequence>
+
+					<xsd:element name="NumeroScheda" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="38" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="TipoServizioRichiestoCod" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="9" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="TipoServizioRichiestoDescr"
+						minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="250" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="TipoRichiedenteCod" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="9" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="TipoRichiedenteDescr" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="255" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="TipoTerziCod" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:totalDigits value="3" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="TipoTerziDescr" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="120" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="NomeTerzi" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="60" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="TipoSegnalanteCod" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:totalDigits value="3" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="TipoSegnalanteDescr" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="255" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="PresaInCaricoType">
+				<xsd:sequence>
+
+					<xsd:element name="PresaCaricoNum" minOccurs="1">
+						<xs:simpleType>
+							<xs:restriction base="xs:int">
+								<xs:totalDigits value="7" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="ChiusuraPresaInCaricoType">
+				<xsd:sequence>
+					<xsd:element name="PresaCaricoNum" minOccurs="1">
+						<xs:simpleType>
+							<xs:restriction base="xs:int">
+								<xs:totalDigits value="7" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="AssegnazioneAreaUtenzaType">
+				<xsd:sequence>
+
+					<xsd:element name="PresaCaricoNum" minOccurs="1">
+						<xs:simpleType>
+							<xs:restriction base="xsd:int">
+								<xs:totalDigits value="7" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+					<xsd:element name="AreaUtenzaCod" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="3" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="AreaUtenzaDescr" minOccurs="1">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="RevocaAreaUtenzaType">
+				<xsd:sequence>
+
+					<xsd:element name="PresaCaricoNum" minOccurs="1">
+						<xs:simpleType>
+							<xs:restriction base="xsd:int">
+								<xs:totalDigits value="7" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+					<xsd:element name="AreaUtenzaCod" minOccurs="1">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="3" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+					<xsd:element name="AreaUtenzaDescr" minOccurs="1">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="RicezioneDomandaAmministrativaType">
+				<xsd:sequence>
+
+					<xsd:element name="GiornateSettimanali" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+								parte decimale
+							</xsd:documentation>
+						</xsd:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xsd:int">
+								<xs:totalDigits value="7" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+					<xsd:element name="NumeroPastiSettimanali" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+								parte decimale
+							</xsd:documentation>
+						</xsd:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xsd:int">
+								<xs:totalDigits value="7" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+					<xsd:element name="NumeroTrasportiSettimanali"
+						minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+								parte decimale
+							</xsd:documentation>
+						</xsd:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xsd:int">
+								<xs:totalDigits value="7" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+					<xsd:element name="OreSettimanali" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+								parte decimale
+							</xsd:documentation>
+						</xsd:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xsd:int">
+								<xs:totalDigits value="7" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="FatturazionePeriodicaType">
+				<xsd:sequence>
+
+					<xsd:element name="CodiceCentro" minOccurs="1">
+						<xs:simpleType>
+							<xs:restriction base="xsd:int">
+								<xs:totalDigits value="7" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+					<xsd:element name="DenominazioneCentro" minOccurs="1">
+						<xs:simpleType>
+							<xs:restriction base="xsd:string">
+								<xs:maxLength value="240" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+					<xsd:element name="DataInizio" type="xs:date"
+						minOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Formato: YYYY-MM-DD</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+
+					<xsd:element name="DataFine" type="xs:date" minOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Formato: YYYY-MM-DD</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+
+					<xsd:element name="ImportoFattura" minOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+								parte decimale
+							</xsd:documentation>
+						</xsd:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xsd:int">
+								<xs:totalDigits value="7" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+					<xsd:element name="Giornate" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+								parte decimale
+							</xsd:documentation>
+						</xsd:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xsd:int">
+								<xs:totalDigits value="7" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+					<xsd:element name="AccessiServizio" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+								parte decimale
+							</xsd:documentation>
+						</xsd:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xsd:int">
+								<xs:totalDigits value="7" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+					<xsd:element name="NumeroPasti" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+								parte decimale
+							</xsd:documentation>
+						</xsd:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xsd:int">
+								<xs:totalDigits value="7" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+					<xsd:element name="NumeroTrasporti" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+								parte decimale
+							</xsd:documentation>
+						</xsd:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xsd:int">
+								<xs:totalDigits value="7" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+					<xsd:element name="GiorniAssenzaGiustificati"
+						minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+								parte decimale
+							</xsd:documentation>
+						</xsd:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xsd:int">
+								<xs:totalDigits value="7" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+					<xsd:element name="GiorniAssenzaNonGiustificati"
+						minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+								parte decimale
+							</xsd:documentation>
+						</xsd:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xsd:int">
+								<xs:totalDigits value="7" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+
+					<xsd:element name="OreErogate" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
+								parte decimale
+							</xsd:documentation>
+						</xsd:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xsd:int">
+								<xs:totalDigits value="7" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="EventNotificationRequest" type="tns:EventType">
+			</xsd:element>
+			<xsd:element name="EventNotificationResponse" type="xsd:string"></xsd:element>
+
+			<xsd:complexType name="OperationType">
 				<xsd:annotation>
-					<xsd:documentation>Data ed ora di quando l'evento è stato
-						registrato nel sistema informativo legacy del producer
+					<xsd:documentation>specifica se è una pubblicazione di un nuovo
+						evento o la cancellazione di uno già pubblicato.
 					</xsd:documentation>
 				</xsd:annotation>
-			</xsd:element>
-			<xsd:element name="TipoEventoCod">
-				<xsd:annotation>
-					<xsd:documentation>ID della classe/tipo di evento
-					</xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:int">
-						<xsd:totalDigits value="7" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="TipoEventoDescr">
-				<xsd:annotation>
-					<xsd:documentation>
-						Descrizione della classe/tipo di evento
-					</xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="250"></xsd:maxLength>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element minOccurs="0" name="IdInterventoPratica">
-				<xsd:annotation>
-					<xsd:documentation>ID dell'intervento o pratica nell'ambito del
-						quale è avvenuto l'evento</xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:int">
-						<xsd:totalDigits value="7" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="ServizioCod">
-				<xsd:annotation>
-					<xsd:documentation>Codice tipo intervento o tipo pratica
-					</xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:int">
-						<xsd:totalDigits value="12" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="ServizioDescr">
-				<xsd:annotation>
-					<xsd:documentation>
-						Descrizione tipo intervento o tipo pratica
-					</xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="250"></xsd:maxLength>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="DataOraEvento" type="xsd:dateTime">
-				<xsd:annotation>
-					<xsd:documentation>Data ed ora di quando l'evento è avvenuto nella
-						realtà</xsd:documentation>
-				</xsd:annotation>
-			</xsd:element>
-			<xsd:element name="ProduttoreCod">
-				<xsd:annotation>
-					<xsd:documentation>Codice ente gestore (ente gestore
-						dell'operatore)</xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:int">
-						<xsd:totalDigits value="3" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="ProduttoreDescr">
-				<xsd:annotation>
-					<xsd:documentation>
-						Descrizione ente gestore (ente gestore
-						dell'operatore)
-            		</xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="250"></xsd:maxLength>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="UnitaOrganizzativaCod">
-				<xsd:annotation>
-					<xsd:documentation>Codice polo o ambito (polo dell'operatore)
-					</xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:int">
-						<xsd:totalDigits value="3" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="UnitaOrganizzativaDescr">
-				<xsd:annotation>
-					<xsd:documentation>
-						Descrizione polo o ambito (polo dell'operatore)
-					</xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="100"></xsd:maxLength>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-		</xsd:sequence>
-            </xsd:complexType>
-        
-            <xsd:complexType name="HeaderType">
-            	<xsd:sequence>
-            		<xsd:element name="IdEvento" type="xsd:string"></xsd:element>
-            		<xsd:element name="Mittente"
-            			type="tns:MittenteType">
-            		</xsd:element>
-            		<xsd:element name="SorgenteAnagrafe" type="tns:SorgenteAnagrafeType"></xsd:element>
-            	</xsd:sequence>
-            </xsd:complexType>
-            
-            <xsd:complexType name="PatientType">
-            		<xsd:sequence>
-			<xsd:element name="Nome">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="100"></xsd:maxLength>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="Cognome">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="100"></xsd:maxLength>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="DataNascita" type="xs:date" />
-			<xsd:element name="CodiceFiscale"  minOccurs="0">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:length value="16"></xsd:length>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="ComuneNascitaCod">
-				<xsd:annotation>
-					<xsd:documentation>Codice ISTAT dei comuni</xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:int">
-						<xsd:totalDigits value="7" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="ComuneResidenzaCod">
-				<xsd:annotation>
-					<xsd:documentation>Codice ISTAT dei comuni</xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:int">
-						<xsd:totalDigits value="7" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="IdAnagrafeLocale">
-				<xsd:annotation>
-					<xsd:documentation>
-						ID DELL' ANAGRAFICA LOCALE (eg.
-						MATRICOLA_ASSISTITO PER CSI)
-					</xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:int">
-						<xsd:totalDigits value="7" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-		</xsd:sequence>
-            </xsd:complexType>
-        
-            <xsd:complexType name="EventType">
-            	<xsd:sequence>
-            		<xsd:element name="Intestazione"
-            			type="tns:HeaderType">
-            		</xsd:element>
-            		<xsd:element name="Assistito"
-            			type="tns:PatientType">
-            		</xsd:element>
-            		<xsd:element name="Descrizione"
-            			type="tns:DescriptionType">
-            		</xsd:element>
-            		<xsd:element name="Operazione"
-            			type="tns:OperationType">
-            		</xsd:element>
-            		<xsd:element name="Evento" type="tns:BodyType"></xsd:element>
-            	</xsd:sequence>
-            </xsd:complexType>
-            
-            <xsd:complexType name="InserimentoVariazioneAnagraficaType">
-            		<xsd:sequence>
+				<xsd:sequence>
+					<xsd:element name="OperazioneCod" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Codice dell'operazione da effettuare
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="1"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="OperazioneDescr" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>ID della classe/tipo di operazione
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="100"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
 
-			<xsd:element name="ComuneNascitaDescr" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="255"></xsd:maxLength>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
+			<xsd:complexType name="MittenteType">
+				<xsd:sequence>
+					<xsd:element name="NomeEnte" type="xsd:string"></xsd:element>
+					<xsd:element name="UrlEnte" type="xsd:string"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
 
-			<xsd:element name="Sesso" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="1"></xsd:maxLength>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
+			<xsd:complexType name="SorgenteAnagrafeType">
+				<xsd:sequence>
+					<xsd:element name="UrlEnte" type="xs:string" />
+					<xsd:element name="IdAnagrafe" type="xs:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="SendEventRequest">
+		<wsdl:part element="tns:EventNotificationRequest" name="parameters" />
 
-			<xsd:element name="StatoCivileCod" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:int">
-						<xsd:totalDigits value="3" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
+	</wsdl:message>
+	<wsdl:message name="SendEventResponse">
+		<wsdl:part element="tns:EventNotificationResponse" name="parameters" />
+	</wsdl:message>
 
-			<xsd:element name="StatoCivileDescr" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="255" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="NazionalitaCod" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:int">
-						<xsd:totalDigits value="3" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="NazionalitacDescr" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="255" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="ComuneResidenzaDescr" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="255" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="Via" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="255" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="CAP" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:int">
-						<xsd:totalDigits value="5" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="CittadinanzaCod" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:int">
-						<xsd:totalDigits value="3" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="CittadinanzaDescr" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="25" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="AssSocialeCod" minOccurs="0">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:int">
-						<xsd:totalDigits value="3" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="AssSocialeCognome" minOccurs="0">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="100" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="AssSocialeNome" minOccurs="0">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="100" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-		</xsd:sequence>
-            </xsd:complexType>
-        
-            <xsd:complexType name="InserimentoVariazioneNucleoFattoType">
-            <xsd:sequence>
-			<xsd:element name="Componente" minOccurs="1" maxOccurs="unbounded"
-				type="tns:ComponenteNucleoType">
-			</xsd:element>
-			<xsd:element name="CodiceNucleo" minOccurs="1" type="xsd:integer" />
-		</xsd:sequence>
-            </xsd:complexType>
-        
-            <xsd:complexType name="ComponenteNucleoType">
-            		<xsd:sequence>
-			<xsd:element name="Nome" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="100"></xsd:maxLength>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="Cognome" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="100"></xsd:maxLength>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="CodiceFiscale" minOccurs="0">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:length value="16" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="GradoParentelaCod" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:int">
-						<xsd:totalDigits value="3" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="GradoParentelaDescr" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="50" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="DataNascita" type="xsd:date"
-				minOccurs="1">
-			</xsd:element>
-		</xsd:sequence>
-            </xsd:complexType>
-        
-            <xsd:complexType name="SchedaAccessoType">
-            <xsd:sequence>
-
-			<xsd:element name="NumeroScheda" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="38" /> 
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="TipoServizioRichiestoCod" minOccurs="0">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="9" /> 
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="TipoServizioRichiestoDescr" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="250" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="TipoRichiedenteCod" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="9" /> 
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="TipoRichiedenteDescr" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="255" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="TipoTerziCod" minOccurs="0">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:int">
-						<xsd:totalDigits value="3" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="TipoTerziDescr" minOccurs="0">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="120" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="NomeTerzi" minOccurs="0">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="60" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="TipoSegnalanteCod" minOccurs="0">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:int">
-						<xsd:totalDigits value="3" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="TipoSegnalanteDescr" minOccurs="0">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="255" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-		</xsd:sequence>
-            </xsd:complexType>
-        
-            <xsd:complexType name="PresaInCaricoType">
-            <xsd:sequence>
-
-			<xsd:element name="PresaCaricoNum" minOccurs="1">
-				<xs:simpleType>
-					<xs:restriction base="xs:int">
-						<xs:totalDigits value="7" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-		</xsd:sequence>
-            </xsd:complexType>
-        
-            <xsd:complexType name="ChiusuraPresaInCaricoType">
-            <xsd:sequence>
-			<xsd:element name="PresaCaricoNum" minOccurs="1">
-				<xs:simpleType>
-					<xs:restriction base="xs:int">
-						<xs:totalDigits value="7" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-		</xsd:sequence>
-            </xsd:complexType>
-        
-            <xsd:complexType name="AssegnazioneAreaUtenzaType">
-            <xsd:sequence>
-
-			<xsd:element name="PresaCaricoNum" minOccurs="1">
-				<xs:simpleType>
-					<xs:restriction base="xsd:int">
-						<xs:totalDigits value="7" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-			<xsd:element name="AreaUtenzaCod" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="3" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="AreaUtenzaDescr" minOccurs="1">
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="255" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-		</xsd:sequence>
-            </xsd:complexType>
-        
-            <xsd:complexType name="RevocaAreaUtenzaType">
-            <xsd:sequence>
-
-			<xsd:element name="PresaCaricoNum" minOccurs="1">
-				<xs:simpleType>
-					<xs:restriction base="xsd:int">
-						<xs:totalDigits value="7" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-			<xsd:element name="AreaUtenzaCod" minOccurs="1">
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="3" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-
-			<xsd:element name="AreaUtenzaDescr" minOccurs="1">
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="255" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-		</xsd:sequence>
-            </xsd:complexType>
-        
-            <xsd:complexType name="RicezioneDomandaAmministrativaType">
-            <xsd:sequence>
-
-			<xsd:element name="GiornateSettimanali" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
-						parte decimale </xsd:documentation>
-				</xsd:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xsd:int">
-						<xs:totalDigits value="7" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-			<xsd:element name="NumeroPastiSettimanali" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
-						parte decimale </xsd:documentation>
-				</xsd:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xsd:int">
-						<xs:totalDigits value="7" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-			<xsd:element name="NumeroTrasportiSettimanali" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
-						parte decimale </xsd:documentation>
-				</xsd:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xsd:int">
-						<xs:totalDigits value="7" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-			<xsd:element name="OreSettimanali" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
-						parte decimale </xsd:documentation>
-				</xsd:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xsd:int">
-						<xs:totalDigits value="7" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-		</xsd:sequence>
-            </xsd:complexType>
-        
-            <xsd:complexType name="FatturazionePeriodicaType">
-            <xsd:sequence>
-
-			<xsd:element name="CodiceCentro" minOccurs="1">
-				<xs:simpleType>
-					<xs:restriction base="xsd:int">
-						<xs:totalDigits value="7" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-			<xsd:element name="DenominazioneCentro" minOccurs="1">
-				<xs:simpleType>
-					<xs:restriction base="xsd:string">
-						<xs:maxLength value="240" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-			<xsd:element name="DataInizio" type="xs:date" minOccurs="1">
-				<xsd:annotation>
-					<xsd:documentation>Formato: YYYY-MM-DD</xsd:documentation>
-				</xsd:annotation>
-			</xsd:element>
-
-			<xsd:element name="DataFine" type="xs:date" minOccurs="1">
-				<xsd:annotation>
-					<xsd:documentation>Formato: YYYY-MM-DD</xsd:documentation>
-				</xsd:annotation>
-			</xsd:element>
-
-			<xsd:element name="ImportoFattura" minOccurs="1">
-				<xsd:annotation>
-					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
-						parte decimale </xsd:documentation>
-				</xsd:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xsd:int">
-						<xs:totalDigits value="7" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-			<xsd:element name="Giornate" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
-						parte decimale </xsd:documentation>
-				</xsd:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xsd:int">
-						<xs:totalDigits value="7" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-			<xsd:element name="AccessiServizio" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
-						parte decimale </xsd:documentation>
-				</xsd:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xsd:int">
-						<xs:totalDigits value="7" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-			<xsd:element name="NumeroPasti" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
-						parte decimale </xsd:documentation>
-				</xsd:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xsd:int">
-						<xs:totalDigits value="7" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-			<xsd:element name="NumeroTrasporti" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
-						parte decimale </xsd:documentation>
-				</xsd:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xsd:int">
-						<xs:totalDigits value="7" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-			<xsd:element name="GiorniAssenzaGiustificati" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
-						parte decimale </xsd:documentation>
-				</xsd:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xsd:int">
-						<xs:totalDigits value="7" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-			<xsd:element name="GiorniAssenzaNonGiustificati"
-				minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
-						parte decimale </xsd:documentation>
-				</xsd:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xsd:int">
-						<xs:totalDigits value="7" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-
-			<xsd:element name="OreErogate" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation> 7,2: prime 5 cifre parte intera e ultime 2
-						parte decimale </xsd:documentation>
-				</xsd:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xsd:int">
-						<xs:totalDigits value="7" />
-					</xs:restriction>
-				</xs:simpleType>
-			</xsd:element>
-		</xsd:sequence>
-            </xsd:complexType>
-            <xsd:element name="EventNotificationRequest"
-            	type="tns:EventType">
-            </xsd:element>
-            <xsd:element name="EventNotificationResponse" type="xsd:string"></xsd:element>
-        
-            <xsd:complexType name="OperationType">            
-            <xsd:annotation>
-			<xsd:documentation>specifica se è una pubblicazione di un nuovo
-				evento o la cancellazione di uno già pubblicato.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:sequence>
-			<xsd:element name="OperazioneCod"  minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation>Codice dell'operazione da effettuare
-					</xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="1"></xsd:maxLength>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-			<xsd:element name="OperazioneDescr" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation>ID della classe/tipo di operazione
-					</xsd:documentation>
-				</xsd:annotation>
-				<xsd:simpleType>
-					<xsd:restriction base="xsd:string">
-						<xsd:maxLength value="100"></xsd:maxLength>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
-		</xsd:sequence>
-		</xsd:complexType>
-        
-            <xsd:complexType name="MittenteType">
-            	<xsd:sequence>
-            		<xsd:element name="NomeEnte" type="xsd:string"></xsd:element>
-            		<xsd:element name="UrlEnte" type="xsd:string"></xsd:element>
-            	</xsd:sequence>
-            </xsd:complexType>
-            
-            <xsd:complexType name="SorgenteAnagrafeType">
-            <xsd:sequence>
-			<xsd:element name="UrlEnte" type="xs:string" />
-			<xsd:element name="IdAnagrafe" type="xs:string" />
-		</xsd:sequence>
-            </xsd:complexType>
-        </xsd:schema>
-  </wsdl:types>
-  <wsdl:message name="SendEventRequest">
-    <wsdl:part element="tns:EventNotificationRequest" name="parameters" />
-
-  </wsdl:message>
-  <wsdl:message name="SendEventResponse">
-    <wsdl:part element="tns:EventNotificationResponse"
-    	name="parameters" />
-  </wsdl:message>
-  <wsdl:message name="Request">
-  	<wsdl:part name="Request" element="tns:in"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="Response">
-  	<wsdl:part name="parameters" element="tns:Response"></wsdl:part>
-  </wsdl:message>
-  <wsdl:portType name="Events">
-    <wsdl:operation name="SendEvent">
-      <wsdl:input message="tns:SendEventRequest"/>
-      <wsdl:output message="tns:SendEventResponse"/>
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:binding name="EventsSOAP" type="tns:Events">
-    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="SendEvent">
-      <soap:operation soapAction="http://events.laboratory.unitn.it/SendEvent"/>
-      <wsdl:input>
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:service name="Events">
-    <wsdl:port binding="tns:EventsSOAP" name="EventsSOAP">
-      <!--<soap:address location="http://192.168.1.42:8090/SourceEventReceiver"/>  -->
-      <soap:address location="http://192.168.178.30:8090/SourceEventReceiver"/>
-    </wsdl:port>
-  </wsdl:service>
+	<wsdl:portType name="Events">
+		<wsdl:operation name="SendEvent">
+			<wsdl:input message="tns:SendEventRequest" />
+			<wsdl:output message="tns:SendEventResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="EventsSOAP" type="tns:Events">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="SendEvent">
+			<soap:operation soapAction="http://events.laboratory.unitn.it/SendEvent" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Events">
+		<wsdl:port binding="tns:EventsSOAP" name="EventsSOAP">
+			<soap:address location="http://192.168.1.41:8090/SourceEventReceiver" />
+			<!--<soap:address location="http://192.168.178.30:8090/SourceEventReceiver"/> -->
+		</wsdl:port>
+	</wsdl:service>
 </wsdl:definitions>
