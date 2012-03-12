@@ -8,7 +8,10 @@
 	<eip:static-routing-slip service="tns:processEventRequest"
 		endpoint="staticRouting">
 		<eip:targets>
-			 <eip:exchange-target service="tns:splitDifferentEvents"
+		    <eip:exchange-target service="tns:beanLogEvent" 
+				endpoint="LogEvent" operation="logContent" />
+				
+			<eip:exchange-target service="tns:splitDifferentEvents"
 				endpoint="endpoint" />
 		</eip:targets>
 
@@ -27,62 +30,74 @@
 					<eip:exchange-target service="tns:mapInserimentoVariazioneAnagrafica"
 						endpoint="IVA" />
 				</eip:target>
+		    </eip:routing-rule>
+		    <eip:routing-rule>
+				<eip:predicate>
+					<!-- Evento Inserimento Variazione Nucleo Fatto -->
+					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=2]" />
+				</eip:predicate>
+				<eip:target>
+					<eip:exchange-target service="tns:mapInserimentoVariazioneNucleoFatto"
+						endpoint="IVNF" />
+				</eip:target>
 			</eip:routing-rule>
 		</eip:rules>
 	</eip:content-based-router>
 
-
-
-	<eip:static-routing-slip service="tns:mapInserimentoVariazioneAnagrafica" endpoint="IVA">
+	<eip:static-routing-slip service="tns:mapInserimentoVariazioneNucleoFatto"
+		endpoint="IVNF">
 		<eip:targets>
-		    <eip:exchange-target service="tns:mappingIVA"
-				endpoint="mappingIVA"></eip:exchange-target>
-				
-		    <eip:exchange-target service="wsb:DwhWS" />
+			<eip:exchange-target service="tns:mappingIVNF"
+				endpoint="mappingIVNF"></eip:exchange-target>
 		    
-		    <eip:exchange-target  service="tns:mappedEventProcessor" endpoint="mappedEvent" operation="manageDWHResponse"/> />
-		    
+		    <eip:exchange-target service="tns:beanLogEvent" 
+		endpoint="LogEvent" operation="logContent" />
+
+			<eip:exchange-target service="wsb:DwhWS" />
+
 			<eip:exchange-target service="tns:convertDwhResponse"
 				endpoint="convertDwhResponse" />
 		</eip:targets>
 	</eip:static-routing-slip>
 
 
-   	<!--  <eip:static-recipient-list service="tns:logAndSend" endpoint="mappedEvents">
-		<eip:recipients>
-			<eip:exchange-target service="tns:beanLogEvent"
-				endpoint="LogEvent" operation="logContentNoForward" />
-			<eip:exchange-target service="wsb:DwhWS" />
-		</eip:recipients>
-	</eip:static-recipient-list>-->
-	
-	
-	<!-- Eseguo il mapping relativo all'evento Inserimento Variazione Anagrafica 
-		e inoltro il risultato al Datawarehouse WS 
-	<eip:pipeline service="tns:mapInserimentoVariazioneAnagrafica"
+	<eip:static-routing-slip service="tns:mapInserimentoVariazioneAnagrafica"
 		endpoint="IVA">
-		<eip:transformer>
+		<eip:targets>
 			<eip:exchange-target service="tns:mappingIVA"
 				endpoint="mappingIVA"></eip:exchange-target>
-		</eip:transformer>
-		<eip:target>
-			<eip:exchange-target service="tns:logAndSend" endpoint="mappedEvents"></eip:exchange-target>
-		</eip:target>
-	</eip:pipeline> -->
-	
-	
+				
+						    <eip:exchange-target service="tns:beanLogEvent" 
+		endpoint="LogEvent" operation="logContent" />
+
+			<eip:exchange-target service="wsb:DwhWS" />
+
+			<eip:exchange-target service="tns:convertDwhResponse"
+				endpoint="convertDwhResponse" />
+		</eip:targets>
+	</eip:static-routing-slip>
+
+
+	<!-- <eip:static-recipient-list service="tns:logAndSend" endpoint="mappedEvents"> 
+		<eip:recipients> <eip:exchange-target service="tns:beanLogEvent" endpoint="LogEvent" 
+		operation="logContentNoForward" /> <eip:exchange-target service="wsb:DwhWS" 
+		/> </eip:recipients> </eip:static-recipient-list> -->
+
+
+	<!-- Eseguo il mapping relativo all'evento Inserimento Variazione Anagrafica 
+		e inoltro il risultato al Datawarehouse WS <eip:pipeline service="tns:mapInserimentoVariazioneAnagrafica" 
+		endpoint="IVA"> <eip:transformer> <eip:exchange-target service="tns:mappingIVA" 
+		endpoint="mappingIVA"></eip:exchange-target> </eip:transformer> <eip:target> 
+		<eip:exchange-target service="tns:logAndSend" endpoint="mappedEvents"></eip:exchange-target> 
+		</eip:target> </eip:pipeline> -->
+
+
 	<!-- Devo utilizzare questo componente per poter processare l'evento in 
 		modo da poterlo salvare nella staging area. In questo modo riesco ad avvisare 
-		il client dell' avvenuta consegna dell'evento all'ESB 
-	<eip:wire-tap service="tns:wireTrap" endpoint="endpoint">
-		<eip:target>
-			<eip:exchange-target service="tns:beanLogEvent"
-				endpoint="LogEvent" operation="logContent" />
-		</eip:target>
-		<eip:inListener>
-			<eip:exchange-target service="tns:splitDifferentEvents"
-				endpoint="endpoint" />
-		</eip:inListener>
-	</eip:wire-tap> -->
+		il client dell' avvenuta consegna dell'evento all'ESB <eip:wire-tap service="tns:wireTrap" 
+		endpoint="endpoint"> <eip:target> <eip:exchange-target service="tns:beanLogEvent" 
+		endpoint="LogEvent" operation="logContent" /> </eip:target> <eip:inListener> 
+		<eip:exchange-target service="tns:splitDifferentEvents" endpoint="endpoint" 
+		/> </eip:inListener> </eip:wire-tap> -->
 </beans>
 
