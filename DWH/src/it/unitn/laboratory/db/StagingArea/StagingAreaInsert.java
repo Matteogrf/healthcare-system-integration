@@ -53,17 +53,17 @@ public class StagingAreaInsert
 		ps.setInt(11, assistito.getCOMUNERESIDENZACOD());
 		ps.setString(12, assistito.getCOMUNERESIDENZADESCR());
 		ps.setString(13, assistito.getSESSO());
-		ps.setString(13, assistito.getCAP());
-		ps.setInt(14, assistito.getSTATOCIVILECOD());
-		ps.setString(15, assistito.getSTATOCIVILEDESCR());
-		ps.setInt(16, assistito.getNAZIONALITACOD());
-		ps.setString(17, assistito.getNAZIONALITADESCR());
-		ps.setInt(18, assistito.getCITTADINANZACOD());
-		ps.setString(19, assistito.getCITTADINANZADESCR());
-		ps.setInt(20, assistito.getPOLOCOD());
-		ps.setString(21, assistito.getPOLODESCR());
-		ps.setInt(22, assistito.getGESTORECOD());
-		ps.setString(23, assistito.getGESTOREDESCR());
+		ps.setString(14, assistito.getCAP());
+		ps.setInt(15, assistito.getSTATOCIVILECOD());
+		ps.setString(16, assistito.getSTATOCIVILEDESCR());
+		ps.setInt(17, assistito.getNAZIONALITACOD());
+		ps.setString(18, assistito.getNAZIONALITADESCR());
+		ps.setInt(19, assistito.getCITTADINANZACOD());
+		ps.setString(20, assistito.getCITTADINANZADESCR());
+		ps.setInt(21, assistito.getPOLOCOD());
+		ps.setString(22, assistito.getPOLODESCR());
+		ps.setInt(23, assistito.getGESTORECOD());
+		ps.setString(24, assistito.getGESTOREDESCR());
 
 		int res = ps.executeUpdate();	
 

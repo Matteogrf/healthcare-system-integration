@@ -25,6 +25,8 @@
 					</xsd:element>
 					<xsd:element maxOccurs="1" minOccurs="0" name="D_OPERATORE" type="tns:OperatoreType">
 					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="0" name="D_NUCLEO_FAMILIARE" type="tns:NucleoFamiliareType">
+					</xsd:element>
 				</xsd:sequence>
 			</xsd:complexType>
 
@@ -54,7 +56,7 @@
 					<xsd:element maxOccurs="1" minOccurs="0" name="MITTENTE_NOME_ENTE" type="xsd:string"/>
 					<xsd:element maxOccurs="1" minOccurs="0" name="MITTENTE_URL_ENTE" type="xsd:string"/>
 					<xsd:element maxOccurs="1" minOccurs="0" name="ANAG_URL_ENTE" type="xsd:string"/>
-					<xsd:element maxOccurs="1" minOccurs="0" name="ANAG_ID_ANAGRAFE" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ANAG_ID_ANAGRAFE" type="xsd:string"/>
 					<xsd:element maxOccurs="1" minOccurs="0" name="ID_ASS_SOC" type="xsd:int"/>
 					<xsd:element maxOccurs="1" minOccurs="0" name="HASH_COD" type="xsd:string"/>
 					<xsd:element maxOccurs="1" minOccurs="0" name="DATA_NASCITA" type="xsd:date"/>
@@ -80,6 +82,27 @@
 				</xsd:sequence>
 			</xsd:complexType>
 
+
+			<xsd:complexType name="NucleoFamiliareType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="1" name="CODICE_NUCLEO" type="xsd:int"/>
+					<xsd:element minOccurs="1" name="COMPONENTE" type="tns:ComponenteType"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="HASH_COD" type="xsd:string"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="COGNOME" type="xsd:string"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="POLO_COD" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="POLO_DESCR" type="xsd:string"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ENTE_GESTORE_COD" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ENTE_GESTORE_DESCR" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="ComponenteType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="0" name="HASH_COD" type="xsd:string"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="GRADO_PARENTELA_COD" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="GRADO_PARENTELA_DESCR" type="xsd:string"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="DATA_NASCITA" type="xsd:date"/>
+				</xsd:sequence>
+			</xsd:complexType>
 		</xsd:schema>
   </wsdl:types>
   <wsdl:message name="SendMappedChangesResponse">

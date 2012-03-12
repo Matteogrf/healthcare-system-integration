@@ -36,9 +36,36 @@ public class DWHUpdateSQL {
 		if (res==0) throw new SQLWarning("Inserimanto operatore fallito? check It");
 	}
 
-	public static void updateAssistito(AssistitoType i, int id) {
-		// TODO Auto-generated method stub
+	public static void updateAssistito(AssistitoType i, int id) throws ClassNotFoundException, SQLException {
+		Connection con = ConnectionManagerDWH.getInstance().getConnection();
 		
+		PreparedStatement ps = con.prepareStatement("UPDATE D_ASSISTITO SET" +
+				" ID_ANAGRAFE_LOCALE = ?," +
+				" MITTENTE_NOME_ENTE = ?," +
+				" MITTENTE_URL_ENTE = ?," +
+				" ANAGRAFE_URL_ENTE = ?," +
+				" ANAG_ID_ANAGRAFE = ?," +
+				" ID_ASS_SOC = ?," +
+				" HASH_COD = ?," +
+				" DATA_NASCITA =?," +
+				" COMUNE_NASCITA_COD= ?," +
+				" COMUNE_NASCITA_DESCR= ?," +
+				" COMUNE_RESIDENZA_COD= ?," +
+				" COMUNE_RESIDENZA_DESCR= ?," +
+				" SESSO= ?," +
+				" CAP= ?," +
+				" STATO_CIVILE_COD= ?," +
+				" STATO_CIVILE_DESCR= ?," +
+				" NAZIONALITA_COD= ?," +
+				" NAZIONALITA_DESCR= ?," +
+				" CITTADINANZA_COD= ?," +
+				" CITTADINANZA_DESCR= ?," +
+				" POLO_COD, POLO_DESCR= ?," +
+				" ENTE_GESTORE_COD= ?," +
+				" ENTE_GESTORE_DESCR=?" );
+		
+		int res = ps.executeUpdate();		
+		if (res==0) throw new SQLWarning("Inserimanto operatore fallito? check It");
 	}
 
 }
