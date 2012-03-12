@@ -80,4 +80,16 @@ public class DataManager
 				 
 		return ps.executeQuery();
 	}
+
+	public ResultSet getAssegnazioneAreaUtenza() throws SQLException 
+	{		
+			PreparedStatement ps  = conn.getConnection().prepareStatement("SELECT * FROM Events E, EventDescription ED, Header H, Patient P, assegnazionedatautenza A " +
+					  "WHERE ED.TipoEventoCod = 6 AND " +
+					  "ED.IdEvent = E.IdEventDescr AND " +
+					  "E.IdPatient = P.idAnagrafeLocale AND " +
+					  "E.IdHeader = H.IdHeader AND " +
+					  "A.EventoAssociato = E.idEvent;");			  
+					 
+			return ps.executeQuery();		
+	}
 }

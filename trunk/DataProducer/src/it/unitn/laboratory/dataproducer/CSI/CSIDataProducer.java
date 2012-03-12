@@ -45,7 +45,7 @@ public class CSIDataProducer
 		CreateSchedaAccesso();
 		CreatePresaInCarico();
 		CreateChiusuraPresaInCarico();
-		//CreateAssegnazioneAreaUtenza();
+		CreateAssegnazioneAreaUtenza();
 	}
 	
 
@@ -159,7 +159,7 @@ public class CSIDataProducer
 
 	private static void CreateAssegnazioneAreaUtenza() throws SQLException, DatatypeConfigurationException 
 	{
-	/**	
+		ResultSet pic = dataM.getAssegnazioneAreaUtenza();
 		ObjectFactory of = new ObjectFactory();	
 		while(pic.next())
 		{
@@ -175,14 +175,20 @@ public class CSIDataProducer
 			String res=new Events_Service().getEventsSOAP().sendEvent(event);
 		
 			System.out.println("Res sendEvent:"+res);
-		}*/
+		}
 	}
 
-	private static BodyType extractAssegnazioneAreaUtenza(ResultSet pic, ObjectFactory of) 
+	private static BodyType extractAssegnazioneAreaUtenza(ResultSet pic, ObjectFactory of) throws SQLException 
 	{
 		AssegnazioneAreaUtenzaType a = of.createAssegnazioneAreaUtenzaType();
 		
-		return null;
+		a.setAreaUtenzaCod( pic.getString("AreaUtenzaCod") );
+		a.setAreaUtenzaDescr( pic.getString("AreaUtenzaString") );
+		a.setPresaCaricoNum( pic.getInt("PresaInCaricoNum") );
+		
+		BodyType b = of.createBodyType();
+		b.setAssegnazioneAreaUtenza(a);
+		return b;
 	}
 
 	private static void CreateInserimentoNucleoFamiliare() throws SQLException, DatatypeConfigurationException, ClassNotFoundException 
