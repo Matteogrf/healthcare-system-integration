@@ -20,6 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="EVENT_TYPE" type="{http://events.laboratory.unitn.it}EventType"/>
  *         &lt;element name="D_ASSISTITO" type="{http://events.laboratory.unitn.it}AssistitoType" minOccurs="0"/>
  *         &lt;element name="D_OPERATORE" type="{http://events.laboratory.unitn.it}OperatoreType" minOccurs="0"/>
+ *         &lt;element name="D_NUCLEO_FAMILIARE" type="{http://events.laboratory.unitn.it}NucleoFamiliareType" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -32,7 +33,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "DwhSchemaType", propOrder = {
     "eventtype",
     "dassistito",
-    "doperatore"
+    "doperatore",
+    "dnucleofamiliare"
 })
 public class DwhSchemaType {
 
@@ -43,7 +45,10 @@ public class DwhSchemaType {
     @XmlElement(name = "D_OPERATORE")
     protected OperatoreType doperatore;
 
-    /**
+    @XmlElement(name = "D_NUCLEO_FAMILIARE")
+    protected NucleoFamiliareType dnucleofamiliare;
+
+	/**
      * Gets the value of the eventtype property.
      * 
      * @return
@@ -113,6 +118,30 @@ public class DwhSchemaType {
      */
     public void setDOPERATORE(OperatoreType value) {
         this.doperatore = value;
+    }
+
+	/**
+     * Gets the value of the dnucleofamiliare property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link NucleoFamiliareType }
+     *     
+     */
+    public NucleoFamiliareType getDNUCLEOFAMILIARE() {
+        return dnucleofamiliare;
+    }
+
+	/**
+     * Sets the value of the dnucleofamiliare property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link NucleoFamiliareType }
+     *     
+     */
+    public void setDNUCLEOFAMILIARE(NucleoFamiliareType value) {
+        this.dnucleofamiliare = value;
     }
 
 }

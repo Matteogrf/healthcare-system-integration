@@ -24,7 +24,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="MITTENTE_NOME_ENTE" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="MITTENTE_URL_ENTE" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ANAG_URL_ENTE" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="ANAG_ID_ANAGRAFE" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="ANAG_ID_ANAGRAFE" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ID_ASS_SOC" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="HASH_COD" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="DATA_NASCITA" type="{http://www.w3.org/2001/XMLSchema}date" minOccurs="0"/>
@@ -273,7 +273,7 @@ public class AssistitoType {
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
     public String getANAGIDANAGRAFE() {
@@ -288,6 +288,7 @@ public class AssistitoType {
      *     {@link Integer }
      *     
      */
+
     public void setANAGIDANAGRAFE(String value) {
         this.anagidanagrafe = value;
     }

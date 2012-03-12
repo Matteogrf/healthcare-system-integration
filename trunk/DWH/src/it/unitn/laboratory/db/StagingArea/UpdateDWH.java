@@ -1,13 +1,17 @@
 package it.unitn.laboratory.db.StagingArea;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLWarning;
 import java.util.GregorianCalendar;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+
 
 import it.unitn.laboratory.db.ConnectionManager;
 import it.unitn.laboratory.db.QueryManager;
@@ -43,6 +47,14 @@ public class UpdateDWH {
 		this.updateD_Operatore(cm);
 		this.updateD_Assistito(cm);
 
+		// Remove all staging area content
+		this.cleanStagingArea();
+	}
+
+	private void cleanStagingArea() throws ClassNotFoundException, SQLException {
+
+		this.deleteTableContent("D_OPERATORE");
+		this.deleteTableContent("D_ASSISTITO");
 	}
 
 	private void updateD_Operatore(ConnectionManager cm) throws SQLException, ClassNotFoundException {
@@ -125,5 +137,13 @@ public class UpdateDWH {
 		cal.setTime(date);
 		return  DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);	
 	}
+
+	private void deleteTableContent(String table) throws ClassNotFoundException, SQLException{
+		Connection con = ConnectionManagerSA.getInstance().getConnection();
+		PreparedStatement ps = con.prepareStatement("DELETE FROM "+table);
+		int res = ps.executeUpdate();		
+		if (res==0) throw new SQLWarning("Inserimento operatore fallito? check It");
 	}
+
+}	
 

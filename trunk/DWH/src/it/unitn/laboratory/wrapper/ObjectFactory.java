@@ -62,6 +62,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ComponenteType }
+     * 
+     */
+    public ComponenteType createComponenteType() {
+        return new ComponenteType();
+    }
+
+	/**
      * Create an instance of {@link OperatoreType }
      * 
      */
@@ -75,6 +83,14 @@ public class ObjectFactory {
      */
     public EventType createEventType() {
         return new EventType();
+    }
+
+	/**
+     * Create an instance of {@link NucleoFamiliareType }
+     * 
+     */
+    public NucleoFamiliareType createNucleoFamiliareType() {
+        return new NucleoFamiliareType();
     }
 
 }
