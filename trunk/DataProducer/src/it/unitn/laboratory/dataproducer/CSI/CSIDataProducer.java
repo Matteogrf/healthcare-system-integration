@@ -38,34 +38,33 @@ public class CSIDataProducer
 		}				
 	}
 
-	private static void produceEvents() throws SQLException, DatatypeConfigurationException 
-	{		
-		ResultSet ev = dataM.getEvents();
-		while ( ev.next() )
-		{		
-			CreateInserimentoVariazioneAnagraficaEvent(ev);
-			CreateInserimentoNucleoFamiliare(ev);
-		}
-			
+	private static void produceEvents() throws SQLException, DatatypeConfigurationException, ClassNotFoundException 
+	{	
+		CreateInserimentoVariazioneAnagrafica();
+		CreateInserimentoNucleoFamiliare();
 	}
 
-	private static void CreateInserimentoNucleoFamiliare(ResultSet ev) throws SQLException, DatatypeConfigurationException, ClassNotFoundException 
+	private static void CreateInserimentoNucleoFamiliare() throws SQLException, DatatypeConfigurationException, ClassNotFoundException 
 	{
+		ResultSet ev = dataM.getNucleiFamiliari();
 		ObjectFactory of = new ObjectFactory();	
-		EventType event = of.createEventType();		
+		while(ev.next())
+		{
+			
+			EventType event = of.createEventType();			
+			event.setAssistito(extractPatient(ev, of));
+			event.setIntestazione(extractHeader(ev, of));
+			event.setDescrizione(extractDescrizione(ev,of));
+			event.setEvento(extractInserimentoNucleaoFamiliare(ev,of));
 		
-		event.setAssistito(extractPatient(ev, of));
-		event.setIntestazione(extractHeader(ev, of));
-		event.setDescrizione(extractDescrizione(ev,of));
-		event.setEvento(extractInserimentoNucleaoFamiliare(ev,of));
+			OperationType operation = of.createOperationType();
+			operation.setOperazioneCod("2");
+			operation.setOperazioneDescr("InserimentoVariazioneNucleoFatto");
+			event.setOperazione(operation);
+			String res=new Events_Service().getEventsSOAP().sendEvent(event);
 		
-		OperationType operation = of.createOperationType();
-		operation.setOperazioneCod("2");
-		operation.setOperazioneDescr("InserimentoVariazioneNucleoFatto");
-		event.setOperazione(operation);
-		String res=new Events_Service().getEventsSOAP().sendEvent(event);
-		
-		System.out.println("Res sendEvent:"+res);
+			System.out.println("Res sendEvent:"+res);
+		}
 	}
 
 	private static BodyType extractInserimentoNucleaoFamiliare(ResultSet ev,ObjectFactory of) throws SQLException, ClassNotFoundException, DatatypeConfigurationException 
@@ -92,19 +91,23 @@ public class CSIDataProducer
 		return body;
 	}
 
-	private static void CreateInserimentoVariazioneAnagraficaEvent(ResultSet iva) throws SQLException, DatatypeConfigurationException 
+	private static void CreateInserimentoVariazioneAnagrafica() throws SQLException, DatatypeConfigurationException 
 	{
-		ObjectFactory of = new ObjectFactory();			
-		EventType event = of.createEventType();	
+		ResultSet iva = dataM.getInserimentoVariazioneAnagrafica();
+		while(iva.next())
+		{
+			ObjectFactory of = new ObjectFactory();			
+			EventType event = of.createEventType();	
 		
-		event.setAssistito(extractPatient(iva, of));
-		event.setIntestazione(extractHeader(iva, of));
-		event.setDescrizione(extractDescrizione(iva,of));
-		event.setEvento(extractEventInserimentoVariazioneAnagrafica(iva,of));
-		event.setOperazione(extractOperation(of));
+			event.setAssistito(extractPatient(iva, of));
+			event.setIntestazione(extractHeader(iva, of));
+			event.setDescrizione(extractDescrizione(iva,of));
+			event.setEvento(extractEventInserimentoVariazioneAnagrafica(iva,of));
+			event.setOperazione(extractOperation(of));
 		
-		String res=new Events_Service().getEventsSOAP().sendEvent(event);
-		System.out.println("Res sendEvent:"+res);
+			String res=new Events_Service().getEventsSOAP().sendEvent(event);
+			System.out.println("Res sendEvent:"+res);
+		}			
 	}
 
 	private static OperationType extractOperation(ObjectFactory of) 

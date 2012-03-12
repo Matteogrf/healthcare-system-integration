@@ -12,7 +12,7 @@ public class DataManager
 		conn = ConnectionManager.getInstance();
 	}
 	
-	public ResultSet getEvents() throws SQLException
+	public ResultSet getInserimentoVariazioneAnagrafica() throws SQLException
 	{
 		PreparedStatement ps  = conn.getConnection().prepareStatement("SELECT * FROM inserimentovariazioneanagrafica I, Events E, EventDescription ED, Header H,  Patient P, nucleofamiliare N  " +
 											  "WHERE I.EventoInviato = 0 AND " +
@@ -30,6 +30,12 @@ public class DataManager
 											" WHERE N.CodiceNucleo = ? AND" +
 											" N.IdPatient = P.IdAnagrafeLocale; ");
 		ps.setInt(1, codiceNucleo);
+		return ps.executeQuery();
+	}
+
+	public ResultSet getNucleiFamiliari() throws SQLException
+	{
+		PreparedStatement ps  = conn.getConnection().prepareStatement("SELECT * FROM nucleofamiliare N;");		
 		return ps.executeQuery();
 	}
 }
