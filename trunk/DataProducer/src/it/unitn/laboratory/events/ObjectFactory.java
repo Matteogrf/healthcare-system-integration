@@ -35,11 +35,51 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AssegnazioneAreaUtenzaType }
+     * Create an instance of {@link PatientType }
      * 
      */
-    public AssegnazioneAreaUtenzaType createAssegnazioneAreaUtenzaType() {
-        return new AssegnazioneAreaUtenzaType();
+    public PatientType createPatientType() {
+        return new PatientType();
+    }
+
+    /**
+     * Create an instance of {@link HeaderType }
+     * 
+     */
+    public HeaderType createHeaderType() {
+        return new HeaderType();
+    }
+
+    /**
+     * Create an instance of {@link SchedaAccessoType }
+     * 
+     */
+    public SchedaAccessoType createSchedaAccessoType() {
+        return new SchedaAccessoType();
+    }
+
+    /**
+     * Create an instance of {@link ComponenteNucleoType }
+     * 
+     */
+    public ComponenteNucleoType createComponenteNucleoType() {
+        return new ComponenteNucleoType();
+    }
+
+    /**
+     * Create an instance of {@link EventType }
+     * 
+     */
+    public EventType createEventType() {
+        return new EventType();
+    }
+
+    /**
+     * Create an instance of {@link InserimentoVariazioneAnagraficaType }
+     * 
+     */
+    public InserimentoVariazioneAnagraficaType createInserimentoVariazioneAnagraficaType() {
+        return new InserimentoVariazioneAnagraficaType();
     }
 
     /**
@@ -48,6 +88,14 @@ public class ObjectFactory {
      */
     public FatturazionePeriodicaType createFatturazionePeriodicaType() {
         return new FatturazionePeriodicaType();
+    }
+
+    /**
+     * Create an instance of {@link RicezioneDomandaAmministrativaType }
+     * 
+     */
+    public RicezioneDomandaAmministrativaType createRicezioneDomandaAmministrativaType() {
+        return new RicezioneDomandaAmministrativaType();
     }
 
     /**
@@ -67,99 +115,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SchedaAccessoType }
-     * 
-     */
-    public SchedaAccessoType createSchedaAccessoType() {
-        return new SchedaAccessoType();
-    }
-
-    /**
-     * Create an instance of {@link InserimentoVariazioneAnagraficaType }
-     * 
-     */
-    public InserimentoVariazioneAnagraficaType createInserimentoVariazioneAnagraficaType() {
-        return new InserimentoVariazioneAnagraficaType();
-    }
-
-    /**
-     * Create an instance of {@link RevocaAreaUtenzaType }
-     * 
-     */
-    public RevocaAreaUtenzaType createRevocaAreaUtenzaType() {
-        return new RevocaAreaUtenzaType();
-    }
-
-    /**
      * Create an instance of {@link ChiusuraPresaInCaricoType }
      * 
      */
     public ChiusuraPresaInCaricoType createChiusuraPresaInCaricoType() {
         return new ChiusuraPresaInCaricoType();
-    }
-
-    /**
-     * Create an instance of {@link BodyType }
-     * 
-     */
-    public BodyType createBodyType() {
-        return new BodyType();
-    }
-
-    /**
-     * Create an instance of {@link PatientType }
-     * 
-     */
-    public PatientType createPatientType() {
-        return new PatientType();
-    }
-
-    /**
-     * Create an instance of {@link DescriptionType }
-     * 
-     */
-    public DescriptionType createDescriptionType() {
-        return new DescriptionType();
-    }
-
-    /**
-     * Create an instance of {@link PresaInCaricoType }
-     * 
-     */
-    public PresaInCaricoType createPresaInCaricoType() {
-        return new PresaInCaricoType();
-    }
-
-    /**
-     * Create an instance of {@link EventType }
-     * 
-     */
-    public EventType createEventType() {
-        return new EventType();
-    }
-
-    /**
-     * Create an instance of {@link ComponenteNucleoType }
-     * 
-     */
-    public ComponenteNucleoType createComponenteNucleoType() {
-        return new ComponenteNucleoType();
-    }
-
-    /**
-     * Create an instance of {@link RicezioneDomandaAmministrativaType }
-     * 
-     */
-    public RicezioneDomandaAmministrativaType createRicezioneDomandaAmministrativaType() {
-        return new RicezioneDomandaAmministrativaType();
-    }
-
-    /**
-     * Create an instance of {@link InserimentoVariazioneNucleoFattoType }
-     * 
-     */
-    public InserimentoVariazioneNucleoFattoType createInserimentoVariazioneNucleoFattoType() {
-        return new InserimentoVariazioneNucleoFattoType();
     }
 
     /**
@@ -171,11 +131,51 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link HeaderType }
+     * Create an instance of {@link BodyType }
      * 
      */
-    public HeaderType createHeaderType() {
-        return new HeaderType();
+    public BodyType createBodyType() {
+        return new BodyType();
+    }
+
+    /**
+     * Create an instance of {@link AssegnazioneAreaUtenzaType }
+     * 
+     */
+    public AssegnazioneAreaUtenzaType createAssegnazioneAreaUtenzaType() {
+        return new AssegnazioneAreaUtenzaType();
+    }
+
+    /**
+     * Create an instance of {@link RevocaAreaUtenzaType }
+     * 
+     */
+    public RevocaAreaUtenzaType createRevocaAreaUtenzaType() {
+        return new RevocaAreaUtenzaType();
+    }
+
+    /**
+     * Create an instance of {@link InserimentoVariazioneNucleoFattoType }
+     * 
+     */
+    public InserimentoVariazioneNucleoFattoType createInserimentoVariazioneNucleoFattoType() {
+        return new InserimentoVariazioneNucleoFattoType();
+    }
+
+    /**
+     * Create an instance of {@link PresaInCaricoType }
+     * 
+     */
+    public PresaInCaricoType createPresaInCaricoType() {
+        return new PresaInCaricoType();
+    }
+
+    /**
+     * Create an instance of {@link DescriptionType }
+     * 
+     */
+    public DescriptionType createDescriptionType() {
+        return new DescriptionType();
     }
 
     /**
