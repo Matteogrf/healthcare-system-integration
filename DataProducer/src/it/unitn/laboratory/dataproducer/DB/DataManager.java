@@ -56,6 +56,18 @@ public class DataManager
 				 
 		return ps.executeQuery();
 	}
+	
+	public ResultSet getChiusuraPreseInCarico() throws SQLException
+	{
+		PreparedStatement ps  = conn.getConnection().prepareStatement("SELECT * FROM Events E, EventDescription ED, Header H, Patient P, presaincarico PI" +
+				  " WHERE ED.TipoEventoCod = 5 AND " +
+				  "ED.IdEvent = E.IdEventDescr AND " +
+				  "E.IdPatient = P.idAnagrafeLocale AND " +
+				  "E.IdHeader = H.IdHeader AND " +
+				  "E.idEvent = PI.EventoAssociato;");			  
+				 
+		return ps.executeQuery();
+	}
 
 	public ResultSet getSchedaAccesso() throws SQLException 
 	{
