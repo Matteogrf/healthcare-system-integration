@@ -12,14 +12,24 @@ public class DataManager
 		conn = ConnectionManager.getInstance();
 	}
 	
-	public ResultSet getInserimentoVariazioneAnagrafica() throws SQLException
+	public ResultSet getEvents() throws SQLException
 	{
-		PreparedStatement ps  = conn.getConnection().prepareStatement("SELECT * FROM inserimentovariazioneanagrafica I, Events E, EventDescription ED, Header H,  Patient P  " +
+		PreparedStatement ps  = conn.getConnection().prepareStatement("SELECT * FROM inserimentovariazioneanagrafica I, Events E, EventDescription ED, Header H,  Patient P, nucleofamiliare N  " +
 											  "WHERE I.EventoInviato = 0 AND " +
 											  "I.EventoAssociato = E.idEvent AND " +
 											  "E.IdPatient = P.idAnagrafeLocale AND " +
 											  "E.IdHeader = H.IdHeader AND " +
-											  "E.IdEventDescr = ED.IdEvent;");
+											  "E.IdEventDescr = ED.IdEvent AND " +
+											  "E.IdPatient = N.IdPatient;");
+		return ps.executeQuery();
+	}
+	
+	public ResultSet getComponentiNucleoFamiliare(int codiceNucleo) throws ClassNotFoundException, SQLException 
+	{
+		PreparedStatement ps  = conn.getConnection().prepareStatement("SELECT * FROM nucleofamiliare N, patient P" +
+											" WHERE N.CodiceNucleo = ? AND" +
+											" N.IdPatient = P.IdAnagrafeLocale; ");
+		ps.setInt(1, codiceNucleo);
 		return ps.executeQuery();
 	}
 }
