@@ -14,13 +14,14 @@ public class DataManager
 	
 	public ResultSet getInserimentoVariazioneAnagrafica() throws SQLException
 	{
-		PreparedStatement ps  = conn.getConnection().prepareStatement("SELECT * FROM inserimentovariazioneanagrafica I, Events E, EventDescription ED, Header H,  Patient P, nucleofamiliare N  " +
-											  "WHERE I.EventoInviato = 0 AND " +
+		PreparedStatement ps  = conn.getConnection().prepareStatement("SELECT * FROM inserimentovariazioneanagrafica I, Events E, EventDescription ED, Header H,  Patient P  " +
+											  "WHERE ED.TipoEventoCod = 1 AND " +
+											  "ED.IdEvent = E.IdEventDescr AND " +											  
 											  "I.EventoAssociato = E.idEvent AND " +
+											  "I.EventoInviato = 0 AND " +
 											  "E.IdPatient = P.idAnagrafeLocale AND " +
 											  "E.IdHeader = H.IdHeader AND " +
-											  "E.IdEventDescr = ED.IdEvent AND " +
-											  "E.IdPatient = N.IdPatient;");
+											  "E.IdEventDescr = ED.IdEvent; ");
 		return ps.executeQuery();
 	}
 	
@@ -35,7 +36,13 @@ public class DataManager
 
 	public ResultSet getNucleiFamiliari() throws SQLException
 	{
-		PreparedStatement ps  = conn.getConnection().prepareStatement("SELECT * FROM nucleofamiliare N;");		
+		PreparedStatement ps  = conn.getConnection().prepareStatement("SELECT * FROM Events E, EventDescription ED, Header H,  Patient P, nucleofamiliare N  " +
+				 "WHERE ED.TipoEventoCod = 2 AND " +
+				  "ED.IdEvent = E.IdEventDescr AND " +
+				  "E.IdPatient = P.idAnagrafeLocale AND " +
+				  "E.IdHeader = H.IdHeader AND " +
+				  "E.IdEventDescr = ED.IdEvent AND " +
+				  "N.IdPatient = E.IdPatient;");	
 		return ps.executeQuery();
 	}
 }
