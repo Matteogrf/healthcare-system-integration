@@ -44,9 +44,44 @@ public class CSIDataProducer
 		CreateInserimentoNucleoFamiliare();
 		CreateSchedaAccesso();
 		CreatePresaInCarico();
+		CreateChiusuraPresaInCarico();
 		//CreateAssegnazioneAreaUtenza();
 	}
 	
+
+	private static void CreateChiusuraPresaInCarico() throws SQLException, DatatypeConfigurationException 
+	{
+		ResultSet rs = dataM.getPreseInCarico();
+		ObjectFactory of = new ObjectFactory();	
+		while(rs.next())
+		{					
+			EventType event = of.createEventType();	
+		
+			event.setAssistito(extractPatient(rs, of));
+			event.setIntestazione(extractHeader(rs, of));
+			event.setDescrizione(extractDescrizione(rs,of));
+			event.setEvento(extractChiusuraPresaInCarico(rs,of));
+			OperationType operation = of.createOperationType();
+			operation.setOperazioneCod("5");
+			operation.setOperazioneDescr("ChiusuraPresaInCarico");
+			event.setOperazione(operation);
+		
+			String res=new Events_Service().getEventsSOAP().sendEvent(event);
+			System.out.println("Res sendEvent:"+res);
+		}
+		
+	}
+
+	private static BodyType extractChiusuraPresaInCarico(ResultSet rs,
+			ObjectFactory of) throws SQLException, DatatypeConfigurationException 
+	{
+		PresaInCaricoType pic = of.createPresaInCaricoType();
+		pic.setPresaCaricoNum(rs.getInt("PI.PresaInCaricoNum"));
+		pic.setInizioPresaInCarico(DateToXMLGregorianCalendar(rs.getDate("PI.ChiusuraData")));
+		BodyType b = of.createBodyType();
+		b.setPresaInCarico(pic);
+		return b;
+	}
 
 	private static void CreateSchedaAccesso() throws SQLException, DatatypeConfigurationException 
 	{
