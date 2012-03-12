@@ -51,7 +51,7 @@ public class CSIDataProducer
 
 	private static void CreateChiusuraPresaInCarico() throws SQLException, DatatypeConfigurationException 
 	{
-		ResultSet rs = dataM.getPreseInCarico();
+		ResultSet rs = dataM.getChiusuraPreseInCarico();
 		ObjectFactory of = new ObjectFactory();	
 		while(rs.next())
 		{					
