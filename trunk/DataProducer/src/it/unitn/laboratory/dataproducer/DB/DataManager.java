@@ -40,9 +40,32 @@ public class DataManager
 				 "WHERE ED.TipoEventoCod = 2 AND " +
 				  "ED.IdEvent = E.IdEventDescr AND " +
 				  "E.IdPatient = P.idAnagrafeLocale AND " +
-				  "E.IdHeader = H.IdHeader AND " +
-				  "E.IdEventDescr = ED.IdEvent AND " +
+				  "E.IdHeader = H.IdHeader AND " +				  
 				  "N.IdPatient = E.IdPatient;");	
+		return ps.executeQuery();
+	}
+
+	public ResultSet getPreseInCarico() throws SQLException
+	{
+		PreparedStatement ps  = conn.getConnection().prepareStatement("SELECT * FROM Events E, EventDescription ED, Header H, Patient P, presaincarica PI" +
+				 "WHERE ED.TipoEventoCod = 4 AND " +
+				  "ED.IdEvent = E.IdEventDescr AND " +
+				  "E.IdPatient = P.idAnagrafeLocale AND " +
+				  "E.IdHeader = H.IdHeader AND " +
+				  "E.idEvent = PI.EventoAssociato;");			  
+				 
+		return ps.executeQuery();
+	}
+
+	public ResultSet getSchedaAccesso() throws SQLException 
+	{
+		PreparedStatement ps  = conn.getConnection().prepareStatement("SELECT * FROM Events E, EventDescription ED, Header H, Patient P, schedaaccesso S " +
+				  "WHERE ED.TipoEventoCod = 3 AND " +
+				  "ED.IdEvent = E.IdEventDescr AND " +
+				  "E.IdPatient = P.idAnagrafeLocale AND " +
+				  "E.IdHeader = H.IdHeader AND " +
+				  "E.idEvent = S.NumeroScheda;");			  
+				 
 		return ps.executeQuery();
 	}
 }

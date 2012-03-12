@@ -42,6 +42,90 @@ public class CSIDataProducer
 	{	
 		CreateInserimentoVariazioneAnagrafica();
 		CreateInserimentoNucleoFamiliare();
+		CreateSchedaAccesso();
+		//CreatePresaInCarico();
+		//CreateAssegnazioneAreaUtenza();
+	}
+	
+
+	private static void CreateSchedaAccesso() throws SQLException, DatatypeConfigurationException 
+	{
+		ResultSet rs = dataM.getSchedaAccesso();
+		ObjectFactory of = new ObjectFactory();	
+		while(rs.next())
+		{					
+			EventType event = of.createEventType();	
+		
+			event.setAssistito(extractPatient(rs, of));
+			event.setIntestazione(extractHeader(rs, of));
+			event.setDescrizione(extractDescrizione(rs,of));
+			event.setEvento(extractSchedaAccesso(rs,of));
+			OperationType operation = of.createOperationType();
+			operation.setOperazioneCod("3");
+			operation.setOperazioneDescr("SchedaAccesso");
+			event.setOperazione(operation);
+		
+			String res=new Events_Service().getEventsSOAP().sendEvent(event);
+			System.out.println("Res sendEvent:"+res);
+		}
+		
+	}
+
+	private static BodyType extractSchedaAccesso(ResultSet rs, ObjectFactory of) throws SQLException 
+	{
+		SchedaAccessoType sac = of.createSchedaAccessoType();
+		
+		sac.setNomeTerzi( rs.getString("NomeTerzi") );
+		sac.setNumeroScheda( rs.getString("NumeroScheda") );
+		sac.setTipoRichiedenteCod(rs.getString("TipoRichiedenteCod"));
+		sac.setTipoRichiedenteDescr(rs.getString("TipoRichiedenteDescr"));
+		sac.setTipoSegnalanteCod(rs.getInt("TipoSegnalanteCod"));
+		sac.setTipoSegnalanteDescr(rs.getString("TipoSegnalanteDescr"));
+		sac.setTipoServizioRichiestoCod(rs.getString("TipoServizioRichiestoCod"));
+		sac.setTipoServizioRichiestoDescr(rs.getString("TipoServizioRichiestoDescr"));
+		sac.setTipoTerziCod(rs.getInt("TipoTerziCod"));
+		sac.setTipoTerziDescr(rs.getString("TipoTerziDescr"));
+		
+		BodyType b = of.createBodyType();
+		b.setSchedaAccesso(sac);
+		return b;
+	}
+
+	private static void CreatePresaInCarico() throws SQLException, DatatypeConfigurationException 
+	{
+		ResultSet pic = dataM.getPreseInCarico();
+		while(pic.next())
+		{
+			
+		}
+	}
+
+	private static void CreateAssegnazioneAreaUtenza() throws SQLException, DatatypeConfigurationException 
+	{
+	/**	
+		ObjectFactory of = new ObjectFactory();	
+		while(pic.next())
+		{
+			EventType event = of.createEventType();			
+			event.setAssistito(extractPatient(pic, of));
+			event.setIntestazione(extractHeader(pic, of));
+			event.setDescrizione(extractDescrizione(pic,of));
+			event.setEvento(extractAssegnazioneAreaUtenza(pic,of));
+			OperationType operation = of.createOperationType();
+			operation.setOperazioneCod("6");
+			operation.setOperazioneDescr("AssegnazioneAreaUtenza");
+			event.setOperazione(operation);
+			String res=new Events_Service().getEventsSOAP().sendEvent(event);
+		
+			System.out.println("Res sendEvent:"+res);
+		}*/
+	}
+
+	private static BodyType extractAssegnazioneAreaUtenza(ResultSet pic, ObjectFactory of) 
+	{
+		AssegnazioneAreaUtenzaType a = of.createAssegnazioneAreaUtenzaType();
+		
+		return null;
 	}
 
 	private static void CreateInserimentoNucleoFamiliare() throws SQLException, DatatypeConfigurationException, ClassNotFoundException 
