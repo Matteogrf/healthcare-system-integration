@@ -1,6 +1,7 @@
 package it.unitn.laboratory.db.StagingArea;
 
 import it.unitn.laboratory.wrapper.AssistitoType;
+import it.unitn.laboratory.wrapper.ComponenteType;
 import it.unitn.laboratory.wrapper.OperatoreType;
 
 import java.sql.Connection;
@@ -32,6 +33,23 @@ public class StagingAreaInsert
 		int res = ps.executeUpdate();
 		
 		if (res==0) throw new SQLWarning("Inserimanto operatore fallito? check It");
+	}
+	
+	public static void insertNucleoFamiliare(int id, ComponenteType ct,int codicenucleo, int idPatient) throws ClassNotFoundException, SQLException {
+		Connection con = ConnectionManagerSA.getInstance().getConnection();
+		PreparedStatement ps = con.prepareStatement("INSERT INTO D_NUCLEO_FAMILIARE " +
+						"(ID_NUCLEO, CODICE_NUCLEO, HASH_COD, GRADO_PARENTELA_COD, GRADO_PARENTELA_DESCR, DATA_NASCITA, ID_ASSISTITO) " +
+						"VALUES (?,?,MD5('"+ct.getHASHCOD()+"'),?,?,?,?,?)");
+		ps.setInt(1, id);
+		ps.setInt(2, codicenucleo);
+		ps.setInt(3, ct.getGRADOPARENTELACOD());
+		ps.setString(4, ct.getGRADOPARENTELADESCR());
+		ps.setDate(5, convertDate(ct.getDATANASCITA()));
+		ps.setInt(6,idPatient);
+		int res = ps.executeUpdate();
+		
+		if (res==0) throw new SQLWarning("Inserimanto operatore fallito? check It");
+		
 	}
 
 	public static void insertAssistito(int id, AssistitoType assistito, OperatoreType operatore) throws ClassNotFoundException, SQLException 
@@ -78,4 +96,6 @@ public class StagingAreaInsert
 		java.sql.Date sqlDate = new java.sql.Date(d.getTime());
 		return sqlDate;
 	}
+
+
 }

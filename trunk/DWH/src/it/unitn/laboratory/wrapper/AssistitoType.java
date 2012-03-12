@@ -285,10 +285,9 @@ public class AssistitoType {
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-
     public void setANAGIDANAGRAFE(String value) {
         this.anagidanagrafe = value;
     }

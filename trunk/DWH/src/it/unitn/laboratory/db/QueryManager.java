@@ -1,6 +1,7 @@
 package it.unitn.laboratory.db;
 
 import it.unitn.laboratory.wrapper.AssistitoType;
+import it.unitn.laboratory.wrapper.ComponenteType;
 import it.unitn.laboratory.wrapper.OperatoreType;
 
 import java.sql.*;
@@ -36,6 +37,23 @@ public class QueryManager
 								" WHERE HASH_COD = MD5('"+assistito.getHASHCOD()+"')" +
 								" AND ID_ANAGRAFE_LOCALE = ?;");
 		ps.setInt(1, assistito.getIDANAGRAFELOCALE());
+		return ps.executeQuery();
+	}
+	
+	public ResultSet findIdAssistito(String hashcod) throws SQLException 
+	{
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM D_ASSISTITO " +
+								" WHERE HASH_COD = MD5('"+hashcod+"')");
+		return ps.executeQuery();
+	}
+	
+	public ResultSet findComponenteNucleo(ComponenteType comp, int nucleo) throws SQLException 
+	{
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM D_NUCLEO_FAMILIARE " +
+								" WHERE HASH_COD = MD5('"+comp.getHASHCOD()+"')" +
+								" AND CODICE_NUCLEO = "+nucleo+";");
 		return ps.executeQuery();
 	}
 	

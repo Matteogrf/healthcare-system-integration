@@ -62,6 +62,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link AreaUtenzaType }
+     * 
+     */
+    public AreaUtenzaType createAreaUtenzaType() {
+        return new AreaUtenzaType();
+    }
+
+	/**
      * Create an instance of {@link ComponenteType }
      * 
      */
@@ -69,7 +77,7 @@ public class ObjectFactory {
         return new ComponenteType();
     }
 
-	/**
+    /**
      * Create an instance of {@link OperatoreType }
      * 
      */
@@ -78,11 +86,43 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link RichiedenteType }
+     * 
+     */
+    public RichiedenteType createRichiedenteType() {
+        return new RichiedenteType();
+    }
+
+	/**
+     * Create an instance of {@link CartellaType }
+     * 
+     */
+    public CartellaType createCartellaType() {
+        return new CartellaType();
+    }
+
+	/**
      * Create an instance of {@link EventType }
      * 
      */
     public EventType createEventType() {
         return new EventType();
+    }
+
+    /**
+     * Create an instance of {@link SegnalanteType }
+     * 
+     */
+    public SegnalanteType createSegnalanteType() {
+        return new SegnalanteType();
+    }
+
+	/**
+     * Create an instance of {@link TipoTerziType }
+     * 
+     */
+    public TipoTerziType createTipoTerziType() {
+        return new TipoTerziType();
     }
 
 	/**
