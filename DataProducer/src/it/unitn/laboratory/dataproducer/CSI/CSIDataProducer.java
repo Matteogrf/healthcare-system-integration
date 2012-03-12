@@ -75,16 +75,16 @@ public class CSIDataProducer
 	{
 		SchedaAccessoType sac = of.createSchedaAccessoType();
 		
-		sac.setNomeTerzi( rs.getString("NomeTerzi") );
-		sac.setNumeroScheda( rs.getString("NumeroScheda") );
-		sac.setTipoRichiedenteCod(rs.getString("TipoRichiedenteCod"));
-		sac.setTipoRichiedenteDescr(rs.getString("TipoRichiedenteDescr"));
-		sac.setTipoSegnalanteCod(rs.getInt("TipoSegnalanteCod"));
-		sac.setTipoSegnalanteDescr(rs.getString("TipoSegnalanteDescr"));
-		sac.setTipoServizioRichiestoCod(rs.getString("TipoServizioRichiestoCod"));
-		sac.setTipoServizioRichiestoDescr(rs.getString("TipoServizioRichiestoDescr"));
-		sac.setTipoTerziCod(rs.getInt("TipoTerziCod"));
-		sac.setTipoTerziDescr(rs.getString("TipoTerziDescr"));
+		sac.setNomeTerzi( rs.getString("S.NomeTerzi") );
+		sac.setNumeroScheda( rs.getString("S.NumeroScheda") );
+		sac.setTipoRichiedenteCod(rs.getString("S.TipoRichiedenteCod"));
+		sac.setTipoRichiedenteDescr(rs.getString("S.TipoRichiedenteDescr"));
+		sac.setTipoSegnalanteCod(rs.getInt("S.TipoSegnalanteCod"));
+		sac.setTipoSegnalanteDescr(rs.getString("S.TipoSegnalanteDescr"));
+		sac.setTipoServizioRichiestoCod(rs.getString("S.TipoServizioRichiestoCod"));
+		sac.setTipoServizioRichiestoDescr(rs.getString("S.TipoServizioRichiestoDescr"));
+		sac.setTipoTerziCod(rs.getInt("S.TipoTerziCod"));
+		sac.setTipoTerziDescr(rs.getString("S.TipoTerziDescr"));
 		
 		BodyType b = of.createBodyType();
 		b.setSchedaAccesso(sac);
@@ -113,10 +113,10 @@ public class CSIDataProducer
 		}
 	}
 
-	private static BodyType extractPresaInCarico(ResultSet rs, ObjectFactory of) throws SQLException {
+	private static BodyType extractPresaInCarico(ResultSet rs, ObjectFactory of) throws SQLException, DatatypeConfigurationException {
 		PresaInCaricoType pic = of.createPresaInCaricoType();
 		pic.setPresaCaricoNum(rs.getInt("PI.PresaInCaricoNum"));
-		
+		pic.setInizioPresaInCarico(DateToXMLGregorianCalendar(rs.getDate("PI.PresaInCaricoData")));
 		BodyType b = of.createBodyType();
 		b.setPresaInCarico(pic);
 		return b;

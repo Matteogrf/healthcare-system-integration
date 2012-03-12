@@ -7,7 +7,7 @@ public class ConnectionManager {
 	private static final String DBName = "eventsdb"; // Name of the database
 	private static final String userName = "root";
 	private static final String pwd = "root";
-	private static final String address = "192.168.178.25:3306";//"192.168.1.41:3306";
+	private static final String address = "192.168.1.41:3306"; //"192.168.178.25:3306";
 	private static Connection db;
 
 	private static ConnectionManager istance;

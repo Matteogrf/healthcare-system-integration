@@ -9,7 +9,8 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * specifica se è una pubblicazione di un nuovo
- * 				evento o la cancellazione di uno già pubblicato.
+ * 						evento o la cancellazione di uno già pubblicato.
+ * 					
  * 
  * <p>Java class for OperationType complex type.
  * 

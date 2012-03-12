@@ -47,8 +47,8 @@ public class DataManager
 
 	public ResultSet getPreseInCarico() throws SQLException
 	{
-		PreparedStatement ps  = conn.getConnection().prepareStatement("SELECT * FROM Events E, EventDescription ED, Header H, Patient P, presaincarica PI" +
-				 "WHERE ED.TipoEventoCod = 4 AND " +
+		PreparedStatement ps  = conn.getConnection().prepareStatement("SELECT * FROM Events E, EventDescription ED, Header H, Patient P, presaincarico PI" +
+				  " WHERE ED.TipoEventoCod = 4 AND " +
 				  "ED.IdEvent = E.IdEventDescr AND " +
 				  "E.IdPatient = P.idAnagrafeLocale AND " +
 				  "E.IdHeader = H.IdHeader AND " +

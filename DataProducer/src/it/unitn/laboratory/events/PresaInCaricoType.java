@@ -4,7 +4,9 @@ package it.unitn.laboratory.events;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -24,6 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
+ *         &lt;element name="InizioPresaInCarico" type="{http://www.w3.org/2001/XMLSchema}date"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -34,12 +37,16 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PresaInCaricoType", propOrder = {
-    "presaCaricoNum"
+    "presaCaricoNum",
+    "inizioPresaInCarico"
 })
 public class PresaInCaricoType {
 
     @XmlElement(name = "PresaCaricoNum")
     protected int presaCaricoNum;
+    @XmlElement(name = "InizioPresaInCarico", required = true)
+    @XmlSchemaType(name = "date")
+    protected XMLGregorianCalendar inizioPresaInCarico;
 
     /**
      * Gets the value of the presaCaricoNum property.
@@ -55,6 +62,30 @@ public class PresaInCaricoType {
      */
     public void setPresaCaricoNum(int value) {
         this.presaCaricoNum = value;
+    }
+
+    /**
+     * Gets the value of the inizioPresaInCarico property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getInizioPresaInCarico() {
+        return inizioPresaInCarico;
+    }
+
+    /**
+     * Sets the value of the inizioPresaInCarico property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setInizioPresaInCarico(XMLGregorianCalendar value) {
+        this.inizioPresaInCarico = value;
     }
 
 }
