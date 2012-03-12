@@ -77,6 +77,11 @@
 			    <include name="mapInserimentoVariazioneAnagrafica.xsl" />
 				<include name="mapInserimentoVariazioneNucleoFatto.xsl"/>
 				<include name="convertResponseFromDWH.xsl" />
+				<include name="mapSchedaAccesso.xsl" />
+				<include name="mapPresaInCarico.xsl"/>
+				<include name="mapFinePresaInCarico.xsl"/>
+				<include name="mapAssegnazioneAreaUtenza.xsl"/>
+				
 			</fileset>
 		</jar>
 	</target>

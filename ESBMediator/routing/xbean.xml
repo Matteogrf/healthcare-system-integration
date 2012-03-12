@@ -41,8 +41,64 @@
 						endpoint="IVNF" />
 				</eip:target>
 			</eip:routing-rule>
+			<eip:routing-rule>
+				<eip:predicate>
+					<!-- Evento Scheda Accesso -->
+					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=3]" />
+				</eip:predicate>
+				<eip:target>
+					<eip:exchange-target service="tns:mapSchedaAccesso"
+						endpoint="SA" />
+				</eip:target>
+			</eip:routing-rule>
+			<eip:routing-rule>
+				<eip:predicate>
+					<!-- Evento Inizio Presa in Carico -->
+					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=4]" />
+				</eip:predicate>
+				<eip:target>
+					<eip:exchange-target service="tns:mapPresaInCarico"
+						endpoint="PC" />
+				</eip:target>
+			</eip:routing-rule>
+			<eip:routing-rule>
+				<eip:predicate>
+					<!-- Evento Fine Presa In Carico -->
+					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=5]" />
+				</eip:predicate>
+				<eip:target>
+					<eip:exchange-target service="tns:mapFinePresaInCarico"
+						endpoint="FPC" />
+				</eip:target>
+			</eip:routing-rule>
+			<eip:routing-rule>
+				<eip:predicate>
+					<!-- Evento Fine Presa In Carico -->
+					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=6]" />
+				</eip:predicate>
+				<eip:target>
+					<eip:exchange-target service="tns:mapAssegnazioneAreaUtenza"
+						endpoint="AAU" />
+				</eip:target>
+			</eip:routing-rule>
 		</eip:rules>
 	</eip:content-based-router>
+	
+	<eip:static-routing-slip service="tns:mapSchedaAccesso"
+		endpoint="SA">
+		<eip:targets>
+			<eip:exchange-target service="tns:mappingSA"
+				endpoint="mappingSA"></eip:exchange-target>
+		    
+		    <eip:exchange-target service="tns:beanLogEvent" 
+		endpoint="LogEvent" operation="logContent" />
+
+			<eip:exchange-target service="wsb:DwhWS" />
+
+			<eip:exchange-target service="tns:convertDwhResponse"
+				endpoint="convertDwhResponse" />
+		</eip:targets>
+	</eip:static-routing-slip>
 
 	<eip:static-routing-slip service="tns:mapInserimentoVariazioneNucleoFatto"
 		endpoint="IVNF">
@@ -66,6 +122,54 @@
 		<eip:targets>
 			<eip:exchange-target service="tns:mappingIVA"
 				endpoint="mappingIVA"></eip:exchange-target>
+				
+						    <eip:exchange-target service="tns:beanLogEvent" 
+		endpoint="LogEvent" operation="logContent" />
+
+			<eip:exchange-target service="wsb:DwhWS" />
+
+			<eip:exchange-target service="tns:convertDwhResponse"
+				endpoint="convertDwhResponse" />
+		</eip:targets>
+	</eip:static-routing-slip>
+	
+	<eip:static-routing-slip service="tns:mapPresaInCarico"
+		endpoint="PC">
+		<eip:targets>
+			<eip:exchange-target service="tns:mappingPC"
+				endpoint="mappingPC"></eip:exchange-target>
+				
+						    <eip:exchange-target service="tns:beanLogEvent" 
+		endpoint="LogEvent" operation="logContent" />
+
+			<eip:exchange-target service="wsb:DwhWS" />
+
+			<eip:exchange-target service="tns:convertDwhResponse"
+				endpoint="convertDwhResponse" />
+		</eip:targets>
+	</eip:static-routing-slip>
+	
+	<eip:static-routing-slip service="tns:mapFinePresaInCarico"
+		endpoint="FPC">
+		<eip:targets>
+			<eip:exchange-target service="tns:mappingFPC"
+				endpoint="mappingFPC"></eip:exchange-target>
+				
+						    <eip:exchange-target service="tns:beanLogEvent" 
+		endpoint="LogEvent" operation="logContent" />
+
+			<eip:exchange-target service="wsb:DwhWS" />
+
+			<eip:exchange-target service="tns:convertDwhResponse"
+				endpoint="convertDwhResponse" />
+		</eip:targets>
+	</eip:static-routing-slip>
+	
+	<eip:static-routing-slip service="tns:mapAssegnazioneAreaUtenza"
+		endpoint="AAU">
+		<eip:targets>
+			<eip:exchange-target service="tns:mappingAAU"
+				endpoint="mappingAAU"></eip:exchange-target>
 				
 						    <eip:exchange-target service="tns:beanLogEvent" 
 		endpoint="LogEvent" operation="logContent" />

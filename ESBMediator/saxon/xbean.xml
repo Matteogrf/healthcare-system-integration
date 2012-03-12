@@ -18,4 +18,24 @@
 				endpoint="convertDwhResponse" 
 				resource="classpath:convertResponseFromDWH.xsl"
 				result="String"/>
+				
+	<saxon:xslt service="tns:mappingSA"
+				endpoint="mappingSA" 
+				resource="classpath:mapSchedaAccesso.xsl"
+				result="String"/>
+	
+    <saxon:xslt service="tns:mappingPC"
+				endpoint="mappingPC" 
+				resource="classpath:mapPresaInCarico.xsl"
+				result="String"/>
+				
+	<saxon:xslt service="tns:mappingFPC"
+				endpoint="mappingFPC" 
+				resource="classpath:mapFinePresaInCarico.xsl"
+				result="String"/>
+	
+   <saxon:xslt service="tns:mappingAAU"
+				endpoint="mappingAAU" 
+				resource="classpath:mapAssegnazioneAreaUtenza.xsl"
+				result="String"/>
 </beans>

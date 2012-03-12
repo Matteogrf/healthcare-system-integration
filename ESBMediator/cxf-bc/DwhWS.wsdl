@@ -27,6 +27,16 @@
 					</xsd:element>
 					<xsd:element maxOccurs="1" minOccurs="0" name="D_NUCLEO_FAMILIARE" type="tns:NucleoFamiliareType">
 					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="0" name="F_CARTELLA" type="tns:CartellaType">
+					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="0" name="D_RICHIEDENTE" type="tns:RichiedenteType">
+					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="0" name="D_TIPO_TERZI" type="tns:TipoTerziType">
+					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="0" name="D_SEGNALANTE" type="tns:SegnalanteType">
+					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="0" name="D_AREA_UTENZA" type="tns:AreaUtenzaType">
+					</xsd:element>
 				</xsd:sequence>
 			</xsd:complexType>
 
@@ -95,6 +105,53 @@
 					<xsd:element maxOccurs="1" minOccurs="0" name="GRADO_PARENTELA_COD" type="xsd:int"/>
 					<xsd:element maxOccurs="1" minOccurs="0" name="GRADO_PARENTELA_DESCR" type="xsd:string"/>
 					<xsd:element maxOccurs="1" minOccurs="0" name="DATA_NASCITA" type="xsd:date"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="CartellaType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="0" name="NUMERO_SCHEDA" type="xsd:string"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="PRESA_CARICO" type="xsd:int"/>					
+					<xsd:element maxOccurs="1" minOccurs="0" name="DATA_ACCESSO" type="xsd:date"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ID_ASSISTITO" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ID_SEGNALANTE" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ID_TIPO_TERZI" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ID_RICHIEDENTE" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ID_OPERATORE" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="INIZIO_PRESA_CARICO" type="xsd:date"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="FINE_PRESA_CARICO" type="xsd:date"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="GIORNATE_SETTIMANALI" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="NUMERO_PASTI_SETTIMANALI" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="NUMERO_TRASPORTI_SETTIMANALI" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ORE_SETTIMANALI" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="DATA_DOMANDA" type="xsd:date"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="RichiedenteType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="0" name="RICHIEDENTE_COD" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="RICHIEDENTE_DESCR" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="TipoTerziType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="0" name="TIPO_TERZI_COD" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="TIPO_TERZI_DERCR" type="xsd:string"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="NOME_TERZI" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="SegnalanteType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="0" name="SEGNALANTE_COD" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="SEGNALANTE_DESCR" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="AreaUtenzaType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="0" name="AREA_UTENZA_COD" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="AREA_UTENZA_DERCR" type="xsd:string"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="DATA_FINE_VAL" type="xsd:date"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="DATA_INIZIO_VAL" type="xsd:date"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ID_ASSISITITO" type="xsd:int"/>
 				</xsd:sequence>
 			</xsd:complexType>
 		</xsd:schema>

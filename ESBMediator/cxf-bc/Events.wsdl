@@ -521,6 +521,7 @@
 							</xs:restriction>
 						</xs:simpleType>
 					</xsd:element>
+					<xsd:element name="InizioPresaInCarico" minOccurs="1" type="xsd:date"/>
 
 				</xsd:sequence>
 			</xsd:complexType>
@@ -534,6 +535,7 @@
 							</xs:restriction>
 						</xs:simpleType>
 					</xsd:element>
+					<xsd:element name="FinePresaInCarico" minOccurs="1" type="xsd:date"/>
 				</xsd:sequence>
 			</xsd:complexType>
 
