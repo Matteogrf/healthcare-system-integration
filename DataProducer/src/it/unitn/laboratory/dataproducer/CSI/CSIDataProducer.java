@@ -6,6 +6,8 @@
 
 package it.unitn.laboratory.dataproducer.CSI;
 
+import java.util.List;
+import java.math.BigInteger;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,12 +40,56 @@ public class CSIDataProducer
 
 	private static void produceEvents() throws SQLException, DatatypeConfigurationException 
 	{		
-		ResultSet iva = dataM.getInserimentoVariazioneAnagrafica();
-		while ( iva.next() )
+		ResultSet ev = dataM.getEvents();
+		while ( ev.next() )
 		{		
-			CreateInserimentoVariazioneAnagraficaEvent(iva);
+			CreateInserimentoVariazioneAnagraficaEvent(ev);
+			CreateInserimentoNucleoFamiliare(ev);
 		}
 			
+	}
+
+	private static void CreateInserimentoNucleoFamiliare(ResultSet ev) throws SQLException, DatatypeConfigurationException, ClassNotFoundException 
+	{
+		ObjectFactory of = new ObjectFactory();	
+		EventType event = of.createEventType();		
+		
+		event.setAssistito(extractPatient(ev, of));
+		event.setIntestazione(extractHeader(ev, of));
+		event.setDescrizione(extractDescrizione(ev,of));
+		event.setEvento(extractInserimentoNucleaoFamiliare(ev,of));
+		
+		OperationType operation = of.createOperationType();
+		operation.setOperazioneCod("2");
+		operation.setOperazioneDescr("InserimentoVariazioneNucleoFatto");
+		event.setOperazione(operation);
+		String res=new Events_Service().getEventsSOAP().sendEvent(event);
+		
+		System.out.println("Res sendEvent:"+res);
+	}
+
+	private static BodyType extractInserimentoNucleaoFamiliare(ResultSet ev,ObjectFactory of) throws SQLException, ClassNotFoundException, DatatypeConfigurationException 
+	{
+		InserimentoVariazioneNucleoFattoType ins = of.createInserimentoVariazioneNucleoFattoType();
+		ins.setCodiceNucleo( BigInteger.valueOf(ev.getInt("N.CodiceNucleo")));
+		List<ComponenteNucleoType> l =  ins.getComponente();
+		
+		ResultSet rs = dataM.getComponentiNucleoFamiliare(ev.getInt("N.CodiceNucleo"));		
+		while (rs.next())
+		{
+			ComponenteNucleoType c = of.createComponenteNucleoType();
+			c.setNome( rs.getString("P.Nome") );
+			c.setCognome(rs.getString("P.Cognome"));
+			c.setCodiceFiscale(rs.getString("P.CoficeFiscale"));
+			c.setDataNascita( DateToXMLGregorianCalendar(rs.getDate("P.DataNascita"))  );
+			c.setGradoParentelaCod( rs.getInt("N.GradoParentelaCod") );
+			c.setGradoParentelaDescr( rs.getString("N.GradoParentelaDescr") );
+			l.add(c);
+		}
+				
+		BodyType body = of.createBodyType();
+		body.setInserimentoVariazioneNucleoFatto(ins);
+		return body;
 	}
 
 	private static void CreateInserimentoVariazioneAnagraficaEvent(ResultSet iva) throws SQLException, DatatypeConfigurationException 
@@ -102,8 +148,8 @@ public class CSIDataProducer
 		description.setServizioDescr( iva.getString("ED.ServizioDescr") );
 		description.setTipoEventoCod( iva.getInt("ED.TipoEventoCod") );
 		description.setTipoEventoDescr( iva.getString("ED.TipoEventoDescr") );
-		description.setUnitaOrganizzativaCod( iva.getInt("ED.Unit‡OrganizzativaCod") );
-		description.setUnitaOrganizzativaDescr( iva.getString("ED.Unit‡OrganizzativaDescr") );
+		description.setUnitaOrganizzativaCod( iva.getInt("ED.UnitaOrganizzativaCod") );
+		description.setUnitaOrganizzativaDescr( iva.getString("ED.UnitaOrganizzativaDescr") );
 		
 		description.setDataOraEvento( DateToXMLGregorianCalendar( iva.getDate("ED.DataOraEvento") ) );
 		description.setDataOraRegEvento( DateToXMLGregorianCalendar( iva.getDate("ED.DataOraRegEvento") ) );
