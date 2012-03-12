@@ -43,7 +43,7 @@ public class CSIDataProducer
 		CreateInserimentoVariazioneAnagrafica();
 		CreateInserimentoNucleoFamiliare();
 		CreateSchedaAccesso();
-		//CreatePresaInCarico();
+		CreatePresaInCarico();
 		//CreateAssegnazioneAreaUtenza();
 	}
 	
@@ -93,11 +93,33 @@ public class CSIDataProducer
 
 	private static void CreatePresaInCarico() throws SQLException, DatatypeConfigurationException 
 	{
-		ResultSet pic = dataM.getPreseInCarico();
-		while(pic.next())
-		{
-			
+		ResultSet rs = dataM.getPreseInCarico();
+		ObjectFactory of = new ObjectFactory();	
+		while(rs.next())
+		{					
+			EventType event = of.createEventType();	
+		
+			event.setAssistito(extractPatient(rs, of));
+			event.setIntestazione(extractHeader(rs, of));
+			event.setDescrizione(extractDescrizione(rs,of));
+			event.setEvento(extractPresaInCarico(rs,of));
+			OperationType operation = of.createOperationType();
+			operation.setOperazioneCod("4");
+			operation.setOperazioneDescr("PresaInCarico");
+			event.setOperazione(operation);
+		
+			String res=new Events_Service().getEventsSOAP().sendEvent(event);
+			System.out.println("Res sendEvent:"+res);
 		}
+	}
+
+	private static BodyType extractPresaInCarico(ResultSet rs, ObjectFactory of) throws SQLException {
+		PresaInCaricoType pic = of.createPresaInCaricoType();
+		pic.setPresaCaricoNum(rs.getInt("PI.PresaInCaricoNum"));
+		
+		BodyType b = of.createBodyType();
+		b.setPresaInCarico(pic);
+		return b;
 	}
 
 	private static void CreateAssegnazioneAreaUtenza() throws SQLException, DatatypeConfigurationException 
