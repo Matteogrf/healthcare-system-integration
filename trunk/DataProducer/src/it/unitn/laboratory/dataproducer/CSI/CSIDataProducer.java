@@ -79,7 +79,7 @@ public class CSIDataProducer
 			ComponenteNucleoType c = of.createComponenteNucleoType();
 			c.setNome( rs.getString("P.Nome") );
 			c.setCognome(rs.getString("P.Cognome"));
-			c.setCodiceFiscale(rs.getString("P.CoficeFiscale"));
+			c.setCodiceFiscale(rs.getString("P.CodiceFiscale"));
 			c.setDataNascita( DateToXMLGregorianCalendar(rs.getDate("P.DataNascita"))  );
 			c.setGradoParentelaCod( rs.getInt("N.GradoParentelaCod") );
 			c.setGradoParentelaDescr( rs.getString("N.GradoParentelaDescr") );
