@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tns:DWH_SCHEMA xmlns:tns="http://events.laboratory.unitn.it/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://events.laboratory.unitn.it/ MappedEvents.xsd ">
+<!-- <tns:DWH_SCHEMA xmlns:tns="http://events.laboratory.unitn.it/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://events.laboratory.unitn.it/ MappedEvents.xsd ">
   <tns:D_ASSISTITO>
     <tns:ID_ANAGRAFE_LOCALE>0</tns:ID_ANAGRAFE_LOCALE>
     <tns:MITTENTE_NOME_ENTE>tns:MITTENTE_NOME_ENTE</tns:MITTENTE_NOME_ENTE>
@@ -29,4 +29,4 @@
     <tns:ENTE_GESTORE_COD>0</tns:ENTE_GESTORE_COD>
     <tns:ENTE_GESTORE_DESCR>tns:ENTE_GESTORE_DESCR</tns:ENTE_GESTORE_DESCR>
   </tns:D_OPERATORE>
-</tns:DWH_SCHEMA>
+</tns:DWH_SCHEMA> -->
