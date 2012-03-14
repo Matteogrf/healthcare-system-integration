@@ -38,4 +38,9 @@
 				endpoint="mappingAAU" 
 				resource="classpath:mapAssegnazioneAreaUtenza.xsl"
 				result="String"/>
+
+   <saxon:xslt service="tns:mappingRAU"
+				endpoint="mappingRAU" 
+				resource="classpath:mapRevocaAreaUtenza.xsl"
+				result="String"/>
 </beans>

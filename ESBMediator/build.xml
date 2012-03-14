@@ -81,7 +81,7 @@
 				<include name="mapPresaInCarico.xsl"/>
 				<include name="mapFinePresaInCarico.xsl"/>
 				<include name="mapAssegnazioneAreaUtenza.xsl"/>
-				
+				<include name="mapRevocaAreaUtenza.xsl"/>				
 			</fileset>
 		</jar>
 	</target>

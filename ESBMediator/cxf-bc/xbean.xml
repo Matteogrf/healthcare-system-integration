@@ -2,7 +2,7 @@
 <beans
      xmlns:cxfbc="http://servicemix.apache.org/cxfbc/1.0"
      xmlns="http://xbean.org/schemas/spring/1.0"
-     xmlns:wsb="http://events.laboratory.unitn.it"
+     xmlns:wsb="http://wrapper.laboratory.unitn.it"
      xmlns:myws="http://aibmp/ImageSearch/"
      xmlns:tns="http://it.unitn/">
 

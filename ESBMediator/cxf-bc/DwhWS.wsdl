@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions name="DwhWS" targetNamespace="http://events.laboratory.unitn.it" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://events.laboratory.unitn.it" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+<wsdl:definitions name="DwhWS" targetNamespace="http://wrapper.laboratory.unitn.it" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://wrapper.laboratory.unitn.it" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
   <wsdl:types>
-    <xsd:schema targetNamespace="http://events.laboratory.unitn.it">
+    <xsd:schema targetNamespace="http://wrapper.laboratory.unitn.it">
 			<xsd:element name="SendMappedChanges">
 				<xsd:complexType>
 					<xsd:sequence>
@@ -148,7 +148,7 @@
 			<xsd:complexType name="AreaUtenzaType">
 				<xsd:sequence>
 					<xsd:element maxOccurs="1" minOccurs="0" name="AREA_UTENZA_COD" type="xsd:int"/>
-					<xsd:element maxOccurs="1" minOccurs="0" name="AREA_UTENZA_DERCR" type="xsd:string"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="AREA_UTENZA_DESCR" type="xsd:string"/>
 					<xsd:element maxOccurs="1" minOccurs="0" name="DATA_FINE_VAL" type="xsd:date"/>
 					<xsd:element maxOccurs="1" minOccurs="0" name="DATA_INIZIO_VAL" type="xsd:date"/>
 					<xsd:element maxOccurs="1" minOccurs="0" name="ID_ASSISITITO" type="xsd:int"/>
@@ -175,7 +175,7 @@
   <wsdl:binding name="DwhWSSOAP" type="tns:DwhWS">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     <wsdl:operation name="SendMappedChanges">
-      <soap:operation soapAction="http://events.laboratory.unitn.it/NewOperation"/>
+      <soap:operation soapAction="http://wrapper.laboratory.unitn.it/NewOperation"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>
@@ -186,7 +186,7 @@
   </wsdl:binding>
   <wsdl:service name="DwhWS">
     <wsdl:port name="DwhWSSOAP" binding="tns:DwhWSSOAP">
-      <soap:address location="http://10.22.14.11:9090/DwhWS"/>
+      <soap:address location="http://192.168.1.42:9090/DwhWS"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
