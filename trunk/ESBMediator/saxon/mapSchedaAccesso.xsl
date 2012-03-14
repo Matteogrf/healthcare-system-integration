@@ -27,7 +27,7 @@ xmlns:ns2="http://events.laboratory.unitn.it/">
     <GESTORE_DESCR><xsl:value-of select="Descrizione/ProduttoreDescr"/></GESTORE_DESCR>
   </D_ASSISTITO>
     
-  <D_CARTELLA>
+  <F_CARTELLA>
     <NUMERO_SCHEDA><xsl:value-of select="Evento/SchedaAccesso/NumeroScheda"/></NUMERO_SCHEDA>
 	<PRESA_CARICO></PRESA_CARICO>					
 	<DATA_ACCESSO><xsl:value-of select="Evento/SchedaAccesso/DataAccesso"/></DATA_ACCESSO>
@@ -43,11 +43,11 @@ xmlns:ns2="http://events.laboratory.unitn.it/">
 	<NUMERO_TRASPORTI_SETTIMANALI></NUMERO_TRASPORTI_SETTIMANALI>
 	<ORE_SETTIMANALI></ORE_SETTIMANALI>
 	<DATA_DOMANDA></DATA_DOMANDA>
-  </D_CARTELLA>
+  </F_CARTELLA>
 
   <D_RICHIEDENTE>
-  		<RICHIEDENTE_COD><xsl:value-of select="Evento/SchedaAccesso/RichiedenteCod"/></RICHIEDENTE_COD>
-		<RICHIEDENTE_DESCR><xsl:value-of select="Evento/SchedaAccesso/richiedenteDescr"/></RICHIEDENTE_DESCR>
+  		<RICHIEDENTE_COD><xsl:value-of select="Evento/SchedaAccesso/TipoRichiedenteCod"/></RICHIEDENTE_COD>
+		<RICHIEDENTE_DESCR><xsl:value-of select="Evento/SchedaAccesso/TipoRichiedenteDescr"/></RICHIEDENTE_DESCR>
   </D_RICHIEDENTE>
 
   <D_TIPO_TERZI>
@@ -57,8 +57,8 @@ xmlns:ns2="http://events.laboratory.unitn.it/">
   </D_TIPO_TERZI>
  
   <D_SEGNALANTE>
-  	<SEGNALANTE_COD><xsl:value-of select="Evento/SchedaAccesso/SegnalanteCod"/></SEGNALANTE_COD>
-	<SEGNALANTE_DESCR><xsl:value-of select="Evento/SchedaAccesso/SegnalanteDescr"/></SEGNALANTE_DESCR>
+  	<SEGNALANTE_COD><xsl:value-of select="Evento/SchedaAccesso/TipoSegnalanteCod"/></SEGNALANTE_COD>
+	<SEGNALANTE_DESCR><xsl:value-of select="Evento/SchedaAccesso/TipoSegnalanteDescr"/></SEGNALANTE_DESCR>
   </D_SEGNALANTE>
 
   <D_OPERATORE>
