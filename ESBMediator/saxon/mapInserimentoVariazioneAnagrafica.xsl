@@ -20,13 +20,15 @@ xmlns:ns2="http://events.laboratory.unitn.it/">
     <HASH_COD> <xsl:value-of select="Assistito/Nome"/>,<xsl:value-of select="Assistito/Cognome"/>,<xsl:value-of select="Assistito/CodiceFiscale"/></HASH_COD>
     <DATA_NASCITA><xsl:value-of select="Assistito/DataNascita"/></DATA_NASCITA>
     <COMUNE_NASCITA_COD><xsl:value-of select="Assistito/ComuneNascitaCod"/></COMUNE_NASCITA_COD>
+    <COMUNE_NASCITA_DESCR><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/ComuneNascitaDescr"/></COMUNE_NASCITA_DESCR>
     <COMUNE_RESIDENZA_COD><xsl:value-of select="Assistito/ComuneResidenzaCod"/></COMUNE_RESIDENZA_COD>
+    <COMUNE_RESIDENZA_DESCR><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/ComuneResidenzaDescr"/></COMUNE_RESIDENZA_DESCR>
     <SESSO><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/Sesso"/></SESSO>
     <CAP><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/CAP"/></CAP>
     <STATO_CIVILE_COD><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/StatoCivileCod"/></STATO_CIVILE_COD>
     <STATO_CIVILE_DESCR><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/StatoCivileDescr"/></STATO_CIVILE_DESCR>
     <NAZIONALITA_COD><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/NazionalitaCod"/></NAZIONALITA_COD>
-    <NAZIONALITA_DESCR><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/NazionalitaDescr"/></NAZIONALITA_DESCR>
+    <NAZIONALITA_DESCR><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/NazionalitacDescr"/></NAZIONALITA_DESCR>
     <CITTADINANZA_COD><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/CittadinanzaCod"/></CITTADINANZA_COD>
     <CITTADINANZA_DESCR><xsl:value-of select="Evento/InserimentoVariazioneAnagrafica/CittadinanzaDescr"/></CITTADINANZA_DESCR>
     <POLO_COD><xsl:value-of select="Descrizione/UnitaOrganizzativaCod"/></POLO_COD>

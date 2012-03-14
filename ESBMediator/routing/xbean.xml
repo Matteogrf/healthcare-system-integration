@@ -5,14 +5,12 @@
 
 	<!-- Ricevo la richiesta inviata al Web Service Endpoint e la invio al componente 
 		di routing content-base-router -->
-	<eip:static-routing-slip service="tns:processEventRequest"
-		endpoint="staticRouting">
+	<eip:static-routing-slip service="tns:processEventRequest"	endpoint="staticRouting">
 		<eip:targets>
-		    <eip:exchange-target service="tns:beanLogEvent" 
+			<eip:exchange-target service="tns:beanLogEvent"
 				endpoint="LogEvent" operation="logContent" />
-				
-			<eip:exchange-target service="tns:splitDifferentEvents"
-				endpoint="endpoint" />
+
+			<eip:exchange-target service="tns:splitDifferentEvents"/>
 		</eip:targets>
 
 	</eip:static-routing-slip>
@@ -30,8 +28,8 @@
 					<eip:exchange-target service="tns:mapInserimentoVariazioneAnagrafica"
 						endpoint="IVA" />
 				</eip:target>
-		    </eip:routing-rule>
-		    <eip:routing-rule>
+			</eip:routing-rule>
+			<eip:routing-rule>
 				<eip:predicate>
 					<!-- Evento Inserimento Variazione Nucleo Fatto -->
 					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=2]" />
@@ -83,15 +81,15 @@
 			</eip:routing-rule>
 		</eip:rules>
 	</eip:content-based-router>
-	
+
 	<eip:static-routing-slip service="tns:mapSchedaAccesso"
 		endpoint="SA">
 		<eip:targets>
 			<eip:exchange-target service="tns:mappingSA"
 				endpoint="mappingSA"></eip:exchange-target>
-		    
-		    <eip:exchange-target service="tns:beanLogEvent" 
-		endpoint="LogEvent" operation="logContent" />
+
+			<eip:exchange-target service="tns:beanLogEvent"
+				endpoint="LogEvent" operation="logContent" />
 
 			<eip:exchange-target service="wsb:DwhWS" />
 
@@ -105,9 +103,9 @@
 		<eip:targets>
 			<eip:exchange-target service="tns:mappingIVNF"
 				endpoint="mappingIVNF"></eip:exchange-target>
-		    
-		    <eip:exchange-target service="tns:beanLogEvent" 
-		endpoint="LogEvent" operation="logContent" />
+
+			<eip:exchange-target service="tns:beanLogEvent"
+				endpoint="LogEvent" operation="logContent" />
 
 			<eip:exchange-target service="wsb:DwhWS" />
 
@@ -122,9 +120,9 @@
 		<eip:targets>
 			<eip:exchange-target service="tns:mappingIVA"
 				endpoint="mappingIVA"></eip:exchange-target>
-				
-						    <eip:exchange-target service="tns:beanLogEvent" 
-		endpoint="LogEvent" operation="logContent" />
+
+			<eip:exchange-target service="tns:beanLogEvent"
+				endpoint="LogEvent" operation="logContent" />
 
 			<eip:exchange-target service="wsb:DwhWS" />
 
@@ -132,15 +130,15 @@
 				endpoint="convertDwhResponse" />
 		</eip:targets>
 	</eip:static-routing-slip>
-	
+
 	<eip:static-routing-slip service="tns:mapPresaInCarico"
 		endpoint="PC">
 		<eip:targets>
 			<eip:exchange-target service="tns:mappingPC"
 				endpoint="mappingPC"></eip:exchange-target>
-				
-						    <eip:exchange-target service="tns:beanLogEvent" 
-		endpoint="LogEvent" operation="logContent" />
+
+			<eip:exchange-target service="tns:beanLogEvent"
+				endpoint="LogEvent" operation="logContent" />
 
 			<eip:exchange-target service="wsb:DwhWS" />
 
@@ -148,15 +146,15 @@
 				endpoint="convertDwhResponse" />
 		</eip:targets>
 	</eip:static-routing-slip>
-	
+
 	<eip:static-routing-slip service="tns:mapFinePresaInCarico"
 		endpoint="FPC">
 		<eip:targets>
 			<eip:exchange-target service="tns:mappingFPC"
 				endpoint="mappingFPC"></eip:exchange-target>
-				
-						    <eip:exchange-target service="tns:beanLogEvent" 
-		endpoint="LogEvent" operation="logContent" />
+
+			<eip:exchange-target service="tns:beanLogEvent"
+				endpoint="LogEvent" operation="logContent" />
 
 			<eip:exchange-target service="wsb:DwhWS" />
 
@@ -164,15 +162,15 @@
 				endpoint="convertDwhResponse" />
 		</eip:targets>
 	</eip:static-routing-slip>
-	
+
 	<eip:static-routing-slip service="tns:mapAssegnazioneAreaUtenza"
 		endpoint="AAU">
 		<eip:targets>
 			<eip:exchange-target service="tns:mappingAAU"
 				endpoint="mappingAAU"></eip:exchange-target>
-				
-						    <eip:exchange-target service="tns:beanLogEvent" 
-		endpoint="LogEvent" operation="logContent" />
+
+			<eip:exchange-target service="tns:beanLogEvent"
+				endpoint="LogEvent" operation="logContent" />
 
 			<eip:exchange-target service="wsb:DwhWS" />
 
