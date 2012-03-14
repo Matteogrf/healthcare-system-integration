@@ -9,7 +9,7 @@
 		endpoint="staticRouting">
 		<eip:targets>
 			<eip:exchange-target service="tns:beanLogEvent"
-				endpoint="LogEvent" operation="logContent" />
+				endpoint="LogEvent" operation="logEvent" />
 
 			<eip:exchange-target service="tns:splitDifferentEvents" />
 		</eip:targets>
@@ -176,12 +176,15 @@
 		endpoint="DWH">
 		<eip:targets>
 			<eip:exchange-target service="tns:beanLogEvent"
-				endpoint="LogEvent" operation="logContent" />
+				endpoint="LogEvent" operation="logMappedEvent" />
 
 			<eip:exchange-target service="wsb:DwhWS" />
 
 			<eip:exchange-target service="tns:convertDwhResponse"
 				endpoint="convertDwhResponse" />
+			
+			<eip:exchange-target service="tns:beanLogEvent"
+				endpoint="LogEvent" operation="logDWHResponse" />
 		</eip:targets>
 	</eip:static-routing-slip>
 
