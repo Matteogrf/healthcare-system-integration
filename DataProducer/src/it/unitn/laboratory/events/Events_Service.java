@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.1
  * 
  */
-@WebServiceClient(name = "Events", targetNamespace = "http://events.laboratory.unitn.it/", wsdlLocation = "file:/C:/Users/Matteo/workspace/ESBMediator/cxf-bc/Events.wsdl")
+@WebServiceClient(name = "Events", targetNamespace = "http://events.laboratory.unitn.it/", wsdlLocation = "/home/michele/workspace/ESBMediator/cxf-bc/Events.wsdl")
 public class Events_Service
     extends Service
 {
@@ -30,9 +30,9 @@ public class Events_Service
         try {
             URL baseUrl;
             baseUrl = it.unitn.laboratory.events.Events_Service.class.getResource(".");
-            url = new URL(baseUrl, "file:/C:/Users/Matteo/workspace/ESBMediator/cxf-bc/Events.wsdl");
+            url = new URL(baseUrl, "/home/michele/workspace/ESBMediator/cxf-bc/Events.wsdl");
         } catch (MalformedURLException e) {
-            logger.warning("Failed to create URL for the wsdl Location: 'file:/C:/Users/Michele/workspace/ESBMediator/cxf-bc/Events.wsdl', retrying as a local file");
+            logger.warning("Failed to create URL for the wsdl Location: 'file:/./ESBMediator/cxf-bc/Events.wsdl', retrying as a local file");
             logger.warning(e.getMessage());
         }
         EVENTS_WSDL_LOCATION = url;
