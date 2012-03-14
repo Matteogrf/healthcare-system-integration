@@ -40,14 +40,23 @@ public class CSIDataProducer
 
 	private static void produceEvents() throws SQLException, DatatypeConfigurationException, ClassNotFoundException 
 	{	
+		System.out.println("Invio Variazione Anagrafica");
 		CreateInserimentoVariazioneAnagrafica();
+		System.out.println("\nInvio Nucleo Familiare");
 		CreateInserimentoNucleoFamiliare();
+		System.out.println("\nInvio Scheda accesso");
 		CreateSchedaAccesso();
+		System.out.println("\nInvio Presa in carico");
 		CreatePresaInCarico();
+		System.out.println("\nInvio Chiura presa in carico");
 		CreateChiusuraPresaInCarico();
+		System.out.println("\nInvio Assegnazione area utenza");
 		CreateAssegnazioneAreaUtenza();
+		
 	}
 	
+
+
 
 	private static void CreateChiusuraPresaInCarico() throws SQLException, DatatypeConfigurationException 
 	{
@@ -67,7 +76,7 @@ public class CSIDataProducer
 			event.setOperazione(operation);
 		
 			String res=new Events_Service().getEventsSOAP().sendEvent(event);
-			System.out.println("Res sendEvent:"+res);
+			System.out.println("\tRes sendEvent: "+res);
 		}
 		
 	}
@@ -101,7 +110,7 @@ public class CSIDataProducer
 			event.setOperazione(operation);
 		
 			String res=new Events_Service().getEventsSOAP().sendEvent(event);
-			System.out.println("Res sendEvent:"+res);
+			System.out.println("\tRes sendEvent: "+res);
 		}
 		
 	}
@@ -144,7 +153,7 @@ public class CSIDataProducer
 			event.setOperazione(operation);
 		
 			String res=new Events_Service().getEventsSOAP().sendEvent(event);
-			System.out.println("Res sendEvent:"+res);
+			System.out.println("\tRes sendEvent:"+res);
 		}
 	}
 
@@ -174,7 +183,7 @@ public class CSIDataProducer
 			event.setOperazione(operation);
 			String res=new Events_Service().getEventsSOAP().sendEvent(event);
 		
-			System.out.println("Res sendEvent:"+res);
+			System.out.println("\tRes sendEvent: "+res);
 		}
 	}
 
@@ -210,7 +219,7 @@ public class CSIDataProducer
 			event.setOperazione(operation);
 			String res=new Events_Service().getEventsSOAP().sendEvent(event);
 		
-			System.out.println("Res sendEvent:"+res);
+			System.out.println("\tRes sendEvent: "+res);
 		}
 	}
 
@@ -253,7 +262,7 @@ public class CSIDataProducer
 			event.setOperazione(extractOperation(of));
 		
 			String res=new Events_Service().getEventsSOAP().sendEvent(event);
-			System.out.println("Res sendEvent:"+res);
+			System.out.println("\tRes sendEvent: "+res);
 		}			
 	}
 
