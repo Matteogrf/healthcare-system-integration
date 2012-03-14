@@ -75,6 +75,8 @@ public class CSIDataProducer
 			OperationType operation = of.createOperationType();
 			operation.setOperazioneCod("7");
 			operation.setOperazioneDescr("RevocaAreaUtenza");
+			event.getDescrizione().setTipoEventoCod(7);
+			event.getDescrizione().setTipoEventoDescr("RevocaAreaUtenza");
 			event.setOperazione(operation);
 			String res=new Events_Service().getEventsSOAP().sendEvent(event);
 		
