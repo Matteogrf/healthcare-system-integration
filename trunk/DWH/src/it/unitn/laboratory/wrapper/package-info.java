@@ -1,2 +1,2 @@
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://events.laboratory.unitn.it")
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://wrapper.laboratory.unitn.it")
 package it.unitn.laboratory.wrapper;

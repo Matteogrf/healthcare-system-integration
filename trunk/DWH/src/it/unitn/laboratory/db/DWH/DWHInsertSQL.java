@@ -1,6 +1,8 @@
 package it.unitn.laboratory.db.DWH;
 
+import it.unitn.laboratory.db.QueryManager;
 import it.unitn.laboratory.db.StagingArea.ConnectionManagerSA;
+import it.unitn.laboratory.wrapper.AreaUtenzaType;
 import it.unitn.laboratory.wrapper.AssistitoType;
 import it.unitn.laboratory.wrapper.CartellaType;
 import it.unitn.laboratory.wrapper.ComponenteType;
@@ -105,15 +107,6 @@ public class DWHInsertSQL {
 		if (res==0) throw new SQLWarning("Inserimanto richiedente fallito? check It");
 		
 	}
-	
-	private static Date convertDate(XMLGregorianCalendar data) 
-	{
-		if(data==null) return null;
-		GregorianCalendar c = data.toGregorianCalendar();
-		java.util.Date d = c.getTime();
-		java.sql.Date sqlDate = new java.sql.Date(d.getTime());
-		return sqlDate;
-	}
 
 	public static void insertTipoTerzi(TipoTerziType dtipoterzi) throws ClassNotFoundException, SQLException {
 		Connection con = ConnectionManagerDWH.getInstance().getConnection();
@@ -149,6 +142,10 @@ public class DWHInsertSQL {
 			int idRichiedete, Integer idTipoTerzi, int idSegnalante,
 			int idAssistito, int idOperatore) throws SQLException, ClassNotFoundException {
 		
+		QueryManager qmDWH = new QueryManager(ConnectionManagerDWH.getInstance());
+		
+		if (qmDWH.checkCartella(idAssistito, convertDate(fcartella.getDATAACCESSO())))
+			return;
 		
 		Connection con = ConnectionManagerDWH.getInstance().getConnection();
 		PreparedStatement ps = con.prepareStatement("INSERT INTO F_CARTELLA " +
@@ -178,4 +175,53 @@ public class DWHInsertSQL {
 		return;
 		
 	}
+	
+	public static void insertAreaUtenza(int idAssistito,
+			AreaUtenzaType dareautenza) throws ClassNotFoundException, SQLException {
+		
+		Connection con = ConnectionManagerDWH.getInstance().getConnection();
+		PreparedStatement ps = con.prepareStatement("INSERT INTO D_AREA_UTENZA" +
+						"(AREA_UTENZA_COD, AREA_UTENZA_DESCR, DATA_INIZIO_VAL, ID_ASSISTITO) " +
+						"VALUES (?,?,?,?)");
+		ps.setInt(1, dareautenza.getAREAUTENZACOD());
+		ps.setString(2, dareautenza.getAREAUTENZADESCR());
+		ps.setDate(3, convertDate(dareautenza.getDATAINIZIOVAL()));
+		ps.setInt(4, idAssistito);
+		
+		int res = ps.executeUpdate();
+		
+		if (res==0) throw new SQLWarning("Inserimento area utenza? check It");
+		return;
+		
+	}
+	
+	public static void insertRevocaAreaUtenza(int idAssistito,
+			AreaUtenzaType dareautenza) throws ClassNotFoundException, SQLException {
+		Connection con = ConnectionManagerDWH.getInstance().getConnection();
+		PreparedStatement ps = con.prepareStatement("INSERT INTO D_AREA_UTENZA" +
+						"(AREA_UTENZA_COD, AREA_UTENZA_DESCR, DATA_FINE_VAL, ID_ASSISTITO) " +
+						"VALUES (?,?,?,?)");
+		ps.setInt(1, dareautenza.getAREAUTENZACOD());
+		ps.setString(2, dareautenza.getAREAUTENZADESCR());
+		ps.setDate(3, convertDate(dareautenza.getDATAFINEVAL()));
+		ps.setInt(4, idAssistito);
+		
+		int res = ps.executeUpdate();
+		
+		if (res==0) throw new SQLWarning("Inserimento revoca area utenza? check It");
+		return;
+	}
+	
+	public static Date convertDate(XMLGregorianCalendar data) 
+	{
+		if(data==null) return null;
+		GregorianCalendar c = data.toGregorianCalendar();
+		java.util.Date d = c.getTime();
+		java.sql.Date sqlDate = new java.sql.Date(d.getTime());
+		return sqlDate;
+	}
+
+
+
+
 }

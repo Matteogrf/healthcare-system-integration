@@ -30,7 +30,7 @@ import javax.xml.ws.Endpoint;
 @javax.jws.WebService(
                       serviceName = "DwhWS",
                       portName = "DwhWSSOAP",
-                      targetNamespace = "http://events.laboratory.unitn.it",
+                      targetNamespace = "http://wrapper.laboratory.unitn.it",
                       //wsdlLocation = "/home/michele/workspace/DWH/WebContent/wsdl/DwhWS.wsdl",
                       endpointInterface = "it.unitn.laboratory.wrapper.DwhWS")
                       
@@ -52,12 +52,14 @@ public class DwhWSImpl implements DwhWS {
 			case 2:  return EventManager.inserimentoVariazioneNucleoFatto(dwhSCHEMA);
 			case 3:  return EventManager.inserimentoSchedaAccesso(dwhSCHEMA);
 			case 4:  return EventManager.presaInCarico(dwhSCHEMA);
+			case 6:  return EventManager.assegnazioneAreaUtenza(dwhSCHEMA);
+			case 7:  return EventManager.revocaAreaUtenza(dwhSCHEMA);
 			default: return "ERROR: type "+type+" not supported yet. I'm so sorry";
 		}        
     }
     
     public static void main(String[] args){
-    	Endpoint.publish("http://10.22.14.11:9090/DwhWS",new DwhWSImpl());
+    	Endpoint.publish("http://192.168.1.42:9090/DwhWS",new DwhWSImpl());
     }
 
 }

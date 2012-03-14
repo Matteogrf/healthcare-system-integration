@@ -20,7 +20,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="AREA_UTENZA_COD" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
- *         &lt;element name="AREA_UTENZA_DERCR" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="AREA_UTENZA_DESCR" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="DATA_FINE_VAL" type="{http://www.w3.org/2001/XMLSchema}date" minOccurs="0"/>
  *         &lt;element name="DATA_INIZIO_VAL" type="{http://www.w3.org/2001/XMLSchema}date" minOccurs="0"/>
  *         &lt;element name="ID_ASSISITITO" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
@@ -35,7 +35,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AreaUtenzaType", propOrder = {
     "areautenzacod",
-    "areautenzadercr",
+    "areautenzadescr",
     "datafineval",
     "datainizioval",
     "idassisitito"
@@ -44,8 +44,8 @@ public class AreaUtenzaType {
 
     @XmlElement(name = "AREA_UTENZA_COD")
     protected Integer areautenzacod;
-    @XmlElement(name = "AREA_UTENZA_DERCR")
-    protected String areautenzadercr;
+    @XmlElement(name = "AREA_UTENZA_DESCR")
+    protected String areautenzadescr;
     @XmlElement(name = "DATA_FINE_VAL")
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar datafineval;
@@ -80,27 +80,27 @@ public class AreaUtenzaType {
     }
 
     /**
-     * Gets the value of the areautenzadercr property.
+     * Gets the value of the areautenzadescr property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getAREAUTENZADERCR() {
-        return areautenzadercr;
+    public String getAREAUTENZADESCR() {
+        return areautenzadescr;
     }
 
     /**
-     * Sets the value of the areautenzadercr property.
+     * Sets the value of the areautenzadescr property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setAREAUTENZADERCR(String value) {
-        this.areautenzadercr = value;
+    public void setAREAUTENZADESCR(String value) {
+        this.areautenzadescr = value;
     }
 
     /**

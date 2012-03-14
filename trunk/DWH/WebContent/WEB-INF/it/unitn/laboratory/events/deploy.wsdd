@@ -1,0 +1,114 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from DwhWS WSDL service -->
+
+  <service name="DwhWSSOAP" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://events.laboratory.unitn.it"/>
+      <parameter name="wsdlServiceElement" value="DwhWS"/>
+      <parameter name="schemaUnqualified" value="http://events.laboratory.unitn.it"/>
+      <parameter name="wsdlServicePort" value="DwhWSSOAP"/>
+      <parameter name="className" value="it.unitn.laboratory.events.DwhWSSOAPSkeleton"/>
+      <parameter name="wsdlPortType" value="DwhWS"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <parameter name="allowedMethods" value="*"/>
+
+      <typeMapping
+        xmlns:ns="http://events.laboratory.unitn.it"
+        qname="ns:AssistitoType"
+        type="java:it.unitn.laboratory.events.AssistitoType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://events.laboratory.unitn.it"
+        qname="ns:EventType"
+        type="java:it.unitn.laboratory.events.EventType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://events.laboratory.unitn.it"
+        qname="ns:CartellaType"
+        type="java:it.unitn.laboratory.events.CartellaType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://events.laboratory.unitn.it"
+        qname="ns:NucleoFamiliareType"
+        type="java:it.unitn.laboratory.events.NucleoFamiliareType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://events.laboratory.unitn.it"
+        qname="ns:TipoTerziType"
+        type="java:it.unitn.laboratory.events.TipoTerziType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://events.laboratory.unitn.it"
+        qname="ns:SegnalanteType"
+        type="java:it.unitn.laboratory.events.SegnalanteType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://events.laboratory.unitn.it"
+        qname="ns:OperatoreType"
+        type="java:it.unitn.laboratory.events.OperatoreType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://events.laboratory.unitn.it"
+        qname="ns:AreaUtenzaType"
+        type="java:it.unitn.laboratory.events.AreaUtenzaType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://events.laboratory.unitn.it"
+        qname="ns:ComponenteType"
+        type="java:it.unitn.laboratory.events.ComponenteType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://events.laboratory.unitn.it"
+        qname="ns:DwhSchemaType"
+        type="java:it.unitn.laboratory.events.DwhSchemaType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://events.laboratory.unitn.it"
+        qname="ns:RichiedenteType"
+        type="java:it.unitn.laboratory.events.RichiedenteType"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

@@ -17,15 +17,15 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="EVENT_TYPE" type="{http://events.laboratory.unitn.it}EventType"/>
- *         &lt;element name="D_ASSISTITO" type="{http://events.laboratory.unitn.it}AssistitoType" minOccurs="0"/>
- *         &lt;element name="D_OPERATORE" type="{http://events.laboratory.unitn.it}OperatoreType" minOccurs="0"/>
- *         &lt;element name="D_NUCLEO_FAMILIARE" type="{http://events.laboratory.unitn.it}NucleoFamiliareType" minOccurs="0"/>
- *         &lt;element name="F_CARTELLA" type="{http://events.laboratory.unitn.it}CartellaType" minOccurs="0"/>
- *         &lt;element name="D_RICHIEDENTE" type="{http://events.laboratory.unitn.it}RichiedenteType" minOccurs="0"/>
- *         &lt;element name="D_TIPO_TERZI" type="{http://events.laboratory.unitn.it}TipoTerziType" minOccurs="0"/>
- *         &lt;element name="D_SEGNALANTE" type="{http://events.laboratory.unitn.it}SegnalanteType" minOccurs="0"/>
- *         &lt;element name="D_AREA_UTENZA" type="{http://events.laboratory.unitn.it}AreaUtenzaType" minOccurs="0"/>
+ *         &lt;element name="EVENT_TYPE" type="{http://wrapper.laboratory.unitn.it}EventType"/>
+ *         &lt;element name="D_ASSISTITO" type="{http://wrapper.laboratory.unitn.it}AssistitoType" minOccurs="0"/>
+ *         &lt;element name="D_OPERATORE" type="{http://wrapper.laboratory.unitn.it}OperatoreType" minOccurs="0"/>
+ *         &lt;element name="D_NUCLEO_FAMILIARE" type="{http://wrapper.laboratory.unitn.it}NucleoFamiliareType" minOccurs="0"/>
+ *         &lt;element name="F_CARTELLA" type="{http://wrapper.laboratory.unitn.it}CartellaType" minOccurs="0"/>
+ *         &lt;element name="D_RICHIEDENTE" type="{http://wrapper.laboratory.unitn.it}RichiedenteType" minOccurs="0"/>
+ *         &lt;element name="D_TIPO_TERZI" type="{http://wrapper.laboratory.unitn.it}TipoTerziType" minOccurs="0"/>
+ *         &lt;element name="D_SEGNALANTE" type="{http://wrapper.laboratory.unitn.it}SegnalanteType" minOccurs="0"/>
+ *         &lt;element name="D_AREA_UTENZA" type="{http://wrapper.laboratory.unitn.it}AreaUtenzaType" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -56,20 +56,18 @@ public class DwhSchemaType {
     protected OperatoreType doperatore;
     @XmlElement(name = "D_NUCLEO_FAMILIARE")
     protected NucleoFamiliareType dnucleofamiliare;
-
     @XmlElement(name = "F_CARTELLA")
     protected CartellaType fcartella;
-	@XmlElement(name = "D_RICHIEDENTE")
+    @XmlElement(name = "D_RICHIEDENTE")
     protected RichiedenteType drichiedente;
-	@XmlElement(name = "D_TIPO_TERZI")
+    @XmlElement(name = "D_TIPO_TERZI")
     protected TipoTerziType dtipoterzi;
-	@XmlElement(name = "D_SEGNALANTE")
+    @XmlElement(name = "D_SEGNALANTE")
     protected SegnalanteType dsegnalante;
-
-	@XmlElement(name = "D_AREA_UTENZA")
+    @XmlElement(name = "D_AREA_UTENZA")
     protected AreaUtenzaType dareautenza;
 
-	/**
+    /**
      * Gets the value of the eventtype property.
      * 
      * @return
@@ -165,7 +163,7 @@ public class DwhSchemaType {
         this.dnucleofamiliare = value;
     }
 
-	/**
+    /**
      * Gets the value of the fcartella property.
      * 
      * @return
@@ -177,7 +175,7 @@ public class DwhSchemaType {
         return fcartella;
     }
 
-	/**
+    /**
      * Sets the value of the fcartella property.
      * 
      * @param value
@@ -189,7 +187,7 @@ public class DwhSchemaType {
         this.fcartella = value;
     }
 
-	/**
+    /**
      * Gets the value of the drichiedente property.
      * 
      * @return
@@ -201,7 +199,7 @@ public class DwhSchemaType {
         return drichiedente;
     }
 
-	/**
+    /**
      * Sets the value of the drichiedente property.
      * 
      * @param value
@@ -213,7 +211,7 @@ public class DwhSchemaType {
         this.drichiedente = value;
     }
 
-	/**
+    /**
      * Gets the value of the dtipoterzi property.
      * 
      * @return
@@ -225,7 +223,7 @@ public class DwhSchemaType {
         return dtipoterzi;
     }
 
-	/**
+    /**
      * Sets the value of the dtipoterzi property.
      * 
      * @param value
@@ -237,7 +235,7 @@ public class DwhSchemaType {
         this.dtipoterzi = value;
     }
 
-	/**
+    /**
      * Gets the value of the dsegnalante property.
      * 
      * @return
@@ -249,7 +247,7 @@ public class DwhSchemaType {
         return dsegnalante;
     }
 
-	/**
+    /**
      * Sets the value of the dsegnalante property.
      * 
      * @param value
@@ -261,7 +259,7 @@ public class DwhSchemaType {
         this.dsegnalante = value;
     }
 
-	/**
+    /**
      * Gets the value of the dareautenza property.
      * 
      * @return
@@ -273,7 +271,7 @@ public class DwhSchemaType {
         return dareautenza;
     }
 
-	/**
+    /**
      * Sets the value of the dareautenza property.
      * 
      * @param value

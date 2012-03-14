@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="CODICE_NUCLEO" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="COMPONENTE" type="{http://events.laboratory.unitn.it}ComponenteType" maxOccurs="unbounded"/>
+ *         &lt;element name="COMPONENTE" type="{http://wrapper.laboratory.unitn.it}ComponenteType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

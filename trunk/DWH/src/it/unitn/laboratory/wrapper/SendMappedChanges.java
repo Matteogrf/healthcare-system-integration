@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="DWH_SCHEMA" type="{http://events.laboratory.unitn.it}DwhSchemaType"/>
+ *         &lt;element name="DWH_SCHEMA" type="{http://wrapper.laboratory.unitn.it}DwhSchemaType"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

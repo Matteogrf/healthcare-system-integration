@@ -1,6 +1,7 @@
 package it.unitn.laboratory.db.DWH;
 
 import it.unitn.laboratory.db.StagingArea.ConnectionManagerSA;
+import it.unitn.laboratory.wrapper.AreaUtenzaType;
 import it.unitn.laboratory.wrapper.AssistitoType;
 import it.unitn.laboratory.wrapper.CartellaType;
 import it.unitn.laboratory.wrapper.ComponenteType;
@@ -138,7 +139,7 @@ public class DWHUpdateSQL {
 		Connection con = ConnectionManagerDWH.getInstance().getConnection();
 		PreparedStatement ps = con.prepareStatement("UPDATE F_CARTELLA SET" +
 						" NUMERO_SCHEDA= ?," +
-						" PRESA_CARICO= ?," +
+						" PRESA_CARICO_NUM= ?," +
 						" DATA_ACCESSO= ?," +
 						" ID_ASSISTITO= ?," +
 						" ID_SEGNALANTE= ?," +
@@ -175,6 +176,37 @@ public class DWHUpdateSQL {
 		if (res==0) throw new SQLWarning("Update f_cartella fallito? check It");
 		return;
 		
+	}
+	
+	public static void updateFCartella(int id, CartellaType fcartella) throws ClassNotFoundException, SQLException {
+		
+		Connection con = ConnectionManagerDWH.getInstance().getConnection();
+		PreparedStatement ps = con.prepareStatement("UPDATE F_CARTELLA SET" +
+						" INIZIO_PRESA_CARICO= ?," +
+						" PRESA_CARICO_NUM= ?" +
+						" WHERE ID_CARTELLA= ?;");
+		ps.setDate(1, convertDate(fcartella.getINIZIOPRESACARICO()));
+		ps.setInt(2, fcartella.getPRESACARICO());
+		ps.setInt(3, id);
+		
+		int res = ps.executeUpdate();
+		
+		if (res==0) throw new SQLWarning("Update f_cartella fallito? check It");
+		return;
+    }
+
+	public static void updateAreaUtenza(int idAreaUtenza, AreaUtenzaType dareautenza) throws ClassNotFoundException, SQLException {
+		Connection con = ConnectionManagerDWH.getInstance().getConnection();
+		PreparedStatement ps = con.prepareStatement("UPDATE D_AREA_UTENZA SET" +
+						" DATA_FINE_VAL= ?" +
+						" WHERE ID_AREA_UTENZA= ?;");
+		ps.setDate(1, convertDate(dareautenza.getDATAFINEVAL()));
+		ps.setInt(2, idAreaUtenza);
+		
+		int res = ps.executeUpdate();
+		
+		if (res==0) throw new SQLWarning("Update d_area_utenza fallito? check It");
+		return;
 	}
 
 }
