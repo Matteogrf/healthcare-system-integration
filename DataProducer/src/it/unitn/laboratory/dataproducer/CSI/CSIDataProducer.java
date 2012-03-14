@@ -41,9 +41,9 @@ public class CSIDataProducer
 	private static void produceEvents() throws SQLException, DatatypeConfigurationException, ClassNotFoundException 
 	{	
 		System.out.println("Invio Variazione Anagrafica");
-		//CreateInserimentoVariazioneAnagrafica();
+		CreateInserimentoVariazioneAnagrafica();
 		System.out.println("\nInvio Nucleo Familiare");
-		//CreateInserimentoNucleoFamiliare();
+		CreateInserimentoNucleoFamiliare();
 		System.out.println("\nInvio Assegnazione Area Utenza");
 		CreateAssegnazioneAreaUtenza();
 		System.out.println("\nInvio Revoca Area Utenza");
