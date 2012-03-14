@@ -11,17 +11,5 @@
      
      <bean
           id="logEventXMLMessage"
-          class="org.aibpm.beans.EventManager" />
-          
-     <bean:endpoint
-          service="tns:mappedEventProcessor"
-          endpoint="mappedEvent"
-          bean="#processFinalData"/>
-     <bean
-          id="processFinalData"
-          class="org.aibpm.beans.ManageMappedData" />
-
-     
-          
-
+          class="it.unitn.laboratory.log.EventManager" />
 </beans>
