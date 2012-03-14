@@ -4,7 +4,9 @@ package it.unitn.laboratory.events;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -38,6 +40,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
+ *         &lt;element name="DataFineValidita" type="{http://www.w3.org/2001/XMLSchema}date"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -50,7 +53,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "RevocaAreaUtenzaType", propOrder = {
     "presaCaricoNum",
     "areaUtenzaCod",
-    "areaUtenzaDescr"
+    "areaUtenzaDescr",
+    "dataFineValidita"
 })
 public class RevocaAreaUtenzaType {
 
@@ -60,6 +64,9 @@ public class RevocaAreaUtenzaType {
     protected String areaUtenzaCod;
     @XmlElement(name = "AreaUtenzaDescr", required = true)
     protected String areaUtenzaDescr;
+    @XmlElement(name = "DataFineValidita", required = true)
+    @XmlSchemaType(name = "date")
+    protected XMLGregorianCalendar dataFineValidita;
 
     /**
      * Gets the value of the presaCaricoNum property.
@@ -123,6 +130,30 @@ public class RevocaAreaUtenzaType {
      */
     public void setAreaUtenzaDescr(String value) {
         this.areaUtenzaDescr = value;
+    }
+
+    /**
+     * Gets the value of the dataFineValidita property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getDataFineValidita() {
+        return dataFineValidita;
+    }
+
+    /**
+     * Sets the value of the dataFineValidita property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setDataFineValidita(XMLGregorianCalendar value) {
+        this.dataFineValidita = value;
     }
 
 }

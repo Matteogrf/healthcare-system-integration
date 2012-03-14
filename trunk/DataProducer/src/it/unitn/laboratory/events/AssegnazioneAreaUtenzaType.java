@@ -4,7 +4,9 @@ package it.unitn.laboratory.events;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -38,6 +40,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
+ *         &lt;element name="DataInizioValidita" type="{http://www.w3.org/2001/XMLSchema}date"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -50,7 +53,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "AssegnazioneAreaUtenzaType", propOrder = {
     "presaCaricoNum",
     "areaUtenzaCod",
-    "areaUtenzaDescr"
+    "areaUtenzaDescr",
+    "dataInizioValidita"
 })
 public class AssegnazioneAreaUtenzaType {
 
@@ -60,6 +64,9 @@ public class AssegnazioneAreaUtenzaType {
     protected String areaUtenzaCod;
     @XmlElement(name = "AreaUtenzaDescr", required = true)
     protected String areaUtenzaDescr;
+    @XmlElement(name = "DataInizioValidita", required = true)
+    @XmlSchemaType(name = "date")
+    protected XMLGregorianCalendar dataInizioValidita;
 
     /**
      * Gets the value of the presaCaricoNum property.
@@ -123,6 +130,30 @@ public class AssegnazioneAreaUtenzaType {
      */
     public void setAreaUtenzaDescr(String value) {
         this.areaUtenzaDescr = value;
+    }
+
+    /**
+     * Gets the value of the dataInizioValidita property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getDataInizioValidita() {
+        return dataInizioValidita;
+    }
+
+    /**
+     * Sets the value of the dataInizioValidita property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setDataInizioValidita(XMLGregorianCalendar value) {
+        this.dataInizioValidita = value;
     }
 
 }

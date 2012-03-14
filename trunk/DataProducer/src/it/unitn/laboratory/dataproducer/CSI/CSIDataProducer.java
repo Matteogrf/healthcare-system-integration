@@ -189,14 +189,14 @@ public class CSIDataProducer
 		}
 	}
 
-	private static BodyType extractAssegnazioneAreaUtenza(ResultSet pic, ObjectFactory of) throws SQLException 
+	private static BodyType extractAssegnazioneAreaUtenza(ResultSet pic, ObjectFactory of) throws SQLException, DatatypeConfigurationException 
 	{
 		AssegnazioneAreaUtenzaType a = of.createAssegnazioneAreaUtenzaType();
 		
 		a.setAreaUtenzaCod( pic.getString("AreaUtenzaCod") );
 		a.setAreaUtenzaDescr( pic.getString("AreaUtenzaString") );
 		a.setPresaCaricoNum( pic.getInt("PresaInCaricoNum") );
-		
+		a.setDataInizioValidita(DateToXMLGregorianCalendar(pic.getDate("DataInizioValidita")));
 		BodyType b = of.createBodyType();
 		b.setAssegnazioneAreaUtenza(a);
 		return b;
