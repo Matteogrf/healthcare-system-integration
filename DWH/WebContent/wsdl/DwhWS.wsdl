@@ -186,7 +186,7 @@
   </wsdl:binding>
   <wsdl:service name="DwhWS">
     <wsdl:port name="DwhWSSOAP" binding="tns:DwhWSSOAP">
-      <soap:address location="http://192.168.1.41:9090/DwhWS"/>
+      <soap:address location="http://10.22.14.11:9090/DwhWS"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

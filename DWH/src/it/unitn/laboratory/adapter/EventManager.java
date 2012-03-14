@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import it.unitn.laboratory.db.ConnectionManager;
 import it.unitn.laboratory.db.QueryManager;
 import it.unitn.laboratory.db.DWH.ConnectionManagerDWH;
+import it.unitn.laboratory.db.DWH.DWHInsertSQL;
+import it.unitn.laboratory.db.DWH.DWHUpdateSQL;
 import it.unitn.laboratory.db.StagingArea.ConnectionManagerSA;
 import it.unitn.laboratory.db.StagingArea.StagingAreaException;
 import it.unitn.laboratory.db.StagingArea.StagingAreaInsert;
@@ -13,6 +15,9 @@ import it.unitn.laboratory.wrapper.AssistitoType;
 import it.unitn.laboratory.wrapper.ComponenteType;
 import it.unitn.laboratory.wrapper.DwhSchemaType;
 import it.unitn.laboratory.wrapper.OperatoreType;
+import it.unitn.laboratory.wrapper.RichiedenteType;
+import it.unitn.laboratory.wrapper.SegnalanteType;
+import it.unitn.laboratory.wrapper.TipoTerziType;
 
 public class EventManager 
 {
@@ -20,21 +25,22 @@ public class EventManager
 	{
 		try 
 		{
-			checkOperatore(dwhSCHEMA.getDOPERATORE());
+			insertOperatore(dwhSCHEMA.getDOPERATORE());
 			AssistitoType assistito = dwhSCHEMA.getDASSISTITO();
 			QueryManager qmDHW = new QueryManager(ConnectionManagerDWH.getInstance());
 			ResultSet rs = qmDHW.findAssistito( assistito );
 			int id;
-			if(rs.next()) id = rs.getInt("ID_ASSISTITO"); // Gia presente nel database. modifica
-			else id = 0;
+			if(rs.next()){
+				id = rs.getInt("ID_ASSISTITO"); // Gia presente nel database. modifica
+				System.out.println("Update assistito");
+				DWHUpdateSQL.updateAssistito(assistito, id);
+			}
+			else //non presente nella DWH (inserimento)
+			{
+				System.out.println("Inserisco assistito");
+				DWHInsertSQL.insertAssistito(assistito);	
+			}
 			
-			// Controllo se è gia presente nella staging area
-			QueryManager qmSTA = new QueryManager(ConnectionManagerSA.getInstance());
-			rs = qmSTA.findAssistito( assistito );
-			if(rs.next()) return "OK"; // Gia nella staging area. per ora non faccio nulla, poi bho
-			
-			System.out.println("Inserisco l'assistito");
-			StagingAreaInsert.insertAssistito(id, assistito, dwhSCHEMA.getDOPERATORE());
 		} 
 		catch (Exception e) 
 		{
@@ -52,34 +58,25 @@ public class EventManager
 			ResultSet rs;
 			int id;
 			int idPatient;
+			insertOperatore(dwhSCHEMA.getDOPERATORE());
 			for(ComponenteType ct : dwhSCHEMA.getDNUCLEOFAMILIARE().getCOMPONENTE()){
 				
-			  rs = qm.findComponenteNucleo(ct, dwhSCHEMA.getDNUCLEOFAMILIARE().getCODICENUCLEO());
-			  if(rs.next()){ // gia presente nella DWH
-		        id = rs.getInt("ID_NUCLEO");
-		        rs= qm.findIdAssistito(ct.getHASHCOD());
-		        idPatient = rs.getInt("ID_ASSISTITO");
+			  rs = qm.findComponenteNucleo(ct, dwhSCHEMA.getDNUCLEOFAMILIARE().getCODICENUCLEO());  
+			  if(rs.next()){ //gia presente nella DWH (update)				  
+		        id = rs.getInt("ID_NUCLEO");		        
+		        DWHUpdateSQL.updateComponenteNucleo(id, ct, dwhSCHEMA.getDNUCLEOFAMILIARE().getCODICENUCLEO());
 			  }
-			  else {
+			  else { //componente non presente nella DWH (insert)
 				id = 0;
-			    idPatient = 0;
-			    // Controllo se è gia presente nella staging area
-				rs = qmSTA.findComponenteNucleo(ct, dwhSCHEMA.getDNUCLEOFAMILIARE().getCODICENUCLEO() );
-				if(rs.next()){ // Gia nella staging area.
-				  
-					  return "OK"; 
-				}
-			  }
-				
-		      else {
-				rs= qmSTA.findIdAssistito(ct.getHASHCOD());
-				if(rs.next())
-		            idPatient = rs.getInt("ID_ASSISTITO"); 
+			    rs = qm.findIdAssistito(ct.getHASHCOD());
+			    if(rs.next()){ // inserisco la variazione nucleo nella DWH
+			    	idPatient = rs.getInt("ID_ASSISTITO");
+			    	System.out.println("fuck:"+idPatient);
+			    	DWHInsertSQL.insertVariazioneNucleo(ct, idPatient, dwhSCHEMA.getDNUCLEOFAMILIARE().getCODICENUCLEO());
+			    }  
 				else throw new StagingAreaException("Patient associated to Nucleo:"+dwhSCHEMA.getDNUCLEOFAMILIARE().getCODICENUCLEO()+" not found");
 		      }
 			  
-			  System.out.println("Inserisco una variazione nucleo");
-			  StagingAreaInsert.insertNucleoFamiliare(id, ct, dwhSCHEMA.getDNUCLEOFAMILIARE().getCODICENUCLEO(), idPatient);
 			}
 			
 		} 
@@ -90,20 +87,16 @@ public class EventManager
 		return "OK";	
 	}
 	
-	private static void checkOperatore(OperatoreType operatore) throws StagingAreaException
+	private static void insertOperatore(OperatoreType operatore) throws StagingAreaException
 	{
 		try 
 		{			
 			QueryManager qm = new QueryManager(ConnectionManagerDWH.getInstance());			
 			ResultSet rs = qm.findOperatore(operatore.getOPERATORECOD(), operatore.getPOLOCOD(), operatore.getENTEGESTORECOD());
 			if(rs.next()) return; // Operatore gia presente nel database
-			
-			QueryManager qm2 = new QueryManager(ConnectionManagerSA.getInstance());
-		    rs = qm2.findOperatore(operatore.getOPERATORECOD(), operatore.getPOLOCOD(), operatore.getENTEGESTORECOD());
-		    if(rs.next()) return; // Operatore gia presente nella staging area
 		    
-		    // inserire l'operatore nella staging area
-		    StagingAreaInsert.insertOperatore(operatore, 0);
+		    // inserire l'operatore nella DWH
+		    DWHInsertSQL.insertOperatore(operatore);
 		} 
 		catch (Exception e ) 
 		{
@@ -111,6 +104,100 @@ public class EventManager
 			throw new StagingAreaException(e.getMessage());			
 		} 
 				
+	}
+
+	
+	public static String inserimentoSchedaAccesso(DwhSchemaType dwhSCHEMA) 
+	{
+		int idAssistito = 0;
+		Integer idTipoTerzi;
+		int idSegnalante;
+		int idOperatore;
+		try
+		{
+			insertOperatore(dwhSCHEMA.getDOPERATORE());			
+			QueryManager qmDWH = new QueryManager(ConnectionManagerDWH.getInstance());
+			QueryManager qmSTA = new QueryManager(ConnectionManagerSA.getInstance());
+			ResultSet rs;
+			
+			//Insert or update richiedente
+			int idRichiedete = insertRichiedente(dwhSCHEMA.getDRICHIEDENTE());
+			
+			if(dwhSCHEMA.getDRICHIEDENTE().getRICHIEDENTECOD() == 2) //se codice richiedente Ã¨ terzi
+			    	idTipoTerzi = insertTipoTerzi(dwhSCHEMA.getDTIPOTERZI());
+			else    idTipoTerzi = 0;
+			
+					
+			idSegnalante = insertSegnalante(dwhSCHEMA.getDSEGNALANTE());
+			idAssistito = qmDWH.findIdAssistito(dwhSCHEMA.getDASSISTITO());
+			idOperatore = qmDWH.findIdOperatore(dwhSCHEMA.getDOPERATORE());		
+			
+			if(idAssistito == 0) throw new StagingAreaException("Assistito not found in DWH");	
+									
+			DWHInsertSQL.insertFCartella(dwhSCHEMA.getFCARTELLA(), idRichiedete, idTipoTerzi, idSegnalante, idAssistito, idOperatore);
+			return "OK";
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return "ERRORE: "+ idAssistito + e.getMessage();
+		}
+	}
+
+	private static int insertSegnalante(SegnalanteType dsegnalante) throws ClassNotFoundException, SQLException {
+		QueryManager qmDWH = new QueryManager(ConnectionManagerDWH.getInstance());
+		ResultSet rs;
+		rs = qmDWH.findSegnalante(dsegnalante);
+		
+		if(rs.next()) return rs.getInt("ID_SEGNALANTE");
+		
+		DWHInsertSQL.insertSegnalante(dsegnalante);
+		rs = qmDWH.findSegnalante(dsegnalante);
+		rs.next();
+		return rs.getInt("ID_SEGNALANTE");
+	}
+
+	private static int insertTipoTerzi(TipoTerziType dtipoterzi) throws ClassNotFoundException, SQLException {
+		QueryManager qmDWH = new QueryManager(ConnectionManagerDWH.getInstance());
+		ResultSet rs;
+		rs = qmDWH.findTipoTerzi(dtipoterzi);
+		
+		if(rs.next()) return rs.getInt("ID_TIPO_TERZI");
+		
+		DWHInsertSQL.insertTipoTerzi(dtipoterzi);
+		rs = qmDWH.findTipoTerzi(dtipoterzi);
+		rs.next();
+		return rs.getInt("ID_TIPO_TERZI");
+	}
+
+	private static int insertRichiedente(RichiedenteType drichiedente) throws ClassNotFoundException, SQLException {
+		
+		QueryManager qmDWH = new QueryManager(ConnectionManagerDWH.getInstance());
+		ResultSet rs;
+		rs = qmDWH.findRichiedente(drichiedente);
+		
+		if(rs.next()) return rs.getInt("ID_RICHIEDENTE");
+		
+		DWHInsertSQL.insertRichiedente(drichiedente);
+		rs = qmDWH.findRichiedente(drichiedente);
+		rs.next();
+		return rs.getInt("ID_RICHIEDENTE");
+	}
+
+	public static String presaInCarico(DwhSchemaType dwhSCHEMA) 
+	{
+		try
+		{
+			insertOperatore(dwhSCHEMA.getDOPERATORE());			
+			QueryManager qmDWH = new QueryManager(ConnectionManagerDWH.getInstance());
+			QueryManager qmSTA = new QueryManager(ConnectionManagerSA.getInstance());
+			
+						
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "OK";
 	}
 
 
