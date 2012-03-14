@@ -90,8 +90,29 @@
 						endpoint="RAU" />
 				</eip:target>
 			</eip:routing-rule>
+			<eip:routing-rule>
+				<eip:predicate>
+					<!-- Evento Revoca Area Utenza -->
+					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=9]" />
+				</eip:predicate>
+				<eip:target>
+					<eip:exchange-target service="tns:mapRicezioneDomandaAmministrativa"
+						endpoint="RDA" />
+				</eip:target>
+			</eip:routing-rule>
 		</eip:rules>
 	</eip:content-based-router>
+	
+	<eip:static-routing-slip service="tns:mapRicezioneDomandaAmministrativa"
+		endpoint="RDA">
+		<eip:targets>
+			<eip:exchange-target service="tns:mappingRDA"
+				endpoint="mappingRDA"></eip:exchange-target>
+
+			<eip:exchange-target service="tns:forwardToDWH"
+				endpoint="DWH" />
+		</eip:targets>
+	</eip:static-routing-slip>
 
 	<eip:static-routing-slip service="tns:mapSchedaAccesso"
 		endpoint="SA">

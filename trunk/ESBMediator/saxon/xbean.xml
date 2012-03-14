@@ -43,4 +43,9 @@
 				endpoint="mappingRAU" 
 				resource="classpath:mapRevocaAreaUtenza.xsl"
 				result="String"/>
+				
+   <saxon:xslt service="tns:mappingRDA"
+				endpoint="mappingRDA" 
+				resource="classpath:mapRicezioneDomandaAmministrativa.xsl"
+				result="String"/>
 </beans>
