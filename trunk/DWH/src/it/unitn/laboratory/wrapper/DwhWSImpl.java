@@ -31,7 +31,7 @@ import javax.xml.ws.Endpoint;
                       serviceName = "DwhWS",
                       portName = "DwhWSSOAP",
                       targetNamespace = "http://events.laboratory.unitn.it",
-                      wsdlLocation = "http://192.168.1.41:9090/DwhWS?wsdl",
+                      //wsdlLocation = "/home/michele/workspace/DWH/WebContent/wsdl/DwhWS.wsdl",
                       endpointInterface = "it.unitn.laboratory.wrapper.DwhWS")
                       
 public class DwhWSImpl implements DwhWS {
@@ -50,12 +50,14 @@ public class DwhWSImpl implements DwhWS {
         {
 			case 1:	 return EventManager.inserimentoVariazioneAnagrafica(dwhSCHEMA);
 			case 2:  return EventManager.inserimentoVariazioneNucleoFatto(dwhSCHEMA);
-			default: return "ERROR: unokown type "+type;
+			case 3:  return EventManager.inserimentoSchedaAccesso(dwhSCHEMA);
+			case 4:  return EventManager.presaInCarico(dwhSCHEMA);
+			default: return "ERROR: type "+type+" not supported yet. I'm so sorry";
 		}        
     }
     
     public static void main(String[] args){
-    	Endpoint.publish("http://192.168.1.41:9090/DwhWS",new DwhWSImpl());
+    	Endpoint.publish("http://10.22.14.11:9090/DwhWS",new DwhWSImpl());
     }
 
 }

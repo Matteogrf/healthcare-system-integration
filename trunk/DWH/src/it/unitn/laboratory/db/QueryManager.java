@@ -3,6 +3,9 @@ package it.unitn.laboratory.db;
 import it.unitn.laboratory.wrapper.AssistitoType;
 import it.unitn.laboratory.wrapper.ComponenteType;
 import it.unitn.laboratory.wrapper.OperatoreType;
+import it.unitn.laboratory.wrapper.RichiedenteType;
+import it.unitn.laboratory.wrapper.SegnalanteType;
+import it.unitn.laboratory.wrapper.TipoTerziType;
 
 import java.sql.*;
 
@@ -63,5 +66,60 @@ public class QueryManager
 		PreparedStatement ps = con.prepareStatement("SELECT * FROM "+tableName+" ;");
 		
 		return ps.executeQuery();
+	}
+
+	public ResultSet findRichiedente(RichiedenteType drichiedente) throws SQLException {
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM D_RICHIEDENTE" +
+												    " WHERE RICHIEDENTE_COD="+drichiedente.getRICHIEDENTECOD()+";");
+		
+		return ps.executeQuery();
+	}
+
+	public ResultSet findTipoTerzi(TipoTerziType dtipoterzi) throws SQLException {
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM D_TIPO_TERZI" +
+												    " WHERE TIPO_TERZI_COD="+dtipoterzi.getTIPOTERZICOD()+";");
+		
+		return ps.executeQuery();
+	}
+
+	public ResultSet findSegnalante(SegnalanteType dsegnalante) throws SQLException {
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM D_SEGNALANTE" +
+												    " WHERE SEGNALANTE_COD="+dsegnalante.getSEGNALANTECOD()+";");
+		
+		return ps.executeQuery();
+	}
+
+	public int findIdAssistito(AssistitoType dassistito) throws SQLException {
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM D_ASSISTITO " +
+								" WHERE HASH_COD = MD5('"+dassistito.getHASHCOD()+"')");
+		ResultSet rs = ps.executeQuery();
+		if(!rs.next())
+			return 0;
+		return rs.getInt("ID_ASSISTITO");
+	}
+
+	public ResultSet findCartella(Integer presacarico) throws SQLException {
+				
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM F_CARTELLA" +
+												    " WHERE PRESA_CARICO_NUM="+presacarico+";");
+		
+		return ps.executeQuery();
+	}
+
+	public int findIdOperatore(OperatoreType doperatore) throws SQLException {
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM D_OPERATORE " +
+								" WHERE OPERATORE_COD = ? AND POLO_COD= ?;");
+		ps.setInt(1, doperatore.getOPERATORECOD());
+		ps.setInt(2, doperatore.getPOLOCOD());
+		ResultSet rs = ps.executeQuery();
+		if(!rs.next())
+			return 0;
+		return rs.getInt("ID_OPERATORE");
 	}
 }

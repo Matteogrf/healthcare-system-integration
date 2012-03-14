@@ -15,7 +15,7 @@ import javax.xml.ws.Service;
  * 
  */
 @WebServiceClient(name = "DwhWS", 
-                  wsdlLocation = "http://192.168.1.41:9090/DwhWS?wsdl",
+                  wsdlLocation = "http://192.168.1.23:9090/DwhWS?wsdl",
                   targetNamespace = "http://events.laboratory.unitn.it") 
 public class DwhWS_Service extends Service {
 
@@ -26,7 +26,7 @@ public class DwhWS_Service extends Service {
     static {
         URL url = null;
         try {
-            url = new URL("http://192.168.1.41:9090/DwhWS?wsdl");
+            url = new URL("http://192.168.1.23:9090/DwhWS?wsdl");
         } catch (MalformedURLException e) {
             java.util.logging.Logger.getLogger(DwhWS_Service.class.getName())
                 .log(java.util.logging.Level.INFO, 

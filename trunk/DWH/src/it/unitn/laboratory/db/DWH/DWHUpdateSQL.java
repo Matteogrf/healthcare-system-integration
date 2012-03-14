@@ -2,12 +2,19 @@ package it.unitn.laboratory.db.DWH;
 
 import it.unitn.laboratory.db.StagingArea.ConnectionManagerSA;
 import it.unitn.laboratory.wrapper.AssistitoType;
+import it.unitn.laboratory.wrapper.CartellaType;
+import it.unitn.laboratory.wrapper.ComponenteType;
+import it.unitn.laboratory.wrapper.NucleoFamiliareType;
 import it.unitn.laboratory.wrapper.OperatoreType;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
+import java.util.GregorianCalendar;
+
+import javax.xml.datatype.XMLGregorianCalendar;
 
 public class DWHUpdateSQL {
 	
@@ -33,20 +40,20 @@ public class DWHUpdateSQL {
 		ps.setString(7, operatore.getENTEGESTOREDESCR());
 		int res = ps.executeUpdate();
 		
-		if (res==0) throw new SQLWarning("Inserimanto operatore fallito? check It");
+		if (res==0) throw new SQLWarning("Update operatore fallito? check It");
 	}
 
-	public static void updateAssistito(AssistitoType i, int id) throws ClassNotFoundException, SQLException {
+	public static void updateAssistito(AssistitoType assistito, int id) throws ClassNotFoundException, SQLException {
 		Connection con = ConnectionManagerDWH.getInstance().getConnection();
 		
 		PreparedStatement ps = con.prepareStatement("UPDATE D_ASSISTITO SET" +
 				" ID_ANAGRAFE_LOCALE = ?," +
 				" MITTENTE_NOME_ENTE = ?," +
 				" MITTENTE_URL_ENTE = ?," +
-				" ANAGRAFE_URL_ENTE = ?," +
+				" ANAG_URL_ENTE = ?," +
 				" ANAG_ID_ANAGRAFE = ?," +
 				" ID_ASS_SOC = ?," +
-				" HASH_COD = ?," +
+				" HASH_COD = MD5('"+assistito.getHASHCOD()+"')," +
 				" DATA_NASCITA =?," +
 				" COMUNE_NASCITA_COD= ?," +
 				" COMUNE_NASCITA_DESCR= ?," +
@@ -60,12 +67,114 @@ public class DWHUpdateSQL {
 				" NAZIONALITA_DESCR= ?," +
 				" CITTADINANZA_COD= ?," +
 				" CITTADINANZA_DESCR= ?," +
-				" POLO_COD, POLO_DESCR= ?," +
+				" POLO_COD = ?," +
+				" POLO_DESCR= ?," +
 				" ENTE_GESTORE_COD= ?," +
-				" ENTE_GESTORE_DESCR=?" );
+				" ENTE_GESTORE_DESCR=?" +
+				" WHERE ID_ASSISTITO =?;" );
+		
+		
+		ps.setInt(1, assistito.getIDANAGRAFELOCALE());
+		ps.setString(2, assistito.getMITTENTENOMEENTE());
+		ps.setString(3, assistito.getMITTENTEURLENTE());
+		ps.setString(4, assistito.getANAGURLENTE());
+		ps.setString(5, assistito.getANAGIDANAGRAFE());
+		ps.setInt(6, assistito.getIDASSSOC());
+		ps.setDate(7, convertDate(assistito.getDATANASCITA()));
+		ps.setInt(8, assistito.getCOMUNENASCITACOD());
+		ps.setString(9, assistito.getCOMUNENASCITADESCR());
+		ps.setInt(10, assistito.getCOMUNERESIDENZACOD());
+		ps.setString(11, assistito.getCOMUNERESIDENZADESCR());
+		ps.setString(12, assistito.getSESSO());
+		ps.setString(13, assistito.getCAP());
+		ps.setInt(14, assistito.getSTATOCIVILECOD());
+		ps.setString(15, assistito.getSTATOCIVILEDESCR());
+		ps.setInt(16, assistito.getNAZIONALITACOD());
+		ps.setString(17, assistito.getNAZIONALITADESCR());
+		ps.setInt(18, assistito.getCITTADINANZACOD());
+		ps.setString(19, assistito.getCITTADINANZADESCR());
+		ps.setInt(20, assistito.getPOLOCOD());
+		ps.setString(21, assistito.getPOLODESCR());
+		ps.setInt(22, assistito.getGESTORECOD());
+		ps.setString(23, assistito.getGESTOREDESCR());
+		ps.setInt(24, id);
 		
 		int res = ps.executeUpdate();		
 		if (res==0) throw new SQLWarning("Inserimanto operatore fallito? check It");
+	}
+
+	public static void updateComponenteNucleo(int id, ComponenteType nuc, int codNuc) throws SQLException, ClassNotFoundException 
+	{
+		Connection con = ConnectionManagerDWH.getInstance().getConnection();
+		PreparedStatement ps = con.prepareStatement("UPDATE D_NUCLEO_FAMILIARE SET" +
+													" CODICE_NUCLEO = ?," +
+													" HASH_COD = MD5('"+nuc.getHASHCOD()+"'),"+
+													" GRADO_PARENTELA_COD = ?," +
+													" GRADO_PARENTELA_DESCR = ?," +
+													" DATA_NASCITA = ?" +
+													" WHERE ID_NUCLEO = ?;");
+		ps.setInt(1, codNuc);
+		ps.setInt(2, nuc.getGRADOPARENTELACOD());
+		ps.setString(3, nuc.getGRADOPARENTELADESCR());
+		ps.setDate(4, convertDate(nuc.getDATANASCITA()));
+		ps.setInt(5, id);
+		int res = ps.executeUpdate();
+		
+		if (res==0) throw new SQLWarning("Update variazione nucleo fallito? check It");
+	}
+	
+	private static Date convertDate(XMLGregorianCalendar data) 
+	{
+		GregorianCalendar c = data.toGregorianCalendar();
+		java.util.Date d = c.getTime();
+		java.sql.Date sqlDate = new java.sql.Date(d.getTime());
+		return sqlDate;
+	}
+
+	public static void updateFCartella(int id, CartellaType fcartella,
+			int idRichiedete, Integer idTipoTerzi, int idSegnalante,
+			int idAssistito, int idOperatore) throws ClassNotFoundException, SQLException {
+		
+		Connection con = ConnectionManagerDWH.getInstance().getConnection();
+		PreparedStatement ps = con.prepareStatement("UPDATE F_CARTELLA SET" +
+						" NUMERO_SCHEDA= ?," +
+						" PRESA_CARICO= ?," +
+						" DATA_ACCESSO= ?," +
+						" ID_ASSISTITO= ?," +
+						" ID_SEGNALANTE= ?," +
+						" ID_TIPO_TERZI= ?," +
+						" ID_RICHIEDENTE= ?," +
+						" ID_OPERATORE= ?," +
+						" INIZIO_PRESA_CARICO= ?," +
+						" FINE_PRESA_CARICO= ?," +
+						" GIORNATE_SETTIMANALI= ?," +
+						" NUMERO_PASTI_SETTIMANALI= ?," +
+						" NUMERO_TRASPORTI_SETTIMANALI= ?," +
+						" ORE_SETTIMANALI= ?," +
+						" DATA_DOMANDA= ? " +
+						" WHERE ID_CARTELLA= ?;");
+		ps.setString(1, fcartella.getNUMEROSCHEDA());
+		ps.setInt(2, fcartella.getPRESACARICO());
+		ps.setDate(3, convertDate(fcartella.getDATAACCESSO()));
+		ps.setInt(4, idAssistito);
+		ps.setInt(5, idSegnalante);
+		ps.setInt(6, idTipoTerzi);
+		ps.setInt(7, idRichiedete);
+		ps.setInt(8, idOperatore);
+		ps.setDate(9,convertDate(fcartella.getINIZIOPRESACARICO()));
+		ps.setDate(10, convertDate(fcartella.getFINEPRESACARICO()));
+		ps.setInt(11, fcartella.getGIORNATESETTIMANALI());
+		ps.setInt(12, fcartella.getNUMEROPASTISETTIMANALI());
+		ps.setInt(13, fcartella.getNUMEROTRASPORTISETTIMANALI());
+		ps.setInt(14, fcartella.getORESETTIMANALI());
+		ps.setDate(15, convertDate(fcartella.getDATADOMANDA()));
+		ps.setInt(16, id);
+		
+		int res = ps.executeUpdate();
+		
+		if (res==0) throw new SQLWarning("Update f_cartella fallito? check It");
+		return;
+		
 	}
 
 }
