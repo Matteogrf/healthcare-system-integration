@@ -46,6 +46,8 @@ public class CSIDataProducer
 		CreateInserimentoNucleoFamiliare();
 		System.out.println("\nInvio Assegnazione Area Utenza");
 		CreateAssegnazioneAreaUtenza();
+		System.out.println("\nInvio Revoca Area Utenza");
+		CreateRevocaAreaUtenza();
 		System.out.println("\nInvio Scheda accesso");
 		CreateSchedaAccesso();
 		System.out.println("\nInvio Presa in carico");
@@ -58,6 +60,41 @@ public class CSIDataProducer
 	
 
 
+
+	private static void CreateRevocaAreaUtenza() throws SQLException, DatatypeConfigurationException 
+	{
+		ResultSet pic = dataM.getAssegnazioneAreaUtenza();
+		ObjectFactory of = new ObjectFactory();	
+		while(pic.next())
+		{
+			EventType event = of.createEventType();			
+			event.setAssistito(extractPatient(pic, of));
+			event.setIntestazione(extractHeader(pic, of));
+			event.setDescrizione(extractDescrizione(pic,of));
+			event.setEvento(extractRevocaAreaUtenza(pic,of));
+			OperationType operation = of.createOperationType();
+			operation.setOperazioneCod("7");
+			operation.setOperazioneDescr("RevocaAreaUtenza");
+			event.setOperazione(operation);
+			String res=new Events_Service().getEventsSOAP().sendEvent(event);
+		
+			System.out.println("\tRes sendEvent: "+res);
+		}		
+	}
+
+	private static BodyType extractRevocaAreaUtenza(ResultSet pic,
+			ObjectFactory of) throws SQLException, DatatypeConfigurationException 
+	{
+		RevocaAreaUtenzaType r = of.createRevocaAreaUtenzaType();
+		
+		r.setAreaUtenzaCod( pic.getString("AreaUtenzaCod") );
+		r.setAreaUtenzaDescr( pic.getString("AreaUtenzaString") );
+		r.setPresaCaricoNum( pic.getInt("PresaInCaricoNum") );
+		r.setDataFineValidita(DateToXMLGregorianCalendar(pic.getDate("DataInizioValidita")));
+		BodyType b = of.createBodyType();
+		b.setRevocaAreaUtenza(r);
+		return b;
+	}
 
 	private static void CreateChiusuraPresaInCarico() throws SQLException, DatatypeConfigurationException 
 	{
