@@ -4,7 +4,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 xmlns:ns2="http://events.laboratory.unitn.it/">
 
 <xsl:template match="/ns2:EventNotificationRequest">
-<tns:SendMappedChanges xmlns:tns="http://events.laboratory.unitn.it" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://events.laboratory.unitn.it/MappedEvents.xsd ">
+<tns:SendMappedChanges xmlns:tns="http://wrapper.laboratory.unitn.it" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://wrapper.laboratory.unitn.it/MappedEvents.xsd ">
 <DWH_SCHEMA >
   <EVENT_TYPE>
     <EVENT_COD><xsl:value-of select="Descrizione/TipoEventoCod"/></EVENT_COD>
@@ -27,7 +27,7 @@ xmlns:ns2="http://events.laboratory.unitn.it/">
     <GESTORE_DESCR><xsl:value-of select="Descrizione/ProduttoreDescr"/></GESTORE_DESCR>
   </D_ASSISTITO>
     
-  <D_CARTELLA>
+  <F_CARTELLA>
     <NUMERO_SCHEDA></NUMERO_SCHEDA>
 	<PRESA_CARICO><xsl:value-of select="Evento/FinePresaInCarico/PresaCaricoNum"/></PRESA_CARICO>					
 	<DATA_ACCESSO></DATA_ACCESSO>
@@ -43,7 +43,7 @@ xmlns:ns2="http://events.laboratory.unitn.it/">
 	<NUMERO_TRASPORTI_SETTIMANALI></NUMERO_TRASPORTI_SETTIMANALI>
 	<ORE_SETTIMANALI></ORE_SETTIMANALI>
 	<DATA_DOMANDA></DATA_DOMANDA>
-  </D_CARTELLA>
+  </F_CARTELLA>
 
   
   <D_OPERATORE>

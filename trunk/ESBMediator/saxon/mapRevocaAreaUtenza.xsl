@@ -10,18 +10,8 @@ xmlns:ns2="http://events.laboratory.unitn.it/">
     <EVENT_COD><xsl:value-of select="Descrizione/TipoEventoCod"/></EVENT_COD>
     <EVENT_DESCR><xsl:value-of select="Descrizione/TipoEventoDescr"/></EVENT_DESCR>
   </EVENT_TYPE>
-  <D_NUCLEO_FAMILIARE>
-    <CODICE_NUCLEO><xsl:value-of select="Evento/InserimentoVariazioneNucleoFatto/CodiceNucleo"/></CODICE_NUCLEO>
-    <xsl:for-each select="Evento/InserimentoVariazioneNucleoFatto/Componente"> 
-    <COMPONENTE>
-    	<HASH_COD><xsl:value-of select="Nome"/>,<xsl:value-of select="Cognome"/>,<xsl:value-of select="CodiceFiscale"/></HASH_COD>
-    	<GRADO_PARENTELA_COD><xsl:value-of select="GradoParentelaCod"/></GRADO_PARENTELA_COD>
-    	<GRADO_PARENTELA_DESCR><xsl:value-of select="GradoParentelaDescr"/></GRADO_PARENTELA_DESCR>
-    	<DATA_NASCITA><xsl:value-of select="DataNascita"/></DATA_NASCITA>    
-    </COMPONENTE>
-    </xsl:for-each>   
-  </D_NUCLEO_FAMILIARE>
-   <D_ASSISTITO>
+  
+  <D_ASSISTITO>
     <ID_ANAGRAFE_LOCALE><xsl:value-of select="Assistito/IdAnagrafeLocale"/></ID_ANAGRAFE_LOCALE>
     <MITTENTE_NOME_ENTE><xsl:value-of select="Intestazione/Mittente/NomeEnte"/></MITTENTE_NOME_ENTE>
     <MITTENTE_URL_ENTE><xsl:value-of select="Intestazione/Mittente/UrlEnte"/></MITTENTE_URL_ENTE>
@@ -36,6 +26,31 @@ xmlns:ns2="http://events.laboratory.unitn.it/">
     <GESTORE_COD><xsl:value-of select="Descrizione/ProduttoreCod"/></GESTORE_COD>
     <GESTORE_DESCR><xsl:value-of select="Descrizione/ProduttoreDescr"/></GESTORE_DESCR>
   </D_ASSISTITO>
+    
+  <F_CARTELLA>
+    <NUMERO_SCHEDA><xsl:value-of select="Evento/RevocaAreaUtenza/PresaCaricoNum"/></NUMERO_SCHEDA>
+	<PRESA_CARICO></PRESA_CARICO>					
+	<DATA_ACCESSO></DATA_ACCESSO>
+	<ID_ASSISTITO></ID_ASSISTITO>
+	<ID_SEGNALANTE></ID_SEGNALANTE>
+	<ID_TIPO_TERZI></ID_TIPO_TERZI>
+	<ID_RICHIEDENTE></ID_RICHIEDENTE>
+	<ID_OPERATORE></ID_OPERATORE>
+	<INIZIO_PRESA_CARICO></INIZIO_PRESA_CARICO>
+	<FINE_PRESA_CARICO></FINE_PRESA_CARICO>
+	<GIORNATE_SETTIMANALI></GIORNATE_SETTIMANALI>
+	<NUMERO_PASTI_SETTIMANALI></NUMERO_PASTI_SETTIMANALI>
+	<NUMERO_TRASPORTI_SETTIMANALI></NUMERO_TRASPORTI_SETTIMANALI>
+	<ORE_SETTIMANALI></ORE_SETTIMANALI>
+	<DATA_DOMANDA></DATA_DOMANDA>
+  </F_CARTELLA>
+
+  <D_AREA_UTENZA>  				
+	<AREA_UTENZA_COD><xsl:value-of select="Evento/RevocaAreaUtenza/AreaUtenzaCod"/></AREA_UTENZA_COD>
+	<AREA_UTENZA_DESCR><xsl:value-of select="Evento/RevocaAreaUtenza/AreaUtenzaDescr"/></AREA_UTENZA_DESCR>
+	<DATA_FINE_VAL><xsl:value-of select="Evento/RevocaAreaUtenza/DataFineValidita"/></DATA_FINE_VAL>
+  </D_AREA_UTENZA>
+
   <D_OPERATORE>
     <OPERATORE_COD></OPERATORE_COD>
     <POLO_COD><xsl:value-of select="Descrizione/UnitaOrganizzativaCod"/></POLO_COD>
@@ -43,7 +58,6 @@ xmlns:ns2="http://events.laboratory.unitn.it/">
     <ENTE_GESTORE_COD><xsl:value-of select="Descrizione/ProduttoreCod"/></ENTE_GESTORE_COD>
     <ENTE_GESTORE_DESCR><xsl:value-of select="Descrizione/ProduttoreDescr"/></ENTE_GESTORE_DESCR>
   </D_OPERATORE>
-  
 </DWH_SCHEMA>
 </tns:SendMappedChanges>
 </xsl:template>

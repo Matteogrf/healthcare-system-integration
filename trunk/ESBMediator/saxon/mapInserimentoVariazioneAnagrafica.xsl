@@ -4,7 +4,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 xmlns:ns2="http://events.laboratory.unitn.it/">
 
 <xsl:template match="/ns2:EventNotificationRequest">
-<tns:SendMappedChanges xmlns:tns="http://events.laboratory.unitn.it" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://events.laboratory.unitn.it/MappedEvents.xsd ">
+<tns:SendMappedChanges xmlns:tns="http://wrapper.laboratory.unitn.it" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://wrapper.laboratory.unitn.it/MappedEvents.xsd ">
 <DWH_SCHEMA >
   <EVENT_TYPE>
     <EVENT_COD><xsl:value-of select="Descrizione/TipoEventoCod"/></EVENT_COD>

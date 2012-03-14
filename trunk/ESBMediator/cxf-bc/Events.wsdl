@@ -507,6 +507,9 @@
 							</xsd:restriction>
 						</xsd:simpleType>
 					</xsd:element>
+					
+					<xsd:element name="DataAccesso" type="xs:date"
+						minOccurs="1"/>
 
 				</xsd:sequence>
 			</xsd:complexType>
@@ -565,6 +568,8 @@
 							</xs:restriction>
 						</xs:simpleType>
 					</xsd:element>
+					
+					<xsd:element name="DataInizioValidita" minOccurs="1" type="xsd:date"/>
 
 				</xsd:sequence>
 			</xsd:complexType>
@@ -596,6 +601,7 @@
 						</xs:simpleType>
 					</xsd:element>
 
+					<xsd:element name="DataFineValidita" minOccurs="1" type="xsd:date"/>
 				</xsd:sequence>
 			</xsd:complexType>
 
@@ -877,7 +883,7 @@
 	</wsdl:binding>
 	<wsdl:service name="Events">
 		<wsdl:port binding="tns:EventsSOAP" name="EventsSOAP">
-			<soap:address location="http://10.22.14.11:8090/SourceEventReceiver" />
+			<soap:address location="http://192.168.1.42:8090/SourceEventReceiver" />
 			<!--<soap:address location="http://192.168.178.30:8090/SourceEventReceiver"/> -->
 		</wsdl:port>
 	</wsdl:service>
