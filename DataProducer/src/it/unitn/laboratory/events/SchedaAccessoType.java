@@ -4,7 +4,9 @@ package it.unitn.laboratory.events;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -87,6 +89,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
+ *         &lt;element name="DataAccesso" type="{http://www.w3.org/2001/XMLSchema}date"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -106,7 +109,8 @@ import javax.xml.bind.annotation.XmlType;
     "tipoTerziDescr",
     "nomeTerzi",
     "tipoSegnalanteCod",
-    "tipoSegnalanteDescr"
+    "tipoSegnalanteDescr",
+    "dataAccesso"
 })
 public class SchedaAccessoType {
 
@@ -130,6 +134,9 @@ public class SchedaAccessoType {
     protected Integer tipoSegnalanteCod;
     @XmlElement(name = "TipoSegnalanteDescr")
     protected String tipoSegnalanteDescr;
+    @XmlElement(name = "DataAccesso", required = true)
+    @XmlSchemaType(name = "date")
+    protected XMLGregorianCalendar dataAccesso;
 
     /**
      * Gets the value of the numeroScheda property.
@@ -369,6 +376,30 @@ public class SchedaAccessoType {
      */
     public void setTipoSegnalanteDescr(String value) {
         this.tipoSegnalanteDescr = value;
+    }
+
+    /**
+     * Gets the value of the dataAccesso property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getDataAccesso() {
+        return dataAccesso;
+    }
+
+    /**
+     * Sets the value of the dataAccesso property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setDataAccesso(XMLGregorianCalendar value) {
+        this.dataAccesso = value;
     }
 
 }

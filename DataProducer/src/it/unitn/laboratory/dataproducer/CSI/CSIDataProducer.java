@@ -115,7 +115,7 @@ public class CSIDataProducer
 		
 	}
 
-	private static BodyType extractSchedaAccesso(ResultSet rs, ObjectFactory of) throws SQLException 
+	private static BodyType extractSchedaAccesso(ResultSet rs, ObjectFactory of) throws SQLException, DatatypeConfigurationException 
 	{
 		SchedaAccessoType sac = of.createSchedaAccessoType();
 		
@@ -129,6 +129,7 @@ public class CSIDataProducer
 		sac.setTipoServizioRichiestoDescr(rs.getString("S.TipoServizioRichiestoDescr"));
 		sac.setTipoTerziCod(rs.getInt("S.TipoTerziCod"));
 		sac.setTipoTerziDescr(rs.getString("S.TipoTerziDescr"));
+		sac.setDataAccesso(DateToXMLGregorianCalendar(rs.getDate("S.DataAccesso")));
 		
 		BodyType b = of.createBodyType();
 		b.setSchedaAccesso(sac);
