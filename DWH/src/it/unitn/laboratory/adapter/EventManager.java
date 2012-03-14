@@ -58,7 +58,6 @@ public class EventManager
 			ResultSet rs;
 			int id;
 			int idPatient;
-			insertOperatore(dwhSCHEMA.getDOPERATORE());
 			for(ComponenteType ct : dwhSCHEMA.getDNUCLEOFAMILIARE().getCOMPONENTE()){
 				
 			  rs = qm.findComponenteNucleo(ct, dwhSCHEMA.getDNUCLEOFAMILIARE().getCODICENUCLEO());  
@@ -114,8 +113,7 @@ public class EventManager
 		int idSegnalante;
 		int idOperatore;
 		try
-		{
-			insertOperatore(dwhSCHEMA.getDOPERATORE());			
+		{			
 			QueryManager qmDWH = new QueryManager(ConnectionManagerDWH.getInstance());
 			QueryManager qmSTA = new QueryManager(ConnectionManagerSA.getInstance());
 			ResultSet rs;
@@ -186,16 +184,74 @@ public class EventManager
 
 	public static String presaInCarico(DwhSchemaType dwhSCHEMA) 
 	{
+		int idAssistito = 0;
 		try
-		{
-			insertOperatore(dwhSCHEMA.getDOPERATORE());			
+		{		
 			QueryManager qmDWH = new QueryManager(ConnectionManagerDWH.getInstance());
-			QueryManager qmSTA = new QueryManager(ConnectionManagerSA.getInstance());
 			
+			idAssistito = qmDWH.findIdAssistito(dwhSCHEMA.getDASSISTITO());
+			
+			if(idAssistito == 0) throw new StagingAreaException("Assistito not found in DWH");
+			
+			ResultSet rs = qmDWH.findCartella(DWHInsertSQL.convertDate(dwhSCHEMA.getFCARTELLA().getINIZIOPRESACARICO()), idAssistito);
+			
+			if(rs.next()) DWHUpdateSQL.updateFCartella(rs.getInt("ID_CARTELLA"), dwhSCHEMA.getFCARTELLA());
+			else 	throw new StagingAreaException("F_Cartella not found in DWH");	
 						
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+			return "ERRORE: "+ idAssistito + e.getMessage();
+		}
+		return "OK";
+	}
+
+	public static String assegnazioneAreaUtenza(DwhSchemaType dwhSCHEMA) {
+		int idAssistito = 0;
+		try
+		{		
+			QueryManager qmDWH = new QueryManager(ConnectionManagerDWH.getInstance());
+			
+			idAssistito = qmDWH.findIdAssistito(dwhSCHEMA.getDASSISTITO());
+			
+			if(idAssistito == 0) throw new StagingAreaException("Assistito not found in DWH");
+			
+			if(qmDWH.checkAreaUtenza(dwhSCHEMA.getDAREAUTENZA().getAREAUTENZACOD(),
+					                 DWHInsertSQL.convertDate(dwhSCHEMA.getDAREAUTENZA().getDATAINIZIOVAL()),
+					                 idAssistito) == 0){
+				DWHInsertSQL.insertAreaUtenza(idAssistito, dwhSCHEMA.getDAREAUTENZA());
+			}	
+			else return "OK, area utenza gia presente.";		
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return "ERRORE: "+ idAssistito + e.getMessage();
+		}
+		return "OK";
+	}
+
+	public static String revocaAreaUtenza(DwhSchemaType dwhSCHEMA) {
+		int idAssistito = 0;
+		int idAreaUtenza = 0;
+		try
+		{		
+			QueryManager qmDWH = new QueryManager(ConnectionManagerDWH.getInstance());
+			
+			idAssistito = qmDWH.findIdAssistito(dwhSCHEMA.getDASSISTITO());
+			
+			if(idAssistito == 0) throw new StagingAreaException("Assistito not found in DWH");
+			
+			idAreaUtenza = qmDWH.checkAreaUtenza(dwhSCHEMA.getDAREAUTENZA().getAREAUTENZACOD(), idAssistito);
+			
+			if(idAreaUtenza == 0)
+				throw new StagingAreaException("Area Utenza not found in DWH");				
+			else
+				DWHUpdateSQL.updateAreaUtenza(idAreaUtenza, dwhSCHEMA.getDAREAUTENZA());
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return "ERRORE: "+ idAssistito + e.getMessage();
 		}
 		return "OK";
 	}

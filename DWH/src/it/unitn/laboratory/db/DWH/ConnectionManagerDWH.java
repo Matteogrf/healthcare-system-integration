@@ -12,7 +12,7 @@ public class ConnectionManagerDWH implements ConnectionManager
 	private static final String DBName = "dwh"; // Name of the database
 	private static final String userName = "root";
 	private static final String pwd = "root";
-	private static final String address = "192.168.1.20:3306";//"192.168.1.41:3306";	
+	private static final String address = "192.168.1.43:3306";//"192.168.1.41:3306";	
 	private static Connection db;
 
 	private static ConnectionManagerDWH istance;

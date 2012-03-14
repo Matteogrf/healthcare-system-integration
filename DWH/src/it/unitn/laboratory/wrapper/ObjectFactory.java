@@ -69,7 +69,7 @@ public class ObjectFactory {
         return new AreaUtenzaType();
     }
 
-	/**
+    /**
      * Create an instance of {@link ComponenteType }
      * 
      */
@@ -93,7 +93,7 @@ public class ObjectFactory {
         return new RichiedenteType();
     }
 
-	/**
+    /**
      * Create an instance of {@link CartellaType }
      * 
      */
@@ -101,7 +101,7 @@ public class ObjectFactory {
         return new CartellaType();
     }
 
-	/**
+    /**
      * Create an instance of {@link EventType }
      * 
      */
@@ -117,7 +117,7 @@ public class ObjectFactory {
         return new SegnalanteType();
     }
 
-	/**
+    /**
      * Create an instance of {@link TipoTerziType }
      * 
      */
@@ -125,7 +125,7 @@ public class ObjectFactory {
         return new TipoTerziType();
     }
 
-	/**
+    /**
      * Create an instance of {@link NucleoFamiliareType }
      * 
      */

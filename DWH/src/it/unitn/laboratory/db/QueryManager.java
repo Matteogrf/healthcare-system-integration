@@ -1,6 +1,7 @@
 package it.unitn.laboratory.db;
 
 import it.unitn.laboratory.wrapper.AssistitoType;
+import it.unitn.laboratory.wrapper.CartellaType;
 import it.unitn.laboratory.wrapper.ComponenteType;
 import it.unitn.laboratory.wrapper.OperatoreType;
 import it.unitn.laboratory.wrapper.RichiedenteType;
@@ -8,6 +9,8 @@ import it.unitn.laboratory.wrapper.SegnalanteType;
 import it.unitn.laboratory.wrapper.TipoTerziType;
 
 import java.sql.*;
+
+import javax.xml.datatype.XMLGregorianCalendar;
 
 public class QueryManager 
 {
@@ -122,4 +125,56 @@ public class QueryManager
 			return 0;
 		return rs.getInt("ID_OPERATORE");
 	}
+
+	public boolean checkCartella(int idAssistito, Date dataaccesso) throws SQLException {
+		
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM F_CARTELLA " +
+								" WHERE ID_ASSISTITO = ? AND DATA_ACCESSO= ?;");
+		ps.setInt(1, idAssistito);
+		ps.setDate(2, dataaccesso);
+		ResultSet rs = ps.executeQuery();
+		
+		return rs.next();
+	}
+
+	public ResultSet findCartella(Date dataAccesso, int idAssistito) throws SQLException {
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM F_CARTELLA " +
+								" WHERE ID_ASSISTITO = ? AND DATA_ACCESSO= ?;");
+		ps.setInt(1, idAssistito);
+		ps.setDate(2, dataAccesso);
+		
+		return ps.executeQuery();
+		
+	}
+
+	public int checkAreaUtenza(Integer areautenzacod, Date dataInizioVal, int idAssistito) throws SQLException {
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM D_AREA_UTENZA " +
+								" WHERE ID_ASSISTITO = ? AND AREA_UTENZA_COD= ? AND DATA_INIZIO_VAL=?;");
+		ps.setInt(1, idAssistito);
+		ps.setInt(2, areautenzacod);
+		ps.setDate(3, dataInizioVal);
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next())
+			return rs.getInt("ID_AREA_UTENZA");
+		return 0;
+	}
+
+	public int checkAreaUtenza(Integer areautenzacod, int idAssistito) throws SQLException {
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM D_AREA_UTENZA " +
+								" WHERE ID_ASSISTITO = ? AND AREA_UTENZA_COD= ?;");
+		ps.setInt(1, idAssistito);
+		ps.setInt(2, areautenzacod);
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next())
+			return rs.getInt("ID_AREA_UTENZA");
+		return 0;
+	}
+
+	
 }
