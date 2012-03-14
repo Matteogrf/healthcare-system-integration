@@ -44,14 +44,15 @@ public class CSIDataProducer
 		CreateInserimentoVariazioneAnagrafica();
 		System.out.println("\nInvio Nucleo Familiare");
 		CreateInserimentoNucleoFamiliare();
+		System.out.println("\nInvio Assegnazione Area Utenza");
+		CreateAssegnazioneAreaUtenza();
 		System.out.println("\nInvio Scheda accesso");
 		CreateSchedaAccesso();
 		System.out.println("\nInvio Presa in carico");
 		CreatePresaInCarico();
 		System.out.println("\nInvio Chiura presa in carico");
 		CreateChiusuraPresaInCarico();
-		System.out.println("\nInvio Assegnazione area utenza");
-		CreateAssegnazioneAreaUtenza();
+
 		
 	}
 	
