@@ -221,7 +221,21 @@ public class DWHInsertSQL {
 		return sqlDate;
 	}
 
-
-
+	public static void createNewAssistito(AssistitoType assistito) throws ClassNotFoundException, SQLException 
+	{
+		Connection con = ConnectionManagerDWH.getInstance().getConnection();
+		PreparedStatement ps = con.prepareStatement("INSERT INTO D_ASSISTITO " +
+				"(ID_ANAGRAFE_LOCALE,HASH_COD,DATA_NASCITA,COMUNE_NASCITA_COD, COMUNE_RESIDENZA_COD) " +
+				"VALUES (?,MD5('"+assistito.getHASHCOD()+"'),?,?,?)");
+		ps.setInt(1, assistito.getIDANAGRAFELOCALE());
+		ps.setDate(2,convertDate(assistito.getDATANASCITA()));
+		ps.setInt(3, assistito.getCOMUNENASCITACOD());
+		ps.setInt(4, assistito.getCOMUNERESIDENZACOD());
+		ps.executeUpdate();
+		
+		int res = ps.executeUpdate();		
+		if (res==0) throw new SQLWarning("Inserimento NewAssistito fallito? check It");
+		return;
+	}
 
 }
