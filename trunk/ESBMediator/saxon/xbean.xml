@@ -48,4 +48,9 @@
 				endpoint="mappingRDA" 
 				resource="classpath:mapRicezioneDomandaAmministrativa.xsl"
 				result="String"/>
+				
+   <saxon:xslt service="tns:mappingFP"
+				endpoint="mappingFP" 
+				resource="classpath:mapFatturazionePeriodica.xsl"
+				result="String"/>
 </beans>

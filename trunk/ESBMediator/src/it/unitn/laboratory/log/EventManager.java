@@ -41,11 +41,21 @@ public class EventManager {
 				Node eventDescr = doc.getElementsByTagName("Descrizione").item(0);
 				NodeList descrAttrs = eventDescr.getChildNodes();
 				Node attr;
+				int eventCod;
 				String eventLog = "\nEvent Received -> ";
 				for (int i = 0; i < descrAttrs.getLength(); i++) {
 					attr = descrAttrs.item(i);
-					if (attr.getNodeName().equals("TipoEventoCod"))
-						eventLog += "Cod: " + attr.getTextContent();
+					if (attr.getNodeName().equals("TipoEventoCod")){
+						eventCod = Integer.parseInt(attr.getTextContent());
+						if(eventCod < 8)
+							eventLog += "From: CSI ";
+						if((eventCod > 7) & (eventCod < 10))
+							eventLog += "From: GA ";
+						if(eventCod > 9)
+							eventLog += "From: CD ";
+						
+						eventLog += "Cod: " + eventCod;
+					}
 					if (attr.getNodeName().equals("TipoEventoDescr"))
 						eventLog += " Descr: " + attr.getTextContent();
 				}

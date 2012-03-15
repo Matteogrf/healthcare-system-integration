@@ -22,7 +22,7 @@
 		<eip:rules>
 			<eip:routing-rule>
 				<eip:predicate>
-					<!-- Evento Inserimento Variazione Anagrafica -->
+					<!-- CSI: Evento Inserimento Variazione Anagrafica -->
 					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=1]" />
 				</eip:predicate>
 				<eip:target>
@@ -32,7 +32,7 @@
 			</eip:routing-rule>
 			<eip:routing-rule>
 				<eip:predicate>
-					<!-- Evento Inserimento Variazione Nucleo Fatto -->
+					<!-- CSI: Evento Inserimento Variazione Nucleo Fatto -->
 					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=2]" />
 				</eip:predicate>
 				<eip:target>
@@ -42,7 +42,7 @@
 			</eip:routing-rule>
 			<eip:routing-rule>
 				<eip:predicate>
-					<!-- Evento Scheda Accesso -->
+					<!-- CSI: Evento Scheda Accesso -->
 					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=3]" />
 				</eip:predicate>
 				<eip:target>
@@ -52,7 +52,7 @@
 			</eip:routing-rule>
 			<eip:routing-rule>
 				<eip:predicate>
-					<!-- Evento Inizio Presa in Carico -->
+					<!-- CSI: Evento Inizio Presa in Carico -->
 					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=4]" />
 				</eip:predicate>
 				<eip:target>
@@ -62,7 +62,7 @@
 			</eip:routing-rule>
 			<eip:routing-rule>
 				<eip:predicate>
-					<!-- Evento Fine Presa In Carico -->
+					<!-- CSI: Evento Fine Presa In Carico -->
 					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=5]" />
 				</eip:predicate>
 				<eip:target>
@@ -72,7 +72,7 @@
 			</eip:routing-rule>
 			<eip:routing-rule>
 				<eip:predicate>
-					<!-- Evento Assegnazione Area Utenza -->
+					<!-- CSI: Evento Assegnazione Area Utenza -->
 					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=6]" />
 				</eip:predicate>
 				<eip:target>
@@ -82,7 +82,7 @@
 			</eip:routing-rule>
 			<eip:routing-rule>
 				<eip:predicate>
-					<!-- Evento Revoca Area Utenza -->
+					<!-- CSI: Evento Revoca Area Utenza -->
 					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=7]" />
 				</eip:predicate>
 				<eip:target>
@@ -92,7 +92,17 @@
 			</eip:routing-rule>
 			<eip:routing-rule>
 				<eip:predicate>
-					<!-- Evento Revoca Area Utenza -->
+					<!-- GA: Evento Inserimento Variazione Anagrafica -->
+					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=8]" />
+				</eip:predicate>
+				<eip:target>
+					<eip:exchange-target service="tns:mapInserimentoVariazioneAnagrafica"
+						endpoint="IVA" />
+				</eip:target>
+			</eip:routing-rule>
+			<eip:routing-rule>
+				<eip:predicate>
+					<!-- GA: Evento Ricezione Domanda Amministrativa -->
 					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=9]" />
 				</eip:predicate>
 				<eip:target>
@@ -100,8 +110,29 @@
 						endpoint="RDA" />
 				</eip:target>
 			</eip:routing-rule>
+			<eip:routing-rule>
+				<eip:predicate>
+					<!-- CD: Evento Fatturazione Periodica -->
+					<eip:xpath-predicate xpath="/*[//Descrizione/TipoEventoCod=10]" />
+				</eip:predicate>
+				<eip:target>
+					<eip:exchange-target service="tns:mapFatturazionePeriodica"
+						endpoint="FP" />
+				</eip:target>
+			</eip:routing-rule>
 		</eip:rules>
 	</eip:content-based-router>
+	
+	<eip:static-routing-slip service="tns:mapFatturazionePeriodica"
+		endpoint="FP">
+		<eip:targets>
+			<eip:exchange-target service="tns:mappingFP"
+				endpoint="mappingFP"></eip:exchange-target>
+
+			<eip:exchange-target service="tns:forwardToDWH"
+				endpoint="DWH" />
+		</eip:targets>
+	</eip:static-routing-slip>
 	
 	<eip:static-routing-slip service="tns:mapRicezioneDomandaAmministrativa"
 		endpoint="RDA">
