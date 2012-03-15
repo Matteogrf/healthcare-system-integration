@@ -54,6 +54,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link FatturazioneType }
+     * 
+     */
+    public FatturazioneType createFatturazioneType() {
+        return new FatturazioneType();
+    }
+
+	/**
      * Create an instance of {@link AssistitoType }
      * 
      */
@@ -126,6 +134,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link EnteErogatoreType }
+     * 
+     */
+    public EnteErogatoreType createEnteErogatoreType() {
+        return new EnteErogatoreType();
+    }
+
+	/**
      * Create an instance of {@link NucleoFamiliareType }
      * 
      */
