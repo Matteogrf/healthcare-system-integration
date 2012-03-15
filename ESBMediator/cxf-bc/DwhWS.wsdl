@@ -37,6 +37,10 @@
 					</xsd:element>
 					<xsd:element maxOccurs="1" minOccurs="0" name="D_AREA_UTENZA" type="tns:AreaUtenzaType">
 					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="0" name="D_ENTE_EROGATORE" type="tns:EnteErogatoreType">
+					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="0" name="F_FATTURAZIONE" type="tns:FatturazioneType">
+					</xsd:element>
 				</xsd:sequence>
 			</xsd:complexType>
 
@@ -154,6 +158,34 @@
 					<xsd:element maxOccurs="1" minOccurs="0" name="ID_ASSISITITO" type="xsd:int"/>
 				</xsd:sequence>
 			</xsd:complexType>
+			<xsd:complexType name="EnteErogatoreType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ENTE_EROGATORE_COD" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ENTE_EROGATORE_DESCR" type="xsd:string"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="POLO_COD" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="POLO_DESCR" type="xsd:string"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ENTE_GESTORE_COD" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ENTE_GESTORE_DESCR" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="FatturazioneType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ID_FATTURAZIONE" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ID_ASSISTITO" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ID_ENTE_EROGATORE" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="DATA_INIZIO" type="xsd:date"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="DATA_FINE" type="xsd:date"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="IMPORTO_FATTURA" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="GIORNATE" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ACCESSO_SERVIZIO" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="NUMERO_PASTI" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="NUMERO_TRASPORTI" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="GIORNI_ASSENZA_GIUSTIFICATI" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="GIORNI_ASSENZA_NON_GIUSTIFICATI" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="ORE_EROGATE" type="xsd:int"/>
+					<xsd:element maxOccurs="1" minOccurs="0" name="DATA_FATTURA" type="xsd:date"/>
+				</xsd:sequence>
+			</xsd:complexType>
 		</xsd:schema>
   </wsdl:types>
   <wsdl:message name="SendMappedChangesResponse">
@@ -186,7 +218,7 @@
   </wsdl:binding>
   <wsdl:service name="DwhWS">
     <wsdl:port name="DwhWSSOAP" binding="tns:DwhWSSOAP">
-      <soap:address location="http://192.168.1.42:9090/DwhWS"/>
+      <soap:address location="http://192.168.1.41:9090/DwhWS"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
