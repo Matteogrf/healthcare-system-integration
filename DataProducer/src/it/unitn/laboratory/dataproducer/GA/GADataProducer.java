@@ -56,7 +56,7 @@ public class GADataProducer {
 		}		
 		
 	}
-	private static BodyType extractRicezioneDomandaAmministrativa(ResultSet pic) throws SQLException 
+	private static BodyType extractRicezioneDomandaAmministrativa(ResultSet pic) throws SQLException, DatatypeConfigurationException 
 	{
 		ObjectFactory of = new ObjectFactory();
 		RicezioneDomandaAmministrativaType r = of.createRicezioneDomandaAmministrativaType();
@@ -64,6 +64,7 @@ public class GADataProducer {
 		r.setNumeroPastiSettimanali( pic.getInt("R.NumeroPastiSettimanali") );
 		r.setNumeroTrasportiSettimanali( pic.getInt("R.NumeroTrasportiSettimanali") );
 		r.setOreSettimanali( pic.getInt("R.OreSettimanali") );
+		r.setDataDomanda( CommonPerocedures.DateToXMLGregorianCalendar(pic.getDate("DataDomanda")) );
 		BodyType b = of.createBodyType();
 		b.setRicezioneDomandaAmministrativa(r);
 		return b;

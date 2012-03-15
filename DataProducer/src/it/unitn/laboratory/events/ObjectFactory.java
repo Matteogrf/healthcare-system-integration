@@ -35,51 +35,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link EventType }
+     * Create an instance of {@link OperationType }
      * 
      */
-    public EventType createEventType() {
-        return new EventType();
-    }
-
-    /**
-     * Create an instance of {@link BodyType }
-     * 
-     */
-    public BodyType createBodyType() {
-        return new BodyType();
-    }
-
-    /**
-     * Create an instance of {@link MittenteType }
-     * 
-     */
-    public MittenteType createMittenteType() {
-        return new MittenteType();
-    }
-
-    /**
-     * Create an instance of {@link AssegnazioneAreaUtenzaType }
-     * 
-     */
-    public AssegnazioneAreaUtenzaType createAssegnazioneAreaUtenzaType() {
-        return new AssegnazioneAreaUtenzaType();
-    }
-
-    /**
-     * Create an instance of {@link PatientType }
-     * 
-     */
-    public PatientType createPatientType() {
-        return new PatientType();
-    }
-
-    /**
-     * Create an instance of {@link SchedaAccessoType }
-     * 
-     */
-    public SchedaAccessoType createSchedaAccessoType() {
-        return new SchedaAccessoType();
+    public OperationType createOperationType() {
+        return new OperationType();
     }
 
     /**
@@ -91,11 +51,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link InserimentoVariazioneNucleoFattoType }
+     * Create an instance of {@link FatturazionePeriodicaType }
      * 
      */
-    public InserimentoVariazioneNucleoFattoType createInserimentoVariazioneNucleoFattoType() {
-        return new InserimentoVariazioneNucleoFattoType();
+    public FatturazionePeriodicaType createFatturazionePeriodicaType() {
+        return new FatturazionePeriodicaType();
+    }
+
+    /**
+     * Create an instance of {@link InserimentoVariazioneAnagraficaType }
+     * 
+     */
+    public InserimentoVariazioneAnagraficaType createInserimentoVariazioneAnagraficaType() {
+        return new InserimentoVariazioneAnagraficaType();
+    }
+
+    /**
+     * Create an instance of {@link AssegnazioneAreaUtenzaType }
+     * 
+     */
+    public AssegnazioneAreaUtenzaType createAssegnazioneAreaUtenzaType() {
+        return new AssegnazioneAreaUtenzaType();
+    }
+
+    /**
+     * Create an instance of {@link DescriptionType }
+     * 
+     */
+    public DescriptionType createDescriptionType() {
+        return new DescriptionType();
     }
 
     /**
@@ -107,11 +91,75 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DescriptionType }
+     * Create an instance of {@link InserimentoVariazioneNucleoFattoType }
      * 
      */
-    public DescriptionType createDescriptionType() {
-        return new DescriptionType();
+    public InserimentoVariazioneNucleoFattoType createInserimentoVariazioneNucleoFattoType() {
+        return new InserimentoVariazioneNucleoFattoType();
+    }
+
+    /**
+     * Create an instance of {@link BodyType }
+     * 
+     */
+    public BodyType createBodyType() {
+        return new BodyType();
+    }
+
+    /**
+     * Create an instance of {@link PatientType }
+     * 
+     */
+    public PatientType createPatientType() {
+        return new PatientType();
+    }
+
+    /**
+     * Create an instance of {@link ChiusuraPresaInCaricoType }
+     * 
+     */
+    public ChiusuraPresaInCaricoType createChiusuraPresaInCaricoType() {
+        return new ChiusuraPresaInCaricoType();
+    }
+
+    /**
+     * Create an instance of {@link SchedaAccessoType }
+     * 
+     */
+    public SchedaAccessoType createSchedaAccessoType() {
+        return new SchedaAccessoType();
+    }
+
+    /**
+     * Create an instance of {@link MittenteType }
+     * 
+     */
+    public MittenteType createMittenteType() {
+        return new MittenteType();
+    }
+
+    /**
+     * Create an instance of {@link PresaInCaricoType }
+     * 
+     */
+    public PresaInCaricoType createPresaInCaricoType() {
+        return new PresaInCaricoType();
+    }
+
+    /**
+     * Create an instance of {@link SorgenteAnagrafeType }
+     * 
+     */
+    public SorgenteAnagrafeType createSorgenteAnagrafeType() {
+        return new SorgenteAnagrafeType();
+    }
+
+    /**
+     * Create an instance of {@link EventType }
+     * 
+     */
+    public EventType createEventType() {
+        return new EventType();
     }
 
     /**
@@ -128,54 +176,6 @@ public class ObjectFactory {
      */
     public RicezioneDomandaAmministrativaType createRicezioneDomandaAmministrativaType() {
         return new RicezioneDomandaAmministrativaType();
-    }
-
-    /**
-     * Create an instance of {@link ChiusuraPresaInCaricoType }
-     * 
-     */
-    public ChiusuraPresaInCaricoType createChiusuraPresaInCaricoType() {
-        return new ChiusuraPresaInCaricoType();
-    }
-
-    /**
-     * Create an instance of {@link SorgenteAnagrafeType }
-     * 
-     */
-    public SorgenteAnagrafeType createSorgenteAnagrafeType() {
-        return new SorgenteAnagrafeType();
-    }
-
-    /**
-     * Create an instance of {@link InserimentoVariazioneAnagraficaType }
-     * 
-     */
-    public InserimentoVariazioneAnagraficaType createInserimentoVariazioneAnagraficaType() {
-        return new InserimentoVariazioneAnagraficaType();
-    }
-
-    /**
-     * Create an instance of {@link PresaInCaricoType }
-     * 
-     */
-    public PresaInCaricoType createPresaInCaricoType() {
-        return new PresaInCaricoType();
-    }
-
-    /**
-     * Create an instance of {@link OperationType }
-     * 
-     */
-    public OperationType createOperationType() {
-        return new OperationType();
-    }
-
-    /**
-     * Create an instance of {@link FatturazionePeriodicaType }
-     * 
-     */
-    public FatturazionePeriodicaType createFatturazionePeriodicaType() {
-        return new FatturazionePeriodicaType();
     }
 
     /**
