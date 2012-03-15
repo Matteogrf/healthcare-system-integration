@@ -9,6 +9,7 @@ import it.unitn.laboratory.db.DWH.ConnectionManagerDWH;
 import it.unitn.laboratory.db.DWH.DWHInsertSQL;
 import it.unitn.laboratory.db.DWH.DWHUpdateSQL;
 import it.unitn.laboratory.db.StagingArea.ConnectionManagerSA;
+import it.unitn.laboratory.db.StagingArea.StagingArea;
 import it.unitn.laboratory.db.StagingArea.StagingAreaException;
 import it.unitn.laboratory.db.StagingArea.StagingAreaInsert;
 import it.unitn.laboratory.wrapper.AssistitoType;
@@ -25,12 +26,15 @@ public class EventManager
 	{
 		try 
 		{
-			insertOperatore(dwhSCHEMA.getDOPERATORE());
+			int id;
+			Operatore(dwhSCHEMA.getDOPERATORE());
 			AssistitoType assistito = dwhSCHEMA.getDASSISTITO();
+			
 			QueryManager qmDHW = new QueryManager(ConnectionManagerDWH.getInstance());
 			ResultSet rs = qmDHW.findAssistito( assistito );
-			int id;
-			if(rs.next()){
+			
+			if(rs.next())
+			{
 				id = rs.getInt("ID_ASSISTITO"); // Gia presente nel database. modifica
 				System.out.println("Update assistito");
 				DWHUpdateSQL.updateAssistito(assistito, id);
@@ -39,8 +43,7 @@ public class EventManager
 			{
 				System.out.println("Inserisco assistito");
 				DWHInsertSQL.insertAssistito(assistito);	
-			}
-			
+			}			
 		} 
 		catch (Exception e) 
 		{
@@ -49,7 +52,8 @@ public class EventManager
 		return "OK";		
 	}
 	
-	public static String inserimentoVariazioneNucleoFatto(DwhSchemaType dwhSCHEMA) {
+	public static String inserimentoVariazioneNucleoFatto(DwhSchemaType dwhSCHEMA) //TODO: Da aggiornare
+	{
 		try 
 		{
 			//Per ogni componente del nucleo controllo se gia presente nella DWH	
@@ -58,27 +62,29 @@ public class EventManager
 			ResultSet rs;
 			int id;
 			int idPatient;
-			for(ComponenteType ct : dwhSCHEMA.getDNUCLEOFAMILIARE().getCOMPONENTE()){
+			for(ComponenteType ct : dwhSCHEMA.getDNUCLEOFAMILIARE().getCOMPONENTE())
+			{
 				
-			  rs = qm.findComponenteNucleo(ct, dwhSCHEMA.getDNUCLEOFAMILIARE().getCODICENUCLEO());  
-			  if(rs.next()){ //gia presente nella DWH (update)				  
-		        id = rs.getInt("ID_NUCLEO");		        
-		        DWHUpdateSQL.updateComponenteNucleo(id, ct, dwhSCHEMA.getDNUCLEOFAMILIARE().getCODICENUCLEO());
-			  }
-			  else { //componente non presente nella DWH (insert)
+				  rs = qm.findComponenteNucleo(ct, dwhSCHEMA.getDNUCLEOFAMILIARE().getCODICENUCLEO());  
+				  if(rs.next()){ //gia presente nella DWH (update)				  
+			        id = rs.getInt("ID_NUCLEO");		        
+			        DWHUpdateSQL.updateComponenteNucleo(id, ct, dwhSCHEMA.getDNUCLEOFAMILIARE().getCODICENUCLEO());
+			 }
+			  else 
+			  { //componente non presente nella DWH (insert)
 				id = 0;
 			    rs = qm.findIdAssistito(ct.getHASHCOD());
-			    if(rs.next()){ // inserisco la variazione nucleo nella DWH
-			    	idPatient = rs.getInt("ID_ASSISTITO");
-			    	System.out.println("fuck:"+idPatient);
-			    	DWHInsertSQL.insertVariazioneNucleo(ct, idPatient, dwhSCHEMA.getDNUCLEOFAMILIARE().getCODICENUCLEO());
-			    }  
-				else throw new StagingAreaException("Patient associated to Nucleo:"+dwhSCHEMA.getDNUCLEOFAMILIARE().getCODICENUCLEO()+" not found");
-		      }
-			  
-			}
+			    if(rs.next())
+				    { // inserisco la variazione nucleo nella DWH
+				    	idPatient = rs.getInt("ID_ASSISTITO");
+				    	System.out.println("fuck:"+idPatient);
+				    	DWHInsertSQL.insertVariazioneNucleo(ct, idPatient, dwhSCHEMA.getDNUCLEOFAMILIARE().getCODICENUCLEO());
+				    }  
+					else throw new StagingAreaException("Patient associated to Nucleo:"+dwhSCHEMA.getDNUCLEOFAMILIARE().getCODICENUCLEO()+" not found");
+			  }
 			
-		} 
+			} 
+		}
 		catch (Exception e) 
 		{
 			return "ERRORE: "+e.getMessage();
@@ -86,7 +92,7 @@ public class EventManager
 		return "OK";	
 	}
 	
-	private static void insertOperatore(OperatoreType operatore) throws StagingAreaException
+	private static void Operatore(OperatoreType operatore) throws StagingAreaException
 	{
 		try 
 		{			
@@ -115,8 +121,6 @@ public class EventManager
 		try
 		{			
 			QueryManager qmDWH = new QueryManager(ConnectionManagerDWH.getInstance());
-			QueryManager qmSTA = new QueryManager(ConnectionManagerSA.getInstance());
-			ResultSet rs;
 			
 			//Insert or update richiedente
 			int idRichiedete = insertRichiedente(dwhSCHEMA.getDRICHIEDENTE());
@@ -124,15 +128,22 @@ public class EventManager
 			if(dwhSCHEMA.getDRICHIEDENTE().getRICHIEDENTECOD() == 2) //se codice richiedente è terzi
 			    	idTipoTerzi = insertTipoTerzi(dwhSCHEMA.getDTIPOTERZI());
 			else    idTipoTerzi = 0;
-			
-					
+								
 			idSegnalante = insertSegnalante(dwhSCHEMA.getDSEGNALANTE());
-			idAssistito = qmDWH.findIdAssistito(dwhSCHEMA.getDASSISTITO());
+			idAssistito = qmDWH.findOrCreateAssistito(dwhSCHEMA.getDASSISTITO());
 			idOperatore = qmDWH.findIdOperatore(dwhSCHEMA.getDOPERATORE());		
 			
-			if(idAssistito == 0) throw new StagingAreaException("Assistito not found in DWH");	
-									
-			DWHInsertSQL.insertFCartella(dwhSCHEMA.getFCARTELLA(), idRichiedete, idTipoTerzi, idSegnalante, idAssistito, idOperatore);
+			// todo : se la cartella clinica dell'utente esiste gia aggiornarla. E possibile ke ci sia gia qualcosa nella stagin area? bha	
+			ResultSet cartella = qmDWH.findCartella(idAssistito);
+			if(!cartella.next()) 
+			{
+				// Prima di inserire una nuova cartella controllo se ce qualche informazione nella staging area
+				StagingArea.getFCartellaInfo(idAssistito, dwhSCHEMA.getFCARTELLA());				
+				DWHInsertSQL.insertFCartella(dwhSCHEMA.getFCARTELLA(), idRichiedete, idTipoTerzi, idSegnalante, idAssistito, idOperatore);
+				StagingArea.deleteFCartellaInfo(idAssistito);
+			}
+			else DWHUpdateSQL.UpdateSchedaAccesso( cartella.getInt("ID_CARTELLa"), dwhSCHEMA.getFCARTELLA(),idRichiedete, idTipoTerzi, idSegnalante, idAssistito, idOperatore);
+		
 			return "OK";
 		}
 		catch(Exception e)
@@ -141,6 +152,7 @@ public class EventManager
 			return "ERRORE: "+ idAssistito + e.getMessage();
 		}
 	}
+
 
 	private static int insertSegnalante(SegnalanteType dsegnalante) throws ClassNotFoundException, SQLException {
 		QueryManager qmDWH = new QueryManager(ConnectionManagerDWH.getInstance());
@@ -189,15 +201,15 @@ public class EventManager
 		{		
 			QueryManager qmDWH = new QueryManager(ConnectionManagerDWH.getInstance());
 			
-			idAssistito = qmDWH.findIdAssistito(dwhSCHEMA.getDASSISTITO());
-			
-			if(idAssistito == 0) throw new StagingAreaException("Assistito not found in DWH");
-			
-			ResultSet rs = qmDWH.findCartella(DWHInsertSQL.convertDate(dwhSCHEMA.getFCARTELLA().getINIZIOPRESACARICO()), idAssistito);
-			
-			if(rs.next()) DWHUpdateSQL.updateFCartella(rs.getInt("ID_CARTELLA"), dwhSCHEMA.getFCARTELLA());
-			else 	throw new StagingAreaException("F_Cartella not found in DWH");	
+			idAssistito = qmDWH.findOrCreateAssistito(dwhSCHEMA.getDASSISTITO());
 						
+			ResultSet cartella = qmDWH.findCartella(idAssistito);
+			if(!cartella.next())
+				// Se non ce la scheda accesso butto queste info a marcire nella staging area. non si sa mai ke prima o poi servano
+				StagingArea.addPresaInCaricoInfo( idAssistito, dwhSCHEMA.getFCARTELLA() );
+			
+			else qmDWH.updatePresaInCaricoInfo(idAssistito, dwhSCHEMA.getFCARTELLA() );
+			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
