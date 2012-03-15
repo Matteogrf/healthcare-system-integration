@@ -17,7 +17,8 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "Events", targetNamespace = "http://events.laboratory.unitn.it/", wsdlLocation = "file:/home/michele/workspace/ESBMediator/cxf-bc/Events.wsdl")
+@WebServiceClient(name = "Events", targetNamespace = "http://events.laboratory.unitn.it/", 
+		wsdlLocation = "file:C:/Users/Matteo/workspace/ESBMediator/cxf-bc/Events.wsdl")
 public class Events_Service
     extends Service
 {
@@ -30,7 +31,7 @@ public class Events_Service
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/home/michele/workspace/ESBMediator/cxf-bc/Events.wsdl");
+            url = new URL("file:C:/Users/Matteo/workspace/ESBMediator/cxf-bc/Events.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
