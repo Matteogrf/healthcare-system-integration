@@ -1,5 +1,7 @@
 package it.unitn.laboratory.db.StagingArea;
 
+import it.unitn.laboratory.db.QueryManager;
+import it.unitn.laboratory.db.DWH.DWHInsertSQL;
 import it.unitn.laboratory.wrapper.CartellaType;
 
 import java.sql.Connection;
@@ -27,9 +29,8 @@ public class StagingArea {
 	public static void getFCartellaInfo(int idAssistito, CartellaType cartella) throws ClassNotFoundException, SQLException, DatatypeConfigurationException 
 	{
 		Connection con = ConnectionManagerSA.getInstance().getConnection();
-		PreparedStatement ps = con.prepareStatement("SELECT * FROM F_CARTELLA WHERE ID_ASSISTITO = ?");
-		ps.setInt(1, idAssistito);
-		ResultSet rs = ps.executeQuery();
+		QueryManager qm = new QueryManager(ConnectionManagerSA.getInstance());
+		ResultSet rs = qm.findCartella(idAssistito);
 		if(rs.next())
 		{
 			cartella.setPRESACARICO(			rs.getInt("PRESA_CARICO_NUM"));
@@ -43,10 +44,34 @@ public class StagingArea {
 		}
 	}
 
-	private static XMLGregorianCalendar DateToXMLGregorianCalendar(Date date) throws DatatypeConfigurationException 
+	public static XMLGregorianCalendar DateToXMLGregorianCalendar(Date date) throws DatatypeConfigurationException 
 	{
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(date);
 		return  DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);	
 	}
+
+	public static void addPresaInCaricoInfo(int idAssistito,
+			CartellaType fcartella)  throws ClassNotFoundException, SQLException 
+	{
+		Connection con = ConnectionManagerSA.getInstance().getConnection();
+		QueryManager qm = new QueryManager(ConnectionManagerSA.getInstance());
+		ResultSet rs = qm.findCartella(idAssistito);
+		if(rs.next())
+		{
+			// INSERT
+			PreparedStatement ps = con.prepareStatement("INSERT INTO F_CARTELLA " +
+					"( PRESA_CARICO_NUM, INIZIO_PRESA_CARICO, ID_ASSISTITO  ) " +
+					"VALUES (?,?,?)");
+			ps.setInt(1, fcartella.getPRESACARICO());
+			ps.setDate(2, DWHInsertSQL.convertDate(fcartella.getINIZIOPRESACARICO()));
+			ps.setInt(3, idAssistito);
+			ps.executeUpdate();
+		}
+		else qm.updatePresaInCaricoInfo(idAssistito, fcartella);
+		
+	}
+
+
+
 }

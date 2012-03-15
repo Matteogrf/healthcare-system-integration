@@ -1,5 +1,6 @@
 package it.unitn.laboratory.db;
 
+import it.unitn.laboratory.db.DWH.DWHInsertSQL;
 import it.unitn.laboratory.wrapper.AssistitoType;
 import it.unitn.laboratory.wrapper.CartellaType;
 import it.unitn.laboratory.wrapper.ComponenteType;
@@ -138,13 +139,11 @@ public class QueryManager
 		return rs.next();
 	}
 
-	public ResultSet findCartella(Date dataAccesso, int idAssistito) throws SQLException {
+	public ResultSet findCartella( int idAssistito) throws SQLException {
 		Connection con = cm.getConnection();
 		PreparedStatement ps = con.prepareStatement("SELECT * FROM F_CARTELLA " +
-								" WHERE ID_ASSISTITO = ? AND DATA_ACCESSO= ?;");
-		ps.setInt(1, idAssistito);
-		ps.setDate(2, dataAccesso);
-		
+								" WHERE ID_ASSISTITO = ?;");
+		ps.setInt(1, idAssistito);			
 		return ps.executeQuery();
 		
 	}
@@ -176,5 +175,35 @@ public class QueryManager
 		return 0;
 	}
 
+	public int findOrCreateAssistito(AssistitoType dassistito) throws SQLException, ClassNotFoundException 
+	{
+		int id = findIdAssistito(dassistito);
+		if(id==0) DWHInsertSQL.createNewAssistito(dassistito);
+		id = findIdAssistito(dassistito);
+		if(id==0) throw new SQLException("Non ho trovato l'assistito che ho appena inserito. son semo");
+		return id;		
+	}
+
+	public int findOrCreateOperatore(OperatoreType doperatore) throws SQLException 
+	{
+		int id = findIdOperatore(doperatore);
+		if(id==0) DWHInsertSQL.createNewOperatore(doperatore);
+		id = findIdOperatore(doperatore);
+		if(id==0) throw new SQLException("Non ho trovato l'assistito che ho appena inserito. son semo");
+		return id;
+	}
+	
+	public void updatePresaInCaricoInfo(int idAssistito, CartellaType fcartella) throws SQLException
+	{
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("UPDATE F_CARTELLA " +
+				"SET PRESA_CARICO_NUM = ?," +
+				"    INIZIO_PRESA_CARICO = ? " +
+				"WHERE ID_ASSISTITO = ?; ");
+		ps.setInt(1, fcartella.getPRESACARICO());
+		ps.setDate(2, DWHInsertSQL.convertDate(fcartella.getINIZIOPRESACARICO()));
+		ps.setInt(3, idAssistito);
+		ps.executeUpdate();
+	}
 	
 }

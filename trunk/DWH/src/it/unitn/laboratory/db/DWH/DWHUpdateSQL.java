@@ -209,4 +209,31 @@ public class DWHUpdateSQL {
 		return;
 	}
 
+	public static void UpdateSchedaAccesso(int idc, CartellaType fcartella,
+			int idRichiedete, Integer idTipoTerzi, int idSegnalante,
+			int idAssistito, int idOperatore) throws ClassNotFoundException, SQLException
+	{
+		Connection con = ConnectionManagerDWH.getInstance().getConnection();
+		PreparedStatement ps = con.prepareStatement("UPDATE F_CARTELLA SET" +
+						" NUMERO_SCHEDA= ?," +						
+						" DATA_ACCESSO= ?," +
+						" ID_ASSISTITO= ?," +
+						" ID_SEGNALANTE= ?," +
+						" ID_TIPO_TERZI= ?," +
+						" ID_RICHIEDENTE= ?," +
+						" ID_OPERATORE= ?" +						
+						" WHERE ID_CARTELLA= ?;");
+		ps.setString(1, fcartella.getNUMEROSCHEDA());
+		ps.setDate(2, convertDate(fcartella.getDATAACCESSO()));
+		ps.setInt(3, idAssistito);
+		ps.setInt(4, idSegnalante);
+		ps.setInt(5, idTipoTerzi);
+		ps.setInt(6, idRichiedete);
+		ps.setInt(7, idOperatore);
+		ps.setInt(8, idc);
+		int res = ps.executeUpdate();		
+		if (res==0) throw new SQLWarning("Update d_area_utenza fallito? check It");
+		return;
+	}
+
 }
