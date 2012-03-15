@@ -45,8 +45,12 @@ public class DwhWSImpl implements DwhWS {
 			case 2:  return EventManager.inserimentoVariazioneNucleoFatto(dwhSCHEMA);
 			case 3:  return EventManager.inserimentoSchedaAccesso(dwhSCHEMA);
 			case 4:  return EventManager.presaInCarico(dwhSCHEMA);
+			case 5:  return EventManager.chiusuraPresaInCarico(dwhSCHEMA);
 			case 6:  return EventManager.assegnazioneAreaUtenza(dwhSCHEMA);
 			case 7:  return EventManager.revocaAreaUtenza(dwhSCHEMA);
+			case 8:  return EventManager.inserimentoVariazioneAnagrafica(dwhSCHEMA);
+			case 9:  return EventManager.ricezioneDomandaAmministrativa(dwhSCHEMA);
+			case 10:  return EventManager.fatturazionePeriodica(dwhSCHEMA);
 			default: return "ERROR: type "+type+" not supported yet. I'm so sorry";
 		}        
     }
