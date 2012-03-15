@@ -26,19 +26,16 @@ xmlns:ns2="http://events.laboratory.unitn.it/">
     <GESTORE_COD><xsl:value-of select="Descrizione/ProduttoreCod"/></GESTORE_COD>
     <GESTORE_DESCR><xsl:value-of select="Descrizione/ProduttoreDescr"/></GESTORE_DESCR>
   </D_ASSISTITO>
-  <D_ENTE_EROGARORE>
+  <D_ENTE_EROGATORE>
 	<ENTE_EROGATORE_COD><xsl:value-of select="Evento/FatturazionePeriodica/CodiceCentro"/></ENTE_EROGATORE_COD>
 	<ENTE_EROGATORE_DESCR><xsl:value-of select="Evento/FatturazionePeriodica/DenominazioneCentro"/></ENTE_EROGATORE_DESCR>
 	<POLO_COD><xsl:value-of select="Descrizione/UnitaOrganizzativaCod"/></POLO_COD>
 	<POLO_DESCR><xsl:value-of select="Descrizione/UnitaOrganizzativaDescr"/></POLO_DESCR>
 	<ENTE_GESTORE_COD><xsl:value-of select="Descrizione/ProduttoreCod"/></ENTE_GESTORE_COD>
 	<ENTE_GESTORE_DESCR><xsl:value-of select="Descrizione/ProduttoreDescr"/></ENTE_GESTORE_DESCR>
-  </D_ENTE_EROGARORE> 
+  </D_ENTE_EROGATORE> 
 
   <F_FATTURAZIONE>
-	<ID_FATTURAZIONE></ID_FATTURAZIONE>
-	<ID_ASSISTITO></ID_ASSISTITO>
-	<ID_ENTE_EROGATORE></ID_ENTE_EROGATORE>
 	<DATA_INIZIO><xsl:value-of select="Evento/FatturazionePeriodica/DataInizio"/></DATA_INIZIO>
 	<DATA_FINE><xsl:value-of select="Evento/FatturazionePeriodica/DataFine"/></DATA_FINE>
 	<IMPORTO_FATTURA><xsl:value-of select="Evento/FatturazionePeriodica/ImportoFattura"/></IMPORTO_FATTURA>

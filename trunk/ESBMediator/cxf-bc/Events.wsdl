@@ -806,6 +806,13 @@
 							</xs:restriction>
 						</xs:simpleType>
 					</xsd:element>
+					
+					<xsd:element name="DataFattura" type="xs:date"
+						minOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Formato: YYYY-MM-DD</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:element name="EventNotificationRequest" type="tns:EventType">
