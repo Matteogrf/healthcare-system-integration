@@ -42,17 +42,17 @@ public class CSIDataProducer
 	private static void produceEvents() throws SQLException, DatatypeConfigurationException, ClassNotFoundException 
 	{	
 		System.out.println("Invio Variazione Anagrafica");
-		CreateInserimentoVariazioneAnagrafica();
+		//CreateInserimentoVariazioneAnagrafica();
 		System.out.println("\nInvio Nucleo Familiare");
-		CreateInserimentoNucleoFamiliare();
+		//CreateInserimentoNucleoFamiliare();
 		System.out.println("\nInvio Assegnazione Area Utenza");
-		CreateAssegnazioneAreaUtenza();
+		//CreateAssegnazioneAreaUtenza();
 		System.out.println("\nInvio Revoca Area Utenza");
-		CreateRevocaAreaUtenza();
+		//CreateRevocaAreaUtenza();
 		System.out.println("\nInvio Scheda accesso");
 		CreateSchedaAccesso();
 		System.out.println("\nInvio Presa in carico");
-		CreatePresaInCarico();
+		//CreatePresaInCarico();
 		System.out.println("\nInvio Chiura presa in carico");
 		CreateChiusuraPresaInCarico();
 	}
@@ -114,9 +114,13 @@ public class CSIDataProducer
 	private static BodyType extractChiusuraPresaInCarico(ResultSet rs,
 			ObjectFactory of) throws SQLException, DatatypeConfigurationException 
 	{
-		ChiusuraPresaInCaricoType  pic = of.createChiusuraPresaInCaricoType();
+
+		ChiusuraPresaInCaricoType pic = of.createChiusuraPresaInCaricoType();
+
 		pic.setPresaCaricoNum(rs.getInt("PI.PresaInCaricoNum"));
+
 		pic.setFinePresaInCarico(CommonPerocedures.DateToXMLGregorianCalendar(rs.getDate("PI.ChiusuraData")));
+
 		BodyType b = of.createBodyType();
 		b.setChiusuraPresaInCarico(pic);
 		return b;
