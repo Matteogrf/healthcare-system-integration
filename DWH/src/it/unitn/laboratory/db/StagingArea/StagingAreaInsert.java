@@ -83,6 +83,7 @@ public class StagingAreaInsert
 		ps.setInt(23, assistito.getGESTORECOD());
 		ps.setString(24, assistito.getGESTOREDESCR());
 
+
 		int res = ps.executeUpdate();	
 
 		if (res==0) throw new SQLWarning("Inserimanto operatore fallito? check It");
