@@ -20,7 +20,7 @@ import org.w3c.dom.NodeList;
 
 public class EventManager {
 
-	private static final boolean VERBOSE_MODE = false;
+	private static final boolean VERBOSE_MODE = true;
 
 	@Resource
 	private DeliveryChannel channel;
