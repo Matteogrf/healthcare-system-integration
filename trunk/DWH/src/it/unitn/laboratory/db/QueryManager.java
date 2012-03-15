@@ -4,6 +4,7 @@ import it.unitn.laboratory.db.DWH.DWHInsertSQL;
 import it.unitn.laboratory.wrapper.AssistitoType;
 import it.unitn.laboratory.wrapper.CartellaType;
 import it.unitn.laboratory.wrapper.ComponenteType;
+import it.unitn.laboratory.wrapper.EnteErogatoreType;
 import it.unitn.laboratory.wrapper.OperatoreType;
 import it.unitn.laboratory.wrapper.RichiedenteType;
 import it.unitn.laboratory.wrapper.SegnalanteType;
@@ -47,12 +48,16 @@ public class QueryManager
 		return ps.executeQuery();
 	}
 	
-	public ResultSet findIdAssistito(String hashcod) throws SQLException 
+
+	
+	public int findIdAssistito(String hashcod) throws SQLException 
 	{
 		Connection con = cm.getConnection();
 		PreparedStatement ps = con.prepareStatement("SELECT * FROM D_ASSISTITO " +
 								" WHERE HASH_COD = MD5('"+hashcod+"')");
-		return ps.executeQuery();
+		ResultSet rs = ps.executeQuery();
+		if(rs.next()) return rs.getInt("ID_ASSISTITO");
+		return 0;
 	}
 	
 	public ResultSet findComponenteNucleo(ComponenteType comp, int nucleo) throws SQLException 
@@ -101,6 +106,7 @@ public class QueryManager
 		PreparedStatement ps = con.prepareStatement("SELECT * FROM D_ASSISTITO " +
 								" WHERE HASH_COD = MD5('"+dassistito.getHASHCOD()+"')");
 		ResultSet rs = ps.executeQuery();
+
 		if(!rs.next())
 			return 0;
 		return rs.getInt("ID_ASSISTITO");
@@ -115,7 +121,7 @@ public class QueryManager
 		return ps.executeQuery();
 	}
 
-	public int findIdOperatore(OperatoreType doperatore) throws SQLException {
+	public Integer findIdOperatore(OperatoreType doperatore) throws SQLException {
 		Connection con = cm.getConnection();
 		PreparedStatement ps = con.prepareStatement("SELECT * FROM D_OPERATORE " +
 								" WHERE OPERATORE_COD = ? AND POLO_COD= ?;");
@@ -175,6 +181,17 @@ public class QueryManager
 		return 0;
 	}
 
+	public int findIdOperatoreInCartella(int idAssistito) throws SQLException {
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM F_CARTELLA " +
+								" WHERE ID_ASSISTITO = ?;");
+		ps.setInt(1, idAssistito);
+		ResultSet rs = ps.executeQuery();
+		if(rs.next())
+			return rs.getInt("ID_OPERATORE"); 
+		return 0;
+	}
+
 	public int findOrCreateAssistito(AssistitoType dassistito) throws SQLException, ClassNotFoundException 
 	{
 		int id = findIdAssistito(dassistito);
@@ -182,15 +199,6 @@ public class QueryManager
 		id = findIdAssistito(dassistito);
 		if(id==0) throw new SQLException("Non ho trovato l'assistito che ho appena inserito. son semo");
 		return id;		
-	}
-
-	public int findOrCreateOperatore(OperatoreType doperatore) throws SQLException 
-	{
-		int id = findIdOperatore(doperatore);
-		if(id==0) DWHInsertSQL.createNewOperatore(doperatore);
-		id = findIdOperatore(doperatore);
-		if(id==0) throw new SQLException("Non ho trovato l'assistito che ho appena inserito. son semo");
-		return id;
 	}
 	
 	public void updatePresaInCaricoInfo(int idAssistito, CartellaType fcartella) throws SQLException
@@ -205,5 +213,98 @@ public class QueryManager
 		ps.setInt(3, idAssistito);
 		ps.executeUpdate();
 	}
+
+	public void updateIdOperatoreInCartella(int idAssistito, int idOperatore) throws SQLException
+	{
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("UPDATE F_CARTELLA " +
+				"SET ID_OPERATORE = ? " +
+				"WHERE ID_ASSISTITO = ?; ");
+		ps.setInt(1, idOperatore);
+		ps.setInt(2, idAssistito);
+		ps.executeUpdate();
+		
+	}
+
+	public void updateAreaUtenzaInfo(int idAssistito, Integer presacarico) throws SQLException
+	{
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("UPDATE F_CARTELLA " +
+				"SET PRESA_CARICO_NUM = ? " +
+				"WHERE ID_ASSISTITO = ?; ");
+		ps.setInt(1, presacarico);
+		ps.setInt(2, idAssistito);
+		ps.executeUpdate();
+		
+	}
+
+	public void updateChiusuraPresaInCaricoInfo(int idAssistito, CartellaType fcartella) throws SQLException
+	{
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("UPDATE F_CARTELLA " +
+				"SET PRESA_CARICO_NUM = ?," +
+				" FINE_PRESA_CARICO = ? " +
+				"WHERE ID_ASSISTITO = ?; ");
+		ps.setInt(1, fcartella.getPRESACARICO());
+		ps.setDate(2, DWHInsertSQL.convertDate(fcartella.getFINEPRESACARICO()));
+		ps.setInt(3, idAssistito);
+		ps.executeUpdate();
+		
+	}
+
+	public void updateDomandaAmministrativaInfo(int idAssistito, CartellaType fcartella) throws SQLException
+	{
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("UPDATE F_CARTELLA " +
+				"SET DATA_DOMANDA = ?," +
+				" GIORNATE_SETTIMANALI = ?, " +
+				" NUMERO_PASTI_SETTIMANALI = ?, " +
+				" NUMERO_TRASPORTI_SETTIMANALI = ?, " +
+				" ORE_SETTIMANALI = ? " +
+				"WHERE ID_ASSISTITO = ?; ");
+		ps.setDate(1, DWHInsertSQL.convertDate(fcartella.getDATADOMANDA()));
+		ps.setInt(2, fcartella.getGIORNATESETTIMANALI());
+		ps.setInt(3, fcartella.getNUMEROPASTISETTIMANALI());
+		ps.setInt(4, fcartella.getNUMEROTRASPORTISETTIMANALI());
+		ps.setInt(5, fcartella.getORESETTIMANALI());
+		ps.setInt(6, idAssistito);
+		ps.executeUpdate();
+		
+	}
+
+	public int findOrCreateErogatore(EnteErogatoreType denteerogatore) throws SQLException, ClassNotFoundException
+	{
+		int id = findIdErogatore(denteerogatore.getENTEEROGATORECOD());
+		if(id==0) DWHInsertSQL.createNewErogatore(denteerogatore);
+		id = findIdErogatore(denteerogatore.getENTEEROGATORECOD());
+		if(id==0) throw new SQLException("Non ho trovato l'erogatore che ho appena inserito. son semo");
+		return id;		
+	}
+
+	private int findIdErogatore(Integer enteerogatorecod) throws SQLException
+	{
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM D_ENTE_EROGATORE " +
+								" WHERE ENTE_EROGATORE_COD = ?;");
+		ps.setInt(1, enteerogatorecod);
+		ResultSet rs = ps.executeQuery();
+		if(!rs.next())
+			return 0;
+		return rs.getInt("ID_ENTE_EROGATORE");
+	}
+
+	public int findFatturazione(int idAssistito, int idErogatore) throws SQLException
+	{
+		Connection con = cm.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM F_FATTURAZIONE " +
+								" WHERE ID_ASSISTITO= ?" +
+								" AND ID_ENTE_EROGATORE = ?;");
+		ps.setInt(1, idAssistito);
+		ps.setInt(2, idErogatore);
+		ResultSet rs = ps.executeQuery();
+		if(rs.next()) return rs.getInt("ID_FATTURAZIONE");
+		return 0;
+	}
+
 	
 }

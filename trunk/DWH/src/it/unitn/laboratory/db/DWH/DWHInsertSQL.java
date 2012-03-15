@@ -6,6 +6,8 @@ import it.unitn.laboratory.wrapper.AreaUtenzaType;
 import it.unitn.laboratory.wrapper.AssistitoType;
 import it.unitn.laboratory.wrapper.CartellaType;
 import it.unitn.laboratory.wrapper.ComponenteType;
+import it.unitn.laboratory.wrapper.EnteErogatoreType;
+import it.unitn.laboratory.wrapper.FatturazioneType;
 import it.unitn.laboratory.wrapper.OperatoreType;
 import it.unitn.laboratory.wrapper.RichiedenteType;
 import it.unitn.laboratory.wrapper.SegnalanteType;
@@ -231,11 +233,71 @@ public class DWHInsertSQL {
 		ps.setDate(2,convertDate(assistito.getDATANASCITA()));
 		ps.setInt(3, assistito.getCOMUNENASCITACOD());
 		ps.setInt(4, assistito.getCOMUNERESIDENZACOD());
+		
+		int res = ps.executeUpdate();		
+		if (res==0) throw new SQLWarning("Inserimento NewAssistito fallito? check It");
+		return;
+	}
+
+	public static void insertAssistito(ComponenteType ct) throws ClassNotFoundException, SQLException
+	{
+		Connection con = ConnectionManagerDWH.getInstance().getConnection();
+		PreparedStatement ps = con.prepareStatement("INSERT INTO D_ASSISTITO " +
+				"(HASH_COD,DATA_NASCITA) " +
+				"VALUES (MD5('"+ct.getHASHCOD()+"'),?)");
+		ps.setDate(1, convertDate(ct.getDATANASCITA()));
 		ps.executeUpdate();
 		
 		int res = ps.executeUpdate();		
 		if (res==0) throw new SQLWarning("Inserimento NewAssistito fallito? check It");
 		return;
+	}
+
+	public static void createNewErogatore(EnteErogatoreType denteerogatore) throws ClassNotFoundException, SQLException
+	{
+		Connection con = ConnectionManagerDWH.getInstance().getConnection();
+		PreparedStatement ps = con.prepareStatement("INSERT INTO D_ENTE_EROGATORE " +
+						"(ENTE_EROGATORE_COD, ENTE_EROGATORE_DESCR, POLO_COD, POLO_DESCR, ENTE_GESTORE_COD, ENTE_GESTORE_DESCR ) " +
+						"VALUES (?,?,?,?,?,?)");
+		ps.setInt(1, denteerogatore.getENTEEROGATORECOD());
+		ps.setString(2, denteerogatore.getENTEEROGATOREDESCR());
+		ps.setInt(3, denteerogatore.getPOLOCOD());
+		ps.setString(4, denteerogatore.getPOLODESCR());
+		ps.setInt(5, denteerogatore.getENTEGESTORECOD());
+		ps.setString(6, denteerogatore.getENTEGESTOREDESCR());
+		int res = ps.executeUpdate();
+		
+		if (res==0) throw new SQLWarning("Inserimanto operatore fallito? check It");
+		
+	}
+
+	public static void addFatturazioneInfo(int idAssistito, int idErogatore, FatturazioneType ffatturazione) throws ClassNotFoundException, SQLException
+	{
+		Connection con = ConnectionManagerDWH.getInstance().getConnection();
+		PreparedStatement ps = con.prepareStatement("INSERT INTO F_FATTURAZIONE " +
+						"(ID_ASSISTITO, ID_ENTE_EROGATORE, DATA_INIZIO, DATA_FINE, IMPORTO_FATTURA," +
+						" GIORNATE, ACCESSI_SERVIZIO, NUMERO_PASTI, NUMERO_TRASPORTI," +
+						" GIORNI_ASSENZA_GIUSTIFICATI, GIORNI_ASSENZA_NON_GIUSTIFICATI, " +
+						" ORE_EROGATE, DATA_FATTURA ) " +
+						"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		
+		ps.setInt(1, idAssistito);
+		ps.setInt(2, idErogatore);
+		ps.setDate(3, convertDate(ffatturazione.getDATAINIZIO()));
+		ps.setDate(4, convertDate(ffatturazione.getDATAFINE()));
+		ps.setInt(5, ffatturazione.getIMPORTOFATTURA());
+		ps.setInt(6, ffatturazione.getGIORNATE());
+		ps.setInt(7, ffatturazione.getACCESSOSERVIZIO());
+		ps.setInt(8, ffatturazione.getNUMEROPASTI());
+		ps.setInt(9, ffatturazione.getNUMEROTRASPORTI());
+		ps.setInt(10, ffatturazione.getGIORNIASSENZAGIUSTIFICATI());
+		ps.setInt(11, ffatturazione.getGIORNIASSENZANONGIUSTIFICATI());
+		ps.setInt(12, ffatturazione.getOREEROGATE());
+		ps.setDate(13, convertDate(ffatturazione.getDATAFATTURA()));		
+		int res = ps.executeUpdate();
+		
+		if (res==0) throw new SQLWarning("Inserimanto operatore fallito? check It");
+		
 	}
 
 }

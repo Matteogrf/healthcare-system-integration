@@ -5,6 +5,7 @@ import it.unitn.laboratory.wrapper.AreaUtenzaType;
 import it.unitn.laboratory.wrapper.AssistitoType;
 import it.unitn.laboratory.wrapper.CartellaType;
 import it.unitn.laboratory.wrapper.ComponenteType;
+import it.unitn.laboratory.wrapper.FatturazioneType;
 import it.unitn.laboratory.wrapper.NucleoFamiliareType;
 import it.unitn.laboratory.wrapper.OperatoreType;
 
@@ -195,12 +196,26 @@ public class DWHUpdateSQL {
 		return;
     }
 
-	public static void updateAreaUtenza(int idAreaUtenza, AreaUtenzaType dareautenza) throws ClassNotFoundException, SQLException {
+	public static void updateRevocaAreaUtenza(int idAreaUtenza, AreaUtenzaType dareautenza) throws ClassNotFoundException, SQLException {
 		Connection con = ConnectionManagerDWH.getInstance().getConnection();
 		PreparedStatement ps = con.prepareStatement("UPDATE D_AREA_UTENZA SET" +
 						" DATA_FINE_VAL= ?" +
 						" WHERE ID_AREA_UTENZA= ?;");
 		ps.setDate(1, convertDate(dareautenza.getDATAFINEVAL()));
+		ps.setInt(2, idAreaUtenza);
+		
+		int res = ps.executeUpdate();
+		
+		if (res==0) throw new SQLWarning("Update d_area_utenza fallito? check It");
+		return;
+	}
+	
+	public static void updateInizioAreaUtenza(int idAreaUtenza, AreaUtenzaType dareautenza) throws ClassNotFoundException, SQLException {
+		Connection con = ConnectionManagerDWH.getInstance().getConnection();
+		PreparedStatement ps = con.prepareStatement("UPDATE D_AREA_UTENZA SET" +
+						" DATA_INIZIO_VAL= ?" +
+						" WHERE ID_AREA_UTENZA= ?;");
+		ps.setDate(1, convertDate(dareautenza.getDATAINIZIOVAL()));
 		ps.setInt(2, idAreaUtenza);
 		
 		int res = ps.executeUpdate();
@@ -234,6 +249,46 @@ public class DWHUpdateSQL {
 		int res = ps.executeUpdate();		
 		if (res==0) throw new SQLWarning("Update d_area_utenza fallito? check It");
 		return;
+	}
+
+	public static void updateFatturazioneInfo(int idFatturazione, int idAssistito, int idErogatore, FatturazioneType ffatturazione) throws ClassNotFoundException, SQLException
+	{
+		Connection con = ConnectionManagerDWH.getInstance().getConnection();
+		PreparedStatement ps = con.prepareStatement("UPDATE F_FATTURAZIONE SET " +
+						" ID_ASSISTITO = ?," +
+						" ID_ENTE_EROGATORE = ?," +
+						" DATA_INIZIO = ?," +
+						" DATA_FINE = ?," +
+						" IMPORTO_FATTURA = ?," +
+						" GIORNATE = ?," +
+						" ACCESSI_SERVIZIO = ?," +
+						" NUMERO_PASTI = ?," +
+						" NUMERO_TRASPORTI = ?," +
+						" GIORNI_ASSENZA_GIUSTIFICATI = ?," +
+						" GIORNI_ASSENZA_NON_GIUSTIFICATI = ?," +
+						" ORE_EROGATE = ?," +
+						" DATA_FATTURA = ?" +
+						" WHERE ID_FATTURA = ? " +
+						"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		
+		ps.setInt(1, idAssistito);
+		ps.setInt(2, idErogatore);
+		ps.setDate(3, convertDate(ffatturazione.getDATAINIZIO()));
+		ps.setDate(4, convertDate(ffatturazione.getDATAFINE()));
+		ps.setInt(5, ffatturazione.getIMPORTOFATTURA());
+		ps.setInt(6, ffatturazione.getGIORNATE());
+		ps.setInt(7, ffatturazione.getACCESSOSERVIZIO());
+		ps.setInt(8, ffatturazione.getNUMEROPASTI());
+		ps.setInt(9, ffatturazione.getNUMEROTRASPORTI());
+		ps.setInt(10, ffatturazione.getGIORNIASSENZAGIUSTIFICATI());
+		ps.setInt(11, ffatturazione.getGIORNIASSENZANONGIUSTIFICATI());
+		ps.setInt(12, ffatturazione.getOREEROGATE());
+		ps.setDate(13, convertDate(ffatturazione.getDATAFATTURA()));	
+		ps.setInt(14, idFatturazione);	
+		int res = ps.executeUpdate();
+		
+		if (res==0) throw new SQLWarning("Inserimanto operatore fallito? check It");
+		
 	}
 
 }
