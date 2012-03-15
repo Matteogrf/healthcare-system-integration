@@ -18,6 +18,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
+import it.unitn.laboratory.dataproducer.CommonPerocedures;
 import it.unitn.laboratory.dataproducer.DB.DataManager;
 import it.unitn.laboratory.events.*;
 
@@ -63,10 +64,7 @@ public class CSIDataProducer
 		ObjectFactory of = new ObjectFactory();	
 		while(pic.next())
 		{
-			EventType event = of.createEventType();			
-			event.setAssistito(extractPatient(pic, of));
-			event.setIntestazione(extractHeader(pic, of));
-			event.setDescrizione(extractDescrizione(pic,of));
+			EventType event = CommonPerocedures.setCommonPart(pic);
 			event.setEvento(extractRevocaAreaUtenza(pic,of));
 			OperationType operation = of.createOperationType();
 			operation.setOperazioneCod("7");
@@ -88,7 +86,7 @@ public class CSIDataProducer
 		r.setAreaUtenzaCod( pic.getString("AreaUtenzaCod") );
 		r.setAreaUtenzaDescr( pic.getString("AreaUtenzaString") );
 		r.setPresaCaricoNum( pic.getInt("PresaInCaricoNum") );
-		r.setDataFineValidita(DateToXMLGregorianCalendar(pic.getDate("DataInizioValidita")));
+		r.setDataFineValidita(CommonPerocedures.DateToXMLGregorianCalendar(pic.getDate("DataInizioValidita")));
 		BodyType b = of.createBodyType();
 		b.setRevocaAreaUtenza(r);
 		return b;
@@ -100,11 +98,7 @@ public class CSIDataProducer
 		ObjectFactory of = new ObjectFactory();	
 		while(rs.next())
 		{					
-			EventType event = of.createEventType();	
-		
-			event.setAssistito(extractPatient(rs, of));
-			event.setIntestazione(extractHeader(rs, of));
-			event.setDescrizione(extractDescrizione(rs,of));
+			EventType event = CommonPerocedures.setCommonPart(rs);
 			event.setEvento(extractChiusuraPresaInCarico(rs,of));
 			OperationType operation = of.createOperationType();
 			operation.setOperazioneCod("5");
@@ -120,11 +114,11 @@ public class CSIDataProducer
 	private static BodyType extractChiusuraPresaInCarico(ResultSet rs,
 			ObjectFactory of) throws SQLException, DatatypeConfigurationException 
 	{
-		PresaInCaricoType pic = of.createPresaInCaricoType();
+		ChiusuraPresaInCaricoType  pic = of.createChiusuraPresaInCaricoType();
 		pic.setPresaCaricoNum(rs.getInt("PI.PresaInCaricoNum"));
-		pic.setInizioPresaInCarico(DateToXMLGregorianCalendar(rs.getDate("PI.ChiusuraData")));
+		pic.setFinePresaInCarico(CommonPerocedures.DateToXMLGregorianCalendar(rs.getDate("PI.ChiusuraData")));
 		BodyType b = of.createBodyType();
-		b.setPresaInCarico(pic);
+		b.setChiusuraPresaInCarico(pic);
 		return b;
 	}
 
@@ -134,11 +128,7 @@ public class CSIDataProducer
 		ObjectFactory of = new ObjectFactory();	
 		while(rs.next())
 		{					
-			EventType event = of.createEventType();	
-		
-			event.setAssistito(extractPatient(rs, of));
-			event.setIntestazione(extractHeader(rs, of));
-			event.setDescrizione(extractDescrizione(rs,of));
+			EventType event = CommonPerocedures.setCommonPart(rs);
 			event.setEvento(extractSchedaAccesso(rs,of));
 			OperationType operation = of.createOperationType();
 			operation.setOperazioneCod("3");
@@ -165,7 +155,7 @@ public class CSIDataProducer
 		sac.setTipoServizioRichiestoDescr(rs.getString("S.TipoServizioRichiestoDescr"));
 		sac.setTipoTerziCod(rs.getInt("S.TipoTerziCod"));
 		sac.setTipoTerziDescr(rs.getString("S.TipoTerziDescr"));
-		sac.setDataAccesso(DateToXMLGregorianCalendar(rs.getDate("S.DataAccesso")));
+		sac.setDataAccesso(CommonPerocedures.DateToXMLGregorianCalendar(rs.getDate("S.DataAccesso")));
 		
 		BodyType b = of.createBodyType();
 		b.setSchedaAccesso(sac);
@@ -178,11 +168,7 @@ public class CSIDataProducer
 		ObjectFactory of = new ObjectFactory();	
 		while(rs.next())
 		{					
-			EventType event = of.createEventType();	
-		
-			event.setAssistito(extractPatient(rs, of));
-			event.setIntestazione(extractHeader(rs, of));
-			event.setDescrizione(extractDescrizione(rs,of));
+			EventType event = CommonPerocedures.setCommonPart(rs);
 			event.setEvento(extractPresaInCarico(rs,of));
 			OperationType operation = of.createOperationType();
 			operation.setOperazioneCod("4");
@@ -197,7 +183,7 @@ public class CSIDataProducer
 	private static BodyType extractPresaInCarico(ResultSet rs, ObjectFactory of) throws SQLException, DatatypeConfigurationException {
 		PresaInCaricoType pic = of.createPresaInCaricoType();
 		pic.setPresaCaricoNum(rs.getInt("PI.PresaInCaricoNum"));
-		pic.setInizioPresaInCarico(DateToXMLGregorianCalendar(rs.getDate("PI.PresaInCaricoData")));
+		pic.setInizioPresaInCarico(CommonPerocedures.DateToXMLGregorianCalendar(rs.getDate("PI.PresaInCaricoData")));
 		BodyType b = of.createBodyType();
 		b.setPresaInCarico(pic);
 		return b;
@@ -209,10 +195,7 @@ public class CSIDataProducer
 		ObjectFactory of = new ObjectFactory();	
 		while(pic.next())
 		{
-			EventType event = of.createEventType();			
-			event.setAssistito(extractPatient(pic, of));
-			event.setIntestazione(extractHeader(pic, of));
-			event.setDescrizione(extractDescrizione(pic,of));
+			EventType event = CommonPerocedures.setCommonPart(pic);
 			event.setEvento(extractAssegnazioneAreaUtenza(pic,of));
 			OperationType operation = of.createOperationType();
 			operation.setOperazioneCod("6");
@@ -231,7 +214,7 @@ public class CSIDataProducer
 		a.setAreaUtenzaCod( pic.getString("AreaUtenzaCod") );
 		a.setAreaUtenzaDescr( pic.getString("AreaUtenzaString") );
 		a.setPresaCaricoNum( pic.getInt("PresaInCaricoNum") );
-		a.setDataInizioValidita(DateToXMLGregorianCalendar(pic.getDate("DataInizioValidita")));
+		a.setDataInizioValidita(CommonPerocedures.DateToXMLGregorianCalendar(pic.getDate("DataInizioValidita")));
 		BodyType b = of.createBodyType();
 		b.setAssegnazioneAreaUtenza(a);
 		return b;
@@ -244,10 +227,7 @@ public class CSIDataProducer
 		while(ev.next())
 		{
 			
-			EventType event = of.createEventType();			
-			event.setAssistito(extractPatient(ev, of));
-			event.setIntestazione(extractHeader(ev, of));
-			event.setDescrizione(extractDescrizione(ev,of));
+			EventType event = CommonPerocedures.setCommonPart(ev);
 			event.setEvento(extractInserimentoNucleaoFamiliare(ev,of));
 		
 			OperationType operation = of.createOperationType();
@@ -273,7 +253,7 @@ public class CSIDataProducer
 			c.setNome( rs.getString("P.Nome") );
 			c.setCognome(rs.getString("P.Cognome"));
 			c.setCodiceFiscale(rs.getString("P.CodiceFiscale"));
-			c.setDataNascita( DateToXMLGregorianCalendar(rs.getDate("P.DataNascita"))  );
+			c.setDataNascita( CommonPerocedures.DateToXMLGregorianCalendar(rs.getDate("P.DataNascita"))  );
 			c.setGradoParentelaCod( rs.getInt("N.GradoParentelaCod") );
 			c.setGradoParentelaDescr( rs.getString("N.GradoParentelaDescr") );
 			l.add(c);
@@ -287,30 +267,21 @@ public class CSIDataProducer
 	private static void CreateInserimentoVariazioneAnagrafica() throws SQLException, DatatypeConfigurationException 
 	{
 		ResultSet iva = dataM.getInserimentoVariazioneAnagrafica();
+		ObjectFactory of = new ObjectFactory();	
 		while(iva.next())
 		{
-			ObjectFactory of = new ObjectFactory();			
-			EventType event = of.createEventType();	
-		
-			event.setAssistito(extractPatient(iva, of));
-			event.setIntestazione(extractHeader(iva, of));
-			event.setDescrizione(extractDescrizione(iva,of));
+			EventType event = CommonPerocedures.setCommonPart(iva);
 			event.setEvento(extractEventInserimentoVariazioneAnagrafica(iva,of));
-			event.setOperazione(extractOperation(of));
+			OperationType operation = of.createOperationType();
+			operation.setOperazioneCod("1");
+			operation.setOperazioneDescr("Inserimento");
 		
 			String res=new Events_Service().getEventsSOAP().sendEvent(event);
 			System.out.println("\tRes sendEvent: "+res);
 		}			
 	}
 
-	private static OperationType extractOperation(ObjectFactory of) 
-	{
-		OperationType operation = of.createOperationType();
-		operation.setOperazioneCod("1");
-		operation.setOperazioneDescr("Inserimento");
-		return operation;
-	}
-
+	
 	private static BodyType extractEventInserimentoVariazioneAnagrafica(ResultSet iva, ObjectFactory of) throws SQLException {
 		BodyType body = of.createBodyType();
 		InserimentoVariazioneAnagraficaType ivat = of.createInserimentoVariazioneAnagraficaType();
@@ -332,58 +303,6 @@ public class CSIDataProducer
 		return body;
 	}
 
-	private static DescriptionType extractDescrizione(ResultSet iva,
-			ObjectFactory of) throws DatatypeConfigurationException, SQLException 
-	{
-		DescriptionType description = of.createDescriptionType();
-		
-		description.setIdInterventoPratica( iva.getInt("ED.IdInterventoPratica") );
-		description.setProduttoreCod( iva.getInt("ED.ProduttoreCod") );
-		description.setProduttoreDescr( iva.getString("ED.ProduttoreDescr"));
-		description.setServizioCod( iva.getInt("ED.ServizioCod") );
-		description.setServizioDescr( iva.getString("ED.ServizioDescr") );
-		description.setTipoEventoCod( iva.getInt("ED.TipoEventoCod") );
-		description.setTipoEventoDescr( iva.getString("ED.TipoEventoDescr") );
-		description.setUnitaOrganizzativaCod( iva.getInt("ED.UnitaOrganizzativaCod") );
-		description.setUnitaOrganizzativaDescr( iva.getString("ED.UnitaOrganizzativaDescr") );
-		
-		description.setDataOraEvento( DateToXMLGregorianCalendar( iva.getDate("ED.DataOraEvento") ) );
-		description.setDataOraRegEvento( DateToXMLGregorianCalendar( iva.getDate("ED.DataOraRegEvento") ) );
-		return description;
-	}
 
-	private static HeaderType extractHeader(ResultSet iva, ObjectFactory of) throws SQLException {
-		HeaderType header = of.createHeaderType();
-		header.setIdEvento(iva.getString("H.IdHeader"));
-		MittenteType mt = of.createMittenteType();
-		mt.setNomeEnte(iva.getString("H.NomeEnte"));
-		mt.setUrlEnte(iva.getString("H.UrlEnteMittente"));
-		header.setMittente(mt);
-		SorgenteAnagrafeType sat = of.createSorgenteAnagrafeType();
-		sat.setIdAnagrafe(iva.getString("H.IdAnagrafe"));
-		sat.setUrlEnte(iva.getString("H.UrlEnteAnagrafe"));
-		header.setSorgenteAnagrafe(sat);
-		return header;
-	}
-
-	private static PatientType extractPatient(ResultSet iva, ObjectFactory of) throws SQLException, DatatypeConfigurationException 
-	{
-		PatientType patient = of.createPatientType();
-		patient.setNome( iva.getString("P.Nome") );
-		patient.setCognome(iva.getString("P.Cognome"));
-		patient.setCodiceFiscale(iva.getString("P.CodiceFiscale"));
-		patient.setComuneNascitaCod(iva.getInt("P.ComuneNascitaCod"));
-		patient.setComuneResidenzaCod(iva.getInt("P.ComuneResidenzaCod"));		
-		patient.setIdAnagrafeLocale(iva.getInt("P.IdAnagrafeLocale"));		
-	    patient.setDataNascita( DateToXMLGregorianCalendar( iva.getDate("P.DataNascita") ) );
-		return patient;
-	}
-
-	public static XMLGregorianCalendar DateToXMLGregorianCalendar(Date date) throws DatatypeConfigurationException 
-	{
-		GregorianCalendar cal = new GregorianCalendar();
-		cal.setTime(date);
-		return  DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);	
-	}
 }
 
