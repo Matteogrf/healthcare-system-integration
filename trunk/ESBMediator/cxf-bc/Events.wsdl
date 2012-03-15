@@ -660,7 +660,12 @@
 							</xs:restriction>
 						</xs:simpleType>
 					</xsd:element>
-
+					<xsd:element name="DataDomanda" type="xs:date"
+						minOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Formato: YYYY-MM-DD</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
 				</xsd:sequence>
 			</xsd:complexType>
 
