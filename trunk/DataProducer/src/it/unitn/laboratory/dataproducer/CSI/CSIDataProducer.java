@@ -54,12 +54,8 @@ public class CSIDataProducer
 		CreatePresaInCarico();
 		System.out.println("\nInvio Chiura presa in carico");
 		CreateChiusuraPresaInCarico();
-
-		
 	}
 	
-
-
 
 	private static void CreateRevocaAreaUtenza() throws SQLException, DatatypeConfigurationException 
 	{
