@@ -93,5 +93,18 @@ public class DataManager
 			return ps.executeQuery();		
 	}
 
+	public ResultSet getDomandeAmministrative() throws SQLException 
+	{
+		PreparedStatement ps  = conn.getConnection().prepareStatement("SELECT * FROM Events E, EventDescription ED, Header H, Patient P, ricezionedomandaamministrativa R " +
+				  "WHERE ED.TipoEventoCod = 9 AND " +
+				  "ED.IdEvent = E.IdEventDescr AND " +
+				  "E.IdPatient = P.idAnagrafeLocale AND " +
+				  "E.IdHeader = H.IdHeader AND " +
+				  "R.IdRicezione = E.idEvent;");			  
+				 
+		return ps.executeQuery();		
+		
+	}
+
 
 }
