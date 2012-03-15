@@ -27,18 +27,7 @@ xmlns:ns2="http://events.laboratory.unitn.it/">
     <GESTORE_DESCR><xsl:value-of select="Descrizione/ProduttoreDescr"/></GESTORE_DESCR>
   </D_ASSISTITO>
     
-  <F_CARTELLA>
-    <NUMERO_SCHEDA></NUMERO_SCHEDA>
-	<PRESA_CARICO></PRESA_CARICO>					
-	<DATA_ACCESSO></DATA_ACCESSO>
-	<ID_ASSISTITO></ID_ASSISTITO>
-	<ID_SEGNALANTE></ID_SEGNALANTE>
-	<ID_TIPO_TERZI></ID_TIPO_TERZI>
-	<ID_RICHIEDENTE></ID_RICHIEDENTE>
-	<ID_OPERATORE></ID_OPERATORE>
-	<INIZIO_PRESA_CARICO></INIZIO_PRESA_CARICO>
-	<FINE_PRESA_CARICO></FINE_PRESA_CARICO>
-	<GIORNATE_SETTIMANALI><xsl:value-of select="Evento/RicezioneDomandaAmministrativa/GiornateSettimanali"/></GIORNATE_SETTIMANALI>
+  <F_CARTELLA><GIORNATE_SETTIMANALI><xsl:value-of select="Evento/RicezioneDomandaAmministrativa/GiornateSettimanali"/></GIORNATE_SETTIMANALI>
 	<NUMERO_PASTI_SETTIMANALI><xsl:value-of select="Evento/RicezioneDomandaAmministrativa/NumeroPastiSettimanali"/></NUMERO_PASTI_SETTIMANALI>
 	<NUMERO_TRASPORTI_SETTIMANALI><xsl:value-of select="Evento/RicezioneDomandaAmministrativa/NumeroTrasportiSettimanali"/></NUMERO_TRASPORTI_SETTIMANALI>
 	<ORE_SETTIMANALI><xsl:value-of select="Evento/RicezioneDomandaAmministrativa/OreSettimanali"/></ORE_SETTIMANALI>
