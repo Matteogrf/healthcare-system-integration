@@ -4,7 +4,9 @@ package it.unitn.laboratory.events;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -45,6 +47,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
+ *         &lt;element name="DataDomanda" type="{http://www.w3.org/2001/XMLSchema}date"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -58,7 +61,8 @@ import javax.xml.bind.annotation.XmlType;
     "giornateSettimanali",
     "numeroPastiSettimanali",
     "numeroTrasportiSettimanali",
-    "oreSettimanali"
+    "oreSettimanali",
+    "dataDomanda"
 })
 public class RicezioneDomandaAmministrativaType {
 
@@ -70,6 +74,9 @@ public class RicezioneDomandaAmministrativaType {
     protected Integer numeroTrasportiSettimanali;
     @XmlElement(name = "OreSettimanali")
     protected Integer oreSettimanali;
+    @XmlElement(name = "DataDomanda", required = true)
+    @XmlSchemaType(name = "date")
+    protected XMLGregorianCalendar dataDomanda;
 
     /**
      * Gets the value of the giornateSettimanali property.
@@ -165,6 +172,30 @@ public class RicezioneDomandaAmministrativaType {
      */
     public void setOreSettimanali(Integer value) {
         this.oreSettimanali = value;
+    }
+
+    /**
+     * Gets the value of the dataDomanda property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getDataDomanda() {
+        return dataDomanda;
+    }
+
+    /**
+     * Sets the value of the dataDomanda property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setDataDomanda(XMLGregorianCalendar value) {
+        this.dataDomanda = value;
     }
 
 }

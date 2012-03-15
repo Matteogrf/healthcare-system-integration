@@ -106,5 +106,16 @@ public class DataManager
 		
 	}
 
+	public ResultSet getFatturazioniPeriodiche() throws SQLException {
+		PreparedStatement ps  = conn.getConnection().prepareStatement("SELECT * FROM Events E, EventDescription ED, Header H, Patient P, fatturazioneperiodica F" +
+				  " WHERE ED.TipoEventoCod = 10 AND " +
+				  "ED.IdEvent = E.IdEventDescr AND " +
+				  "E.IdPatient = P.idAnagrafeLocale AND " +
+				  "E.IdHeader = H.IdHeader AND " +
+				  "F.IdEvent = E.idEvent;");			  
+				 
+		return ps.executeQuery();			
+	}
+
 
 }

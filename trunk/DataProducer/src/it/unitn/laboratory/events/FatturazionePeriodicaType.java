@@ -91,6 +91,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
+ *         &lt;element name="DataFattura" type="{http://www.w3.org/2001/XMLSchema}date"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -112,7 +113,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "numeroTrasporti",
     "giorniAssenzaGiustificati",
     "giorniAssenzaNonGiustificati",
-    "oreErogate"
+    "oreErogate",
+    "dataFattura"
 })
 public class FatturazionePeriodicaType {
 
@@ -142,6 +144,9 @@ public class FatturazionePeriodicaType {
     protected Integer giorniAssenzaNonGiustificati;
     @XmlElement(name = "OreErogate")
     protected Integer oreErogate;
+    @XmlElement(name = "DataFattura", required = true)
+    @XmlSchemaType(name = "date")
+    protected XMLGregorianCalendar dataFattura;
 
     /**
      * Gets the value of the codiceCentro property.
@@ -413,6 +418,30 @@ public class FatturazionePeriodicaType {
      */
     public void setOreErogate(Integer value) {
         this.oreErogate = value;
+    }
+
+    /**
+     * Gets the value of the dataFattura property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getDataFattura() {
+        return dataFattura;
+    }
+
+    /**
+     * Sets the value of the dataFattura property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setDataFattura(XMLGregorianCalendar value) {
+        this.dataFattura = value;
     }
 
 }
