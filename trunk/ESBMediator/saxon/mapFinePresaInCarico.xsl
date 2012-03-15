@@ -28,9 +28,8 @@ xmlns:ns2="http://events.laboratory.unitn.it/">
   </D_ASSISTITO>
     
   <F_CARTELLA>
-    <NUMERO_SCHEDA></NUMERO_SCHEDA>
-	<PRESA_CARICO><xsl:value-of select="Evento/FinePresaInCarico/PresaCaricoNum"/></PRESA_CARICO>					
-	<FINE_PRESA_CARICO><xsl:value-of select="Evento/FinePresaInCarico/DataChiusura"/></FINE_PRESA_CARICO>
+   	<PRESA_CARICO><xsl:value-of select="Evento/ChiusuraPresaInCarico/PresaCaricoNum"/></PRESA_CARICO>					
+	<FINE_PRESA_CARICO><xsl:value-of select="Evento/ChiusuraPresaInCarico/FinePresaInCarico"/></FINE_PRESA_CARICO>
   </F_CARTELLA>
 
   

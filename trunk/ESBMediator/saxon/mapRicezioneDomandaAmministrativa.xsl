@@ -34,12 +34,6 @@ xmlns:ns2="http://events.laboratory.unitn.it/">
 	<DATA_DOMANDA><xsl:value-of select="Evento/RicezioneDomandaAmministrativa/DataDomanda"/></DATA_DOMANDA>
   </F_CARTELLA>
 
-  <D_AREA_UTENZA>  				
-	<AREA_UTENZA_COD><xsl:value-of select="Evento/AssegnazioneAreaUtenza/AreaUtenzaCod"/></AREA_UTENZA_COD>
-	<AREA_UTENZA_DESCR><xsl:value-of select="Evento/AssegnazioneAreaUtenza/AreaUtenzaDescr"/></AREA_UTENZA_DESCR>
-	<DATA_INIZIO_VAL><xsl:value-of select="Evento/AssegnazioneAreaUtenza/DataInizioValidita"/></DATA_INIZIO_VAL>
-  </D_AREA_UTENZA>
-
   <D_OPERATORE>
     <OPERATORE_COD></OPERATORE_COD>
     <POLO_COD><xsl:value-of select="Descrizione/UnitaOrganizzativaCod"/></POLO_COD>

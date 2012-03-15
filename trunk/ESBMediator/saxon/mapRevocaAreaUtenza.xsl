@@ -28,7 +28,7 @@ xmlns:ns2="http://events.laboratory.unitn.it/">
   </D_ASSISTITO>
     
   <F_CARTELLA>
-    <NUMERO_SCHEDA><xsl:value-of select="Evento/RevocaAreaUtenza/PresaCaricoNum"/></NUMERO_SCHEDA>
+    <PRESA_CARICO><xsl:value-of select="Evento/RevocaAreaUtenza/PresaCaricoNum"/></PRESA_CARICO>
   </F_CARTELLA>
 
   <D_AREA_UTENZA>  				
