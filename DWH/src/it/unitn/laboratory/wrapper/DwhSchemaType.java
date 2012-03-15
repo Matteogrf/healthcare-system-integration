@@ -26,6 +26,8 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="D_TIPO_TERZI" type="{http://wrapper.laboratory.unitn.it}TipoTerziType" minOccurs="0"/>
  *         &lt;element name="D_SEGNALANTE" type="{http://wrapper.laboratory.unitn.it}SegnalanteType" minOccurs="0"/>
  *         &lt;element name="D_AREA_UTENZA" type="{http://wrapper.laboratory.unitn.it}AreaUtenzaType" minOccurs="0"/>
+ *         &lt;element name="D_ENTE_EROGATORE" type="{http://wrapper.laboratory.unitn.it}EnteErogatoreType" minOccurs="0"/>
+ *         &lt;element name="F_FATTURAZIONE" type="{http://wrapper.laboratory.unitn.it}FatturazioneType" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -44,7 +46,9 @@ import javax.xml.bind.annotation.XmlType;
     "drichiedente",
     "dtipoterzi",
     "dsegnalante",
-    "dareautenza"
+    "dareautenza",
+    "denteerogatore",
+    "ffatturazione"
 })
 public class DwhSchemaType {
 
@@ -67,7 +71,12 @@ public class DwhSchemaType {
     @XmlElement(name = "D_AREA_UTENZA")
     protected AreaUtenzaType dareautenza;
 
-    /**
+    @XmlElement(name = "D_ENTE_EROGATORE")
+    protected EnteErogatoreType denteerogatore;
+	@XmlElement(name = "F_FATTURAZIONE")
+    protected FatturazioneType ffatturazione;
+
+	/**
      * Gets the value of the eventtype property.
      * 
      * @return
@@ -281,6 +290,54 @@ public class DwhSchemaType {
      */
     public void setDAREAUTENZA(AreaUtenzaType value) {
         this.dareautenza = value;
+    }
+
+	/**
+     * Gets the value of the denteerogatore property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link EnteErogatoreType }
+     *     
+     */
+    public EnteErogatoreType getDENTEEROGATORE() {
+        return denteerogatore;
+    }
+
+	/**
+     * Sets the value of the denteerogatore property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link EnteErogatoreType }
+     *     
+     */
+    public void setDENTEEROGATORE(EnteErogatoreType value) {
+        this.denteerogatore = value;
+    }
+
+	/**
+     * Gets the value of the ffatturazione property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link FatturazioneType }
+     *     
+     */
+    public FatturazioneType getFFATTURAZIONE() {
+        return ffatturazione;
+    }
+
+	/**
+     * Sets the value of the ffatturazione property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link FatturazioneType }
+     *     
+     */
+    public void setFFATTURAZIONE(FatturazioneType value) {
+        this.ffatturazione = value;
     }
 
 }
