@@ -95,7 +95,7 @@ CREATE TABLE `f_fatturazione` (
   KEY `fk_F_FATTURAZIONE_D_ASSISTITO` (`ID_ASSISTITO`),
   CONSTRAINT `fk_F_FATTURAZIONE_D_ASSISTITO` FOREIGN KEY (`ID_ASSISTITO`) REFERENCES `d_assistito` (`ID_ASSISTITO`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_F_FATTURAZIONE_D_ENTE_EROGATORE` FOREIGN KEY (`ID_ENTE_EROGATORE`) REFERENCES `d_ente_erogatore` (`ID_ENTE_EROGATORE`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin2;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin2;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,6 +104,7 @@ CREATE TABLE `f_fatturazione` (
 
 LOCK TABLES `f_fatturazione` WRITE;
 /*!40000 ALTER TABLE `f_fatturazione` DISABLE KEYS */;
+INSERT INTO `f_fatturazione` VALUES (1,60,1,'2012-03-15','2012-03-15',4324.00,44.00,5.00,34.00,2.00,10.00,5.00,123.00,'2012-03-14'),(2,66,2,'2012-03-10','2012-03-10',2131.00,43.00,8.00,20.00,12.00,22.00,3.00,155.00,'2012-03-15'),(3,62,3,'2011-12-30','2011-12-30',987.00,32.00,5.00,12.00,6.00,11.00,2.00,179.00,'2012-03-15'),(4,59,4,'2012-03-10','2012-03-10',4445.00,30.00,8.00,22.00,3.00,2.00,0.00,32.00,'2012-03-15'),(5,59,5,'2012-01-26','2012-01-26',1200.00,50.00,2.00,8.00,8.00,4.00,1.00,60.00,'2012-03-15');
 /*!40000 ALTER TABLE `f_fatturazione` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +229,7 @@ CREATE TABLE `d_ente_erogatore` (
   `ENTE_GESTORE_COD` int(11) DEFAULT NULL,
   `ENTE_GESTORE_DESCR` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`ID_ENTE_EROGATORE`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin2;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin2;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -237,6 +238,7 @@ CREATE TABLE `d_ente_erogatore` (
 
 LOCK TABLES `d_ente_erogatore` WRITE;
 /*!40000 ALTER TABLE `d_ente_erogatore` DISABLE KEYS */;
+INSERT INTO `d_ente_erogatore` VALUES (1,'1','S.A.D.',717,'Val di Sole',156,'RSA di Montagnaga di Pine'),(2,'2','F.A.I.',717,'Val di Sole',156,'RSA di Montagnaga di Pine'),(3,'3','DELFINO',717,'Val di Sole',156,'RSA di Montagnaga di Pine'),(4,'4','ALTRO',717,'Val di Sole',156,'RSA di Montagnaga di Pine'),(5,'970','non codificato',717,'Val di Sole',156,'RSA di Montagnaga di Pine');
 /*!40000 ALTER TABLE `d_ente_erogatore` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -529,4 +531,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-03-15 15:39:49
+-- Dump completed on 2012-03-15 16:14:27
