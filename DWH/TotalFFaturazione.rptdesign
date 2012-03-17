@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.2.v20120213 Build &lt;3.7.2.v20120214-1408></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="7">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
+            <property name="odaURL">jdbc:mysql://localhost:3306/dwh</property>
+            <property name="odaUser">root</property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="totals" id="8">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">ID_ASSISTITO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">ID_ASSISTITO</text-property>
+                    <text-property name="heading">ID_ASSISTITO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">IMPORTO_FATTURA</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">IMPORTO_FATTURA</text-property>
+                    <text-property name="heading">IMPORTO_FATTURA</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ACCESSI_SERVIZIO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">ACCESSI_SERVIZIO</text-property>
+                    <text-property name="heading">ACCESSI_SERVIZIO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">NUMERO_PASTI</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">NUMERO_PASTI</text-property>
+                    <text-property name="heading">NUMERO_PASTI</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">NUMERO_TRASPORTI</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">NUMERO_TRASPORTI</text-property>
+                    <text-property name="heading">NUMERO_TRASPORTI</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ORE_EROGATE</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">ORE_EROGATE</text-property>
+                    <text-property name="heading">ORE_EROGATE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">TOTAL</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">TOTAL</text-property>
+                    <text-property name="heading">TOTAL</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ID_ASSISTITO</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">IMPORTO_FATTURA</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">ACCESSI_SERVIZIO</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">NUMERO_PASTI</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">NUMERO_TRASPORTI</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">ORE_EROGATE</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">TOTAL</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">ID_ASSISTITO</property>
+                    <property name="nativeName">ID_ASSISTITO</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">IMPORTO_FATTURA</property>
+                    <property name="nativeName">IMPORTO_FATTURA</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">ACCESSI_SERVIZIO</property>
+                    <property name="nativeName">ACCESSI_SERVIZIO</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">NUMERO_PASTI</property>
+                    <property name="nativeName">NUMERO_PASTI</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">NUMERO_TRASPORTI</property>
+                    <property name="nativeName">NUMERO_TRASPORTI</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">ORE_EROGATE</property>
+                    <property name="nativeName">ORE_EROGATE</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">TOTAL</property>
+                    <property name="nativeName">TOTAL</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select d_assistito.ID_ASSISTITO, f_fatturazione.IMPORTO_FATTURA, f_fatturazione.ACCESSI_SERVIZIO,f_fatturazione.NUMERO_PASTI,f_fatturazione.NUMERO_TRASPORTI,f_fatturazione.ORE_EROGATE,
+ sum(f_fatturazione.IMPORTO_FATTURA+f_fatturazione.ACCESSI_SERVIZIO+f_fatturazione.NUMERO_PASTI+f_fatturazione.NUMERO_TRASPORTI+f_fatturazione.ORE_EROGATE) AS TOTAL
+from 
+d_assistito, f_fatturazione
+where f_fatturazione.ID_ASSISTITO = d_assistito.ID_ASSISTITO]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ID_ASSISTITO</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>11</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ID_ASSISTITO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ID_ASSISTITO</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>IMPORTO_FATTURA</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>IMPORTO_FATTURA</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>IMPORTO_FATTURA</design:label>
+            <design:formattingHints>
+              <design:displaySize>12</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ACCESSI_SERVIZIO</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ACCESSI_SERVIZIO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ACCESSI_SERVIZIO</design:label>
+            <design:formattingHints>
+              <design:displaySize>12</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>NUMERO_PASTI</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>NUMERO_PASTI</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>NUMERO_PASTI</design:label>
+            <design:formattingHints>
+              <design:displaySize>12</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>NUMERO_TRASPORTI</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>NUMERO_TRASPORTI</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>NUMERO_TRASPORTI</design:label>
+            <design:formattingHints>
+              <design:displaySize>12</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ORE_EROGATE</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ORE_EROGATE</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ORE_EROGATE</design:label>
+            <design:formattingHints>
+              <design:displaySize>12</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="9">
+            <column id="10"/>
+            <column id="11"/>
+            <column id="12"/>
+            <row id="13">
+                <cell id="14"/>
+                <cell id="15"/>
+                <cell id="16"/>
+            </row>
+            <row id="17">
+                <cell id="18"/>
+                <cell id="19"/>
+                <cell id="20"/>
+            </row>
+            <row id="21">
+                <cell id="22"/>
+                <cell id="23"/>
+                <cell id="24"/>
+            </row>
+        </grid>
+        <table id="71">
+            <property name="dataSet">totals</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">ID_ASSISTITO</property>
+                    <text-property name="displayName">ID_ASSISTITO</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ID_ASSISTITO"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">IMPORTO_FATTURA</property>
+                    <text-property name="displayName">IMPORTO_FATTURA</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["IMPORTO_FATTURA"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">ACCESSI_SERVIZIO</property>
+                    <text-property name="displayName">ACCESSI_SERVIZIO</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ACCESSI_SERVIZIO"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">NUMERO_PASTI</property>
+                    <text-property name="displayName">NUMERO_PASTI</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["NUMERO_PASTI"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">NUMERO_TRASPORTI</property>
+                    <text-property name="displayName">NUMERO_TRASPORTI</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["NUMERO_TRASPORTI"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">ORE_EROGATE</property>
+                    <text-property name="displayName">ORE_EROGATE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ORE_EROGATE"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL</property>
+                    <text-property name="displayName">TOTAL</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["TOTAL"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <column id="110"/>
+            <column id="111"/>
+            <column id="112"/>
+            <column id="113"/>
+            <column id="114"/>
+            <column id="115"/>
+            <column id="116"/>
+            <header>
+                <row id="72">
+                    <cell id="73">
+                        <label id="74">
+                            <text-property name="text">ID_ASSISTITO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="75">
+                        <label id="76">
+                            <text-property name="text">IMPORTO_FATTURA</text-property>
+                        </label>
+                    </cell>
+                    <cell id="77">
+                        <label id="78">
+                            <text-property name="text">ACCESSI_SERVIZIO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="79">
+                        <label id="80">
+                            <text-property name="text">NUMERO_PASTI</text-property>
+                        </label>
+                    </cell>
+                    <cell id="81">
+                        <label id="82">
+                            <text-property name="text">NUMERO_TRASPORTI</text-property>
+                        </label>
+                    </cell>
+                    <cell id="83">
+                        <label id="84">
+                            <text-property name="text">ORE_EROGATE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="85">
+                        <label id="86">
+                            <text-property name="text">TOTAL</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="87">
+                    <cell id="88">
+                        <data id="89">
+                            <property name="resultSetColumn">ID_ASSISTITO</property>
+                        </data>
+                    </cell>
+                    <cell id="90">
+                        <data id="91">
+                            <property name="resultSetColumn">IMPORTO_FATTURA</property>
+                        </data>
+                    </cell>
+                    <cell id="92">
+                        <data id="93">
+                            <property name="resultSetColumn">ACCESSI_SERVIZIO</property>
+                        </data>
+                    </cell>
+                    <cell id="94">
+                        <data id="95">
+                            <property name="resultSetColumn">NUMERO_PASTI</property>
+                        </data>
+                    </cell>
+                    <cell id="96">
+                        <data id="97">
+                            <property name="resultSetColumn">NUMERO_TRASPORTI</property>
+                        </data>
+                    </cell>
+                    <cell id="98">
+                        <data id="99">
+                            <property name="resultSetColumn">ORE_EROGATE</property>
+                        </data>
+                    </cell>
+                    <cell id="100">
+                        <data id="101">
+                            <property name="resultSetColumn">TOTAL</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="102">
+                    <cell id="103"/>
+                    <cell id="104"/>
+                    <cell id="105"/>
+                    <cell id="106"/>
+                    <cell id="107"/>
+                    <cell id="108"/>
+                    <cell id="109"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>
