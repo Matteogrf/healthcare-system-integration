@@ -29,19 +29,19 @@
         </oda-data-source>
     </data-sources>
     <data-sets>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Data Set" id="8">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="AverageTakingCareDuration" id="8">
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">SESSO</property>
+                    <property name="columnName">AGE CLASS</property>
                     <property name="analysis">dimension</property>
-                    <text-property name="displayName">SESSO</text-property>
-                    <text-property name="heading">SESSO</text-property>
+                    <text-property name="displayName">AGE CLASS</text-property>
+                    <text-property name="heading">AGE CLASS</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">ID_ASSISTITO</property>
+                    <property name="columnName">Take in Care Duration</property>
                     <property name="analysis">measure</property>
-                    <text-property name="displayName">ID_ASSISTITO</text-property>
-                    <text-property name="heading">ID_ASSISTITO</text-property>
+                    <text-property name="displayName">Take in Care Duration</text-property>
+                    <text-property name="heading">Take in Care Duration</text-property>
                 </structure>
             </list-property>
             <list-property name="parameters"/>
@@ -49,13 +49,13 @@
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">SESSO</property>
+                        <property name="name">AGE CLASS</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">ID_ASSISTITO</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">Take in Care Duration</property>
+                        <property name="dataType">float</property>
                     </structure>
                 </list-property>
             </structure>
@@ -63,24 +63,92 @@
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">SESSO</property>
-                    <property name="nativeName">SESSO</property>
+                    <property name="name">AGE CLASS</property>
+                    <property name="nativeName">AGE CLASS</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
-                    <property name="name">ID_ASSISTITO</property>
-                    <property name="nativeName">ID_ASSISTITO</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">4</property>
+                    <property name="name">Take in Care Duration</property>
+                    <property name="nativeName">Take in Care Duration</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select  d_assistito.SESSO, d_assistito.ID_ASSISTITO
-from 
-f_cartella, d_assistito
+            <xml-property name="queryText"><![CDATA[SELECT CASE 
+     WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) < 18 and d_assistito.SESSO='M' THEN '<18 Male' 
+     WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) < 18 and d_assistito.SESSO='F' THEN '<18 Female' 
+     WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) < 30 and d_assistito.SESSO='M' THEN '18-30 Male'  
+     WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) < 30 and d_assistito.SESSO='F' THEN '18-30 Female' 
+     WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) < 60 and d_assistito.SESSO='M' THEN '30-60 Male'
+     WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) < 60 and d_assistito.SESSO='F' THEN '30-60 Female'   
+     WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) < 80 and d_assistito.SESSO='M' THEN '60-80 Male'
+     WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) < 80 and d_assistito.SESSO='F' THEN '60-80 Female'   
+     WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) <120 and d_assistito.SESSO='M' THEN '>80 Male'
+     WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) <120 and d_assistito.SESSO='F' THEN '>80 Female'
+         
+       END AS "AGE CLASS", 
+       avg(DATEDIFF(Now(), f_cartella.INIZIO_PRESA_CARICO)) AS "Take in Care Duration"
+       from 
+d_assistito, f_cartella
 where
-d_assistito.ID_ASSISTITO = f_cartella.ID_ASSISTITO and f_cartella.FINE_PRESA_CARICO is null and f_cartella.INIZIO_PRESA_CARICO is not null]]></xml-property>
+f_cartella.FINE_PRESA_CARICO is null and f_cartella.INIZIO_PRESA_CARICO is not null and d_assistito.ID_ASSISTITO = f_cartella.ID_ASSISTITO
+
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>AGE CLASS</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>12</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>AGE CLASS</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>AGE CLASS</design:label>
+            <design:formattingHints>
+              <design:displaySize>12</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>Take in Care Duration</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>14</design:precision>
+            <design:scale>4</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Take in Care Duration</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Take in Care Duration</design:label>
+            <design:formattingHints>
+              <design:displaySize>16</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
         </oda-data-set>
     </data-sets>
     <styles>
@@ -129,43 +197,25 @@ d_assistito.ID_ASSISTITO = f_cartella.ID_ASSISTITO and f_cartella.FINE_PRESA_CAR
     </page-setup>
     <body>
         <grid id="9">
-            <column id="10"/>
-            <column id="11"/>
-            <column id="12"/>
+            <property name="width">7.947916666666667in</property>
+            <column id="10">
+                <property name="width">2.25in</property>
+            </column>
+            <column id="11">
+                <property name="width">3.6354166666666665in</property>
+            </column>
+            <column id="12">
+                <property name="width">2.0625in</property>
+            </column>
             <row id="13">
-                <cell id="14">
-                    <image id="25">
-                        <property name="height">0.8125in</property>
-                        <property name="width">2.5625in</property>
-                        <property name="source">embed</property>
-                        <property name="imageName">unitn_logo.gif</property>
-                    </image>
-                </cell>
+                <cell id="14"/>
                 <cell id="15"/>
-                <cell id="16">
-                    <text id="27">
-                        <property name="contentType">html</property>
-                        <text-property name="content"><![CDATA[<H4>
-<B>
-Marchesoni Michele
-</B><br/>
-<B>
-Matteo Grof
-</B><br/>
-<B>
-Meque Abdul
-</B><br/>
-<B>
-Roberto, Micaela
-</B>
-</H4>]]></text-property>
-                    </text>
-                </cell>
+                <cell id="16"/>
             </row>
             <row id="17">
                 <cell id="18"/>
                 <cell id="19">
-                    <extended-item extensionName="Chart" id="28">
+                    <extended-item extensionName="Chart" id="25">
                         <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithoutAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
   <Version>2.5.3</Version>
   <Type>Pie Chart</Type>
@@ -202,9 +252,9 @@ Roberto, Micaela
       <Visible>true</Visible>
       <Label>
         <Caption>
-          <Value>Patients with Open Cartela by Sex</Value>
+          <Value>Average Take in Care Duration By Sex and Age Class</Value>
           <Font>
-            <Size>16.0</Size>
+            <Size>14.0</Size>
             <Bold>true</Bold>
             <Alignment>
               <horizontalAlignment>Center</horizontalAlignment>
@@ -227,6 +277,7 @@ Roberto, Micaela
             <Green>0</Green>
             <Blue>0</Blue>
           </Color>
+          <Visible>false</Visible>
         </Outline>
         <Insets>
           <Top>0.0</Top>
@@ -437,7 +488,9 @@ Roberto, Micaela
       <SeriesDefinitionIndex>0</SeriesDefinitionIndex>
     </OrthogonalSampleData>
   </SampleData>
-  <Interactivity/>
+  <Interactivity>
+    <LegendBehavior>None</LegendBehavior>
+  </Interactivity>
   <EmptyMessage>
     <Caption>
       <Value>This chart contains no data.</Value>
@@ -902,14 +955,13 @@ Roberto, Micaela
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>row[&quot;ID_ASSISTITO&quot;]</Definition>
+          <Definition>row[&quot;AGE CLASS&quot;]</Definition>
           <Grouping>
-            <Enabled>true</Enabled>
             <GroupType>Text</GroupType>
-            <AggregateExpression>DistinctCount</AggregateExpression>
+            <AggregateExpression>Sum</AggregateExpression>
           </Grouping>
         </DataDefinition>
-        <SeriesIdentifier>Patients</SeriesIdentifier>
+        <SeriesIdentifier>Age Class </SeriesIdentifier>
         <DataPoint>
           <Components>
             <Type>Orthogonal_Value</Type>
@@ -970,6 +1022,10 @@ Roberto, Micaela
         </LeaderLineAttributes>
         <LeaderLineLength>10.0</LeaderLineLength>
       </Series>
+      <Grouping>
+        <GroupType>Text</GroupType>
+        <AggregateExpression>Sum</AggregateExpression>
+      </Grouping>
     </SeriesDefinitions>
     <Series>
       <Visible>true</Visible>
@@ -1006,9 +1062,9 @@ Roberto, Micaela
         <Visible>false</Visible>
       </Label>
       <DataDefinition>
-        <Definition>row[&quot;SESSO&quot;]</Definition>
+        <Definition>row[&quot;Take in Care Duration&quot;]</Definition>
       </DataDefinition>
-      <SeriesIdentifier>Gender</SeriesIdentifier>
+      <SeriesIdentifier>Age Class</SeriesIdentifier>
       <DataPoint>
         <Components>
           <Type>Orthogonal_Value</Type>
@@ -1020,7 +1076,7 @@ Roberto, Micaela
     </Series>
     <Grouping>
       <Enabled>true</Enabled>
-      <GroupType>Text</GroupType>
+      <GroupType>Numeric</GroupType>
       <AggregateExpression>Sum</AggregateExpression>
     </Grouping>
   </SeriesDefinitions>
@@ -1028,19 +1084,19 @@ Roberto, Micaela
 ]]></xml-property>
                         <property name="outputFormat">SVG</property>
                         <property name="inheritColumns">false</property>
-                        <property name="dataSet">Data Set</property>
+                        <property name="dataSet">AverageTakingCareDuration</property>
                         <property name="height">130pt</property>
-                        <property name="width">212pt</property>
+                        <property name="width">3.5625in</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">SESSO</property>
-                                <expression name="expression" type="javascript">dataSetRow["SESSO"]</expression>
+                                <property name="name">AGE CLASS</property>
+                                <expression name="expression" type="javascript">dataSetRow["AGE CLASS"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
-                                <property name="name">ID_ASSISTITO</property>
-                                <expression name="expression" type="javascript">dataSetRow["ID_ASSISTITO"]</expression>
-                                <property name="dataType">integer</property>
+                                <property name="name">Take in Care Duration</property>
+                                <expression name="expression" type="javascript">dataSetRow["Take in Care Duration"]</expression>
+                                <property name="dataType">float</property>
                             </structure>
                         </list-property>
                     </extended-item>
@@ -1053,216 +1109,60 @@ Roberto, Micaela
                 <cell id="24"/>
             </row>
         </grid>
-        <table id="29">
-            <property name="dataSet">Data Set</property>
+        <table id="26">
+            <property name="dataSet">AverageTakingCareDuration</property>
             <list-property name="boundDataColumns">
                 <structure>
-                    <property name="name">SESSO</property>
-                    <text-property name="displayName">SESSO</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["SESSO"]</expression>
+                    <property name="name">AGE CLASS</property>
+                    <text-property name="displayName">AGE CLASS</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["AGE CLASS"]</expression>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="name">ID_ASSISTITO</property>
-                    <text-property name="displayName">ID_ASSISTITO</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["ID_ASSISTITO"]</expression>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="name">Aggregation</property>
-                    <property name="dataType">integer</property>
-                    <simple-property-list name="aggregateOn">
-                        <value>bySexy</value>
-                    </simple-property-list>
-                    <property name="aggregateFunction">COUNTDISTINCT</property>
-                    <list-property name="arguments">
-                        <structure>
-                            <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["ID_ASSISTITO"]</expression>
-                        </structure>
-                    </list-property>
-                    <property name="allowExport">true</property>
+                    <property name="name">Take in Care Duration</property>
+                    <text-property name="displayName">Take in Care Duration</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Take in Care Duration"]</expression>
+                    <property name="dataType">float</property>
                 </structure>
             </list-property>
-            <column id="43"/>
-            <column id="44"/>
+            <column id="40"/>
+            <column id="41"/>
             <header>
-                <row id="30">
-                    <cell id="31">
-                        <label id="32">
+                <row id="27">
+                    <cell id="28">
+                        <label id="29">
                             <property name="textAlign">left</property>
-                            <text-property name="text">SESSO</text-property>
+                            <text-property name="text">AGE CLASS</text-property>
                         </label>
                     </cell>
-                    <cell id="33">
-                        <label id="34">
+                    <cell id="30">
+                        <label id="31">
                             <property name="textAlign">left</property>
-                            <text-property name="text">ID_ASSISTITO                                                         Total</text-property>
+                            <text-property name="text">Take in Care Duration in Days</text-property>
                         </label>
                     </cell>
                 </row>
             </header>
-            <group id="45">
-                <property name="groupName">bySexy</property>
-                <expression name="keyExpr" type="javascript">row["SESSO"]</expression>
-                <structure name="toc">
-                    <expression name="expressionValue" type="javascript">row["SESSO"]</expression>
-                </structure>
-                <property name="hideDetail">false</property>
-                <header>
-                    <row id="46">
-                        <cell id="47">
-                            <data id="52">
-                                <property name="resultSetColumn">SESSO</property>
-                            </data>
-                        </cell>
-                        <cell id="48"/>
-                    </row>
-                </header>
-                <footer>
-                    <row id="49">
-                        <cell id="50"/>
-                        <cell id="51">
-                            <data id="53">
-                                <property name="textAlign">right</property>
-                                <property name="resultSetColumn">Aggregation</property>
-                            </data>
-                        </cell>
-                    </row>
-                </footer>
-            </group>
             <detail>
-                <row id="35">
-                    <cell id="36"/>
-                    <cell id="38">
-                        <data id="39">
-                            <property name="resultSetColumn">ID_ASSISTITO</property>
+                <row id="32">
+                    <cell id="33">
+                        <data id="34">
+                            <property name="resultSetColumn">AGE CLASS</property>
+                        </data>
+                    </cell>
+                    <cell id="35">
+                        <data id="36">
+                            <property name="resultSetColumn">Take in Care Duration</property>
                         </data>
                     </cell>
                 </row>
             </detail>
             <footer>
-                <row id="40">
-                    <cell id="41"/>
-                    <cell id="42"/>
+                <row id="37">
+                    <cell id="38"/>
+                    <cell id="39"/>
                 </row>
             </footer>
         </table>
     </body>
-    <list-property name="images">
-        <structure>
-            <property name="name">unitn_logo.gif</property>
-            <property name="type">image/gif</property>
-            <property name="data">
-                R0lGODlhygBGAOf1AC1anEJjoUhop0lpqEpqqUtrqlNspVVtqFdvqllxrFpyrVtzrl11sF52sV93smB4
-                s2Z4rmd5r2h6sGl7sWR+s2x+tGeBtm1/tWiCt3CCuGuFu3GDupGAdm2HvZOCeHOIuJSDeZWEenuHuXWK
-                upaFe3aLu5OJfXeMvJiHfZSKfpqJf3mOv3qPwICNv5eNgXyQwZ2Mgn2Rwp6Ng36Sw3+TxKCPhYCUxYSU
-                v6GQhoaWwqSTiIeXw6WUiaaViqKXi4mZxaWWkYqaxqiXjIubx6Wajo2cyKabj46dyY+eyqedkJCfy6ie
-                kZGgzamfkqefmJKizquhlJeiyZijyq2jlpmky5qlzJumza6mn5ynzq+noLCooZ2p0J6q0bKqo5+r0rOr
-                pKCs06Gt1LSspqKu1batp6auz6Sv1revqKWw16iw0biwqbuwpKmx07mxqquy1LuzrLy0ra201r21rq61
-                16i42L62r6+22LC32cC4sbG42qy726+71bK527C81sK6s7O63MO7tLK92Li72Lm82bS/2sa9trq92rXA
-                27u+28e/uLbB3Ly/3MjAubfC3cnBurnE377C3svDvMzEvbvH4rzI487Gv73J5M/HwNHIwcPL4NLJwsXN
-                4tTMxMbO49XNxtbOx8jQ5tfPyMrR59jQycvS6NnRytrSy83U6tzTzNHV5d3UzdLW5s/X7N7VztPX59/W
-                z9TZ6eDY0N7Z2Nba6uHZ0tfb6+La09jc7OPb1Nnd7eTc1eLc29re7ubd1tvf7+fe19zg8Ojf2OXg3ubh
-                3+Li7efi4OPj7ujj4uTl7+vl5OXm8Ozm5e3n5ufo8u7o5+jp8+nq9O/q6Orr9vDr6fHs6u3t+PPt7PTu
-                7e/w+vbw7/Dx+/Px9ffx8PTy9vXz9/jz8fb0+Pn08vr18/j1+vP4+/b49Pn2+/T5/Pf59vr3/Pj69/n7
-                +P/5+Pz6/vr8+ff9//37//v9+vj+//z/+/7//P//////////////////////////////////////////
-                /yH+FUNyZWF0ZWQgd2l0aCBUaGUgR0lNUAAsAAAAAMoARgAACP4A6QkcSLCgwYMIEypcyLChw4cQI0qc
-                SLGixYsYM2rcyLGjx48gQ4ocSbKkyZMoU6pcybKly5cwY8qcSbOmzZs4WWJLZSnPnUeB/jy6M6eRKGg5
-                kypdCG1SGiuQTh1D5mpOmlnIkIkaxMeNJaRLwyZVFqfMoz0/IMmTxy6HBhEr2ArUU6aTmzzExOqdWW2O
-                ElHw2FUAtk1gIwypeGGwIxBagxbwtkQBM6fa3sssU9UtQ8GcvCICXmBjR6yFFDcnbtGTF6VEDnqg7nwo
-                o8QS5tsl5QVi8oRdpw0UvNEDBuEIPXJVaNygos1bGUs7Psijd4NJGkKC4pDDzd2juTlRtv4YwkasSIUM
-                ihrtOeQNGbE/gogpg5QDnhkJ9HhB0CYu3Z4YWIDV3YAWgVPGD1tAsN0sZchjgQhVPBHFCyvcsMMON9iw
-                AxONcJGDMh9YsRo5BezQCRbKEKiiROSYcQoX2HhBAT0gEtPIESJkMIconRCzljfApDJICyV4YQcFqdAD
-                DwQtsPMME1hYtuKUDLlhQxQDbZADMFwUQQEFFnzgyiwFFLCCEs8o2ckHFTBAwQ+kpEKBDWlYkoYBgZQh
-                HJV8GkRIJnogIIVAt0hgxg0SVJDGH2WskAEFOVTQwArKnCJBFXSUIQIDG0hRwjns2FCAMvJMYkafqAq0
-                yhFgbEOOA/4/dKOMFCK4QYEgbqwATA4UZFBAAFvsEIMgGmgjwg99ULCHCEUQMwcEs8CzTQZcQJIqn+Bg
-                kUYnz6RSzQMrPFGCL6JoQM4NXrASwSFUnLACOEVkMMgCrtixATIb6OFMCzNoUAY9jSgQhSJS5HXtinp0
-                YkcGChQgJg0jKBNPGR9cZUwEH7CzAwLkyPPDAs3csMAtvGRCARbyYGMhJTMwsII2ZsR8sIrVcLEWHZnQ
-                I4Wmt8ADjxsdbCAIPRs0sAEBN8TDzh4BfEDBA+6wssIGp8ZDjgg3UBDPHlYUFocoMw+4yB4tQMLOODk8
-                sUEj8AhkhgirjCBFJlvckAMsbUOTQ/4LRWTyNiRRYMmWLxlIkcYpw/3wCBZhc0cOFlvEgUEUK6zwAxMD
-                xUPHCo948UcUXuxBxR1KnvJDGV5EYUYZgRQhBTvT0ZPHBmAcQY4ENwjCBCyN39aJFZCm/QckHTBDkBQ/
-                VJE0OZ2cAgkpAiGjyCOZpPkEElzY8A5BN0ThBj0CEMNFJt/3vhc7dNwCDcU30JGDGbHLA0sCPyBgwS2w
-                QMJEDrloQw4xN7ACHYhxCysYoAgJmIRA1iKKijlNScrgQjfMpxdtlMFH8miHEnJQAmQMhB3g2MECHiAC
-                UUihERUwQAsCYYkNICABdqBDI7BAAQhcwBgCYYcOT2CGR2hDFP5MSAAWWEFBsQCjClyAhSFg4YbsEaRt
-                78hadloQBQ1gwAGpOIYFHvABEXAhCib7gMEWCA863KAFFPjAExQhCEQUMSyi4AIxSIEEdpQhB4owyDMQ
-                IIJHGAABJZDABwJgBksIAAMV6EAEAACJIwhgEwRhBz1KU4RcSJIetwjDG5MSmEwUQQIUEAETKJeLgsAu
-                ExcggACesAU3LeARrKDAAhiAoAIMQAHwM4g8SjAHNEwiFWD4wBz2tEmc6CEvtzjECH5wgwkeBBoG+EAm
-                DGCAFZRBFK7Awg8MQIA+2CAAmdChQdhhhR/84D0BoAQhgFFMnLCDEH+hBzvgIQgbJEQeaf54wAJ+IAgK
-                VGAABoDAA8JjAArEoDAIcR88iGEAa/0Bce20CTzygAVBBGIW9IgDlhCylmawQh7GkAACMGCBgmZCfquA
-                XdsMEg9B3IAXAeCCM7BQhiRFtCbnoMM74MGKC1jADBbwHhewYAYrYGEQf5hDIAjxCEtYIgqJssCcOtEJ
-                UogCEpYQClVFkQpR8AgLORiDDSwRCBtgoRMHYUc4yvENgnyDrepAxzfQUZB4cIOt8XhrOLghDnUURBzi
-                KIc61lqOwpYjHvQIR2AVy9JpJMMZdE2sOBS71sACthx8LUg5FCuOmpRDEFGwAP1usawFUIABB1AAA6jQ
-                iEbwwhfEeP4GM54BjU7YwAZVKIMZ3JAdLGBhBSLwxSk6dwFI5CINMYgCMeZJj0xYyyDqkAMQHLFSeYwC
-                CFr4xjWuIIReRBIQQCgFPBwBBDyowglkKIgsnFCIcIgBCPAFwhU6KwwnAMEJToCCJtwhkFAAwQcu8IEQ
-                rEEPT6CXEfC1L36BsAQnqKGzArEGfosxE5/J4w43KAM55tkIC2gAAgN02gtKkBd2YOMRrmBnGcqwjVyk
-                ohFUWDFoOxCHQQiiDFGIAzzkcYgV0OEOXiAGPCaB1oLIY7wgaMVA5BEMGLRBnngwgROisUB6vAII5ZAH
-                KkIgCXYIoQZUVlI8fqECWdBjDS6ohP4qQtFeeoiDCD3ohTDaEIJI0IMTJhDDMKaxizUwg8kqaIMmPKEK
-                R5BgDa34BCYKEQJH5PAbMJCDTZZ2CnmQYxZmiIIIJOAFKmSiChoQpivAQY9BYAADLPACE+ShCBuIwAFb
-                ANQh6CAIQwRC1YwRSBpu8I5trIAF/ISoQTBhAjMPZBouWINA8CADFXThkvTYhQ+ywQ5ZmEAT9PiECTBB
-                EEY4QZJ4gIE1ArMWeqxDvmxhh33ZIQYUJAN2q0EssusgT3j0IgWaOHJgnACDZQhEut9YKU0gUQQIbIBN
-                Q/gABJDBii2wowVqpAM0jvwD+q2iBU/4QzXKkAlWYIEOURjCCv5akAMsRGEH6RCIFY5QwwWUwArxOQg8
-                KmGCVyx5GjKog8/q0IZCmMAPAonHLoTQVmtjAh7UkMEUEKskITACyi6gRg4Fsg4hTGEt7DDCFdgNgkKs
-                ZsnRkAEcFigLFHB7ILtIwResXPObwCMTWOjDNtpGihUY4AaioEMaLEBFZ8qzDISQhzdWSAentuAQZYCE
-                +4oQODo0Y4GzYQIp3iFJM2jjIPLABAqMLRBnuIDe9KgDGdhxhRCMQiCx8EE5rIyCSqymDSqgsJWBEOY6
-                qMARnBgFf+mhDvnSwx2OcEEr5PELH5CgC94dSDKAoGyBvMIEridIHVCgCSDIIXY1gYcr1P5CDEp8oAhg
-                UEACMsCCClCADliA3mrkkQlRKCIThljFLHxRhqH+wBWW0KYGbhA7duRiA9ugNGuxDSIic8RmcwvkDJEm
-                T2ugBvBgDUAgA8UgD7vQA9wgD2XHbRhIAl4nD21wBTmEByoQX+sgEOogBFeACktwBbuwGvBQDGsQAimg
-                BS1ID8wAA2O3GmUXfTlUDk6QAkIQDjkBDVgwAnsgCgKgDJ3QASXwARkwA1GwAWAxCNhAD3zQAsQADKtw
-                CmlABcPzB6TwAxIQCI2QCoExEHPQPkXGDqSwBxxVCShQgwIRDS4gaexQB80nDC5gBOHQC1hGD9YWfdyA
-                X+4QDj4wCv4rVQcuMA30UA6XhA5AMAXCAANkwHQuKAxkgAIuEAr0EA0LKBBGRxBKUwgewHmTBg+Lwg4W
-                Ig+EIAIQoAc38AN7AAw5gw0fwDvKsALsMAuDYAVM4Ap7AEZg1QhHtkCWkQ4rkAOLsA2kAEl8oH66RHMI
-                KE8KKAc6BAdiIA/xIA+aYAJt0AtCwA3xkIE5VAggIAyj0AOrpyR44ALMAG28J1/woAkg4GiRlG0q4ATl
-                4InWKE+yQAI8uGPs4AkhoGQ5IQ9/MAvAYACkEAcZUAQ7kAtxkAt/wFykkAZzMA70wASCkAs3gARSUAVY
-                8AhpAAFcAG2s8S+Z4EVS8AIGkAGZoP4nHOUJHoBtA7EMKGCHeAhv8AAHKHAF+giI27ZA94aNeCBwihhm
-                A6EOTSAEOpSJqrBkAgEPTiAD1rANODgQspACPLhAeCYLAncTykAHMyACPWIOyCACijAORfAIA+ELSGAA
-                aKUHLWAIsyAIdIAIZYUB/0IPsMAHZWAMT4AI6dABd4ANGtABwNBIc3BPx+ACTsCI9PANYkAC9HaHYjAQ
-                8EAOTuABQkBtu3BtU9kOUzCCwvBBPtcLbfUNqPALVHl1jegEOPAKleAMC4QKKaBszpBzQbcLZmdk9DiN
-                OIGKSIAU0LAHerAFIrANVLADOUMPWPACHQAJ5qAMObAF1ZAJ5v50ADegFs2gCHNgBX+gB69EBx+AJTpk
-                DGaABOx0T5igAj5ABmRABF2gAlOgDl5GdAQxDT7wh5LAAXLAdNVGAlBgieJwBSTgAvcFBDBADUkHBNeg
-                JMsXgTBwBR+oAmSQZbIAAlNAV+zgCCZABn6lmXVgAl7HSa5AB8qgCFxwCrdQBB2wBV5QABJACey3AmZA
-                CEXADluwCc9gCDmwAXegCKJQBi5UBoIAD4GQA5CwAVuAAB1AKjJEBwvRNsVQCGvACL9wDqiACmylCqMg
-                dfIEO8GwBt+AgZogC3TFFlomC7snD9cgC6PwCZowaGbmDJ7wCWEWD9QgC3SKpY4QDGcoDP6agArcoIOe
-                MAptNRDtIAtpuo45YUcx8ANnSAGZMBuisAVlIAVrcwI0wAWkQAcCYFXAsAKpcAMQwARbUAIrsD3H8QF7
-                0DFUsACrkwNjpBCBoUPT4TM7Vm5VBjvYl6uaGRhhOU9H5qtK4qtrsY3EWoxktFI6ZGGRBDvMlRTywAtM
-                kCZR9ADyQAoi0AiQAAs7IAExGQWwGAUFIAjGgAQbUAErAAAfkAdFcANcQCOiNHECoQwVcAODEBLYV6UO
-                EZaY9xDT8a9JwQ59EAhxcAE2oEPscKlP4AYWsAdmwAB2kAYtgARZcwQG8AAdwCwGkApRsDO50AE2gEZV
-                IBCfxgTb4f4Q8SAMn+AJr3CoA5ENzjAN0eAMzhChl3QNzOAM0UANOhsNzMAM0wC0BDYQ13CzOesMhxoP
-                RwupEaazQKuzQmu1A4EOveAJnrALUvsQNuu0DkENzECzFgEP46ApghA/LVAGrrYAbtAJRVAEH3ADRWBa
-                FIBjGKBGI5kAVoAEIqB3rAANFnAE8CAKOaAaDiELRJBgPoADkTCiweADlAtgkjYQaFa5lJts7egDRtAD
-                U5B8uuADNbC5gNA2jOBkBTG6ayAEmru59sgJVclgMuAEXekQk+sD/maDkYUQnJACqKARwBAFlycQnXAA
-                pLAKViBVZrAHFbADA7ACFIAAC/ACmf6wA0iwYmmAARTQtt+gB94AQg5wAm5gNgKLEJFAAmSQDPK0DHIQ
-                AmLgV/IAX7uQDLsQvALxDZogDO5LApyQDK8QDJ6AAp7ADbsABC5gm+VwX8MAwEomD8XgAiggCQQhD0Lg
-                CLIwDMUgBmVWDKhAYXUAAnggdewgDDGIBxHxDviFuZKJELsQAqZoEfKDBdsBDxZgB2VgAbkABi8ASiUC
-                AYKABC/wkS+QBljwAPuzAWXwBAWwDbdwKvQgCiXABwabEKHZfAUrDzHoCOzgDkTQBFO5ZHLBDpIQhzsG
-                D5pnZlpmAp8AD+XAA1PggvJED8PQnyowjfNbCg4LBw16hpoQAv6FULA+8w5r4AGc6BDsIA5C4ASIJQ5O
-                AGFLSRC7QAL4mxEPawbYgAQCkAlHEANpkAPi0AhFkAMjtAJRoAQbAAEFsAE0YAE/gAW3QAfPsAM2AA+d
-                gASdAAl5ABFCAAMRWhDUAAQ9kA30sG73FAkpkHzyII2rYY6n+Q1AkJkFIQxAoAvwZZvyBAWHTA9w4AJh
-                Fg73Bck5pIdAMKINoQ7cBQ/B0AUy0AVdcJqv0JRagICxUGytQAayRw/ZUAd40LsBGw+iUAUY8AceUyvy
-                AAmA0weZQAdKcAM3gAF2e0JL2H781w0LUEpM0AGB8BDwMA33ZRDwEA9dkAK7oG5OgAd1UP4KMlcILlCD
-                aFxz7nDAyubGPSAEgFAHUSkQwqB69TwFnfUO4ZVDciADtkmBJPBkFbxjTlADxtMQiZxfWiabhVAIxfAO
-                mCALqiAGMpAMGygL3MADBSoQ4sAD6SURknQLF8QOEPAC6YANbiAPwMAAsyACxBAHLLANotAHaTAo1eEL
-                BIAN8kAHC3CRixARwpCbBxEPhUACp9cEMkAGUwAIBmgCyvyeoXAFNYCIbXMN9iUGU2CP9GDN2SAPkeAB
-                dugEh8wOZOADwSAQqmACoGcQZJDMCmGJvycEQKAk4AVhzAUPofkJ9NALJqDSmkACNeiHrU0R8NAMWKAH
-                GKAamWAbxv5QAZpjTR2ADRRQhRJwBMhQAfSwAgngBplQHWATETfoBLu3ZOzwBpRNlULgM/ComYVA0guk
-                ebvgCPQtEIY4BT4zovKw09mwY2IQApzADkDgpvJEBrQnELvgbGl1Be5YEJ/wBWTwBZyQ3uygwt/GDsxm
-                tsMgCWsABCnACUKHAqggD+DQA5mpxVuHEYOABZuADTGQF3TwA/QADhCQAYIgCg2AWISwAPCQAWDTCFFw
-                BHGAUBAhD+7gBCiQ3KJoX9uxyIhVxUrynsk3czUHDwi8u9wQzVOHen/IDtngBC7QC1PQxvIkB94sENnw
-                uGJKENdwX+lND8uApWtQCNcAj+wwBf5AgFh48Ifo8AYyIAaYgAoq4AnyUM/G5ggqwAwLXMkXAQ16UAUt
-                IArN8ADWsiE7IAjJEADNIA97kAH0EB2kRQeuQOUL4bCjQAJa4M+Z5wFe5w64jepKEgkmUIOZlwJmxgwu
-                0AThIA/cgANaYGTCIAO/HA8RLMwqLU9vkMALZOtITRCAQMkFAd/wZkpQkNv00OHs8Apdt2PJgAKfsIHB
-                Kw/W4AKF4Al/mBFs0QyNsDo3oECZ1gFvfQQn4AtMIArA4AZeUAan4LAVAQ9+AL/sq89lDAeSRJVOoBCk
-                Tdn1TQJK1u3HJw7xAARCUAzUkA27UAjoYM3rOE+4SQLGxg5yAP4DLZwOYgACbxBm1gAIKFAI8c3w9AAE
-                YEwPNIcL0WaiDJ4CXifcYCkQhVC7jHC+FqFD3sAKukwHgzAHEcsKp+AGVpAGg6AHqTAa7M6NPiADUMDn
-                QEDBnVcDPPDmBtEOZGCi/PUOclCPyYoJLnAFqoDAAeYDKPAG8uAIIbDsyeoIIHDIB2oCnvBB7lAIOoAD
-                W88DPhAKtD5OnQgEPOAM8uAMCCwH1wAH+bgGw4CgmvAJHEDBRzYNPWDyHoF19BAP2wAMsLAKpNAJmbAK
-                vDBxxsoRaiULmFAJrSC11CAMXpsQ5YD7wyBJJSwMxbBSSLcLuqALw4D7cnaoxSAMBb9kXf4rEODQC71Q
-                DJYYGOUg+5iwC+1A9AtBDbqwC2I6DZrQC2yx8WB5DXrKDPw7x/IgBmcwEv86T2f4QR2xqwIZSYgV8x8k
-                Tpo5x0ry/wAhjx47dvQE0kOYUCE9eArhyWPX0KE7eBIXXsSY8WHCggY3LmQXS4awjCVNZux4UuVKkxYd
-                skR40CQ7mTJhKjwoz+ZNjCkxCnRXqg0jII54HkWaVClLnxgbpmyalODSmwXZpcNEpo4sql29fgUbVmxV
-                gvHGnr25rpcstm3dvoUbV+5cunXt3sV7d1dermjRshsWTPBgwoUNH0acWPFixo0dP37sF61OypUtX8ac
-                WfNmzp09fw0GTflhZ8mlTZ9GTTUgADs=
-            </property>
-        </structure>
-    </list-property>
 </report>
