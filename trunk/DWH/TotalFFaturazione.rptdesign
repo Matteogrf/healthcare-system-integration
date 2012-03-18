@@ -67,12 +67,6 @@
                     <text-property name="displayName">ORE_EROGATE</text-property>
                     <text-property name="heading">ORE_EROGATE</text-property>
                 </structure>
-                <structure>
-                    <property name="columnName">TOTAL</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">TOTAL</text-property>
-                    <text-property name="heading">TOTAL</text-property>
-                </structure>
             </list-property>
             <list-property name="parameters"/>
             <structure name="cachedMetaData">
@@ -106,11 +100,6 @@
                         <property name="position">6</property>
                         <property name="name">ORE_EROGATE</property>
                         <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">TOTAL</property>
-                        <property name="dataType">decimal</property>
                     </structure>
                 </list-property>
             </structure>
@@ -158,16 +147,8 @@
                     <property name="dataType">float</property>
                     <property name="nativeDataType">8</property>
                 </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">TOTAL</property>
-                    <property name="nativeName">TOTAL</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
-                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select d_assistito.ID_ASSISTITO, f_fatturazione.IMPORTO_FATTURA, f_fatturazione.ACCESSI_SERVIZIO,f_fatturazione.NUMERO_PASTI,f_fatturazione.NUMERO_TRASPORTI,f_fatturazione.ORE_EROGATE,
- sum(f_fatturazione.IMPORTO_FATTURA+f_fatturazione.ACCESSI_SERVIZIO+f_fatturazione.NUMERO_PASTI+f_fatturazione.NUMERO_TRASPORTI+f_fatturazione.ORE_EROGATE) AS TOTAL
+            <xml-property name="queryText"><![CDATA[select d_assistito.ID_ASSISTITO, f_fatturazione.IMPORTO_FATTURA, f_fatturazione.ACCESSI_SERVIZIO,f_fatturazione.NUMERO_PASTI,f_fatturazione.NUMERO_TRASPORTI,f_fatturazione.ORE_EROGATE
 from 
 d_assistito, f_fatturazione
 where f_fatturazione.ID_ASSISTITO = d_assistito.ID_ASSISTITO]]></xml-property>
@@ -375,7 +356,7 @@ where f_fatturazione.ID_ASSISTITO = d_assistito.ID_ASSISTITO]]></xml-property>
                 <cell id="24"/>
             </row>
         </grid>
-        <table id="71">
+        <table id="117">
             <property name="dataSet">totals</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -415,106 +396,244 @@ where f_fatturazione.ID_ASSISTITO = d_assistito.ID_ASSISTITO]]></xml-property>
                     <property name="dataType">float</property>
                 </structure>
                 <structure>
-                    <property name="name">TOTAL</property>
-                    <text-property name="displayName">TOTAL</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["TOTAL"]</expression>
-                    <property name="dataType">decimal</property>
+                    <property name="name">Aggregation</property>
+                    <text-property name="displayName">Sum</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>IdAssistito</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["IMPORTO_FATTURA"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_1</property>
+                    <text-property name="displayName">SumAccessServizio</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>IdAssistito</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["ACCESSI_SERVIZIO"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_2</property>
+                    <text-property name="displayName">SumNumeroPasti</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>IdAssistito</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["NUMERO_PASTI"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_3</property>
+                    <text-property name="displayName">SumNumeroTransport</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>IdAssistito</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["NUMERO_TRASPORTI"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Sum_OreOregate</property>
+                    <text-property name="displayName">Sum_OreOregate</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>IdAssistito</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["ORE_EROGATE"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
                 </structure>
             </list-property>
-            <column id="110"/>
-            <column id="111"/>
-            <column id="112"/>
-            <column id="113"/>
-            <column id="114"/>
-            <column id="115"/>
-            <column id="116"/>
+            <column id="151"/>
+            <column id="152"/>
+            <column id="153"/>
+            <column id="154"/>
+            <column id="155"/>
+            <column id="156"/>
             <header>
-                <row id="72">
-                    <cell id="73">
-                        <label id="74">
-                            <text-property name="text">ID_ASSISTITO</text-property>
+                <row id="118">
+                    <cell id="119">
+                        <label id="120">
+                            <text-property name="text">ID ASSISTITO</text-property>
                         </label>
                     </cell>
-                    <cell id="75">
-                        <label id="76">
-                            <text-property name="text">IMPORTO_FATTURA</text-property>
+                    <cell id="121">
+                        <label id="122">
+                            <text-property name="text">IMPORTO FATTURA</text-property>
                         </label>
                     </cell>
-                    <cell id="77">
-                        <label id="78">
-                            <text-property name="text">ACCESSI_SERVIZIO</text-property>
+                    <cell id="123">
+                        <label id="124">
+                            <text-property name="text">ACCESSI SERVIZIO</text-property>
                         </label>
                     </cell>
-                    <cell id="79">
-                        <label id="80">
-                            <text-property name="text">NUMERO_PASTI</text-property>
+                    <cell id="125">
+                        <label id="126">
+                            <text-property name="text">NUMERO PASTI</text-property>
                         </label>
                     </cell>
-                    <cell id="81">
-                        <label id="82">
-                            <text-property name="text">NUMERO_TRASPORTI</text-property>
+                    <cell id="127">
+                        <label id="128">
+                            <text-property name="text">NUMERO TRASPORTI</text-property>
                         </label>
                     </cell>
-                    <cell id="83">
-                        <label id="84">
-                            <text-property name="text">ORE_EROGATE</text-property>
-                        </label>
-                    </cell>
-                    <cell id="85">
-                        <label id="86">
-                            <text-property name="text">TOTAL</text-property>
+                    <cell id="129">
+                        <label id="130">
+                            <text-property name="text">ORE EROGATE</text-property>
                         </label>
                     </cell>
                 </row>
             </header>
+            <group id="157">
+                <property name="groupName">IdAssistito</property>
+                <expression name="keyExpr" type="javascript">row["ID_ASSISTITO"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["ID_ASSISTITO"]</expression>
+                </structure>
+                <property name="hideDetail">false</property>
+                <header>
+                    <row id="158">
+                        <cell id="159">
+                            <data id="172">
+                                <property name="resultSetColumn">ID_ASSISTITO</property>
+                            </data>
+                        </cell>
+                        <cell id="160"/>
+                        <cell id="161"/>
+                        <cell id="162"/>
+                        <cell id="163"/>
+                        <cell id="164"/>
+                    </row>
+                </header>
+                <footer>
+                    <row id="165">
+                        <cell id="166">
+                            <text id="178">
+                                <property name="fontWeight">bold</property>
+                                <property name="color">blue</property>
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[TOTAL]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="167">
+                            <data id="173">
+                                <property name="fontSize">10pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="color">blue</property>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">Aggregation</property>
+                            </data>
+                        </cell>
+                        <cell id="168">
+                            <data id="174">
+                                <property name="fontWeight">bold</property>
+                                <property name="color">blue</property>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">Aggregation_1</property>
+                            </data>
+                        </cell>
+                        <cell id="169">
+                            <data id="175">
+                                <property name="fontWeight">bold</property>
+                                <property name="color">#0000FF</property>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">Aggregation_2</property>
+                            </data>
+                        </cell>
+                        <cell id="170">
+                            <data id="176">
+                                <property name="fontWeight">bold</property>
+                                <property name="color">#0000FF</property>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">Aggregation_3</property>
+                            </data>
+                        </cell>
+                        <cell id="171">
+                            <data id="177">
+                                <property name="fontWeight">bold</property>
+                                <property name="color">#0000FF</property>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">Sum_OreOregate</property>
+                            </data>
+                        </cell>
+                    </row>
+                </footer>
+            </group>
             <detail>
-                <row id="87">
-                    <cell id="88">
-                        <data id="89">
-                            <property name="resultSetColumn">ID_ASSISTITO</property>
-                        </data>
-                    </cell>
-                    <cell id="90">
-                        <data id="91">
+                <row id="131">
+                    <cell id="132"/>
+                    <cell id="134">
+                        <data id="135">
+                            <property name="textAlign">right</property>
                             <property name="resultSetColumn">IMPORTO_FATTURA</property>
                         </data>
                     </cell>
-                    <cell id="92">
-                        <data id="93">
+                    <cell id="136">
+                        <data id="137">
+                            <property name="textAlign">right</property>
                             <property name="resultSetColumn">ACCESSI_SERVIZIO</property>
                         </data>
                     </cell>
-                    <cell id="94">
-                        <data id="95">
+                    <cell id="138">
+                        <data id="139">
+                            <property name="textAlign">right</property>
                             <property name="resultSetColumn">NUMERO_PASTI</property>
                         </data>
                     </cell>
-                    <cell id="96">
-                        <data id="97">
+                    <cell id="140">
+                        <data id="141">
+                            <property name="textAlign">right</property>
                             <property name="resultSetColumn">NUMERO_TRASPORTI</property>
                         </data>
                     </cell>
-                    <cell id="98">
-                        <data id="99">
+                    <cell id="142">
+                        <data id="143">
+                            <property name="textAlign">right</property>
                             <property name="resultSetColumn">ORE_EROGATE</property>
-                        </data>
-                    </cell>
-                    <cell id="100">
-                        <data id="101">
-                            <property name="resultSetColumn">TOTAL</property>
                         </data>
                     </cell>
                 </row>
             </detail>
             <footer>
-                <row id="102">
-                    <cell id="103"/>
-                    <cell id="104"/>
-                    <cell id="105"/>
-                    <cell id="106"/>
-                    <cell id="107"/>
-                    <cell id="108"/>
-                    <cell id="109"/>
+                <row id="144">
+                    <cell id="145"/>
+                    <cell id="146"/>
+                    <cell id="147"/>
+                    <cell id="148"/>
+                    <cell id="149"/>
+                    <cell id="150"/>
                 </row>
             </footer>
         </table>
