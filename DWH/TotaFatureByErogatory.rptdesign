@@ -26,55 +26,47 @@
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost:3306/dwh</property>
             <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">cm9vdA==</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="totals" id="8">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="totaFatura" id="8">
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">ID_ASSISTITO</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">ID_ASSISTITO</text-property>
-                    <text-property name="heading">ID_ASSISTITO</text-property>
+                    <property name="columnName">ID_ENTE_EROGATORE</property>
+                    <text-property name="displayName">ID_ENTE_EROGATORE</text-property>
+                    <text-property name="heading">ID_ENTE_EROGATORE</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">IMPORTO_FATTURA</property>
-                    <property name="analysis">measure</property>
                     <text-property name="displayName">IMPORTO_FATTURA</text-property>
                     <text-property name="heading">IMPORTO_FATTURA</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">ACCESSI_SERVIZIO</property>
-                    <property name="analysis">measure</property>
                     <text-property name="displayName">ACCESSI_SERVIZIO</text-property>
                     <text-property name="heading">ACCESSI_SERVIZIO</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">NUMERO_PASTI</property>
-                    <property name="analysis">measure</property>
                     <text-property name="displayName">NUMERO_PASTI</text-property>
                     <text-property name="heading">NUMERO_PASTI</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">NUMERO_TRASPORTI</property>
-                    <property name="analysis">measure</property>
                     <text-property name="displayName">NUMERO_TRASPORTI</text-property>
                     <text-property name="heading">NUMERO_TRASPORTI</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">ORE_EROGATE</property>
-                    <property name="analysis">measure</property>
                     <text-property name="displayName">ORE_EROGATE</text-property>
                     <text-property name="heading">ORE_EROGATE</text-property>
                 </structure>
             </list-property>
-            <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">ID_ASSISTITO</property>
+                        <property name="name">ID_ENTE_EROGATORE</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
@@ -108,8 +100,8 @@
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">ID_ASSISTITO</property>
-                    <property name="nativeName">ID_ASSISTITO</property>
+                    <property name="name">ID_ENTE_EROGATORE</property>
+                    <property name="nativeName">ID_ENTE_EROGATORE</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">4</property>
                 </structure>
@@ -149,10 +141,10 @@
                     <property name="nativeDataType">8</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select d_assistito.ID_ASSISTITO, f_fatturazione.IMPORTO_FATTURA, f_fatturazione.ACCESSI_SERVIZIO,f_fatturazione.NUMERO_PASTI,f_fatturazione.NUMERO_TRASPORTI,f_fatturazione.ORE_EROGATE
-from 
-d_assistito, f_fatturazione
-where f_fatturazione.ID_ASSISTITO = d_assistito.ID_ASSISTITO]]></xml-property>
+            <xml-property name="queryText"><![CDATA[select d_ente_erogatore.ID_ENTE_EROGATORE, f_fatturazione.IMPORTO_FATTURA, f_fatturazione.ACCESSI_SERVIZIO,f_fatturazione.NUMERO_PASTI,f_fatturazione.NUMERO_TRASPORTI,f_fatturazione.ORE_EROGATE
+from d_ente_erogatore, f_fatturazione
+where f_fatturazione.ID_ENTE_EROGATORE = d_ente_erogatore.ID_ENTE_EROGATORE
+]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -162,7 +154,7 @@ where f_fatturazione.ID_ASSISTITO = d_assistito.ID_ASSISTITO]]></xml-property>
         <design:resultColumnDefinitions>
           <design:attributes>
             <design:identifier>
-              <design:name>ID_ASSISTITO</design:name>
+              <design:name>ID_ENTE_EROGATORE</design:name>
               <design:position>1</design:position>
             </design:identifier>
             <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
@@ -170,11 +162,11 @@ where f_fatturazione.ID_ASSISTITO = d_assistito.ID_ASSISTITO]]></xml-property>
             <design:scale>0</design:scale>
             <design:nullability>NotNullable</design:nullability>
             <design:uiHints>
-              <design:displayName>ID_ASSISTITO</design:displayName>
+              <design:displayName>ID_ENTE_EROGATORE</design:displayName>
             </design:uiHints>
           </design:attributes>
           <design:usageHints>
-            <design:label>ID_ASSISTITO</design:label>
+            <design:label>ID_ENTE_EROGATORE</design:label>
             <design:formattingHints>
               <design:displaySize>11</design:displaySize>
             </design:formattingHints>
@@ -338,28 +330,39 @@ where f_fatturazione.ID_ASSISTITO = d_assistito.ID_ASSISTITO]]></xml-property>
     </page-setup>
     <body>
         <grid id="9">
-            <property name="height">2.90625in</property>
+            <property name="height">3.5104166666666665in</property>
             <property name="width">7.947916666666667in</property>
             <column id="10">
-                <property name="width">0.5416666666666666in</property>
+                <property name="width">0.5625in</property>
             </column>
             <column id="11">
-                <property name="width">6.302083333333333in</property>
+                <property name="width">5.84375in</property>
             </column>
             <column id="12">
-                <property name="width">1.1041666666666667in</property>
+                <property name="width">1.5416666666666667in</property>
             </column>
             <row id="13">
                 <cell id="14"/>
-                <cell id="15">
-                    <image id="179">
+                <cell id="15"/>
+                <cell id="16"/>
+            </row>
+            <row id="254">
+                <property name="height">0.5625in</property>
+                <cell id="255">
+                    <property name="fontSize">12pt</property>
+                </cell>
+                <cell id="256">
+                    <property name="fontSize">12pt</property>
+                    <image id="259">
                         <property name="height">0.5208333333333334in</property>
                         <property name="width">2.0833333333333335in</property>
                         <property name="source">embed</property>
                         <property name="imageName">logo_unitn_it.jpg</property>
                     </image>
+                    <data id="258"/>
                 </cell>
-                <cell id="16">
+                <cell id="257">
+                    <property name="fontSize">12pt</property>
                     <text id="79">
                         <property name="fontSize">xx-small</property>
                         <property name="color">#C0C0C0</property>
@@ -374,25 +377,41 @@ Roberto, Micaela
                     </text>
                 </cell>
             </row>
-            <row id="180">
-                <cell id="181">
+            <row id="17">
+                <property name="height">0.28125in</property>
+                <cell id="18">
                     <property name="backgroundColor">#D2D2FF</property>
+                    <property name="fontSize">12pt</property>
                 </cell>
-                <cell id="182">
+                <cell id="19">
                     <property name="backgroundColor">#D2D2FF</property>
-                    <label id="184">
-                        <property name="fontSize">12pt</property>
-                        <text-property name="text">Laboratory Report 9</text-property>
+                    <property name="fontSize">12pt</property>
+                    <label id="248">
+                        <text-property name="text">Laboratory Report 8</text-property>
                     </label>
                 </cell>
-                <cell id="183">
+                <cell id="20">
                     <property name="backgroundColor">#D2D2FF</property>
+                    <property name="fontSize">12pt</property>
                 </cell>
             </row>
-            <row id="17">
-                <cell id="18"/>
-                <cell id="19">
-                    <table id="117">
+            <row id="249">
+                <property name="height">0.28125in</property>
+                <cell id="250">
+                    <property name="fontSize">12pt</property>
+                </cell>
+                <cell id="251">
+                    <property name="fontSize">12pt</property>
+                </cell>
+                <cell id="252">
+                    <property name="fontSize">12pt</property>
+                </cell>
+            </row>
+            <row id="21">
+                <property name="height">2.375in</property>
+                <cell id="22"/>
+                <cell id="23">
+                    <table id="179">
                         <property name="borderBottomColor">#0000FF</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">1px</property>
@@ -405,13 +424,12 @@ Roberto, Micaela
                         <property name="borderTopColor">#0000FF</property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">1px</property>
-                        <property name="width">5.947916666666667in</property>
-                        <property name="dataSet">totals</property>
+                        <property name="dataSet">totaFatura</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">ID_ASSISTITO</property>
-                                <text-property name="displayName">ID_ASSISTITO</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["ID_ASSISTITO"]</expression>
+                                <property name="name">ID_ENTE_EROGATORE</property>
+                                <text-property name="displayName">ID_ENTE_EROGATORE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ID_ENTE_EROGATORE"]</expression>
                                 <property name="dataType">integer</property>
                             </structure>
                             <structure>
@@ -446,10 +464,9 @@ Roberto, Micaela
                             </structure>
                             <structure>
                                 <property name="name">Aggregation</property>
-                                <text-property name="displayName">Sum</text-property>
                                 <property name="dataType">float</property>
                                 <simple-property-list name="aggregateOn">
-                                    <value>IdAssistito</value>
+                                    <value>NewTableGroup1</value>
                                 </simple-property-list>
                                 <property name="aggregateFunction">SUM</property>
                                 <list-property name="arguments">
@@ -462,10 +479,9 @@ Roberto, Micaela
                             </structure>
                             <structure>
                                 <property name="name">Aggregation_1</property>
-                                <text-property name="displayName">SumAccessServizio</text-property>
                                 <property name="dataType">float</property>
                                 <simple-property-list name="aggregateOn">
-                                    <value>IdAssistito</value>
+                                    <value>NewTableGroup1</value>
                                 </simple-property-list>
                                 <property name="aggregateFunction">SUM</property>
                                 <list-property name="arguments">
@@ -478,10 +494,9 @@ Roberto, Micaela
                             </structure>
                             <structure>
                                 <property name="name">Aggregation_2</property>
-                                <text-property name="displayName">SumNumeroPasti</text-property>
                                 <property name="dataType">float</property>
                                 <simple-property-list name="aggregateOn">
-                                    <value>IdAssistito</value>
+                                    <value>NewTableGroup1</value>
                                 </simple-property-list>
                                 <property name="aggregateFunction">SUM</property>
                                 <list-property name="arguments">
@@ -494,10 +509,9 @@ Roberto, Micaela
                             </structure>
                             <structure>
                                 <property name="name">Aggregation_3</property>
-                                <text-property name="displayName">SumNumeroTransport</text-property>
                                 <property name="dataType">float</property>
                                 <simple-property-list name="aggregateOn">
-                                    <value>IdAssistito</value>
+                                    <value>NewTableGroup1</value>
                                 </simple-property-list>
                                 <property name="aggregateFunction">SUM</property>
                                 <list-property name="arguments">
@@ -509,11 +523,10 @@ Roberto, Micaela
                                 <property name="allowExport">true</property>
                             </structure>
                             <structure>
-                                <property name="name">Sum_OreOregate</property>
-                                <text-property name="displayName">Sum_OreOregate</text-property>
+                                <property name="name">Aggregation_4</property>
                                 <property name="dataType">float</property>
                                 <simple-property-list name="aggregateOn">
-                                    <value>IdAssistito</value>
+                                    <value>NewTableGroup1</value>
                                 </simple-property-list>
                                 <property name="aggregateFunction">SUM</property>
                                 <list-property name="arguments">
@@ -525,249 +538,193 @@ Roberto, Micaela
                                 <property name="allowExport">true</property>
                             </structure>
                         </list-property>
-                        <column id="151">
-                            <property name="width">1.09375in</property>
-                        </column>
-                        <column id="152">
-                            <property name="width">0.9583333333333334in</property>
-                        </column>
-                        <column id="153">
-                            <property name="width">1.0104166666666667in</property>
-                        </column>
-                        <column id="154">
-                            <property name="width">0.90625in</property>
-                        </column>
-                        <column id="155">
-                            <property name="width">0.9895833333333334in</property>
-                        </column>
-                        <column id="156">
-                            <property name="width">0.9895833333333334in</property>
-                        </column>
+                        <column id="208"/>
+                        <column id="209"/>
+                        <column id="210"/>
+                        <column id="211"/>
+                        <column id="212"/>
+                        <column id="213"/>
                         <header>
-                            <row id="118">
-                                <cell id="119">
+                            <row id="180">
+                                <cell id="181">
                                     <property name="backgroundColor">#9F9FFF</property>
-                                    <property name="borderBottomColor">#000000</property>
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">1px</property>
-                                    <property name="borderTopColor">#000000</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">1px</property>
-                                    <label id="120">
-                                        <text-property name="text">ID ASSISTITO</text-property>
+                                    <label id="214">
+                                        <text-property name="text">ID ENTE EROGATORE</text-property>
                                     </label>
                                 </cell>
-                                <cell id="121">
+                                <cell id="182">
                                     <property name="backgroundColor">#9F9FFF</property>
-                                    <property name="borderBottomColor">#000000</property>
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">1px</property>
-                                    <property name="borderTopColor">#000000</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">1px</property>
-                                    <label id="122">
+                                    <label id="216">
                                         <text-property name="text">IMPORTO FATTURA</text-property>
                                     </label>
                                 </cell>
-                                <cell id="123">
+                                <cell id="183">
                                     <property name="backgroundColor">#9F9FFF</property>
-                                    <property name="borderBottomColor">#000000</property>
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">1px</property>
-                                    <property name="borderTopColor">#000000</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">1px</property>
-                                    <label id="124">
+                                    <label id="218">
                                         <text-property name="text">ACCESSI SERVIZIO</text-property>
                                     </label>
                                 </cell>
-                                <cell id="125">
+                                <cell id="184">
                                     <property name="backgroundColor">#9F9FFF</property>
-                                    <property name="borderBottomColor">#000000</property>
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">1px</property>
-                                    <property name="borderTopColor">#000000</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">1px</property>
-                                    <label id="126">
+                                    <label id="220">
                                         <text-property name="text">NUMERO PASTI</text-property>
                                     </label>
                                 </cell>
-                                <cell id="127">
+                                <cell id="185">
                                     <property name="backgroundColor">#9F9FFF</property>
-                                    <property name="borderBottomColor">#000000</property>
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">1px</property>
-                                    <property name="borderTopColor">#000000</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">1px</property>
-                                    <label id="128">
+                                    <label id="222">
                                         <text-property name="text">NUMERO TRASPORTI</text-property>
                                     </label>
                                 </cell>
-                                <cell id="129">
+                                <cell id="186">
                                     <property name="backgroundColor">#9F9FFF</property>
-                                    <property name="borderBottomColor">#000000</property>
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">1px</property>
-                                    <property name="borderTopColor">#000000</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">1px</property>
-                                    <label id="130">
+                                    <label id="224">
                                         <text-property name="text">ORE EROGATE</text-property>
                                     </label>
                                 </cell>
                             </row>
                         </header>
-                        <group id="157">
-                            <property name="groupName">IdAssistito</property>
-                            <expression name="keyExpr" type="javascript">row["ID_ASSISTITO"]</expression>
+                        <group id="226">
+                            <property name="groupName">NewTableGroup1</property>
+                            <expression name="keyExpr" type="javascript">row["ID_ENTE_EROGATORE"]</expression>
                             <structure name="toc">
-                                <expression name="expressionValue" type="javascript">row["ID_ASSISTITO"]</expression>
+                                <expression name="expressionValue" type="javascript">row["ID_ENTE_EROGATORE"]</expression>
                             </structure>
                             <property name="hideDetail">false</property>
                             <header>
-                                <row id="158">
-                                    <cell id="159">
+                                <row id="227">
+                                    <cell id="228">
                                         <property name="backgroundColor">#D2D2FF</property>
-                                        <data id="172">
-                                            <property name="resultSetColumn">ID_ASSISTITO</property>
+                                        <data id="241">
+                                            <property name="resultSetColumn">ID_ENTE_EROGATORE</property>
                                         </data>
                                     </cell>
-                                    <cell id="160">
+                                    <cell id="229">
                                         <property name="backgroundColor">#D2D2FF</property>
                                     </cell>
-                                    <cell id="161">
+                                    <cell id="230">
                                         <property name="backgroundColor">#D2D2FF</property>
                                     </cell>
-                                    <cell id="162">
+                                    <cell id="231">
                                         <property name="backgroundColor">#D2D2FF</property>
                                     </cell>
-                                    <cell id="163">
+                                    <cell id="232">
                                         <property name="backgroundColor">#D2D2FF</property>
                                     </cell>
-                                    <cell id="164">
+                                    <cell id="233">
                                         <property name="backgroundColor">#D2D2FF</property>
                                     </cell>
                                 </row>
                             </header>
                             <footer>
-                                <row id="165">
-                                    <property name="height">0.3645833333333333in</property>
-                                    <cell id="166">
-                                        <text id="178">
+                                <row id="234">
+                                    <property name="height">0.5104166666666666in</property>
+                                    <cell id="235">
+                                        <label id="242">
                                             <property name="fontWeight">bold</property>
                                             <property name="color">blue</property>
-                                            <property name="contentType">auto</property>
-                                            <text-property name="content"><![CDATA[Total]]></text-property>
-                                        </text>
+                                            <text-property name="text">Total</text-property>
+                                        </label>
                                     </cell>
-                                    <cell id="167">
-                                        <data id="173">
-                                            <property name="fontSize">10pt</property>
+                                    <cell id="236">
+                                        <data id="243">
                                             <property name="fontWeight">bold</property>
                                             <property name="color">blue</property>
                                             <property name="textAlign">center</property>
                                             <property name="resultSetColumn">Aggregation</property>
                                         </data>
                                     </cell>
-                                    <cell id="168">
-                                        <data id="174">
-                                            <property name="fontWeight">bold</property>
-                                            <property name="color">blue</property>
+                                    <cell id="237">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="color">blue</property>
+                                        <data id="244">
                                             <property name="textAlign">center</property>
                                             <property name="resultSetColumn">Aggregation_1</property>
                                         </data>
                                     </cell>
-                                    <cell id="169">
-                                        <data id="175">
-                                            <property name="fontWeight">bold</property>
-                                            <property name="color">#0000FF</property>
+                                    <cell id="238">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="color">blue</property>
+                                        <data id="245">
                                             <property name="textAlign">center</property>
                                             <property name="resultSetColumn">Aggregation_2</property>
                                         </data>
                                     </cell>
-                                    <cell id="170">
-                                        <data id="176">
+                                    <cell id="239">
+                                        <data id="246">
                                             <property name="fontWeight">bold</property>
-                                            <property name="color">#0000FF</property>
+                                            <property name="color">blue</property>
                                             <property name="textAlign">center</property>
                                             <property name="resultSetColumn">Aggregation_3</property>
                                         </data>
                                     </cell>
-                                    <cell id="171">
-                                        <data id="177">
-                                            <property name="fontWeight">bold</property>
-                                            <property name="color">#0000FF</property>
+                                    <cell id="240">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="color">blue</property>
+                                        <data id="247">
                                             <property name="textAlign">center</property>
-                                            <property name="resultSetColumn">Sum_OreOregate</property>
+                                            <property name="resultSetColumn">Aggregation_4</property>
                                         </data>
                                     </cell>
                                 </row>
                             </footer>
                         </group>
                         <detail>
-                            <row id="131">
-                                <property name="height">0.3541666666666667in</property>
-                                <cell id="132">
+                            <row id="187">
+                                <property name="height">0.3958333333333333in</property>
+                                <cell id="188">
                                     <property name="backgroundColor">#D2D2FF</property>
                                 </cell>
-                                <cell id="134">
+                                <cell id="189">
                                     <property name="backgroundColor">#D2D2FF</property>
-                                    <property name="textAlign">center</property>
-                                    <data id="135">
+                                    <data id="217">
                                         <property name="textAlign">center</property>
                                         <property name="resultSetColumn">IMPORTO_FATTURA</property>
                                     </data>
                                 </cell>
-                                <cell id="136">
+                                <cell id="190">
                                     <property name="backgroundColor">#D2D2FF</property>
-                                    <data id="137">
+                                    <data id="219">
                                         <property name="textAlign">center</property>
                                         <property name="resultSetColumn">ACCESSI_SERVIZIO</property>
                                     </data>
                                 </cell>
-                                <cell id="138">
+                                <cell id="191">
                                     <property name="backgroundColor">#D2D2FF</property>
-                                    <data id="139">
+                                    <data id="221">
                                         <property name="textAlign">center</property>
                                         <property name="resultSetColumn">NUMERO_PASTI</property>
                                     </data>
                                 </cell>
-                                <cell id="140">
+                                <cell id="192">
                                     <property name="backgroundColor">#D2D2FF</property>
-                                    <data id="141">
-                                        <property name="textAlign">center</property>
+                                    <property name="textAlign">center</property>
+                                    <data id="223">
                                         <property name="resultSetColumn">NUMERO_TRASPORTI</property>
                                     </data>
                                 </cell>
-                                <cell id="142">
+                                <cell id="193">
                                     <property name="backgroundColor">#D2D2FF</property>
-                                    <data id="143">
-                                        <property name="textAlign">center</property>
+                                    <property name="textAlign">center</property>
+                                    <data id="225">
                                         <property name="resultSetColumn">ORE_EROGATE</property>
                                     </data>
                                 </cell>
                             </row>
                         </detail>
                         <footer>
-                            <row id="144">
-                                <cell id="145"/>
-                                <cell id="146"/>
-                                <cell id="147"/>
-                                <cell id="148"/>
-                                <cell id="149"/>
-                                <cell id="150"/>
+                            <row id="201">
+                                <property name="height">0.2708333333333333in</property>
+                                <cell id="202"/>
+                                <cell id="203"/>
+                                <cell id="204"/>
+                                <cell id="205"/>
+                                <cell id="206"/>
+                                <cell id="207"/>
                             </row>
                         </footer>
                     </table>
                 </cell>
-                <cell id="20"/>
-            </row>
-            <row id="21">
-                <property name="height">0.3125in</property>
-                <cell id="22"/>
-                <cell id="23"/>
                 <cell id="24"/>
             </row>
         </grid>

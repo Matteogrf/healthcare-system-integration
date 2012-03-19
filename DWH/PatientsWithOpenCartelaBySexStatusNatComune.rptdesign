@@ -184,1025 +184,186 @@ d_assistito.ID_ASSISTITO = f_cartella.ID_ASSISTITO and f_cartella.FINE_PRESA_CAR
     </page-setup>
     <body>
         <grid id="9">
-            <column id="10"/>
-            <column id="11"/>
-            <column id="12"/>
+            <property name="width">7.947916666666667in</property>
+            <column id="10">
+                <property name="width">0.6458333333333334in</property>
+            </column>
+            <column id="11">
+                <property name="width">6.604166666666667in</property>
+            </column>
+            <column id="12">
+                <property name="width">0.6979166666666666in</property>
+            </column>
             <row id="13">
-                <cell id="14">
-                    <image id="25">
-                        <property name="height">0.8125in</property>
-                        <property name="width">2.5625in</property>
+                <cell id="14"/>
+                <cell id="15">
+                    <image id="80">
+                        <property name="height">0.5208333333333334in</property>
+                        <property name="width">2.0833333333333335in</property>
                         <property name="source">embed</property>
-                        <property name="imageName">unitn_logo.gif</property>
+                        <property name="imageName">logo_unitn_it.jpg</property>
                     </image>
                 </cell>
-                <cell id="15"/>
                 <cell id="16">
-                    <text id="27">
+                    <text id="79">
+                        <property name="fontSize">xx-small</property>
+                        <property name="color">#C0C0C0</property>
+                        <property name="textAlign">left</property>
                         <property name="contentType">html</property>
-                        <text-property name="content"><![CDATA[<H4>
-<B>
-Marchesoni Michele
-</B><br/>
-<B>
-Matteo Grof
-</B><br/>
-<B>
-Meque Abdul
-</B><br/>
-<B>
+                        <text-property name="content"><![CDATA[<H6>
+Marchesoni Michele<br/>
+Matteo Grof<br/>
+Meque Abdul<br/>
 Roberto, Micaela
-</B>
-</H4>]]></text-property>
+</H6>]]></text-property>
                     </text>
+                </cell>
+            </row>
+            <row id="81">
+                <cell id="82">
+                    <property name="backgroundColor">#D2D2FF</property>
+                    <property name="fontSize">12pt</property>
+                </cell>
+                <cell id="83">
+                    <property name="backgroundColor">#D2D2FF</property>
+                    <property name="fontSize">12pt</property>
+                    <label id="85">
+                        <text-property name="text">Laboratory Report 2</text-property>
+                    </label>
+                </cell>
+                <cell id="84">
+                    <property name="backgroundColor">#D2D2FF</property>
+                    <property name="fontSize">12pt</property>
                 </cell>
             </row>
             <row id="17">
                 <cell id="18"/>
-                <cell id="19">
-                    <extended-item extensionName="Chart" id="28">
-                        <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithoutAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
-  <Version>2.5.3</Version>
-  <Type>Pie Chart</Type>
-  <SubType>Standard</SubType>
-  <Block>
-    <Children xsi:type="layout:TitleBlock">
-      <Bounds>
-        <Left>0.0</Left>
-        <Top>0.0</Top>
-        <Width>0.0</Width>
-        <Height>0.0</Height>
-      </Bounds>
-      <Insets>
-        <Top>3.0</Top>
-        <Left>3.0</Left>
-        <Bottom>3.0</Bottom>
-        <Right>3.0</Right>
-      </Insets>
-      <Row>-1</Row>
-      <Column>-1</Column>
-      <Rowspan>-1</Rowspan>
-      <Columnspan>-1</Columnspan>
-      <Outline>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </Outline>
-      <Visible>true</Visible>
-      <Label>
-        <Caption>
-          <Value>Patients with Open Cartela by Sex</Value>
-          <Font>
-            <Size>16.0</Size>
-            <Bold>true</Bold>
-            <Alignment>
-              <horizontalAlignment>Center</horizontalAlignment>
-              <verticalAlignment>Center</verticalAlignment>
-            </Alignment>
-          </Font>
-        </Caption>
-        <Background xsi:type="attribute:ColorDefinition">
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Background>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>2.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>3.0</Right>
-        </Insets>
-        <Visible>true</Visible>
-      </Label>
-    </Children>
-    <Children xsi:type="layout:Plot">
-      <Bounds>
-        <Left>0.0</Left>
-        <Top>0.0</Top>
-        <Width>0.0</Width>
-        <Height>0.0</Height>
-      </Bounds>
-      <Insets>
-        <Top>3.0</Top>
-        <Left>3.0</Left>
-        <Bottom>3.0</Bottom>
-        <Right>3.0</Right>
-      </Insets>
-      <Row>-1</Row>
-      <Column>-1</Column>
-      <Rowspan>-1</Rowspan>
-      <Columnspan>-1</Columnspan>
-      <Outline>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </Outline>
-      <Visible>true</Visible>
-      <HorizontalSpacing>5</HorizontalSpacing>
-      <VerticalSpacing>5</VerticalSpacing>
-      <ClientArea>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>0</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>0.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>0.0</Right>
-        </Insets>
-      </ClientArea>
-    </Children>
-    <Children xsi:type="layout:Legend">
-      <Bounds>
-        <Left>0.0</Left>
-        <Top>0.0</Top>
-        <Width>0.0</Width>
-        <Height>0.0</Height>
-      </Bounds>
-      <Insets>
-        <Top>3.0</Top>
-        <Left>3.0</Left>
-        <Bottom>3.0</Bottom>
-        <Right>3.0</Right>
-      </Insets>
-      <Row>-1</Row>
-      <Column>-1</Column>
-      <Rowspan>-1</Rowspan>
-      <Columnspan>-1</Columnspan>
-      <Outline>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </Outline>
-      <Visible>true</Visible>
-      <ClientArea>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>0</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </Outline>
-        <Insets>
-          <Top>2.0</Top>
-          <Left>2.0</Left>
-          <Bottom>2.0</Bottom>
-          <Right>2.0</Right>
-        </Insets>
-      </ClientArea>
-      <Text>
-        <Value></Value>
-        <Font>
-          <Alignment/>
-        </Font>
-      </Text>
-      <Orientation>Vertical</Orientation>
-      <Direction>Top_Bottom</Direction>
-      <Separator>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-        <Visible>true</Visible>
-      </Separator>
-      <Position>Right</Position>
-      <ItemType>Categories</ItemType>
-      <Title>
-        <Caption>
-          <Value></Value>
-          <Font>
-            <Alignment/>
-          </Font>
-        </Caption>
-        <Background xsi:type="attribute:ColorDefinition">
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Background>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>2.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>3.0</Right>
-        </Insets>
-        <Visible>false</Visible>
-      </Title>
-      <TitlePosition>Above</TitlePosition>
-    </Children>
-    <Bounds>
-      <Left>0.0</Left>
-      <Top>0.0</Top>
-      <Width>212.0</Width>
-      <Height>130.0</Height>
-    </Bounds>
-    <Insets>
-      <Top>3.0</Top>
-      <Left>3.0</Left>
-      <Bottom>3.0</Bottom>
-      <Right>3.0</Right>
-    </Insets>
-    <Row>-1</Row>
-    <Column>-1</Column>
-    <Rowspan>-1</Rowspan>
-    <Columnspan>-1</Columnspan>
-    <Outline>
-      <Style>Solid</Style>
-      <Thickness>1</Thickness>
-      <Color>
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>0</Green>
-        <Blue>0</Blue>
-      </Color>
-      <Visible>false</Visible>
-    </Outline>
-    <Visible>true</Visible>
-  </Block>
-  <Dimension>Two_Dimensional_With_Depth</Dimension>
-  <Units>Points</Units>
-  <SeriesThickness>10.0</SeriesThickness>
-  <GridColumnCount>0</GridColumnCount>
-  <ExtendedProperties>
-    <Name>enable.area.alt</Name>
-    <Value>false</Value>
-  </ExtendedProperties>
-  <SampleData>
-    <BaseSampleData>
-      <DataSetRepresentation>'A','B','C','D','E'</DataSetRepresentation>
-    </BaseSampleData>
-    <OrthogonalSampleData>
-      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
-      <SeriesDefinitionIndex>0</SeriesDefinitionIndex>
-    </OrthogonalSampleData>
-  </SampleData>
-  <Interactivity/>
-  <EmptyMessage>
-    <Caption>
-      <Value>This chart contains no data.</Value>
-      <Font>
-        <Alignment>
-          <horizontalAlignment>Center</horizontalAlignment>
-          <verticalAlignment>Center</verticalAlignment>
-        </Alignment>
-      </Font>
-    </Caption>
-    <Background xsi:type="attribute:ColorDefinition">
-      <Transparency>64</Transparency>
-      <Red>127</Red>
-      <Green>127</Green>
-      <Blue>127</Blue>
-    </Background>
-    <Outline>
-      <Color>
-        <Transparency>128</Transparency>
-        <Red>127</Red>
-        <Green>127</Green>
-        <Blue>127</Blue>
-      </Color>
-      <Visible>true</Visible>
-    </Outline>
-    <Insets>
-      <Top>10.0</Top>
-      <Left>10.0</Left>
-      <Bottom>10.0</Bottom>
-      <Right>10.0</Right>
-    </Insets>
-    <Visible>false</Visible>
-  </EmptyMessage>
-  <SeriesDefinitions>
-    <Query>
-      <Definition></Definition>
-    </Query>
-    <SeriesPalette>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>80</Red>
-        <Green>166</Green>
-        <Blue>218</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>242</Red>
-        <Green>88</Green>
-        <Blue>106</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>232</Red>
-        <Green>172</Green>
-        <Blue>57</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>255</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>64</Red>
-        <Green>128</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>128</Green>
-        <Blue>192</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>170</Red>
-        <Green>85</Green>
-        <Blue>85</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>128</Green>
-        <Blue>0</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>192</Red>
-        <Green>192</Green>
-        <Blue>192</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>255</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>192</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>7</Red>
-        <Green>146</Green>
-        <Blue>94</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>128</Green>
-        <Blue>255</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>128</Green>
-        <Blue>192</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>255</Green>
-        <Blue>255</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>128</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>128</Green>
-        <Blue>192</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>128</Green>
-        <Blue>192</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>0</Green>
-        <Blue>255</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>64</Green>
-        <Blue>64</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>128</Green>
-        <Blue>64</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>80</Red>
-        <Green>240</Green>
-        <Blue>120</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>64</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>0</Green>
-        <Blue>64</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>0</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>128</Green>
-        <Blue>64</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>128</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>128</Green>
-        <Blue>255</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>64</Green>
-        <Blue>0</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>0</Green>
-        <Blue>0</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>255</Green>
-        <Blue>255</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>128</Green>
-        <Blue>0</Blue>
-      </Entries>
-    </SeriesPalette>
-    <SeriesDefinitions>
-      <Query>
-        <Definition></Definition>
-      </Query>
-      <SeriesPalette>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>80</Red>
-          <Green>166</Green>
-          <Blue>218</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>242</Red>
-          <Green>88</Green>
-          <Blue>106</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>232</Red>
-          <Green>172</Green>
-          <Blue>57</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>255</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>64</Red>
-          <Green>128</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>128</Green>
-          <Blue>192</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>170</Red>
-          <Green>85</Green>
-          <Blue>85</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>128</Green>
-          <Blue>0</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>192</Red>
-          <Green>192</Green>
-          <Blue>192</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>192</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>7</Red>
-          <Green>146</Green>
-          <Blue>94</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>128</Green>
-          <Blue>255</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>128</Green>
-          <Blue>192</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>128</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>128</Green>
-          <Blue>192</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>128</Green>
-          <Blue>192</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>0</Green>
-          <Blue>255</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>64</Green>
-          <Blue>64</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>128</Green>
-          <Blue>64</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>80</Red>
-          <Green>240</Green>
-          <Blue>120</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>64</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>0</Green>
-          <Blue>64</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>0</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>128</Green>
-          <Blue>64</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>128</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>128</Green>
-          <Blue>255</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>64</Green>
-          <Blue>0</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>128</Green>
-          <Blue>0</Blue>
-        </Entries>
-      </SeriesPalette>
-      <Series xsi:type="type:PieSeries">
-        <Visible>true</Visible>
-        <Label>
-          <Caption>
-            <Value></Value>
-            <Font>
-              <Alignment/>
-            </Font>
-          </Caption>
-          <Background xsi:type="attribute:ColorDefinition">
-            <Transparency>0</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Background>
-          <Outline>
-            <Style>Solid</Style>
-            <Thickness>1</Thickness>
-            <Color>
-              <Transparency>255</Transparency>
-              <Red>0</Red>
-              <Green>0</Green>
-              <Blue>0</Blue>
-            </Color>
-            <Visible>false</Visible>
-          </Outline>
-          <Insets>
-            <Top>0.0</Top>
-            <Left>2.0</Left>
-            <Bottom>0.0</Bottom>
-            <Right>3.0</Right>
-          </Insets>
-          <Visible>false</Visible>
-        </Label>
-        <DataDefinition>
-          <Definition>row[&quot;ID_ASSISTITO&quot;]</Definition>
-          <Grouping>
-            <Enabled>true</Enabled>
-            <GroupType>Text</GroupType>
-            <AggregateExpression>DistinctCount</AggregateExpression>
-          </Grouping>
-        </DataDefinition>
-        <SeriesIdentifier>Patients</SeriesIdentifier>
-        <DataPoint>
-          <Components>
-            <Type>Orthogonal_Value</Type>
-          </Components>
-          <Separator>, </Separator>
-        </DataPoint>
-        <LabelPosition>Outside</LabelPosition>
-        <Stacked>false</Stacked>
-        <Triggers>
-          <Condition>onmouseover</Condition>
-          <Action>
-            <Type>Show_Tooltip</Type>
-            <Value xsi:type="attribute:TooltipValue">
-              <Text></Text>
-              <Delay>200</Delay>
-            </Value>
-          </Action>
-        </Triggers>
-        <Explosion>0</Explosion>
-        <Title>
-          <Caption>
-            <Value></Value>
-            <Font>
-              <Size>16.0</Size>
-              <Bold>true</Bold>
-              <Alignment/>
-            </Font>
-          </Caption>
-          <Background xsi:type="attribute:ColorDefinition">
-            <Transparency>0</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Background>
-          <Outline>
-            <Style>Solid</Style>
-            <Thickness>1</Thickness>
-            <Color>
-              <Transparency>255</Transparency>
-              <Red>0</Red>
-              <Green>0</Green>
-              <Blue>0</Blue>
-            </Color>
-          </Outline>
-          <Insets>
-            <Top>0.0</Top>
-            <Left>2.0</Left>
-            <Bottom>0.0</Bottom>
-            <Right>3.0</Right>
-          </Insets>
-          <Visible>true</Visible>
-        </Title>
-        <TitlePosition>Below</TitlePosition>
-        <LeaderLineAttributes>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Visible>true</Visible>
-        </LeaderLineAttributes>
-        <LeaderLineLength>10.0</LeaderLineLength>
-      </Series>
-    </SeriesDefinitions>
-    <Series>
-      <Visible>true</Visible>
-      <Label>
-        <Caption>
-          <Value></Value>
-          <Font>
-            <Alignment/>
-          </Font>
-        </Caption>
-        <Background xsi:type="attribute:ColorDefinition">
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Background>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>2.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>3.0</Right>
-        </Insets>
-        <Visible>false</Visible>
-      </Label>
-      <DataDefinition>
-        <Definition>row[&quot;SESSO&quot;]</Definition>
-      </DataDefinition>
-      <SeriesIdentifier>Gender</SeriesIdentifier>
-      <DataPoint>
-        <Components>
-          <Type>Orthogonal_Value</Type>
-        </Components>
-        <Separator>, </Separator>
-      </DataPoint>
-      <LabelPosition>Outside</LabelPosition>
-      <Stacked>false</Stacked>
-    </Series>
-    <Grouping>
-      <Enabled>true</Enabled>
-      <GroupType>Text</GroupType>
-      <AggregateExpression>Sum</AggregateExpression>
-    </Grouping>
-  </SeriesDefinitions>
-</model:ChartWithoutAxes>
-]]></xml-property>
-                        <property name="outputFormat">SVG</property>
-                        <property name="inheritColumns">false</property>
+                <cell id="19"/>
+                <cell id="20"/>
+            </row>
+            <row id="21">
+                <cell id="22"/>
+                <cell id="23">
+                    <table id="29">
+                        <property name="fontSize">12pt</property>
+                        <property name="borderBottomColor">#0000FF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftColor">#0000FF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#0000FF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#0000FF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
                         <property name="dataSet">Data Set</property>
-                        <property name="height">130pt</property>
-                        <property name="width">212pt</property>
                         <list-property name="boundDataColumns">
                             <structure>
                                 <property name="name">SESSO</property>
+                                <text-property name="displayName">SESSO</text-property>
                                 <expression name="expression" type="javascript">dataSetRow["SESSO"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
                                 <property name="name">ID_ASSISTITO</property>
+                                <text-property name="displayName">ID_ASSISTITO</text-property>
                                 <expression name="expression" type="javascript">dataSetRow["ID_ASSISTITO"]</expression>
                                 <property name="dataType">integer</property>
                             </structure>
+                            <structure>
+                                <property name="name">Aggregation</property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>bySexy</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["ID_ASSISTITO"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
-                    </extended-item>
+                        <column id="43"/>
+                        <column id="44"/>
+                        <header>
+                            <row id="30">
+                                <cell id="31">
+                                    <property name="backgroundColor">#9F9FFF</property>
+                                    <label id="32">
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">SESSO</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="33">
+                                    <property name="backgroundColor">#9F9FFF</property>
+                                    <label id="34">
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">ID ASSISTITO                                          Total</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <group id="45">
+                            <property name="groupName">bySexy</property>
+                            <expression name="keyExpr" type="javascript">row["SESSO"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["SESSO"]</expression>
+                            </structure>
+                            <property name="hideDetail">false</property>
+                            <header>
+                                <row id="46">
+                                    <cell id="47">
+                                        <property name="backgroundColor">#D2D2FF</property>
+                                        <data id="52">
+                                            <property name="resultSetColumn">SESSO</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="48">
+                                        <property name="backgroundColor">#D2D2FF</property>
+                                    </cell>
+                                </row>
+                            </header>
+                            <footer>
+                                <row id="49">
+                                    <cell id="50"/>
+                                    <cell id="51">
+                                        <data id="53">
+                                            <property name="textAlign">right</property>
+                                            <property name="resultSetColumn">Aggregation</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </footer>
+                        </group>
+                        <detail>
+                            <row id="35">
+                                <cell id="36">
+                                    <property name="backgroundColor">#D2D2FF</property>
+                                </cell>
+                                <cell id="38">
+                                    <property name="backgroundColor">#D2D2FF</property>
+                                    <data id="39">
+                                        <property name="resultSetColumn">ID_ASSISTITO</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="40">
+                                <cell id="41"/>
+                                <cell id="42"/>
+                            </row>
+                        </footer>
+                    </table>
                 </cell>
-                <cell id="20"/>
-            </row>
-            <row id="21">
-                <cell id="22"/>
-                <cell id="23"/>
                 <cell id="24"/>
             </row>
         </grid>
-        <table id="29">
-            <property name="dataSet">Data Set</property>
-            <list-property name="boundDataColumns">
-                <structure>
-                    <property name="name">SESSO</property>
-                    <text-property name="displayName">SESSO</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["SESSO"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="name">ID_ASSISTITO</property>
-                    <text-property name="displayName">ID_ASSISTITO</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["ID_ASSISTITO"]</expression>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="name">Aggregation</property>
-                    <property name="dataType">integer</property>
-                    <simple-property-list name="aggregateOn">
-                        <value>bySexy</value>
-                    </simple-property-list>
-                    <property name="aggregateFunction">COUNTDISTINCT</property>
-                    <list-property name="arguments">
-                        <structure>
-                            <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["ID_ASSISTITO"]</expression>
-                        </structure>
-                    </list-property>
-                    <property name="allowExport">true</property>
-                </structure>
-            </list-property>
-            <column id="43"/>
-            <column id="44"/>
-            <header>
-                <row id="30">
-                    <cell id="31">
-                        <label id="32">
-                            <property name="textAlign">left</property>
-                            <text-property name="text">SESSO</text-property>
-                        </label>
-                    </cell>
-                    <cell id="33">
-                        <label id="34">
-                            <property name="textAlign">left</property>
-                            <text-property name="text">ID_ASSISTITO                                                         Total</text-property>
-                        </label>
-                    </cell>
-                </row>
-            </header>
-            <group id="45">
-                <property name="groupName">bySexy</property>
-                <expression name="keyExpr" type="javascript">row["SESSO"]</expression>
-                <structure name="toc">
-                    <expression name="expressionValue" type="javascript">row["SESSO"]</expression>
-                </structure>
-                <property name="hideDetail">false</property>
-                <header>
-                    <row id="46">
-                        <cell id="47">
-                            <data id="52">
-                                <property name="resultSetColumn">SESSO</property>
-                            </data>
-                        </cell>
-                        <cell id="48"/>
-                    </row>
-                </header>
-                <footer>
-                    <row id="49">
-                        <cell id="50"/>
-                        <cell id="51">
-                            <data id="53">
-                                <property name="textAlign">right</property>
-                                <property name="resultSetColumn">Aggregation</property>
-                            </data>
-                        </cell>
-                    </row>
-                </footer>
-            </group>
-            <detail>
-                <row id="35">
-                    <cell id="36"/>
-                    <cell id="38">
-                        <data id="39">
-                            <property name="resultSetColumn">ID_ASSISTITO</property>
-                        </data>
-                    </cell>
-                </row>
-            </detail>
-            <footer>
-                <row id="40">
-                    <cell id="41"/>
-                    <cell id="42"/>
-                </row>
-            </footer>
-        </table>
         <grid id="57">
             <property name="width">7.947916666666667in</property>
             <column id="58">
@@ -4924,6 +4085,87 @@ Roberto, Micaela
                 skR40CQ7mTJhKjwoz+ZNjCkxCnRXqg0jII54HkWaVClLnxgbpmyalODSmwXZpcNEpo4sql29fgUbVmxV
                 gvHGnr25rpcstm3dvoUbV+5cunXt3sV7d1dermjRshsWTPBgwoUNH0acWPFixo0dP37sF61OypUtX8ac
                 WfNmzp09fw0GTflhZ8mlTZ9GTTUgADs=
+            </property>
+        </structure>
+        <structure>
+            <property name="name">logo_unitn_it.jpg</property>
+            <property name="data">
+                /9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABQAAD/4QNdaHR0cDovL25z
+                LmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJl
+                U3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJB
+                ZG9iZSBYTVAgQ29yZSA1LjAtYzA2MCA2MS4xMzQ3NzcsIDIwMTAvMDIvMTItMTc6MzI6MDAgICAgICAg
+                ICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3lu
+                dGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8v
+                bnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94
+                YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hh
+                cC8xLjAvIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9IkQ1RkMxN0UwRUI1QURCQTFGQzE3RTYyQzFF
+                MjE2MTFCIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjAxNDUyRDJDNENDMjExRTFBQTZERDIxMDAw
+                RDE4RDY1IiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjAxNDUyRDJCNENDMjExRTFBQTZERDIxMDAw
+                RDE4RDY1IiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyI+IDx4bXBN
+                TTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjlENUFCODYxRkY0QkUxMTFCMUZF
+                ODY5RDhGQTY5MEE5IiBzdFJlZjpkb2N1bWVudElEPSJENUZDMTdFMEVCNUFEQkExRkMxN0U2MkMxRTIx
+                NjExQiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0
+                IGVuZD0iciI/Pv/uAA5BZG9iZQBkwAAAAAH/2wCEAAICAgICAgICAgIDAgICAwQDAgIDBAUEBAQEBAUG
+                BQUFBQUFBgYHBwgHBwYJCQoKCQkMDAwMDAwMDAwMDAwMDAwBAwMDBQQFCQYGCQ0LCQsNDw4ODg4PDwwM
+                DAwMDw8MDAwMDAwPDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDP/AABEIADIAyAMBEQACEQEDEQH/
+                xACOAAEAAQUBAQEAAAAAAAAAAAAABQIEBgcIAQMJAQEAAwEBAAAAAAAAAAAAAAAAAQIDBQQQAAICAQQB
+                AwMDAwMFAAAAAAECAwQFABESBiExIhNBFAdRMhVhIxZxQiRSYnI0JREAAgECBQMDAwUBAQAAAAAAAAER
+                IQIxQVESA/BhBIGRwXGhIrHR8WITIxT/2gAMAwEAAhEDEQA/AP30sWK9WCW1amSvWgUvNPIwVFUepYnY
+                AaJNuEQ3Brh/ydh58vSxGMT7lrVtaMt2YtFFBNNCs9YOoR2AsIw+IsFDnwpJB16l4l23c9J+H7Z6GH/o
+                t3QutPfIiK35aR8baydrEPWjr5evho6khdJpZ7M0cClBwYAKZAZORXh/u+m+l3hVhPKevjUovKpLWcGf
+                4HteH7F9xHRleK5Ullhs0bCGOVXgcxyAA+HCsNiVJAPg68vJw3ceOBvZy234GT6zNBoBoBoBoBoBoBoB
+                oBoBoBoBoBoBoBoBoBoBoBoBoDmD8ld7gymZm69jVr55MTZjrT9bPJxatSN8axzwiNi8bsxRSjr8bryc
+                ndUbreJ4+23c6Tnou3VV7rneRzK67aqxl10jU3cetdqr9jlWXIWrmbxVCm8daokdj4kkCRv87exrX2sf
+                wk/KVSRh44u2+vZwc3G7MITb67TXDD6Hn5eK5Xd0uvrFMcSwXqnc8XiuvYHPTTCzNiq/YrPb8fUihtV2
+                lEkjVLDwHi4hMUe5K7F2Ds/xx7at/vxXXXXW67drdPqp1/SmLK/5X2pW3aTPx6GV0ou0Yij0DM2rJdMn
+                joIsJmDKlaKnNBGC1SyUVlQIwllbgR902wlkVI9ZN2Xu+1LB1WM919l/XJSzRK+1Wvt7dv1f9s3Q606j
+                2GLs+BpZWMqXlRROUWREL8Q3NBKiPxdWDLuPQ64vNxPjudp0+Lk32yZRrI0GgGgGgGgGgGgGgGgGgGgG
+                gGgGgGgGgGgGgGgGgOOKnaMPhc/0DsPav5OzXkFlMMsmLeSdrliMFI4HIWxJEvJyCYVQN5V2G23cfDdd
+                ZfbZHeuXfKfU5S5FbdbddPanT+xF/kXr2C/K7H8h9C7b/if8lFJ1/tFvIQLRjsMiukUbPKI5OfJgrpyH
+                NQg5LwIa3jct/jf8uW3dH5KKx19q6leey3n/ADsu2zRzQ0xiOmd0z90HN5u30v8AjsRUwTUbllMw+Qxs
+                BKWJ0jggUGNl5Di68XLK6Sjj599/Px2L8Vult4bYeWf8Zo81vDfc/wAnthRrK6/k6rzVvotz8UydP65F
+                ZkqdexNe3SEtFy0KVpE2knAWNRLN7t19rPybYeuuPx28q5/9L8W9eqI6F743xbbcEtDL/wASNKVzjSVj
+                S+7kjm+xaybUkJXlGEsO9my4n4qPkDFeJ2QKQvJsPNimfpHtRU09zXxc+vl11NtnIUlvrizaQZCSBrKU
+                9/7hhVgjSBfXYMQN9eCVgeuCxodhweTmjr4/K1rliaBrUMUcgLPCshiaRR6lQ44kj6+NQrk8CWmi3Ttn
+                WnnhrLm6hsWHRIYvkALNJK0CAb/9UiMg/wC4Eeum5E7WVZHtXXcRM9fJ5mrSnRkRoZXAYNIjOg2/UqjE
+                f0B0dyRCtbKo+z9dlvri0zNQ5GTgEp/KodjIglQAHbcsh5AfUedNymJG14lt/mfVedxP56p/8/8A9t+f
+                sT+4sP7/ANp2kYKdj4J2Om9DaxW7l1m/Zejj8zVv5BQ5WhDIpkJRWcjY7AeFPrpvWA2skcFmqfYcVTzG
+                PbnUuoWiPJH/AGkqw5RsyHYgjdWI0TlSGoLSr2vrV262Nq52nNfSR4TTEy/IZIiRIgUncspB3A8jTchD
+                FLtnWchXuW6ecpTVcegku2RKojiQkgM7EgAbqfOiuTzDtaKavbet3Y/krZeCRDZipqx3Xeecn4kAYDcv
+                t7dvXRXJjayXW/Se/Li0tRtkIIUsTVAf7ixSFlRyP0JUgH+h1MkQQcndeqRTW4JM9UWSiSLPv3ClWCMO
+                Q8EqzAEA7g+uo3onaz60O3dZyklWLHZupde67R01ikDfKyp8rBNvXZBy8fTzork8A7Wii13Lq1JzHbz1
+                Ou4mmrFZJAP7tfj8yefqnNeX6bjR3pDayTr5nFW7EFWpka9mxZrfe144ZFf5K3Lh8qlSQV5eNxqdyEEp
+                qSBoBoBoDi3u/QuV6SP55cZYweWqxYeviY44chPFYMokeuUWASSzJZbkoEp4RDmVLMT3fH8mmspzOHrj
+                RR2xOTzcFdIdIx+Ne+B9MP2DquN63juoU4JZq2ZTIW+zSZtVsTRXHJenedmSQMGmhd9/BRd2fiyhTF/H
+                yXXu95QlGma9n+xNnJYrVYs5mdcmYVle54F8jRimu1qtW8sWShTHAWZyt0STGqlTlvPMSkgBmCxhvO3n
+                g29nBek3GFK9s5yWGFTK/mtmNa075Rr9aGxbF/Gy4ix1nqvW1hp5+tjs1mLrzpkpRQ5yS/8AKjR2lEZZ
+                YkZFjYqrSsEb6+ZW3bt992EpZV7ZTjnobO5bdtqxh6079am8/wAZQrNhTl0x2OxcGRCJShxNf7WpLBCz
+                8LEcR96/LyO3I7lQp+uuf5b/AC2y3GtX9D2eOvxmEp0oXWaW/je54vsEeJt5XHNh7OMmFFUeSKeSxDMh
+                ZGdPawjYch6H114XjOR6lhBgGB6ZnZ62JmapLgOx4TFiXD5Gbi6Q2/vbTyVpTGx5xyxyKsgHgqdx7lG1
+                LbHC1Lu5Hxx3UOxZaDJJkMVJhbtzrv8AxZC6slfKxZa3dgUOCSeDNG2+2xGitb9vkO5LAkbeL7JNF1bs
+                V3FZKvlruZsZPPVcZ8DWqUbUJasEIMh4MFBRT6+rEaNOjzEqqK5MTn7XZbvZZMFclw65jHX26/L8STyf
+                HSjhSyhVzu9aQEmPlsw39WVd5acyRKiCCymC7I2MyWE6viMtF1iULPYwWUSEGtZF+CZVx8gkLshAkZlY
+                lVA9p3O2qu14LAlNYszXKYzsD5bvcdGpPCvZ/wCIx9PKIFKxRNG8dqwAWB/soxP/AJbau05fchNQiV6X
+                h8t1rIZ/B2gbeIlkTJ4nJRxJBCr2N1s1hGjHjxdA42G3vP6am1NNorc01Jh8eHzuRxkvWv8AH7dSc9rs
+                ZdewWPiSGrXGTa2s0BEjSNI8ftVQo/ceRA31WG6Rn8l5Uz2LDH4bsbdUwmLOBys9zr2Sq5W3i8ga0dex
+                FXlJarWcN5OzCRRJ43UbsNRDiNA2pkmuxX+z5zIUbFXreUGExVzEXTUmgijsNPBad7BQGX3BYuP1239N
+                Tc28iEkjKsMmQudzyWdlxNvG0beDp1YDbCK/yw2rTMpCO+x4urevodWUzJV4QY/gKGZxucmqYOjlKPVJ
+                UvzZPF5VIjHXtysXQ4+VXaQiR2YlSSoB3HEnbVbU06YFm01XEsqGJzmJwn4kyE2Gt2JOqQyQ5zGQhGtR
+                fNSeuGVOQDhXI34nfY7jfRJpW9hKllljK2fx3Yq2fsdVykldsl2GY1YhA8yx3vsjXLAzBRzETf7vG3nR
+                JzMaikRJL9H61mcN2SW3exv2FW9TyFhK8TK8NNrmQE6VAynYsqe48Rx3J20staYuaaNx62MxoBoBoDFe
+                xddkyqSXcVcXDdjjpz0qOcWJJJI4p9i6bup29yhgfowB2YbqdeLl20uU2zMGXJx7qqj1OR+x/iGKOk9b
+                JQZLE5KS3I9jIVSxrPSgW9LUWSZEZJJYYkjT5WXm0km2u3xebLlQ180n0daYQjm8ni0hyn8Vj+e5hHXf
+                xnTSpFcoSWUuZF/vZOuwJD8iVrCNNMEkiUyOZBH8DKJBxmKsBw9d+Xy3MPBUnuupww7mPHwUlZ5de31O
+                jul/i22acFLM4+vjMPWljsKIy5uzyKvuVZnVJ44ixk/efkaKQwyLxUNrl8/lqZtcv7ftP2lSj38XjuIu
+                w66+jhnQ0UUcKJDEixQxKEijQBVVVGwAA8AAa5eJ7sDU3cn65/m+ITtNuOtjBgbzoJbEkCmcWawQrwdS
+                XCluO3n121ndG6uhe2YoRH41mzE/ZLiZqW08n8BCaItlxYNQ5G8Kzzq2xErQhORI5enLzqOOZ9Cb4giM
+                xhsZj6v5klpRPBLhqkceMdZpS0Anx6M/DdzsWck/66hpLcSnMEPkGq17eOxORs1cS57JPJZwt+xOMfBU
+                bHSrBJFIJFd4p2QPvuFEp48QR5q4+/wSloZHavWaF7ufZ8HbmzHWUSvTzOJgdpwtT+OhKXag3JLRMxLg
+                fvTc/uUb2nFrAiJhZlK4SL+XxT4usJcy/SJcpj45JpCj5SJq4ryspfYkHx58bb6RX0E09SiN8I+I6ta6
+                rdml/IMluh95FJNI1+RzIgyK5KIsWCBDIX5qApA4beNKQoxFZrgdDa3MhoBoBoBoBoBoBoBoBoBoBoBo
+                BoBoCkKq78VC7+Tt430BVoBoCkqpO5UEj0OgPdhvvsN/10B5xU7+0efX+ugBRDtuoO3gbjfQHoVRvsAN
+                /XQHgVRtsoGw2G30H6aA8WNFZnCKHfwzgDc7em50BXoBoBoBoBoBoBoBoBoBoBoBoBoBoBoBoBoBoBoB
+                oBoBoBoBoBoBoBoBoBoBoBoBoBoBoBoBoBoBoD//2Q==
             </property>
         </structure>
     </list-property>
