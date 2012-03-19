@@ -26,14 +26,13 @@
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost:3306/dwh</property>
             <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">cm9vdA==</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="openCartelaBySex" id="8">
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">AGE CLASS</property>
+                    <property name="columnName">AGE_CLASS</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">AGE CLASS</text-property>
                     <text-property name="heading">AGE CLASS</text-property>
@@ -50,7 +49,7 @@
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">AGE CLASS</property>
+                        <property name="name">AGE_CLASS</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
@@ -64,8 +63,8 @@
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">AGE CLASS</property>
-                    <property name="nativeName">AGE CLASS</property>
+                    <property name="name">AGE_CLASS</property>
+                    <property name="nativeName">AGE_CLASS</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
@@ -77,20 +76,26 @@
                     <property name="nativeDataType">-5</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT CASE 
-     WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) < 18 THEN ' <18' 
-     WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) < 30 THEN '18-30' 
-     WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) < 60 THEN '30-60' 
-     WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) < 80 THEN '60-80' 
-     WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y'))  <120 THEN '>80' 
+            <xml-property name="queryText"><![CDATA[SELECT t.AGE_CLASS as "AGE CLASS", count(*) as "COUNT"
+from 
+(
+SELECT CASE 
+     WHEN  ( DATE_FORMAT( NOW(), '%Y' ) - (DATE_FORMAT( d_assistito.DATA_NASCITA , '%Y') )) < 18 THEN ' <18' 
+     WHEN  ( DATE_FORMAT( NOW(), '%Y' ) - (DATE_FORMAT( d_assistito.DATA_NASCITA , '%Y') )) < 30 THEN '18-30' 
+     WHEN  ( DATE_FORMAT( NOW(), '%Y' ) - (DATE_FORMAT( d_assistito.DATA_NASCITA , '%Y') )) < 60 THEN '30-60' 
+     WHEN  ( DATE_FORMAT( NOW(), '%Y' ) - (DATE_FORMAT( d_assistito.DATA_NASCITA , '%Y') )) < 80 THEN '60-80' 
+     WHEN   (DATE_FORMAT( NOW(), '%Y' ) - (DATE_FORMAT( d_assistito.DATA_NASCITA , '%Y') )) <120 THEN '>80' 
          
-       END AS "AGE CLASS", 
-       COUNT(*) AS "COUNT"
-       from 
+     END AS "AGE_CLASS"
+       
+ from 
 d_assistito, f_cartella
 where
-f_cartella.FINE_PRESA_CARICO is null and f_cartella.INIZIO_PRESA_CARICO is not null and d_assistito.ID_ASSISTITO = f_cartella.ID_ASSISTITO
-
+f_cartella.FINE_PRESA_CARICO is null 
+and f_cartella.INIZIO_PRESA_CARICO is not null 
+and d_assistito.ID_ASSISTITO = f_cartella.ID_ASSISTITO
+) as t
+group by t.AGE_CLASS;
 ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -1259,7 +1264,7 @@ Roberto, Micaela
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>row[&quot;AGE CLASS&quot;]</Definition>
+          <Definition>row[&quot;AGE_CLASS&quot;]</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -1403,8 +1408,8 @@ Roberto, Micaela
                         <property name="width">4.270833333333333in</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">AGE CLASS</property>
-                                <expression name="expression" type="javascript">dataSetRow["AGE CLASS"]</expression>
+                                <property name="name">AGE_CLASS</property>
+                                <expression name="expression" type="javascript">dataSetRow["AGE_CLASS"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
@@ -1438,9 +1443,9 @@ Roberto, Micaela
                         <property name="dataSet">openCartelaBySex</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">AGE CLASS</property>
+                                <property name="name">AGE_CLASS</property>
                                 <text-property name="displayName">AGE CLASS</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["AGE CLASS"]</expression>
+                                <expression name="expression" type="javascript">dataSetRow["AGE_CLASS"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
@@ -1456,16 +1461,16 @@ Roberto, Micaela
                             <row id="28">
                                 <cell id="29">
                                     <property name="backgroundColor">#9F9FFF</property>
-                                    <label id="39">
+                                    <label id="82">
                                         <property name="textAlign">left</property>
-                                        <text-property name="text">Age Class</text-property>
+                                        <text-property name="text">AGE CLASS</text-property>
                                     </label>
                                 </cell>
                                 <cell id="30">
                                     <property name="backgroundColor">#9F9FFF</property>
-                                    <label id="41">
+                                    <label id="84">
                                         <property name="textAlign">left</property>
-                                        <text-property name="text">Number of Patients</text-property>
+                                        <text-property name="text">COUNT</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -1474,12 +1479,12 @@ Roberto, Micaela
                             <row id="31">
                                 <property name="backgroundColor">#D2D2FF</property>
                                 <cell id="32">
-                                    <data id="40">
-                                        <property name="resultSetColumn">AGE CLASS</property>
+                                    <data id="83">
+                                        <property name="resultSetColumn">AGE_CLASS</property>
                                     </data>
                                 </cell>
                                 <cell id="33">
-                                    <data id="42">
+                                    <data id="85">
                                         <property name="resultSetColumn">COUNT</property>
                                     </data>
                                 </cell>

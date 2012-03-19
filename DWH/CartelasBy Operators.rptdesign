@@ -26,7 +26,6 @@
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost:3306/dwh</property>
             <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">cm9vdA==</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -120,7 +119,7 @@
        END AS "CARTELLA STATUS", d_operatore.ID_OPERATORE, d_operatore.NOME, f_cartella.ID_CARTELLA
 from 
 f_cartella, d_operatore
-where
+where d_operatore.ID_OPERATORE=f_cartella.ID_OPERATORE AND
 f_cartella.INIZIO_PRESA_CARICO is not null]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -268,7 +267,7 @@ Roberto, Micaela
                     <property name="backgroundColor">#CCCCFF</property>
                     <property name="fontSize">12pt</property>
                     <label id="278">
-                        <text-property name="text">Laboratory Report 6 </text-property>
+                        <text-property name="text">Laboratory Report 5/6 </text-property>
                     </label>
                 </cell>
                 <cell id="276">
@@ -488,7 +487,6 @@ Roberto, Micaela
                                 <row id="244">
                                     <property name="height">0.3854166666666667in</property>
                                     <cell id="245">
-                                        <property name="backgroundColor">#D2D2FF</property>
                                         <text id="268">
                                             <property name="fontWeight">bold</property>
                                             <property name="color">blue</property>
@@ -497,17 +495,10 @@ Roberto, Micaela
                                             <text-property name="content"><![CDATA[   GRAND TOTAL]]></text-property>
                                         </text>
                                     </cell>
-                                    <cell id="246">
-                                        <property name="backgroundColor">#D2D2FF</property>
-                                    </cell>
-                                    <cell id="247">
-                                        <property name="backgroundColor">#D2D2FF</property>
-                                    </cell>
-                                    <cell id="248">
-                                        <property name="backgroundColor">#D2D2FF</property>
-                                    </cell>
+                                    <cell id="246"/>
+                                    <cell id="247"/>
+                                    <cell id="248"/>
                                     <cell id="249">
-                                        <property name="backgroundColor">#D2D2FF</property>
                                         <data id="271">
                                             <property name="fontWeight">bold</property>
                                             <property name="color">blue</property>
@@ -615,6 +606,10 @@ Roberto, Micaela
                             <row id="190">
                                 <cell id="191">
                                     <property name="backgroundColor">#8484FF</property>
+                                    <label id="279">
+                                        <property name="fontWeight">bold</property>
+                                        <text-property name="text">AVARAGE</text-property>
+                                    </label>
                                 </cell>
                                 <cell id="192">
                                     <property name="backgroundColor">#8484FF</property>

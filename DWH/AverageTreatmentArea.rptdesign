@@ -31,7 +31,6 @@
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://localhost:3306/dwh</property>
             <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">cm9vdA==</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -39,16 +38,22 @@
             <property name="nullsOrdering">nulls lowest</property>
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">AGE CLASS</property>
+                    <property name="columnName">AGE_CLASS</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">AGE CLASS</text-property>
                     <text-property name="heading">AGE CLASS</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">AVERAGE TREATMENT AREA DURATION</property>
+                    <property name="columnName">PATIENTS</property>
                     <property name="analysis">measure</property>
-                    <text-property name="displayName">AVERAGE TREATMENT AREA DURATION</text-property>
-                    <text-property name="heading">AVERAGE TREATMENT AREA DURATION</text-property>
+                    <text-property name="displayName">PATIENTS</text-property>
+                    <text-property name="heading">PATIENTS</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">AVERAGE DURATION</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">AVERAGE DURATION</text-property>
+                    <text-property name="heading">AVERAGE DURATION</text-property>
                 </structure>
             </list-property>
             <list-property name="parameters"/>
@@ -56,12 +61,22 @@
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">AGE CLASS</property>
+                        <property name="name">AGE_CLASS</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">AVERAGE TREATMENT AREA DURATION</property>
+                        <property name="name">PATIENTS</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">TOtal</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">AVERAGE DURATION</property>
                         <property name="dataType">float</property>
                     </structure>
                 </list-property>
@@ -70,20 +85,37 @@
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">AGE CLASS</property>
-                    <property name="nativeName">AGE CLASS</property>
+                    <property name="name">AGE_CLASS</property>
+                    <property name="nativeName">AGE_CLASS</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
-                    <property name="name">AVERAGE TREATMENT AREA DURATION</property>
-                    <property name="nativeName">AVERAGE TREATMENT AREA DURATION</property>
+                    <property name="name">PATIENTS</property>
+                    <property name="nativeName">PATIENTS</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">TOtal</property>
+                    <property name="nativeName">TOTAL</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">AVERAGE DURATION</property>
+                    <property name="nativeName">AVERAGE DURATION</property>
                     <property name="dataType">float</property>
                     <property name="nativeDataType">8</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT CASE 
+            <xml-property name="queryText"><![CDATA[SELECT t.AGE_CLASS as "AGE CLASS", count(*) as "PATIENTS",sum(t.Duration) as "TOTAL",avg(t.Duration) as "AVERAGE DURATION"
+from 
+(
+SELECT CASE 
      WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) < 18 and d_assistito.SESSO='M' THEN '<18 Male' 
      WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) < 18 and d_assistito.SESSO='F' THEN '<18 Female' 
      WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) < 30 and d_assistito.SESSO='M' THEN '18-30 Male'  
@@ -95,13 +127,17 @@
      WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) <120 and d_assistito.SESSO='M' THEN '>80 Male'
      WHEN (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(d_assistito.DATA_NASCITA)), '%Y')) <120 and d_assistito.SESSO='F' THEN '>80 Female'
          
-       END AS "AGE CLASS", 
-       avg(DATEDIFF(d_area_utenza.DATA_FINE_VAL, d_area_utenza.DATA_INIZIO_VAL)) AS "AVERAGE TREATMENT AREA DURATION"
-from d_assistito, f_cartella,d_area_utenza
+     END AS "AGE_CLASS", d_assistito.ID_ASSISTITO,d_area_utenza.ID_AREA_UTENZA, 
+     ( d_area_utenza.DATA_FINE_VAL - d_area_utenza.DATA_INIZIO_VAL) as "Duration"
+       
+from 
+d_assistito, f_cartella,d_area_utenza
 where
-f_cartella.FINE_PRESA_CARICO is null and f_cartella.INIZIO_PRESA_CARICO is not null and d_assistito.ID_ASSISTITO = f_cartella.ID_ASSISTITO
-
-]]></xml-property>
+f_cartella.FINE_PRESA_CARICO is null 
+and f_cartella.INIZIO_PRESA_CARICO is not null 
+and d_assistito.ID_ASSISTITO = d_area_utenza.ID_ASSISTITO
+and f_cartella.ID_ASSISTITO =d_assistito.ID_ASSISTITO) as t
+group by t.AGE_CLASS]]></xml-property>
         </oda-data-set>
     </data-sets>
     <styles>
@@ -150,16 +186,16 @@ f_cartella.FINE_PRESA_CARICO is null and f_cartella.INIZIO_PRESA_CARICO is not n
     </page-setup>
     <body>
         <grid id="25">
-            <property name="height">3.1354166666666665in</property>
+            <property name="height">4.114583333333333in</property>
             <property name="width">7.947916666666667in</property>
             <column id="26">
                 <property name="width">0.5in</property>
             </column>
             <column id="27">
-                <property name="width">6.510416666666667in</property>
+                <property name="width">6.041666666666667in</property>
             </column>
             <column id="28">
-                <property name="width">0.9375in</property>
+                <property name="width">1.40625in</property>
             </column>
             <row id="29">
                 <cell id="30"/>
@@ -206,10 +242,10 @@ Roberto, Micaela
                 <cell id="34"/>
                 <cell id="35">
                     <extended-item extensionName="Chart" id="57">
-                        <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithoutAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
+                        <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
   <Version>2.5.3</Version>
-  <Type>Pie Chart</Type>
-  <SubType>Standard</SubType>
+  <Type>Bar Chart</Type>
+  <SubType>Side-by-side</SubType>
   <Block>
     <Children xsi:type="layout:TitleBlock">
       <Bounds>
@@ -460,10 +496,9 @@ Roberto, Micaela
     </Outline>
     <Visible>true</Visible>
   </Block>
-  <Dimension>Two_Dimensional</Dimension>
+  <Dimension>Two_Dimensional_With_Depth</Dimension>
   <Units>Points</Units>
   <SeriesThickness>10.0</SeriesThickness>
-  <GridColumnCount>0</GridColumnCount>
   <ExtendedProperties>
     <Name>enable.area.alt</Name>
     <Value>false</Value>
@@ -511,204 +546,455 @@ Roberto, Micaela
     </Insets>
     <Visible>false</Visible>
   </EmptyMessage>
-  <SeriesDefinitions>
-    <Query>
-      <Definition></Definition>
-    </Query>
-    <SeriesPalette>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>80</Red>
-        <Green>166</Green>
-        <Blue>218</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>242</Red>
-        <Green>88</Green>
-        <Blue>106</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>232</Red>
-        <Green>172</Green>
-        <Blue>57</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>255</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>64</Red>
-        <Green>128</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>128</Green>
-        <Blue>192</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>170</Red>
-        <Green>85</Green>
-        <Blue>85</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>128</Green>
-        <Blue>0</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>192</Red>
-        <Green>192</Green>
-        <Blue>192</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>255</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>192</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>7</Red>
-        <Green>146</Green>
-        <Blue>94</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>128</Green>
-        <Blue>255</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>128</Green>
-        <Blue>192</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>255</Green>
-        <Blue>255</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>128</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>128</Green>
-        <Blue>192</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>128</Green>
-        <Blue>192</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>0</Green>
-        <Blue>255</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>64</Green>
-        <Blue>64</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>128</Green>
-        <Blue>64</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>80</Red>
-        <Green>240</Green>
-        <Blue>120</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>64</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>0</Green>
-        <Blue>64</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>0</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>128</Green>
-        <Blue>64</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>128</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>128</Green>
-        <Blue>255</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>64</Green>
-        <Blue>0</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>0</Green>
-        <Blue>0</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
+  <Axes>
+    <Type>Text</Type>
+    <Title>
+      <Caption>
+        <Value>X-Axis Title</Value>
+        <Font>
+          <Size>14.0</Size>
+          <Bold>true</Bold>
+          <Alignment>
+            <horizontalAlignment>Center</horizontalAlignment>
+            <verticalAlignment>Center</verticalAlignment>
+          </Alignment>
+        </Font>
+      </Caption>
+      <Background xsi:type="attribute:ColorDefinition">
+        <Transparency>0</Transparency>
         <Red>255</Red>
         <Green>255</Green>
         <Blue>255</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>128</Green>
-        <Blue>0</Blue>
-      </Entries>
-    </SeriesPalette>
+      </Background>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+      </Outline>
+      <Insets>
+        <Top>0.0</Top>
+        <Left>2.0</Left>
+        <Bottom>0.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Visible>false</Visible>
+    </Title>
+    <TitlePosition>Below</TitlePosition>
+    <AssociatedAxes>
+      <Type>Linear</Type>
+      <Title>
+        <Caption>
+          <Value>Y-Axis Title</Value>
+          <Font>
+            <Size>14.0</Size>
+            <Bold>true</Bold>
+            <Alignment>
+              <horizontalAlignment>Center</horizontalAlignment>
+              <verticalAlignment>Center</verticalAlignment>
+            </Alignment>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Title>
+      <TitlePosition>Left</TitlePosition>
+      <SeriesDefinitions>
+        <Query>
+          <Definition></Definition>
+        </Query>
+        <SeriesPalette>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>80</Red>
+            <Green>166</Green>
+            <Blue>218</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>242</Red>
+            <Green>88</Green>
+            <Blue>106</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>232</Red>
+            <Green>172</Green>
+            <Blue>57</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>255</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>64</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>170</Red>
+            <Green>85</Green>
+            <Blue>85</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>192</Red>
+            <Green>192</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>192</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>7</Red>
+            <Green>146</Green>
+            <Blue>94</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>128</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>0</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>64</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>80</Red>
+            <Green>240</Green>
+            <Blue>120</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>64</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>0</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>0</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>64</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>0</Blue>
+          </Entries>
+        </SeriesPalette>
+        <Series xsi:type="type:BarSeries">
+          <Visible>true</Visible>
+          <Label>
+            <Caption>
+              <Value></Value>
+              <Font>
+                <Alignment/>
+              </Font>
+            </Caption>
+            <Background xsi:type="attribute:ColorDefinition">
+              <Transparency>0</Transparency>
+              <Red>255</Red>
+              <Green>255</Green>
+              <Blue>255</Blue>
+            </Background>
+            <Outline>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </Color>
+              <Visible>false</Visible>
+            </Outline>
+            <Insets>
+              <Top>0.0</Top>
+              <Left>2.0</Left>
+              <Bottom>0.0</Bottom>
+              <Right>3.0</Right>
+            </Insets>
+            <Visible>false</Visible>
+          </Label>
+          <DataDefinition>
+            <Definition>row[&quot;AVERAGE DURATION&quot;]</Definition>
+            <Grouping>
+              <GroupType>Text</GroupType>
+              <AggregateExpression>Sum</AggregateExpression>
+            </Grouping>
+          </DataDefinition>
+          <SeriesIdentifier>Age Class</SeriesIdentifier>
+          <DataPoint>
+            <Components>
+              <Type>Orthogonal_Value</Type>
+            </Components>
+            <Separator>, </Separator>
+          </DataPoint>
+          <LabelPosition>Outside</LabelPosition>
+          <Stacked>false</Stacked>
+          <Triggers>
+            <Condition>onmouseover</Condition>
+            <Action>
+              <Type>Show_Tooltip</Type>
+              <Value xsi:type="attribute:TooltipValue">
+                <Text></Text>
+                <Delay>200</Delay>
+              </Value>
+            </Action>
+          </Triggers>
+          <Riser>Rectangle</Riser>
+        </Series>
+        <Grouping>
+          <GroupType>Text</GroupType>
+          <AggregateExpression>Sum</AggregateExpression>
+        </Grouping>
+      </SeriesDefinitions>
+      <Orientation>Vertical</Orientation>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </LineAttributes>
+      <Label>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>true</Visible>
+      </Label>
+      <LabelPosition>Left</LabelPosition>
+      <MajorGrid>
+        <LineAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>196</Red>
+            <Green>196</Green>
+            <Blue>196</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </LineAttributes>
+        <TickStyle>Across</TickStyle>
+        <TickAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>196</Red>
+            <Green>196</Green>
+            <Blue>196</Blue>
+          </Color>
+          <Visible>true</Visible>
+        </TickAttributes>
+      </MajorGrid>
+      <MinorGrid>
+        <LineAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>225</Red>
+            <Green>225</Green>
+            <Blue>225</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </LineAttributes>
+        <TickStyle>Across</TickStyle>
+        <TickAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>225</Red>
+            <Green>225</Green>
+            <Blue>225</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </TickAttributes>
+      </MinorGrid>
+      <Scale>
+        <MinorGridsPerUnit>5</MinorGridsPerUnit>
+      </Scale>
+      <Origin>
+        <Type>Min</Type>
+        <Value xsi:type="data:NumberDataElement">
+          <Value>0.0</Value>
+        </Value>
+      </Origin>
+      <PrimaryAxis>true</PrimaryAxis>
+      <Percent>false</Percent>
+    </AssociatedAxes>
     <SeriesDefinitions>
       <Query>
         <Definition></Definition>
@@ -907,7 +1193,7 @@ Roberto, Micaela
           <Blue>0</Blue>
         </Entries>
       </SeriesPalette>
-      <Series xsi:type="type:PieSeries">
+      <Series>
         <Visible>true</Visible>
         <Label>
           <Caption>
@@ -942,13 +1228,9 @@ Roberto, Micaela
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>row[&quot;AGE CLASS&quot;]</Definition>
-          <Grouping>
-            <GroupType>Text</GroupType>
-            <AggregateExpression>Sum</AggregateExpression>
-          </Grouping>
+          <Definition>row[&quot;AGE_CLASS&quot;]</Definition>
         </DataDefinition>
-        <SeriesIdentifier>Age Class</SeriesIdentifier>
+        <SeriesIdentifier>Average Duration</SeriesIdentifier>
         <DataPoint>
           <Components>
             <Type>Orthogonal_Value</Type>
@@ -957,117 +1239,131 @@ Roberto, Micaela
         </DataPoint>
         <LabelPosition>Outside</LabelPosition>
         <Stacked>false</Stacked>
-        <Triggers>
-          <Condition>onmouseover</Condition>
-          <Action>
-            <Type>Show_Tooltip</Type>
-            <Value xsi:type="attribute:TooltipValue">
-              <Text></Text>
-              <Delay>200</Delay>
-            </Value>
-          </Action>
-        </Triggers>
-        <Explosion>0</Explosion>
-        <Title>
-          <Caption>
-            <Value></Value>
-            <Font>
-              <Size>16.0</Size>
-              <Bold>true</Bold>
-              <Alignment/>
-            </Font>
-          </Caption>
-          <Background xsi:type="attribute:ColorDefinition">
-            <Transparency>0</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Background>
-          <Outline>
-            <Style>Solid</Style>
-            <Thickness>1</Thickness>
-            <Color>
-              <Transparency>255</Transparency>
-              <Red>0</Red>
-              <Green>0</Green>
-              <Blue>0</Blue>
-            </Color>
-          </Outline>
-          <Insets>
-            <Top>0.0</Top>
-            <Left>2.0</Left>
-            <Bottom>0.0</Bottom>
-            <Right>3.0</Right>
-          </Insets>
-          <Visible>true</Visible>
-        </Title>
-        <TitlePosition>Below</TitlePosition>
-        <LeaderLineAttributes>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Visible>true</Visible>
-        </LeaderLineAttributes>
-        <LeaderLineLength>10.0</LeaderLineLength>
       </Series>
       <Grouping>
+        <Enabled>true</Enabled>
         <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
     </SeriesDefinitions>
-    <Series>
+    <Orientation>Horizontal</Orientation>
+    <LineAttributes>
+      <Style>Solid</Style>
+      <Thickness>1</Thickness>
+      <Color>
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>0</Green>
+        <Blue>0</Blue>
+      </Color>
       <Visible>true</Visible>
-      <Label>
-        <Caption>
-          <Value></Value>
-          <Font>
-            <Alignment/>
-          </Font>
-        </Caption>
-        <Background xsi:type="attribute:ColorDefinition">
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Background>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>2.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>3.0</Right>
-        </Insets>
+    </LineAttributes>
+    <Label>
+      <Caption>
+        <Value></Value>
+        <Font>
+          <Alignment/>
+        </Font>
+      </Caption>
+      <Background xsi:type="attribute:ColorDefinition">
+        <Transparency>0</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Background>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+      </Outline>
+      <Insets>
+        <Top>0.0</Top>
+        <Left>2.0</Left>
+        <Bottom>0.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Visible>true</Visible>
+    </Label>
+    <LabelPosition>Below</LabelPosition>
+    <MajorGrid>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>196</Red>
+          <Green>196</Green>
+          <Blue>196</Blue>
+        </Color>
         <Visible>false</Visible>
-      </Label>
-      <DataDefinition>
-        <Definition>row[&quot;AVERAGE TREATMENT AREA DURATION&quot;]</Definition>
-      </DataDefinition>
-      <SeriesIdentifier>Average Duration</SeriesIdentifier>
-      <DataPoint>
-        <Components>
-          <Type>Orthogonal_Value</Type>
-        </Components>
-        <Separator>, </Separator>
-      </DataPoint>
-      <LabelPosition>Outside</LabelPosition>
-      <Stacked>false</Stacked>
-    </Series>
-    <Grouping>
-      <Enabled>true</Enabled>
-      <GroupType>Numeric</GroupType>
-      <AggregateExpression>Sum</AggregateExpression>
-    </Grouping>
-  </SeriesDefinitions>
-</model:ChartWithoutAxes>
+      </LineAttributes>
+      <TickStyle>Across</TickStyle>
+      <TickAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>196</Red>
+          <Green>196</Green>
+          <Blue>196</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </TickAttributes>
+    </MajorGrid>
+    <MinorGrid>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>225</Red>
+          <Green>225</Green>
+          <Blue>225</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </LineAttributes>
+      <TickStyle>Across</TickStyle>
+      <TickAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>225</Red>
+          <Green>225</Green>
+          <Blue>225</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </TickAttributes>
+    </MinorGrid>
+    <Scale>
+      <MinorGridsPerUnit>5</MinorGridsPerUnit>
+    </Scale>
+    <Origin>
+      <Type>Min</Type>
+      <Value xsi:type="data:NumberDataElement">
+        <Value>0.0</Value>
+      </Value>
+    </Origin>
+    <PrimaryAxis>true</PrimaryAxis>
+    <CategoryAxis>true</CategoryAxis>
+    <Percent>false</Percent>
+  </Axes>
+  <Orientation>Vertical</Orientation>
+  <UnitSpacing>50.0</UnitSpacing>
+  <Rotation>
+    <Angles>
+      <XAngle>-20.0</XAngle>
+      <YAngle>45.0</YAngle>
+      <ZAngle>0.0</ZAngle>
+      <Type>None</Type>
+    </Angles>
+  </Rotation>
+</model:ChartWithAxes>
 ]]></xml-property>
                         <property name="outputFormat">SVG</property>
                         <property name="inheritColumns">false</property>
@@ -1076,13 +1372,23 @@ Roberto, Micaela
                         <property name="width">3.7708333333333335in</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">AGE CLASS</property>
-                                <expression name="expression" type="javascript">dataSetRow["AGE CLASS"]</expression>
+                                <property name="name">AGE_CLASS</property>
+                                <expression name="expression" type="javascript">dataSetRow["AGE_CLASS"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
-                                <property name="name">AVERAGE TREATMENT AREA DURATION</property>
-                                <expression name="expression" type="javascript">dataSetRow["AVERAGE TREATMENT AREA DURATION"]</expression>
+                                <property name="name">PATIENTS</property>
+                                <expression name="expression" type="javascript">dataSetRow["PATIENTS"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">TOtal</property>
+                                <expression name="expression" type="javascript">dataSetRow["TOtal"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                            <structure>
+                                <property name="name">AVERAGE DURATION</property>
+                                <expression name="expression" type="javascript">dataSetRow["AVERAGE DURATION"]</expression>
                                 <property name="dataType">float</property>
                             </structure>
                         </list-property>
@@ -1091,10 +1397,10 @@ Roberto, Micaela
                 <cell id="36"/>
             </row>
             <row id="37">
+                <property name="height">1.125in</property>
                 <cell id="38"/>
                 <cell id="39">
-                    <table id="58">
-                        <property name="fontSize">12pt</property>
+                    <table id="106">
                         <property name="borderBottomColor">#0000FF</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">1px</property>
@@ -1107,61 +1413,100 @@ Roberto, Micaela
                         <property name="borderTopColor">#0000FF</property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">1px</property>
+                        <property name="textAlign">left</property>
                         <property name="dataSet">AverageTreatmentAreaDuration</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">AGE CLASS</property>
+                                <property name="name">AGE_CLASS</property>
                                 <text-property name="displayName">AGE CLASS</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["AGE CLASS"]</expression>
+                                <expression name="expression" type="javascript">dataSetRow["AGE_CLASS"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
-                                <property name="name">AVERAGE TREATMENT AREA DURATION</property>
-                                <text-property name="displayName">AVERAGE TREATMENT AREA DURATION</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["AVERAGE TREATMENT AREA DURATION"]</expression>
+                                <property name="name">PATIENTS</property>
+                                <text-property name="displayName">PATIENTS</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["PATIENTS"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">TOtal</property>
+                                <text-property name="displayName">TOtal</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["TOtal"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                            <structure>
+                                <property name="name">AVERAGE DURATION</property>
+                                <text-property name="displayName">AVERAGE DURATION</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["AVERAGE DURATION"]</expression>
                                 <property name="dataType">float</property>
                             </structure>
                         </list-property>
-                        <column id="72"/>
-                        <column id="73"/>
+                        <column id="122"/>
+                        <column id="123"/>
+                        <column id="124"/>
+                        <column id="125"/>
                         <header>
-                            <row id="59">
-                                <cell id="60">
+                            <row id="107">
+                                <cell id="108">
                                     <property name="backgroundColor">#9F9FFF</property>
-                                    <label id="61">
-                                        <property name="textAlign">left</property>
-                                        <text-property name="text">Age Class</text-property>
+                                    <label id="126">
+                                        <text-property name="text">AGE CLASS</text-property>
                                     </label>
                                 </cell>
-                                <cell id="62">
+                                <cell id="109">
                                     <property name="backgroundColor">#9F9FFF</property>
-                                    <label id="63">
-                                        <property name="textAlign">left</property>
-                                        <text-property name="text">Avarage Treatment Area Duration</text-property>
+                                    <label id="128">
+                                        <text-property name="text">PATIENTS</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="110">
+                                    <property name="backgroundColor">#9F9FFF</property>
+                                    <label id="131">
+                                        <text-property name="text">TOTAL</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="111">
+                                    <property name="backgroundColor">#9F9FFF</property>
+                                    <label id="134">
+                                        <text-property name="text">AVERAGE DURATION</text-property>
                                     </label>
                                 </cell>
                             </row>
                         </header>
                         <detail>
-                            <row id="64">
-                                <cell id="65">
+                            <row id="112">
+                                <cell id="113">
                                     <property name="backgroundColor">#D2D2FF</property>
-                                    <data id="66">
-                                        <property name="resultSetColumn">AGE CLASS</property>
+                                    <data id="127">
+                                        <property name="resultSetColumn">AGE_CLASS</property>
                                     </data>
                                 </cell>
-                                <cell id="67">
+                                <cell id="114">
                                     <property name="backgroundColor">#D2D2FF</property>
-                                    <data id="68">
-                                        <property name="resultSetColumn">AVERAGE TREATMENT AREA DURATION</property>
+                                    <data id="129">
+                                        <property name="resultSetColumn">PATIENTS</property>
+                                    </data>
+                                </cell>
+                                <cell id="115">
+                                    <property name="backgroundColor">#D2D2FF</property>
+                                    <data id="132">
+                                        <property name="resultSetColumn">TOtal</property>
+                                    </data>
+                                </cell>
+                                <cell id="116">
+                                    <property name="backgroundColor">#D2D2FF</property>
+                                    <data id="135">
+                                        <property name="resultSetColumn">AVERAGE DURATION</property>
                                     </data>
                                 </cell>
                             </row>
                         </detail>
                         <footer>
-                            <row id="69">
-                                <cell id="70"/>
-                                <cell id="71"/>
+                            <row id="117">
+                                <cell id="118"/>
+                                <cell id="119"/>
+                                <cell id="120"/>
+                                <cell id="121"/>
                             </row>
                         </footer>
                     </table>

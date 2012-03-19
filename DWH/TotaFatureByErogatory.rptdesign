@@ -330,7 +330,7 @@ where f_fatturazione.ID_ENTE_EROGATORE = d_ente_erogatore.ID_ENTE_EROGATORE
     </page-setup>
     <body>
         <grid id="9">
-            <property name="height">3.5104166666666665in</property>
+            <property name="height">3.6770833333333335in</property>
             <property name="width">7.947916666666667in</property>
             <column id="10">
                 <property name="width">0.5625in</property>
@@ -408,7 +408,7 @@ Roberto, Micaela
                 </cell>
             </row>
             <row id="21">
-                <property name="height">2.375in</property>
+                <property name="height">2.5416666666666665in</property>
                 <cell id="22"/>
                 <cell id="23">
                     <table id="179">
@@ -714,7 +714,7 @@ Roberto, Micaela
                         </detail>
                         <footer>
                             <row id="201">
-                                <property name="height">0.2708333333333333in</property>
+                                <property name="height">0.3645833333333333in</property>
                                 <cell id="202"/>
                                 <cell id="203"/>
                                 <cell id="204"/>
