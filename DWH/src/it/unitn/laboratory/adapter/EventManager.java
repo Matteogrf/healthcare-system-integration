@@ -42,6 +42,8 @@ public class EventManager
 				id = qmDWH.findIdAssistito(assistito.getHASHCOD());
 			}
 
+			
+			
 			Operatore op = new Operatore(dwhSCHEMA.getDOPERATORE());
 			int idOperatore;
 			if ((idOperatore = op.getIdOperatore()) == 0)
