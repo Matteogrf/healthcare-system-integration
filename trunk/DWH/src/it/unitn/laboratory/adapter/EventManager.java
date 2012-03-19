@@ -111,11 +111,7 @@ public class EventManager
 			// Insert or update richiedente
 			int idRichiedete = insertRichiedente(dwhSCHEMA.getDRICHIEDENTE());
 
-			if (dwhSCHEMA.getDRICHIEDENTE().getRICHIEDENTECOD() == 2) // se
-																		// codice
-																		// richiedente
-																		// Ã¨
-																		// terzi
+			if (dwhSCHEMA.getDRICHIEDENTE().getRICHIEDENTECOD() == 2) // se codice richiedente è terzi
 				idTipoTerzi = insertTipoTerzi(dwhSCHEMA.getDTIPOTERZI());
 			else
 				idTipoTerzi = 0;
@@ -216,7 +212,7 @@ public class EventManager
 		}
 		return "OK";
 	}
-	
+
 	public static String chiusuraPresaInCarico(DwhSchemaType dwhSCHEMA)
 	{
 		int idAssistito = 0;
@@ -324,7 +320,7 @@ public class EventManager
 			QueryManager qmDWH = new QueryManager(ConnectionManagerDWH.getInstance());
 
 			idAssistito = qmDWH.findOrCreateAssistito(dwhSCHEMA.getDASSISTITO());
-			
+
 			ResultSet cartella = qmDWH.findCartella(idAssistito);
 			if (!cartella.next())
 				// Se non ce la scheda accesso butto queste info a marcire nella
@@ -332,7 +328,7 @@ public class EventManager
 				StagingArea.addDomandaAmministrativaInfo(idAssistito, dwhSCHEMA.getFCARTELLA());
 			else
 				qmDWH.updateDomandaAmministrativaInfo(idAssistito, dwhSCHEMA.getFCARTELLA());
-			
+
 		} catch (Exception e)
 		{
 			e.printStackTrace();
@@ -350,16 +346,16 @@ public class EventManager
 			QueryManager qmDWH = new QueryManager(ConnectionManagerDWH.getInstance());
 
 			idAssistito = qmDWH.findOrCreateAssistito(dwhSCHEMA.getDASSISTITO());
-			
+
 			idErogatore = qmDWH.findOrCreateErogatore(dwhSCHEMA.getDENTEEROGATORE());
-						
+
 			int idFatturazione = qmDWH.findFatturazione(idAssistito, idErogatore);
-			if (idFatturazione == 0 )
+			if (idFatturazione == 0)
 				// Se non ce la fatturazione la creo
 				DWHInsertSQL.addFatturazioneInfo(idAssistito, idErogatore, dwhSCHEMA.getFFATTURAZIONE());
 			else
-				DWHUpdateSQL.updateFatturazioneInfo(idFatturazione,idAssistito, idErogatore, dwhSCHEMA.getFFATTURAZIONE());
-			
+				DWHUpdateSQL.updateFatturazioneInfo(idFatturazione, idAssistito, idErogatore, dwhSCHEMA.getFFATTURAZIONE());
+
 		} catch (Exception e)
 		{
 			e.printStackTrace();
@@ -367,7 +363,5 @@ public class EventManager
 		}
 		return "OK";
 	}
-
-
 
 }
